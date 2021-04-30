@@ -18,7 +18,9 @@ Tip : there something different with
 
 ## Standard Attribute
 
-标准属性也就是所有控件的共同属性，如大小，字体和颜色等等。
+> Standard properties are the common properties of all controls, such as size, font, color, and so on.
+
+**And you can index them by `widget.cget("Attribute")` .**
 
 | 属性       | 描述                |
 | ---------- | ------------------- |
@@ -63,7 +65,13 @@ background_label.place(relwidth=1, relheight=1)
 
 > It's worth mentioning that if you define image as a **local** variable, it will be distroy after call, and can't be show normally. To solve this problem, you need to define it **global** variable to maintain it.
 
+#### About bg
 
+backgroundcolor of window is `"SystemButtonFace"`, you can index it by `Tk().cget('bg')` .
+
+Here is the common color of tkinter.
+
+![Tk颜色库，from笑待人生原创库](E:\工具\Typora\Temp\20200226214558104.png)
 
 ## Base Widget
 
