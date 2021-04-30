@@ -20,10 +20,12 @@ class Application(Frame):
 
         
     def createContextMenu(self, event):
+        """右键菜单栏，正在设计中。"""
         Menu.post(self.drawbox, event.x_root, event.y_root)
         
 
     def createWidget(self, master):
+        """组件初始化"""
         # 关于画图，完全可以使用matplotlib来实现
         self.drawbox = Canvas(root, width=680, height=320, bg=self.bgcolor)
         # 画图的背景设置只能继承类属性？不能使用实例属性？
@@ -52,11 +54,12 @@ class Application(Frame):
         root.bind_class("Button", "<1>", self.eventmanager)
         self.drawbox.bind("<ButtonRelease-1>", self.stopdraw)
 
-        # 快捷键设定
-        root.bind("<KeyPress=r>", self.shortcut)
+        # 快捷键设定,此处监听了所有按键
+        root.bind("<KeyPress>", self.shortcut)
 
         
     def eventmanager(self, event):
+        """事件管理"""
         name = event.widget.winfo_name()
         if name=="line":
             self.drawbox.bind("<B1-Motion>", self.drawline)
@@ -89,24 +92,28 @@ class Application(Frame):
 
         
     def drawline(self, event):
+        """按住左键，作为起点与终点，绘制一条直线。"""
         self.startdraw(event)
         self.lastdraw = self.drawbox.create_line(self.x,
                                             self.y,event.x,event.y, fill=self.fgcolor)
 
 
     def linearrow(self, event):
+        """按住左键，作为起点与终点，绘制一条带箭头的直线。"""
         self.startdraw(event)
         self.lastdraw = self.drawbox.create_line(self.x,self.y,event.x,event.y,
                                                  arrow=LAST,fill=self.fgcolor)
 
     
     def drawrect(self, event):
+        """按住左键，作为起点与终点，绘制一个矩形。"""
         self.startdraw(event)
         self.lastdraw = self.drawbox.create_rectangle(self.x,self.y,event.x,event.y,
                                                  outline=self.fgcolor)
 
 
     def drawpen(self, event):
+        """画笔，按住左键后，沿鼠标轨迹绘制图形。"""
         self.startdraw(event)
         self.drawbox.create_rectangle(self.x,self.y,event.x,event.y,
                                                  outline=self.fgcolor)
@@ -124,12 +131,18 @@ class Application(Frame):
 
 
     def shortcut(self, event):
+        """快捷键的绑定"""
+        # 也可以通过设置button的accelerate来实现。
         if event.char == "l":
-            pass
+            """快速绘制直线"""
+            self.drawbox.bind("<B1-Motion>", self.drawline)
         elif event.char == "c":
-            pass
+            """快速清屏"""
+            self.drawbox.delete("all")
         elif event.char == "r":
-            pass
+            """快速选择颜色"""
+            c = askcolor(color=self.fgcolor, title="选择画笔颜色")
+            self.fgcolor = c[1]
         
 
 if __name__ == "__main__":
