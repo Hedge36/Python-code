@@ -1,23 +1,25 @@
 import tkinter as tk
+from tkinter import ttk
 
 window = tk.Tk()
 window.title("test")
 window.geometry("400x300")
 
-st = tk.IntVar()    # 样式选择类型
 mode = tk.IntVar()    # 模式选择类型
 dt = tk.IntVar()    # 详情展示类型
 
 
 def styletrace(*args):
-    print("Track the variety of style.")
-    if st.get() == 1:
+    if style.get() == 'style1':
+        print("Style1 load")
         checkbox1.place(x=30, y=150)
         checkbox2.place_forget()
-    elif st.get() == 2:
+    elif style.get() == 'style2':
+        print("Style2 load")
         checkbox1.place_forget()
         checkbox2.place(x=170, y=30)
-    pass
+    else:
+        print("Error")
 
 
 def detail(*args):
@@ -50,11 +52,15 @@ stylebox = tk.LabelFrame(window, height=100, width=100, text="Style",
                          visual="best")
 stylebox.place(x=30, y=30)
 # 样式选择
+"""
 style1 = tk.Radiobutton(stylebox, text="style1", value=1, variable=st)
 style2 = tk.Radiobutton(stylebox, text="style2", value=2, variable=st)
 style1.place(x=10, y=10)
 style2.place(x=10, y=45)
-
+"""
+style = ttk.Combobox(stylebox, values=['style1', 'style2'])
+style.current(0)
+style.place(relx=0.1, rely=0.36, relwidth=0.8)
 
 # 样式1模式选择框
 checkbox1 = tk.LabelFrame(window, height=100, width=100, text="Mode",
@@ -94,11 +100,10 @@ Button1.place(x=40, y=30)
 Button2.place(x=40, y=80)
 
 
-
 # 追踪变量的变化并实时响应
-st.trace("w", styletrace)
+styletrace()
+style.bind("<<ComboboxSelected>>", styletrace)
 mode.trace("w", detail)
-st.set(1)   # 样式选择默认为样式1
 
 
 window.mainloop()
