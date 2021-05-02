@@ -4,7 +4,9 @@
 
 If you have any question, please seek the  [Docs](https://www.tcl.tk/doc/)  for answer. Learn more by refering to the  [tutorial](https://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html) .
 
-Tip : there something different with 
+Tip : there something different with normal.
+
+⬜⚪▭□△○◯
 
 ## Synopsis
 
@@ -65,9 +67,11 @@ background_label.place(relwidth=1, relheight=1)
 
 > It's worth mentioning that if you define image as a **local** variable, it will be distroy after call, and can't be show normally. To solve this problem, you need to define it **global** variable to maintain it.
 
-#### About bg
+#### About color
 
 backgroundcolor of window is `"SystemButtonFace"`, you can index it by `Tk().cget('bg')` .
+
+**And ld/thinkness is need when you refer to the highlightcolor and else.**
 
 Here is the common color of tkinter.
 
@@ -477,6 +481,61 @@ window.mainloop()
 
 ![img](https://images2018.cnblogs.com/blog/1372069/201808/1372069-20180808214010611-964561892.png)![img](https://images2018.cnblogs.com/blog/1372069/201808/1372069-20180808214052169-1659760377.png)
 
+#### Create
+
+##### 1. Line
+
+Items of type **line** appear on the display as one or more connected line segments or curves. Line items support coordinate indexing operations using the **dchars**, **index** and **insert** widget commands. Lines are created with widget commands of the following form:
+
+```
+pathName create line x1 y1... xn yn ?option value ...?
+pathName create line coordList ?option value ...?
+```
+
+The arguments *x1* through *yn* or *coordList* give the coordinates for a series of two or more points that describe a series of connected line segments. After the coordinates there may be any number of *option*-*value* pairs, each of which sets one of the configuration options for the item. These same *option*-*value* pairs may be used in **itemconfigure** widget commands to change the item's configuration. A line item is the current item whenever the mouse pointer is over any segment of the line, whether drawn or not and whether or not the line is smoothed.
+
+The following standard options are supported by lines:
+
+| **-dash**          | **-activedash**      |
+| ------------------ | -------------------- |
+| **-disableddash**  | **-dashoffset**      |
+| **-fill**          | **-activefill**      |
+| **-disabledfill**  | **-stipple**         |
+| **-activestipple** | **-disabledstipple** |
+| **-state**         | **-tags**            |
+| **-width**         | **-activewidth**     |
+| **-disabledwidth** |                      |
+
+The following extra options are supported for lines:
+
+- **-arrow** *where*
+
+  Indicates whether or not arrowheads are to be drawn at one or both ends of the line. *Where* must have one of the values **none** (for no arrowheads), **first** (for an arrowhead at the first point of the line), **last** (for an arrowhead at the last point of the line), or **both** (for arrowheads at both ends). This option defaults to **none**. When requested to draw an arrowhead, Tk internally adjusts the corresponding line end point so that the rendered line ends at the neck of the arrowhead rather than at its tip so that the line doesn't extend past the edge of the arrowhead. This may trigger a **Leave** event if the mouse is hovering this line end. Conversely, when removing an arrowhead Tk adjusts the corresponding line point the other way round, which may trigger an **Enter** event.
+
+- **-arrowshape** *shape*
+
+  This option indicates how to draw arrowheads. The *shape* argument must be a list with three elements, each specifying a distance in any of the forms described in the **COORDINATES** section above. The first element of the list gives the distance along the line from the neck of the arrowhead to its tip. The second element gives the distance along the line from the trailing points of the arrowhead to the tip, and the third element gives the distance from the outside edge of the line to the trailing points. If this option is not specified then Tk picks a “reasonable” shape.
+
+- **-capstyle** *style*
+
+  Specifies the ways in which caps are to be drawn at the endpoints of the line. *Style* may have any of the forms accepted by **[Tk_GetCapStyle](https://www.tcl.tk/man/tcl8.6/TkLib/GetCapStyl.htm)** (**butt**, **projecting**, or **round**). If this option is not specified then it defaults to **butt**. Where arrowheads are drawn the cap style is ignored.
+
+- **-joinstyle** *style*
+
+  Specifies the ways in which joints are to be drawn at the vertices of the line. *Style* may have any of the forms accepted by **[Tk_GetJoinStyle](https://www.tcl.tk/man/tcl8.6/TkLib/GetJoinStl.htm)** (**bevel**, **miter**, or **round**). If this option is not specified then it defaults to **round**. If the line only contains two points then this option is irrelevant.
+
+- **-smooth** *smoothMethod*
+
+  *smoothMethod* must have one of the forms accepted by **[Tcl_GetBoolean](https://www.tcl.tk/man/tcl8.6/TclLib/GetInt.htm)** or a line smoothing method. Only **true** and **raw** are supported in the core (with **bezier** being an alias for **true**), but more can be added at runtime. If a boolean false value or empty string is given, no smoothing is applied. A boolean truth value assumes **true** smoothing. If the smoothing method is **true**, this indicates that the line should be drawn as a curve, rendered as a set of quadratic splines: one spline is drawn for the first and second line segments, one for the second and third, and so on. Straight-line segments can be generated within a curve by duplicating the end-points of the desired line segment. If the smoothing method is **raw**, this indicates that the line should also be drawn as a curve but where the list of coordinates is such that the first coordinate pair (and every third coordinate pair thereafter) is a knot point on a cubic Bezier curve, and the other coordinates are control points on the cubic Bezier curve. Straight line segments can be generated within a curve by making control points equal to their neighbouring knot points. If the last point is a control point and not a knot point, the point is repeated (one or two times) so that it also becomes a knot point.
+
+- **-splinesteps** *number*
+
+  Specifies the degree of smoothness desired for curves: each spline will be approximated with *number* line segments. This option is ignored unless the **-smooth** option is true or **raw**.
+
+
+
+
+
 ### 10. Menu
 
 #### Description
@@ -839,7 +898,7 @@ First import ttk
 
 ### 16. Combobox
 
-
+<<ComboboxSelected>>
 
 ### 17. ScrolledText
 
