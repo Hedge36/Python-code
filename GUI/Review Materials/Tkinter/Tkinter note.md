@@ -532,7 +532,34 @@ The following extra options are supported for lines:
 
   Specifies the degree of smoothness desired for curves: each spline will be approximated with *number* line segments. This option is ignored unless the **-smooth** option is true or **raw**.
 
+##### 2. oval
 
+Items of type **oval** appear as circular or oval regions on the display. Each oval may have an outline, a fill, or both. Ovals are created with widget commands of the following form:
+
+```
+pathName create oval x1 y1 x2 y2 ?option value ...?
+pathName create oval coordList ?option value ...?
+```
+
+The arguments *x1*, *y1*, *x2*, and *y2* or *coordList* give the coordinates of two diagonally opposite corners of a rectangular region enclosing the oval. The oval will include the top and left edges of the rectangle not the lower or right edges. If the region is square then the resulting oval is circular; otherwise it is elongated in shape. After the coordinates there may be any number of *option*-*value* pairs, each of which sets one of the configuration options for the item. These same *option*-*value* pairs may be used in **itemconfigure** widget commands to change the item's configuration. An oval item becomes the current item when the mouse pointer is over any part that is painted or (when fully transparent) that would be painted if both the **-fill** and **-outline** options were non-empty.
+
+The following standard options are supported by ovals:
+
+| **-dash**                   | **-activedash**           |
+| --------------------------- | ------------------------- |
+| **-disableddash**           | **-dashoffset**           |
+| **-fill**                   | **-activefill**           |
+| **-disabledfill**           | **-offset**               |
+| **-outline**                | **-activeoutline**        |
+| **-disabledoutline**        | **-outlineoffset**        |
+| **-outlinestipple**         | **-activeoutlinestipple** |
+| **-disabledoutlinestipple** | **-stipple**              |
+| **-activestipple**          | **-disabledstipple**      |
+| **-state**                  | **-tags**                 |
+| **-width**                  | **-activewidth**          |
+| **-disabledwidth**          |                           |
+
+There are no oval-specific options.
 
 
 

@@ -14,13 +14,14 @@ class Application(Frame):
         self.x, self.y = 0, 0
         self.fgcolor = "red"    # 渐变色？
         self.canvasbg = "white"
-        self.boxbg = "white"
         self.erasorsize = 4
         # 线型变量
         self.arrow = StringVar()
         self.linecheck = IntVar()
         self.dashcheck = StringVar()
         self.ld = IntVar()
+        # 图形变量
+        self.gld = IntVar()
         # 窗口初始化
         self.pack()
         self.createWidget(master)
@@ -40,15 +41,13 @@ class Application(Frame):
         # 右键菜单栏
         self.drawbox.bind("<Button-3>", self.createContextMenu)
         # 功能区
-        self.funcbox = Frame(width=270, height=500, bg=self.boxbg)
+        self.funcbox = Frame(width=270, height=500)
         self.funcbox.place(x=620, y=32)
         # 操作栏
-        self.operatebox = Frame(self.funcbox, width=269,
-                                height=25, bg=self.boxbg)
+        self.operatebox = Frame(self.funcbox, width=269,height=25)
         self.operatebox.place(x=0, y=0)
         # 详情栏
-        self.detailbox = LabelFrame(
-            self.funcbox, width=269, height=470, bg=self.boxbg)
+        self.detailbox = LabelFrame(self.funcbox, width=269, height=470)
         self.detailbox.place(x=0, y=30)
 
         # 操作标签
@@ -69,23 +68,22 @@ class Application(Frame):
         self.bt_option.place(relx=0.2*4, relwidth=0.2, relheight=1)
 
         # 直线详情框
-        self.linebox = Frame(self.detailbox, width=269,
-                             height=470, bg=self.boxbg)
+        self.linebox = Frame(self.detailbox, width=269, height=470)
         # 箭头类型
         Label(self.linebox, text="ArrowStyle").place(x=20, y=40)
-        self.set_arrow = Combobox(self.linebox,
+        self.set_arrow = Combobox(self.linebox, state="readonly",
                                   values=["\\", "<--", "-->", "<->"])
         self.set_arrow.current(0)
         self.set_arrow.place(x=100, y=40, relwidth=0.4)
         # 线型
         Label(self.linebox, text="LineStyle").place(x=20, y=80)
-        self.set_style = Combobox(self.linebox,
+        self.set_style = Combobox(self.linebox, state="readonly",
                                   values=["-", "--"])
         self.set_style.current(0)
         self.set_style.place(x=100, y=80, relwidth=0.4)
         # 模式
         Label(self.linebox, text="PenMode").place(x=20, y=120)
-        self.set_mode = Combobox(self.linebox,
+        self.set_mode = Combobox(self.linebox, state="readonly",
                                  values=["Single", "Multiple", "Radial"])
         self.set_mode.current(0)
         self.set_mode.place(x=100, y=120, relwidth=0.4)
@@ -99,32 +97,75 @@ class Application(Frame):
         self.ld.set(1)
         self.ld.trace("w", self.lsketchshow)
         # 预览图
-        self.linesketchbox = Frame(self.linebox, height=140)
+        self.linesketchbox = Frame(self.linebox, height=140,bd=1,relief='groove')
         self.linesketchbox.place(y=330, relwidth=1)
         self.linesketch = Canvas(self.linesketchbox, width=98, height=98, bg=self.canvasbg,
                                  bd=1, relief="solid")
         Label(self.linesketchbox, text="效果图").place(x=20, y=60)
         self.linesketch.place(x=120, y=20)
+        self.linesketch.create_line(0, 50, 100, 50, width=1)
+        
+        # 图形详情栏
+        self.graphbox = Frame(self.detailbox, width=269,height=470)
+        # 图形类型
+        Label(self.graphbox, text="GraphStyle").place(x=20, y=40)
+        self.set_gtype = Combobox(self.graphbox,values=["Rectangle", "Oval"],
+                                   state="readonly",)
+        self.set_gtype.current(0)
+        self.set_gtype.place(x=100, y=40, relwidth=0.4)
+        # 填充类型
+        Label(self.graphbox, text="FillStyle").place(x=20, y=80)
+        self.set_fillstyle = Combobox(self.graphbox, state="readonly",
+                                  values=["outline", "fill"])
+        self.set_fillstyle.current(0)
+        self.set_fillstyle.place(x=100, y=80, relwidth=0.4)
+        # 颜色
+        Label(self.graphbox, text="Color").place(x=20, y=120)
+        self.set_gcolor = Combobox(self.graphbox, state="readonly",
+                                 values=["red", "blue"])
+        self.set_gcolor.current(0)
+        self.set_gcolor.place(x=100, y=120, relwidth=0.4)
+        # 线宽
+        Label(self.graphbox, text="LineWidth").place(x=20, y=160)
+        self.set_gld = Entry(self.graphbox, highlightcolor="sky blue",
+                             highlightthickness=1,textvariable=self.gld,
+                            validate="key", validatecommand=(check, '%P'))
+        self.set_gld.place(x=100, y=160, relwidth=0.4)
+        self.gld.set(1)
+        self.gld.trace("w", self.gsketchshow)
+        # 预览图
+        self.graphsketchbox = Frame(self.graphbox, height=140,bd=1,
+                                    relief='groove')
+        self.graphsketchbox.place(y=330, relwidth=1)
+        self.graphsketch = Canvas(self.graphsketchbox, width=98, height=98,
+                                  bg=self.canvasbg, bd=1, relief="solid")
+        Label(self.graphsketchbox, text="效果图").place(x=20, y=60)
+        self.graphsketch.place(x=120, y=20)
+        self.graphsketch.create_rectangle(12.5, 87.5, 87.5, 12.5,outline="red",\
+            width=1)
 
-        self.graphbox = Frame(self.detailbox, width=269,
-                              height=470, bg=self.boxbg)
-        self.penbox = Frame(self.detailbox, width=269,
-                            height=470, bg=self.boxbg)
-        self.erasorbox = Frame(self.detailbox, width=269,
-                               height=470, bg=self.boxbg)
-        self.optionbox = Frame(self.detailbox, width=269,
-                               height=470, bg=self.boxbg)
 
+        
+        
+        self.penbox = Frame(self.detailbox, width=269,height=470)
+        self.erasorbox = Frame(self.detailbox, width=269,height=470)
+        self.optionbox = Frame(self.detailbox, width=269,height=470)
+        
         # 按钮效果通过边框样式的改变实现->sunken
         self.bt_line.bind("<Button-1>", self.eventmanager)
         self.bt_graph.bind("<Button-1>", self.eventmanager)
         self.bt_pen.bind("<Button-1>", self.eventmanager)
         self.bt_erasor.bind("<Button-1>", self.eventmanager)
         self.bt_option.bind("<Button-1>", self.eventmanager)
-        self.drawbox.bind("<ButtonRelease-1>", self.stopdraw)
+        
+        
         self.set_arrow.bind("<<ComboboxSelected>>", self.lsketchshow)
         self.set_style.bind("<<ComboboxSelected>>", self.lsketchshow)
         self.set_mode.bind("<<ComboboxSelected>>", self.lsketchshow)
+        self.set_gtype.bind("<<ComboboxSelected>>", self.gsketchshow)
+        self.set_gcolor.bind("<<ComboboxSelected>>", self.gsketchshow)
+        self.set_fillstyle.bind("<<ComboboxSelected>>", self.gsketchshow)
+        
         # 快捷键设定,此处监听了所有按键
         root.bind("<KeyPress>", self.shortcut)
 
@@ -135,8 +176,10 @@ class Application(Frame):
         self.frameshow(name)
         if name == "line":
             self.drawbox.bind("<B1-Motion>", self.drawline)
+            self.drawbox.bind("<ButtonRelease-1>", self.stopdraw)
         elif name == "graph":
             self.drawbox.bind("<B1-Motion>", self.drawgraph)
+            self.drawbox.bind("<ButtonRelease-1>", self.gstopdraw)
         elif name == "pen":
             self.drawbox.bind("<B1-Motion>", self.drawpen)
         elif name == "erasor":
@@ -169,9 +212,14 @@ class Application(Frame):
 
     def drawgraph(self, event):
         """按住左键，作为起点与终点，绘制一个矩形。"""
-        self.startdraw(event)
-        self.lastdraw = self.drawbox.create_rectangle(self.x, self.y, event.x, event.y,
-                                                      outline=self.fgcolor)
+        self.gstartdraw(event)
+        if self.set_gtype.get() == 'Rectangle':
+            cmd = 'self.lastdraw=self.drawbox.create_rectangle(self.x, self.y, event.x, event.y,%s="%s",width=%s)'%(self.set_fillstyle.get(),
+                       self.set_gcolor.get(), self.gld.get())
+        else:
+            cmd = 'self.lastdraw=self.drawbox.create_oval(self.x, self.y,event.x, event.y,%s="%s",width=%s)'%(self.set_fillstyle.get(),
+                       self.set_gcolor.get(), self.gld.get())
+        exec(cmd)
 
     def drawpen(self, event):
         """画笔，按住左键后，沿鼠标轨迹绘制图形。"""
@@ -283,7 +331,32 @@ class Application(Frame):
         self.ld.set(int(self.set_ld.get()))
         self.linecheck.set(checktag[self.set_mode.get()])
 
+    # 图形函数区
+    def gsketchshow(self, *args):
+        self.graphsketch.delete("all")
+        if self.set_gtype.get() == 'Rectangle':
+            cmd = 'self.graphsketch.create_rectangle(12.5, 87.5, 87.5, 12.5,\
+                    %s="%s", width=%s)'%(self.set_fillstyle.get(),
+                                        self.set_gcolor.get(), self.gld.get())
+        else:
+            cmd = 'self.graphsketch.create_oval(12.5, 87.5, 87.5, 12.5,%s="%s",\
+            width=%s)'%(self.set_fillstyle.get(), self.set_gcolor.get(),
+                       self.gld.get())
+        exec(cmd)    
 
+    def gstartdraw(self, event):
+        self.drawbox.delete(self.lastdraw)
+        if self.draw == 0:
+            self.draw = 1
+            self.x, self.y = event.x, event.y
+
+
+    def gstopdraw(self, event):
+        self.draw = 0
+        self.lastdraw = 0
+        self.x, self.y = event.x, event.y
+                
+            
 if __name__ == "__main__":
     root = Tk()
     root.geometry("900x545+200+300")
