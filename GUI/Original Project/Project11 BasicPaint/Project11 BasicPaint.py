@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter.colorchooser import *
 from tkinter.ttk import Combobox
+from tkinter.filedialog import askopenfilename, asksaveasfilename
+from PIL import Image, ImageTk
 
 
 class Application(Frame):
@@ -12,9 +14,9 @@ class Application(Frame):
         self.draw = 0
         self.lastdraw = 0
         self.x, self.y = 0, 0
-        self.fgcolor = "red"    # 渐变色？
         self.canvasbg = "white"
         self.erasorsize = 4
+        self.img = None
         # 线型变量
         self.arrow = StringVar()
         self.linecheck = IntVar()
@@ -24,27 +26,29 @@ class Application(Frame):
         self.gld = IntVar()
         # 选项变量
         self.drawcolor = StringVar()
+        self.oxflash = StringVar()  # 颜色缓冲值
         # 窗口初始化
         self.pack()
         self.createWidget(master)
 
     def createContextMenu(self, event):
         """右键菜单栏，正在设计中。"""
-        Menu.post(self.drawbox, event.x_root, event.y_root)
+        self.rightmenu.post(event.x_root, event.y_root)
 
     def createWidget(self, master):
         """组件初始化"""
         # 关于画图，完全可以使用matplotlib来实现
         self.drawbox = Canvas(root, width=598, height=498, bg=self.canvasbg,
                               bd=1, relief="solid")
-
         # 画图的背景设置只能继承类属性？不能使用实例属性？
-        self.drawbox.place(x=10, y=30)
+        self.drawbox.place(x=10, y=20)
+
         # 右键菜单栏
         self.drawbox.bind("<Button-3>", self.createContextMenu)
+
         # 功能区
         self.funcbox = Frame(width=270, height=500)
-        self.funcbox.place(x=620, y=32)
+        self.funcbox.place(x=620, y=22)
         # 操作栏
         self.operatebox = Frame(self.funcbox, width=269, height=25)
         self.operatebox.place(x=0, y=0)
@@ -159,17 +163,22 @@ class Application(Frame):
         self.set_colormode.current(0)
         self.set_colormode.place(x=110, y=20, relwidth=0.4)
         self.oxbox = Frame(self.optionbox, width=269, height=470)
+        self.oxbox.place(x=0, y=50)
         Label(self.oxbox, text="Colorname").place(x=20, y=10)
-        self.oxcolor = Entry(self.oxbox, textvariable=self.drawcolor,
-                             highlightcolor="sky blue",
+        self.oxcolor = Entry(self.oxbox, highlightcolor="sky blue",
+                             textvariable=self.oxflash,
                              highlightthickness=1, width=15)
+        self.oxflash.set('#ff0000')
         self.oxcolor.place(x=110, y=10)
         self.oxshow = Label(self.oxbox, bg='red', bd=1, relief='solid')
         self.oxshow.place(x=230, y=10, width=20, height=20)
-        self.oxbox.place(x=0, y=50)
+        self.oxtip = Label(self.oxbox)
+        self.oxtip.place(x=20, y=35, relwidth=0.95)
+        self.oxflash.trace('w', self.oxsetcolor)
         self.chbox = Frame(self.optionbox, width=269, height=470)
         Label(self.chbox, text="Colorset").place(x=20, y=15)
-        self.colorboard = Label(self.chbox, textvariable=self.drawcolor)
+        self.colorboard = Label(self.chbox)
+        self.colorboard['text'] = '#ff0000'
         self.colorboard.place(x=110, y=15)
         Button(self.chbox, text="⚙", command=self.setcolor).place(x=200, y=10)
 
@@ -189,7 +198,41 @@ class Application(Frame):
         self.set_colormode.bind("<<ComboboxSelected>>", self.colormode)
 
         # 快捷键设定,此处监听了所有按键
-        root.bind("<KeyPress>", self.shortcut)
+        master.bind("<KeyPress>", self.shortcut)
+
+        # Top Menubar
+        menubar = Menu(master)
+        filemenu = Menu(menubar, tearoff=0)  # tearoff是否可以拖撰单独显示
+        helpmenu = Menu(menubar, tearoff=0)  # tearoff是否可以拖撰单独显示
+        operationmenu = Menu(menubar, tearoff=0)  # tearoff是否可以拖撰单独显示
+
+        menubar.add_cascade(label="File", menu=filemenu)
+        menubar.add_cascade(label="Operation", menu=operationmenu)
+        menubar.add_cascade(label="Help", menu=helpmenu)
+        # 分割线
+        filemenu.add_command(
+            label="Load", accelerator="Ctrl+O", command=self.loadfig)
+        filemenu.add_command(
+            label="Save", accelerator="Ctrl+S", command=self.savefig)
+        filemenu.add_separator()
+        filemenu.add_command(label="Exit", command=master.quit)
+
+        modemenu = Menu(master, tearoff=0)
+        operationmenu.add_command(
+            label='Clear', accelerator="Ctrl+C", command=self.clearfig)
+        helpmenu.add_command(label="About us")
+        master.config(menu=menubar)
+
+        # self.rightmenu
+        self.rightmenu = Menu(master, tearoff=0)
+        self.rightmenu.add_command(
+            label='Clear', accelerator="Ctrl+C", command=self.clearfig)
+        self.rightmenu.add_command(label="Load", command=self.loadfig)
+        self.rightmenu.add_command(label="Save", command=self.savefig)
+        self.rightmenu.add_separator()
+        self.rightmenu.add_command(label="Exit", command=master.quit)
+
+        self.rightmenu.add_command(label="About us")
 
     def eventmanager(self, event):
         """事件管理，包括展示动画效果及响应"""
@@ -216,11 +259,11 @@ class Application(Frame):
         def draw():
             if self.dashcheck.get() == 'True':
                 self.lastdraw = self.drawbox.create_line(self.x, self.y, event.x, event.y,
-                                                         fill=self.fgcolor, arrow=self.arrow.get(),
+                                                         fill=self.drawcolor.get(), arrow=self.arrow.get(),
                                                          dash=10, width=self.ld.get())
             else:
                 self.lastdraw = self.drawbox.create_line(self.x, self.y, event.x, event.y,
-                                                         fill=self.fgcolor, arrow=self.arrow.get(),
+                                                         fill=self.drawcolor.get(), arrow=self.arrow.get(),
                                                          width=self.ld.get())
             # arrowshape不会搞，不搞了
             # 旁边增设⚙按钮设置宽度值，暂时懒得弄
@@ -246,23 +289,40 @@ class Application(Frame):
     def drawpen(self, event):
         """画笔，按住左键后，沿鼠标轨迹绘制图形。"""
         self.startdraw(event)
-        self.drawbox.create_rectangle(self.x, self.y, event.x, event.y,
-                                      outline=self.fgcolor)
+        self.drawbox.create_line(self.x, self.y, event.x, event.y,
+                                 fill=self.drawcolor.get())
         self.x, self.y = event.x, event.y
 
     def drawerasor(self, event):
         """通过绘制新的实心矩形覆盖原有图形，但这会存在一个问题，换背景颜色就全部显示出来了。"""
         self.startdraw(event)
         self.drawbox.create_rectangle(event.x-self.erasorsize/2, event.y-self.erasorsize/2,
-                                      event.x+self.erasorsize/2, event.y+self.erasorsize/2,
-                                      outline=self.canvasbg)
+                                      event.x + self.erasorsize / 2, event.y + self.erasorsize / 2,
+                                      fill=self.canvasbg, outline=self.canvasbg)
         # 功能栏更换橡皮擦样式
         self.x, self.y = event.x, event.y
 
     def drawoption(self, event):
         pass
 
+    def savefig(self):
+        figname = asksaveasfilename(defaultextension='.png',
+                                    filetypes=[('图像', 'png')], initialdir='.',
+                                    title='Choose a path to save.')
+        pass
+
+    def loadfig(self):
+        imgpath = askopenfilename(defaultextension='.png',
+                                  filetypes=[('图像', 'png'), ('图像', '.jpg'),
+                                             ('图像', '.gif')], initialdir='.',
+                                  title='Choose an image to load.')
+        self.img = ImageTk.PhotoImage(Image.open(imgpath))
+        self.drawbox.create_image(0, 0, anchor='nw', image=self.img)
+
+    def clearfig(self):
+        self.drawbox.delete("all")
     # 操作区显示函数区
+
     def labelshow(self, target, *agrs):
         """功能栏操作框现实效果"""
         # Label显示效果设置
@@ -296,8 +356,8 @@ class Application(Frame):
             self.drawbox.delete("all")
         elif event.char == "r":
             """快速选择颜色"""
-            c = askcolor(color=self.fgcolor, title="选择画笔颜色")
-            self.fgcolor = c[1]
+            c = askcolor(color=self.drawcolor, title="选择画笔颜色")
+            self.drawcolor = c[1]
 
     # Entry 数字校验区
     def numberonly(self, content):
@@ -323,11 +383,11 @@ class Application(Frame):
         self.linedataflash()
         if self.dashcheck.get() == 'True':
             self.linesketch.create_line(0, 50, 100, 50,
-                                        fill=self.fgcolor, arrow=self.arrow.get(),
+                                        fill=self.drawcolor.get(), arrow=self.arrow.get(),
                                         dash=10, width=self.ld.get())
         else:
             self.linesketch.create_line(0, 50, 100, 50,
-                                        fill=self.fgcolor, arrow=self.arrow.get(),
+                                        fill=self.drawcolor.get(), arrow=self.arrow.get(),
                                         width=self.ld.get())
 
     def startdraw(self, event):
@@ -382,10 +442,25 @@ class Application(Frame):
     def setcolor(self):
         color = askcolor(color=self.drawcolor.get(),
                          title="选择画笔颜色")[1]
-        if color != "None":
+        if color != None:
             self.drawcolor.set(color)
-        self.colorboard['fg'] = self.drawcolor.get()
-        self.oxshow['bg'] = self.drawcolor.get()
+            self.oxflash.set(color)
+            self.colorboard['fg'] = color
+            self.colorboard['text'] = color
+            self.oxshow['bg'] = color
+
+    def oxsetcolor(self, *args):
+        try:
+            color = self.oxcolor.get()
+            self.colorboard['fg'] = color
+            self.oxshow['bg'] = color
+            self.oxtip['fg'] = 'green'
+            self.oxtip['text'] = 'Color value Valid'
+        except:
+            self.oxtip['text'] = "This's not a valid ox value!"
+            self.oxtip['fg'] = 'red'
+        else:
+            self.drawcolor.set(color)
 
     def colormode(self, event):
         mode = self.set_colormode.get()

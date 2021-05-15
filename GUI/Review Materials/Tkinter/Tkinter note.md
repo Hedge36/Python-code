@@ -1853,6 +1853,12 @@ root.mainloop()
 
 ### Description
 
+```
+from tkinter import filedialog
+```
+
+
+
 ### Function
 
 | Function          | Dialog     | Description            |
@@ -1908,7 +1914,6 @@ filedialog.askopenfile(mode="r", **options)
 ### Description
 
 > Pop up a simple dialog to get return of user, different from messagebox, simple dialog has more simple style and function.
->
 
 ### Fuction
 
