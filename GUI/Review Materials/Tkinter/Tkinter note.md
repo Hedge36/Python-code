@@ -1649,11 +1649,11 @@ tag_raise(firstRect)
 
 ## messagebox
 
-**简单说明：**　　
+### Synopsis
 
-**messagebox需额外引入**
+> **messagebox需额外引入**
 
-messageBox：消息框，用于显示你应用程序的消息框。(Python2中为tkMessagebox)，其实这里的messageBox就是我们平时看到的弹窗。 我们首先需要定义一个触发功能，来触发这个弹窗，这里我们就放上以前学过的button按钮，通过触发功能，调用messagebox吧，点击button按钮就会弹出提示对话框。下面给出messagebox提示信息的几种形式：
+messageBox：消息框，用于显示你应用程序的消息框。其实这里的messageBox就是我们平时看到的弹窗。 我们首先需要定义一个触发功能，来触发这个弹窗，这里我们就放上以前学过的button按钮，通过触发功能，调用messagebox吧，点击button按钮就会弹出提示对话框。下面给出messagebox提示信息的几种形式：
 
 ```python
 tkinter.messagebox.showinfo(title='Hi', message='你好！')            # 提示信息对话窗
@@ -1662,15 +1662,6 @@ tkinter.messagebox.showerror(title='Hi', message='出错了！')         # 提�
 print(tkinter.messagebox.askquestion(title='Hi', message='你好！'))  # 询问选择对话窗return 'yes', 'no'
 print(tkinter.messagebox.askyesno(title='Hi', message='你好！'))     # return 'True', 'False'
 print(tkinter.messagebox.askokcancel(title='Hi', message='你好！'))  # return 'True', 'False'
-```
-
-```python
-tkinter.messagebox.showinfo(title='Hi', message='你好！')              # 提示信息对话窗
-# tkinter.messagebox.showwarning(title='Hi', message='有警告！')       # 提出警告对话窗
-# tkinter.messagebox.showerror(title='Hi', message='出错了！')         # 提出错误对话窗
-# print(tkinter.messagebox.askquestion(title='Hi', message='你好！'))  # 询问选择对话窗return 'yes', 'no'
-# print(tkinter.messagebox.askyesno(title='Hi', message='你好！'))     # return 'True', 'False'
-# print(tkinter.messagebox.askokcancel(title='Hi', message='你好！'))  # return 'True', 'False'
 ```
 
 **测试效果：**
@@ -1685,58 +1676,58 @@ messagebox中工具函数如下：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424123825529.png)
 
-> #### 1.消息提示框
+### 消息提示框
+
+> tkinter.messagebox.showinfo(title, message, icon=None, type=None)
 >
-> > tkinter.messagebox.showinfo(title, message, icon=None, type=None)
-> >
-> > 返回值为点击的按键的值，包括“yes”（是）、“no”（否）、“retry”（重试）、“ok”（确定）、“cancel”（取消）、“ignore”（忽略）、”abort“（中止）。
+> 返回值为点击的按键的值，包括“yes”（是）、“no”（否）、“retry”（重试）、“ok”（确定）、“cancel”（取消）、“ignore”（忽略）、”abort“（中止）。
+
+
+
+### 消息警告框
+
+> tkinter.messagebox.showwarning(title,message,icon= None,type= None)
+>
+> 返回值为点击的按键的值，按键值同上。
+
+
+
+### 消息错误框
+
+> tkinter.messagebox.showerror(title,message,icon= None,type= None)
+>
+> 返回值为点击的按键的值，按键值同上。
+
+
+
+### 对话框
+
+> tkinter.messagebox.**askquestion**(title,message,icon= None,type= None)
+>
+> 返回值为点击的按键的值，当单击的按钮值为“ok”（确定）时返回True，否则都为False
 >
 > 
 >
-> #### 2.消息警告框
+> tkinter.messagebox.**askokcancel**(title,message,icon= None,type= None)
 >
-> > tkinter.messagebox.showwarning(title,message,icon= None,type= None)
-> >
-> > 返回值为点击的按键的值，按键值同上。
+> 返回值为True或False，当单击的按钮值为“ok”（确定）时返回True，否则都为False
 >
 > 
 >
-> #### 3.消息错误框
+> tkinter.messagebox.**askyesno**(title,message,icon= None,type= None)
 >
-> > tkinter.messagebox.showerror(title,message,icon= None,type= None)
-> >
-> > 返回值为点击的按键的值，按键值同上。
+> 返回值为True或False，当单击的按钮键值为“yes”（是）时返回True，否则都返回False
 >
 > 
 >
-> #### 4.对话框
+> tkinter.messagebox.**askyesnocancel**(title,message,icon= None,type= None)
 >
-> > tkinter.messagebox.**askquestion**(title,message,icon= None,type= None)
-> >
-> > 返回值为点击的按键的值，当单击的按钮值为“ok”（确定）时返回True，否则都为False
-> >
-> > 
-> >
-> > tkinter.messagebox.**askokcancel**(title,message,icon= None,type= None)
-> >
-> > 返回值为True或False，当单击的按钮值为“ok”（确定）时返回True，否则都为False
-> >
-> > 
-> >
-> > tkinter.messagebox.**askyesno**(title,message,icon= None,type= None)
-> >
-> > 返回值为True或False，当单击的按钮键值为“yes”（是）时返回True，否则都返回False
-> >
-> > 
-> >
-> > tkinter.messagebox.**askyesnocancel**(title,message,icon= None,type= None)
-> >
-> > 返回值为True、False、None，当单击的按键值为“yes”（是）时返回True、当单击的按键值为“cancel”（取消）时返回None，否则都返回False
-> >
-> > 
-> >
-> > tkinter.messagebox.**askretrycancel**(title,message,icon= None,type= None):
-> > 返回值为True或False，当单击的按钮值为“retry”（重试）时返回True，否则都为False
+> 返回值为True、False、None，当单击的按键值为“yes”（是）时返回True、当单击的按键值为“cancel”（取消）时返回None，否则都返回False
+>
+> 
+>
+> tkinter.messagebox.**askretrycancel**(title,message,icon= None,type= None):
+> 返回值为True或False，当单击的按钮值为“retry”（重试）时返回True，否则都为False
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424125014382.jpg)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424125044939.jpg)![在这里插入图片描述](https://img-blog.csdnimg.cn/2020042413385368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTQxNzkzOA==,size_16,color_FFFFFF,t_70)![在这里插入图片描述](https://img-blog.csdnimg.cn/2020042413393568.png)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424134034464.png)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424134131945.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424134213924.png)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424134243734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTQxNzkzOA==,size_16,color_FFFFFF,t_70)![在这里插入图片描述](https://img-blog.csdnimg.cn/20200424125058874.jpg)
@@ -1746,17 +1737,15 @@ messagebox中工具函数如下：
 
 默认情况下使用者在调用messagebox时只要设置提示区字符串即可。但如果有需要，可以通过如下两个选项来设置图标和按键
 
-> icon：定制的图标区图标选项，该选项支持“error”、“info”、“question”、“warning”（默认为“info”图标）
+> **icon**：定制的图标区图标选项，该选项支持“error”、“info”、“question”、“warning”（默认为“info”图标）
 >
+>**type**：定制按钮的选项。该选项支持“abortretryignore”（中止、重试、忽略）、“ok”（确定）、“okcancel”（确定、取消）、“retrycancel”（重试、取消）、“yesno”（是、否）、“yesnocancel”（是、否、取消）（默认为“ok”按键）
+> 
+>**title**：messagebox消息框的标题
 >
-> type：定制按钮的选项。该选项支持“abortretryignore”（中止、重试、忽略）、“ok”（确定）、“okcancel”（确定、取消）、“retrycancel”（重试、取消）、“yesno”（是、否）、“yesnocancel”（是、否、取消）（默认为“ok”按键）
->
->
-> title：messagebox消息框的标题
->
-> message：提示区字符串
+> **message**：提示区字符串
 
-#### 代码实例
+### 实例
 
 下面代码通过两组单选钮让用户动态选择不同的icon和type选项的效果：
 
@@ -1914,9 +1903,12 @@ filedialog.askopenfile(mode="r", **options)
 
 ## Simple Dialog
 
+**Need import like `from tkinter import simpledialog`.**
+
 ### Description
 
-
+> Pop up a simple dialog to get return of user, different from messagebox, simple dialog has more simple style and function.
+>
 
 ### Fuction
 
@@ -1925,8 +1917,6 @@ filedialog.askopenfile(mode="r", **options)
 | askfloat   | 输入并返回浮点数 |
 | askinteger | 输入并返回整数   |
 | askstring  | 输入并返回字符串 |
-|            |                  |
-|            |                  |
 
 
 
