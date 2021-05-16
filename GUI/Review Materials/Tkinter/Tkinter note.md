@@ -6,8 +6,6 @@ If you have any question, please seek the  [Docs](https://www.tcl.tk/doc/)  for 
 
 Tip : there something different with normal.
 
-⬜⚪▭□△○◯
-
 ## Synopsis
 
 > **Tcl**：工具命令语言，英文全称为Tool Command Language，它是一个非常强大，易学习动态编程语言，应用广泛。包括网页和桌面应用，网络，管理，测试，除此之外，还有很多其他应用。开源和商业友好，Tcl是一个成熟但不断发展的语言，是真正的跨平台，易于部署，高度可扩展的语言。

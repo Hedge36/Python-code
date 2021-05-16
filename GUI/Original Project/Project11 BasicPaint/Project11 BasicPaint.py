@@ -15,7 +15,6 @@ class Application(Frame):
         self.lastdraw = 0
         self.x, self.y = 0, 0
         self.canvasbg = "white"
-        self.erasorsize = 4
         self.img = None
         # 线型变量
         self.arrow = StringVar()
@@ -24,6 +23,10 @@ class Application(Frame):
         self.ld = IntVar()
         # 图形变量
         self.gld = IntVar()
+        # 画笔变量
+        self.pld = IntVar()
+        # 橡皮变量
+        self.esize = IntVar()
         # 选项变量
         self.drawcolor = StringVar()
         self.oxflash = StringVar()  # 颜色缓冲值
@@ -76,30 +79,30 @@ class Application(Frame):
         # 直线详情框
         self.linebox = Frame(self.detailbox, width=269, height=470)
         # 箭头类型
-        Label(self.linebox, text="ArrowStyle").place(x=20, y=40)
+        Label(self.linebox, text="ArrowStyle").place(x=30, y=40)
         self.set_arrow = Combobox(self.linebox, state="readonly",
                                   values=["\\", "<--", "-->", "<->"])
         self.set_arrow.current(0)
-        self.set_arrow.place(x=100, y=40, relwidth=0.4)
+        self.set_arrow.place(x=110, y=40, relwidth=0.4)
         # 线型
-        Label(self.linebox, text="LineStyle").place(x=20, y=80)
+        Label(self.linebox, text="LineStyle").place(x=30, y=80)
         self.set_style = Combobox(self.linebox, state="readonly",
                                   values=["-", "--"])
         self.set_style.current(0)
-        self.set_style.place(x=100, y=80, relwidth=0.4)
+        self.set_style.place(x=110, y=80, relwidth=0.4)
         # 模式
-        Label(self.linebox, text="PenMode").place(x=20, y=120)
+        Label(self.linebox, text="PenMode").place(x=30, y=120)
         self.set_mode = Combobox(self.linebox, state="readonly",
                                  values=["Single", "Multiple", "Radial"])
         self.set_mode.current(0)
-        self.set_mode.place(x=100, y=120, relwidth=0.4)
+        self.set_mode.place(x=110, y=120, relwidth=0.4)
         # 线宽
-        Label(self.linebox, text="LineWidth").place(x=20, y=160)
+        Label(self.linebox, text="LineWidth").place(x=30, y=160)
         check = self.register(self.numberonly)
         self.set_ld = Entry(self.linebox, highlightcolor="sky blue", highlightthickness=1,
                             textvariable=self.ld,
                             validate="key", validatecommand=(check, '%P'))
-        self.set_ld.place(x=100, y=160, relwidth=0.4)
+        self.set_ld.place(x=110, y=160, relwidth=0.4)
         self.ld.set(1)
         self.ld.trace("w", self.lsketchshow)
         # 预览图
@@ -108,36 +111,36 @@ class Application(Frame):
         self.linesketchbox.place(y=330, relwidth=1)
         self.linesketch = Canvas(self.linesketchbox, width=98, height=98, bg=self.canvasbg,
                                  bd=1, relief="solid")
-        Label(self.linesketchbox, text="效果图").place(x=20, y=60)
-        self.linesketch.place(x=120, y=20)
+        Label(self.linesketchbox, text="效果图").place(x=30, y=60)
+        self.linesketch.place(x=110, y=20)
         self.linesketch.create_line(0, 50, 100, 50, width=1)
 
         # 图形详情栏
         self.graphbox = Frame(self.detailbox, width=269, height=470)
         # 图形类型
-        Label(self.graphbox, text="GraphStyle").place(x=20, y=40)
+        Label(self.graphbox, text="GraphStyle").place(x=30, y=40)
         self.set_gtype = Combobox(self.graphbox, values=["Rectangle", "Oval"],
                                   state="readonly",)
         self.set_gtype.current(0)
-        self.set_gtype.place(x=100, y=40, relwidth=0.4)
+        self.set_gtype.place(x=110, y=40, relwidth=0.4)
         # 填充类型
-        Label(self.graphbox, text="FillStyle").place(x=20, y=80)
+        Label(self.graphbox, text="FillStyle").place(x=30, y=80)
         self.set_fillstyle = Combobox(self.graphbox, state="readonly",
                                       values=["outline", "fill"])
         self.set_fillstyle.current(0)
-        self.set_fillstyle.place(x=100, y=80, relwidth=0.4)
+        self.set_fillstyle.place(x=110, y=80, relwidth=0.4)
         # 颜色
-        Label(self.graphbox, text="Color").place(x=20, y=120)
+        Label(self.graphbox, text="Color").place(x=30, y=120)
         self.set_gcolor = Combobox(self.graphbox, state="readonly",
                                    values=["red", "blue"])
         self.set_gcolor.current(0)
-        self.set_gcolor.place(x=100, y=120, relwidth=0.4)
+        self.set_gcolor.place(x=110, y=120, relwidth=0.4)
         # 线宽
-        Label(self.graphbox, text="LineWidth").place(x=20, y=160)
+        Label(self.graphbox, text="LineWidth").place(x=30, y=160)
         self.set_gld = Entry(self.graphbox, highlightcolor="sky blue",
                              highlightthickness=1, textvariable=self.gld,
                              validate="key", validatecommand=(check, '%P'))
-        self.set_gld.place(x=100, y=160, relwidth=0.4)
+        self.set_gld.place(x=110, y=160, relwidth=0.4)
         self.gld.set(1)
         self.gld.trace("w", self.gsketchshow)
         # 预览图
@@ -146,41 +149,74 @@ class Application(Frame):
         self.graphsketchbox.place(y=330, relwidth=1)
         self.graphsketch = Canvas(self.graphsketchbox, width=98, height=98,
                                   bg=self.canvasbg, bd=1, relief="solid")
-        Label(self.graphsketchbox, text="效果图").place(x=20, y=60)
-        self.graphsketch.place(x=120, y=20)
+        Label(self.graphsketchbox, text="效果图").place(x=30, y=60)
+        self.graphsketch.place(x=110, y=20)
         self.graphsketch.create_rectangle(12.5, 87.5, 87.5, 12.5, outline="red",
                                           width=1)
 
+        # 画笔区
         self.penbox = Frame(self.detailbox, width=269, height=470)
+        Label(self.penbox, text="PenWidth").place(x=30, y=40)
+        self.set_pld = Entry(self.penbox, highlightcolor="sky blue",
+                             highlightthickness=1, textvariable=self.pld,
+                             validate="key", validatecommand=(check, '%P'))
+        self.set_pld.place(x=110, y=40, relwidth=0.4)
+        self.pld.set(1)
+
+        # 橡皮详情区
         self.erasorbox = Frame(self.detailbox, width=269, height=470)
+        # 橡皮类型
+        Label(self.erasorbox, text="Erasortype").place(x=30, y=40)
+        self.set_etype = Combobox(self.erasorbox, values=["Rectangle", "Oval"],
+                                  state="readonly",)
+        self.set_etype.current(0)
+        self.set_etype.place(x=110, y=40, relwidth=0.4)
+        # 橡皮大小
+        Label(self.erasorbox, text="ErasorSize").place(x=30, y=80)
+        self.esize.set(4)
+        self.set_eld = Entry(self.erasorbox, highlightcolor="sky blue",
+                             highlightthickness=1, textvariable=self.esize,
+                             validate="key", validatecommand=(check, '%P'))
+        self.set_eld.place(x=110, y=80, relwidth=0.4)
+        self.esize.trace("w", self.esketchshow)
+        # 预览图
+        self.esketchbox = Frame(self.erasorbox, height=140, bd=1,
+                                relief='groove')
+        self.esketchbox.place(y=330, relwidth=1)
+        self.esketch = Canvas(self.esketchbox, width=98, height=98,
+                              bg=self.canvasbg, bd=1, relief="solid")
+        Label(self.esketchbox, text="效果图\n(颜色仅供参考)").place(x=30, y=60)
+        self.esketch.place(x=120, y=20)
+        self.esketch.create_rectangle(46, 46, 54, 54, outline="violet",
+                                      width=1)
 
         # 设置区
         self.optionbox = Frame(self.detailbox, width=269, height=470)
-        Label(self.optionbox, text="ColorMode").place(x=20, y=20)
+        Label(self.optionbox, text="ColorMode").place(x=30, y=40)
         self.drawcolor.set("#ff0000")
         self.set_colormode = Combobox(self.optionbox, state="readonly",
                                       values=["Ox", "Chooser"])
         self.set_colormode.current(0)
-        self.set_colormode.place(x=110, y=20, relwidth=0.4)
+        self.set_colormode.place(x=120, y=40, relwidth=0.4)
         self.oxbox = Frame(self.optionbox, width=269, height=470)
-        self.oxbox.place(x=0, y=50)
-        Label(self.oxbox, text="Colorname").place(x=20, y=10)
+        self.oxbox.place(x=0, y=75)
+        Label(self.oxbox, text="Colorname").place(x=30, y=0)
         self.oxcolor = Entry(self.oxbox, highlightcolor="sky blue",
                              textvariable=self.oxflash,
                              highlightthickness=1, width=15)
         self.oxflash.set('#ff0000')
-        self.oxcolor.place(x=110, y=10)
+        self.oxcolor.place(x=120, y=0)
         self.oxshow = Label(self.oxbox, bg='red', bd=1, relief='solid')
-        self.oxshow.place(x=230, y=10, width=20, height=20)
+        self.oxshow.place(x=240, y=0, width=20, height=20)
         self.oxtip = Label(self.oxbox)
-        self.oxtip.place(x=20, y=35, relwidth=0.95)
+        self.oxtip.place(x=30, y=25, relwidth=0.95)
         self.oxflash.trace('w', self.oxsetcolor)
         self.chbox = Frame(self.optionbox, width=269, height=470)
-        Label(self.chbox, text="Colorset").place(x=20, y=15)
+        Label(self.chbox, text="Colorset").place(x=30, y=0)
         self.colorboard = Label(self.chbox)
         self.colorboard['text'] = '#ff0000'
-        self.colorboard.place(x=110, y=15)
-        Button(self.chbox, text="⚙", command=self.setcolor).place(x=200, y=10)
+        self.colorboard.place(x=120, y=0)
+        Button(self.chbox, text="⚙", command=self.setcolor).place(x=210, y=0)
 
         # 按钮效果通过边框样式的改变实现->sunken
         self.bt_line.bind("<Button-1>", self.eventmanager)
@@ -195,6 +231,7 @@ class Application(Frame):
         self.set_gtype.bind("<<ComboboxSelected>>", self.gsketchshow)
         self.set_gcolor.bind("<<ComboboxSelected>>", self.gsketchshow)
         self.set_fillstyle.bind("<<ComboboxSelected>>", self.gsketchshow)
+        self.set_etype.bind("<<ComboboxSelected>>", self.esketchshow)
         self.set_colormode.bind("<<ComboboxSelected>>", self.colormode)
 
         # 快捷键设定,此处监听了所有按键
@@ -289,16 +326,23 @@ class Application(Frame):
     def drawpen(self, event):
         """画笔，按住左键后，沿鼠标轨迹绘制图形。"""
         self.startdraw(event)
-        self.drawbox.create_line(self.x, self.y, event.x, event.y,
+        self.drawbox.create_line(self.x, self.y, event.x, event.y, width=self.pld.get(),
                                  fill=self.drawcolor.get())
         self.x, self.y = event.x, event.y
 
     def drawerasor(self, event):
         """通过绘制新的实心矩形覆盖原有图形，但这会存在一个问题，换背景颜色就全部显示出来了。"""
         self.startdraw(event)
-        self.drawbox.create_rectangle(event.x-self.erasorsize/2, event.y-self.erasorsize/2,
-                                      event.x + self.erasorsize / 2, event.y + self.erasorsize / 2,
-                                      fill=self.canvasbg, outline=self.canvasbg)
+        size = self.esize.get()
+        if self.set_etype.get() == 'Rectangle':
+            print(size)
+            self.drawbox.create_rectangle(event.x-size/2, event.y-size/2,
+                                          event.x + size / 2, event.y + size / 2,
+                                          fill=self.canvasbg, outline=self.canvasbg)
+        else:
+            self.drawbox.create_oval(event.x-size/2, event.y-size/2,
+                                     event.x + size / 2, event.y + size / 2,
+                                     fill=self.canvasbg, outline=self.canvasbg)
         # 功能栏更换橡皮擦样式
         self.x, self.y = event.x, event.y
 
@@ -316,7 +360,9 @@ class Application(Frame):
                                   filetypes=[('图像', 'png'), ('图像', '.jpg'),
                                              ('图像', '.gif')], initialdir='.',
                                   title='Choose an image to load.')
-        self.img = ImageTk.PhotoImage(Image.open(imgpath))
+        img = Image.open(imgpath)
+        img = img.resize((598, 498), Image.ANTIALIAS)
+        self.img = ImageTk.PhotoImage(img)
         self.drawbox.create_image(0, 0, anchor='nw', image=self.img)
 
     def clearfig(self):
@@ -438,16 +484,32 @@ class Application(Frame):
         self.lastdraw = 0
         self.x, self.y = event.x, event.y
 
+    # 橡皮函数区
+
+    def esketchshow(self, *args):
+        self.esketch.delete("all")
+        size = self.esize.get()
+        if self.set_etype.get() == 'Rectangle':
+            self.esketch.create_rectangle(50-size/2, 50-size/2,
+                                          50 + size / 2, 50 + size / 2,
+                                          fill='violet', outline='violet')
+        else:
+            self.esketch.create_oval(50-size/2, 50-size/2,
+                                     50 + size / 2, 50 + size / 2,
+                                     fill='violet', outline='violet')
+
     # 设置区函数
+
     def setcolor(self):
         color = askcolor(color=self.drawcolor.get(),
                          title="选择画笔颜色")[1]
         if color != None:
-            self.drawcolor.set(color)
+            print(color)
             self.oxflash.set(color)
             self.colorboard['fg'] = color
             self.colorboard['text'] = color
             self.oxshow['bg'] = color
+            self.drawcolor.set(color)
 
     def oxsetcolor(self, *args):
         try:
@@ -465,16 +527,19 @@ class Application(Frame):
     def colormode(self, event):
         mode = self.set_colormode.get()
         if mode == "Chooser":
-            self.chbox.place(x=0, y=50)
+            self.chbox.place(x=0, y=75)
             self.oxbox.place_forget()
         else:
-            self.oxbox.place(x=0, y=50)
+            self.oxbox.place(x=0, y=75)
             self.chbox.place_forget()
 
 
 if __name__ == "__main__":
     root = Tk()
-    root.geometry("900x545+200+300")
+    root.update()
+    x_max, y_max = root.maxsize()
+    x, y = int(x_max/2-450), int(y_max/2-545/2)
+    root.geometry("900x545+%s+%s" % (x, y))
     root.title("BasicPaint")
     root.resizable(0, 0)  # 锁定长宽大小
     app = Application(master=root)
