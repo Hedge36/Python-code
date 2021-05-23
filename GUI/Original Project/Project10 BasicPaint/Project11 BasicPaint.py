@@ -393,19 +393,27 @@ class Application(Frame):
     # 快捷键设置
     def shortcut(self, event):
         """快捷键的绑定"""
+        print(event.keycode)
         # 也可以通过设置button的accelerate来实现。
         if event.char == "l":
             """快速绘制直线"""
             self.drawbox.bind("<B1-Motion>", self.drawline)
-        elif event.char == "c":
+            self.drawbox.bind("<ButtonRelease-1>", self.stopdraw)
+        elif event.char in ["Control-C", "Control-c"]:
             """快速清屏"""
             self.drawbox.delete("all")
         elif event.char == "r":
             """快速选择颜色"""
             c = askcolor(color=self.drawcolor, title="选择画笔颜色")
             self.drawcolor = c[1]
+        elif event.keycode == 83:
+            self.savefig()
+        elif event.char in ["<Control_O>", "<Control_o>"]:
+            self.loadfig()
+        elif event.char in ["P", "p"]:
+            self.drawbox.bind("<B1-Motion>", self.drawpen)
 
-    # Entry 数字校验区
+            # Entry 数字校验区
     def numberonly(self, content):
         "输入文本验证，过滤非数字类型"
         return_variable = False  # 设置默认返回值为False

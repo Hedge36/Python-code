@@ -641,7 +641,7 @@ There are no oval-specific options.
 >
 > Command-Line Name: **-accelerator**
 >
-> This option can set shutcut key to call the command.
+> Specifies a string to display at the right side of the menu entry. Normally describes an accelerator keystroke sequence that may be used to invoke the same function as the menu entry. **This is a display option, it does not actually set the corresponding binding (which can be achieved using the *bind* command).** This option is not available for separator or tear-off entries.
 
 **示例代码：**
 
@@ -1336,27 +1336,29 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 
 **注意大小写！！！**
 
-| Type     | **Format**                            | **Discription**                                              |
-| -------- | ------------------------------------- | ------------------------------------------------------------ |
-| 鼠标事件 | <Button-1>                            | 鼠标点击（1-左键，2-中键，3-右键）                           |
-|          | <Double-Button-1>                     | 鼠标双击（1-左键，2-中键，3-右键）                           |
-|          | <B1-Motion>                           | 鼠标拖动（1-左键，2-中键，3-右键）                           |
-|          | <ButtonRelease-1>                     | 鼠标按下之后释放（1-左键，2-中键，3-右键）                   |
-|          | <Enter>                               | 鼠标进入控件范围（widget），不是键盘按键                     |
-|          | <Leave>                               | 鼠标离开控件范围（widget）                                   |
-| 键盘事件 | <Key>/<KeyPress>                      | 任意键盘按键（键值会以char的格式放入event对象）              |
-|          | <BackSpace><Tab><Shift_L><Up><F1><F2> | 对应键盘按键                                                 |
-| 组件事件 | <Configure>                           | 如果widget的大小发生改变，新的大小（width和height）会打包到event发往handler。 |
-|          | <Activate>                            | 当组件从不可用变为可用                                       |
-|          | <Deactivate>                          | 当组件从可用变为不可用                                       |
-|          | <Destroy>                             | 当组件被销毁时                                               |
-|          | <Expose>                              | 当组件从被遮挡状态变为暴露状态                               |
-|          | <Map>                                 | 当组件由隐藏状态变为显示状态                                 |
-|          | <Unmap>                               | 当组件由显示状态变为隐藏状态                                 |
-|          | <FocusIn>                             | 当组件获得焦点时                                             |
-|          | <FocusOut>                            | 当组件失去焦点时                                             |
-|          | <Property>                            | 当组件属性发生改变时                                         |
-|          | <Visibility>                          | 当组件变为可视状态时                                         |
+| Type     | **Format**                      | **Discription**                                              |
+| -------- | ------------------------------- | ------------------------------------------------------------ |
+| 鼠标事件 | <Button-1>                      | 鼠标点击（1-左键，2-中键，3-右键）                           |
+|          | <Double-Button-1>               | 鼠标双击（1-左键，2-中键，3-右键）                           |
+|          | <B1-Motion>                     | 鼠标拖动（1-左键，2-中键，3-右键）                           |
+|          | <ButtonRelease-1>               | 鼠标按下之后释放（1-左键，2-中键，3-右键）                   |
+|          | <Enter>                         | 鼠标进入控件范围（widget），不是键盘按键                     |
+|          | <Leave>                         | 鼠标离开控件范围（widget）                                   |
+| 键盘事件 | <Key>/<KeyPress>                | 任意键盘按键（键值会以char的格式放入event对象）              |
+|          | <BackSpace><Tab><F1><Control-A> | 对应键盘按键                                                 |
+| 组件事件 | <Configure>                     | 如果widget的大小发生改变，新的大小（width和height）会打包到event发往handler。 |
+|          | <Activate>                      | 当组件从不可用变为可用                                       |
+|          | <Deactivate>                    | 当组件从可用变为不可用                                       |
+|          | <Destroy>                       | 当组件被销毁时                                               |
+|          | <Expose>                        | 当组件从被遮挡状态变为暴露状态                               |
+|          | <Map>                           | 当组件由隐藏状态变为显示状态                                 |
+|          | <Unmap>                         | 当组件由显示状态变为隐藏状态                                 |
+|          | <FocusIn>                       | 当组件获得焦点时                                             |
+|          | <FocusOut>                      | 当组件失去焦点时                                             |
+|          | <Property>                      | 当组件属性发生改变时                                         |
+|          | <Visibility>                    | 当组件变为可视状态时                                         |
+
+[To learn more.](https://www.tcl.tk/man/tcl8.6/TkCmd/keysyms.htm) 
 
 **（2）事件对象：**
 
