@@ -43,7 +43,6 @@ class Application(Frame):
         # 关于画图，完全可以使用matplotlib来实现
         self.drawbox = Canvas(root, width=598, height=498, bg=self.canvasbg,
                               bd=1, relief="solid")
-        # 画图的背景设置只能继承类属性？不能使用实例属性？
         self.drawbox.place(x=10, y=20)
 
         # 右键菜单栏
@@ -303,7 +302,6 @@ class Application(Frame):
                                                          fill=self.drawcolor.get(), arrow=self.arrow.get(),
                                                          width=self.ld.get())
             # arrowshape不会搞，不搞了
-            # 旁边增设⚙按钮设置宽度值，暂时懒得弄
 
         self.linedataflash()
         # 正式绘制
@@ -343,7 +341,6 @@ class Application(Frame):
             self.drawbox.create_oval(event.x-size/2, event.y-size/2,
                                      event.x + size / 2, event.y + size / 2,
                                      fill=self.canvasbg, outline=self.canvasbg)
-        # 功能栏更换橡皮擦样式
         self.x, self.y = event.x, event.y
 
     def drawoption(self, event):
@@ -393,8 +390,8 @@ class Application(Frame):
     # 快捷键设置
     def shortcut(self, event):
         """快捷键的绑定"""
+        # 超级键绑定暂存问题！
         print(event.keycode)
-        # 也可以通过设置button的accelerate来实现。
         if event.char == "l":
             """快速绘制直线"""
             self.drawbox.bind("<B1-Motion>", self.drawline)

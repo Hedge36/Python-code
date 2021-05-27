@@ -257,3 +257,72 @@ text(x,y,string,fontsize=15,verticalalignment="top",horizontalalignment="right")
 > edgecolor(简写ec)边框线条颜色
 >
 > edgewidth边框线条大小
+
+
+
+## 修改默认字体
+
+1.matplotlib默认字体不支持中文显示，图表中的中文会出现乱码
+
+2.动态配置matplotlib是一个比较麻烦的做法，这里不再提，网上有很多教程
+
+比如可以这样
+
+```dart
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif']=['SimHei']
+```
+
+3.一劳永逸的做法是修改matplotlib的配置文件matplotlibrc
+
+想查看当前工作的matplotlibrc文件是哪个，你可以使用下面的方式查看：
+
+```ruby
+# python环境下
+>>> import matplotlib
+>>> matplotlib.matplotlib_fname()
+```
+
+使用sublime打开该配置文件，查找到
+
+```bash
+# font.sans-serif     :  DejaVu Sans, Bitstream Vera Sans, ,,,
+```
+
+配置文件中语句基本上全部被注释掉了，要启动配置需要去掉前面的#；这里是默认的字体列表，当然，不支持中文
+
+所以需要写上支持中文的字体，但不能随便添加，有个前提：必须是matplotlib字体库中存在的或本机安装的字体
+
+matplotlib的字体库路径如下：
+`D:\Anaconda\Lib\site-packages\matplotlib\mpl-data\fonts\ttf`
+
+我的是基于Anaconda的，只要你找到了matplotlibrc，在它的同级目录下就是fonts文件夹
+
+进入ttf文件夹后可以看到所有的字体文件均为.ttf格式，这意味着本机安装的字体只有是.ttf格式的才能使用，像win10里面的.ttc格式的字体是无法使用的
+
+我从win7上考了个msyh.ttf即微软雅黑，放到该目录下，并右键安装
+
+然后找到`C:\Users\admin\.matplotlib`文件夹下的fontList.*文件，只要前缀一致都删掉，缓存文件，删了没什么影响(如果怕，剪切一下也行)，然后运行含有matplotlib的程序，等待新生成的缓存文件
+
+缓存文件出来后，打开查看要使用的字体信息
+
+```bash
+ {
+   "fname": "D:\\Anaconda\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\MSYH.ttf",
+   "name": "Microsoft YaHei",
+   "style": "normal",
+   "variant": "normal",
+   "weight": 400,
+   "stretch": "normal",
+   "size": "scalable",
+   "_class": "FontEntry"
+ },
+```
+
+这里的msyh.ttf对应的name为Microsoft YaHei，这就是我们要在matplotlibrc文件中要写入的字体名，修改font.sans-serif如下即可：
+
+```css
+font.sans-serif     : Microsoft YaHei, DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+```
+
+重启程序或者使用jupyter时restart the kernel，再运行即可
