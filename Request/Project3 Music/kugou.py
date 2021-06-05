@@ -55,7 +55,7 @@ class KuGou():
         song_url = song_info.replace('\/', '/')
         # print(song_url.replace('\/','/'))
         data = self.get_reponse(url=song_url).content
-        with open('E:\\kugou\\{}.mp3'.format(audio_name), 'wb') as f:
+        with open('{}.mp3'.format(audio_name), 'wb') as f:
             f.write(data)
             print('你已经下载:%s' % audio_name)
 

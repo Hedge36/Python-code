@@ -1,2 +1,3 @@
-sklearn/*
+/sklearn/*
 *.csv
+/MOOC Learn/*

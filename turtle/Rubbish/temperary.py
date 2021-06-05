@@ -1,5 +1,5 @@
 import turtle
-turtle.setup(700,700)
+turtle.setup(700, 700)
 turtle.pensize(10)
 turtle.speed(0)
 in_radius = 270
@@ -34,15 +34,17 @@ def reveal():
     turtle.right(60)
     tri()
 
+
 for i in range(10):
     reveal()
     turtle.clear()
     up()
     turtle.home()
     down()
-    in_radius+=5
+    in_radius += 5
+
 turtle.pencolor("cyan")
-turtle.write("Send a flower!", font = ('Simet',32))
+turtle.write("Send a flower!", font=('Simet', 32))
 turtle.done()
 
 '''
