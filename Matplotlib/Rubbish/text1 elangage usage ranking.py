@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm  # 字体管理器
 
 # 准备字体
-my_font = fm.FontProperties(fname="C:/Users/Hedge/Documents/Fonts/msyh.ttf")
+my_font = fm.FontProperties(
+    fname="C:/Users/Hedge/Documents/Fonts/msyh/msyh.ttf")
 # 准备数据
 data = [0.16881, 0.14966, 0.07471, 0.06992, 0.04762,
         0.03541, 0.02925, 0.02411, 0.02316, 0.01409, 0.36326]
