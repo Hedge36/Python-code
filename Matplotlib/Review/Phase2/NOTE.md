@@ -867,3 +867,7 @@ plt.show()
 ![linear, log, symlog, logit](E:/工具/Typora/Temp/sphx_glr_pyplot_010.png)
 
 It is also possible to add your own scale, see Developer's guide for creating scales and transformations for details.
+
+
+
+# Chapter3 

@@ -14,7 +14,7 @@ import os
 
 mwindow = tk.Tk()
 mwindow.title("简易计算器")
-mwindow.resizable(width=False, height=False)  # 窗口大小不可改变
+mwindow.resizable(0, 0)  # 窗口大小不可改变
 mwindow.geometry("400x400")
 history = []
 vartext = tk.StringVar()
@@ -55,7 +55,7 @@ def equal():
             for key, value in keys.items():
                 express = express.replace(key, value)
         if len(history) != 0:
-            print("".join(history))
+            #     print("".join(history))
             express = express.replace("".join(history), '')
         # 避免结果超过显示屏，结果取前18位
         outcome = str(eval(express))[:19]

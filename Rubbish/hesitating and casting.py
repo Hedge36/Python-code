@@ -61,30 +61,30 @@ def myself():
     total_score += score*2
 
 
-def Zoujie():
-    "邹洁表决，其中保守占2成，进取占8成，比重40分，最终根据随机取数表达态度"
+def Zj():
+    "zj表决，其中保守占2成，进取占8成，比重40分，最终根据随机取数表达态度"
     global total_score, record, result_Zoujie
     score = random.randint(1, 10)
     if score >= 2:
-        print("邹洁：试一试咯，相信你可以的")
+        print("zj：试一试咯，相信你可以的")
         record += 1
         result_Zoujie = 1
     else:
-        print("邹洁：不想去就算了吧，也没必要去")
+        print("zj：不想去就算了吧，也没必要去")
         result_Zoujie = 0
     total_score += score*4
 
 
-def Lijia():
-    "李佳表决，其中保守占3成，进取占7成，比重40分，最终根据随机取数表达态度"
+def Lj():
+    "lj表决，其中保守占3成，进取占7成，比重40分，最终根据随机取数表达态度"
     global total_score, record, result_Lijia
     score = random.randint(1, 10)
     if score >= 3:
-        print("李佳：可以试一试")
+        print("lj：可以试一试")
         record += 1
         result_Lijia = 1
     else:
-        print("李佳：不用为难自己")
+        print("lj：不用为难自己")
         result_Lijia = 0
     total_score += score*4
 
@@ -115,8 +115,8 @@ def main():
     "主程序函数"
     init_()
     myself()
-    Zoujie()
-    Lijia()
+    Zj()
+    Lj()
     print_score()
     god()
 

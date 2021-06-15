@@ -26,8 +26,9 @@ EDGE = {
 
 }
 # 浏览器驱动路径
-drive_url = r"D:\Study\2019-2020\Python\code\Request\Review Materials\msedgedriver.exe"
-browser = webdriver.Edge(executable_path=drive_url, capabilities=EDGE)
+drive_url = r".\edgedriver_win64\msedgedriver.exe"
+browser = webdriver.Edge(executable_path=drive_url)
+# browser = webdriver.Edge(executable_path=drive_url, capabilities=EDGE)
 url = "https://max.book118.com/html/2016/0808/50824696.shtm"
 buttonxpath = '//*[@id="btn_preview_remain"]'
 
@@ -62,4 +63,4 @@ def download(word, page):
 
 
 if __name__ == "__main__":
-    download("二次元插画", 3)
+    download("插画", 3)
