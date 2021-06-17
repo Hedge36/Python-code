@@ -8,6 +8,10 @@
 
 ## 版本说明
 
+**Version 1.0.2	2021.6.16**
+
+> 1. Fix one bug that click "确认" without input arises an error;
+
 **Version 1.0	2021.3.17**
 
 > 源码UI化

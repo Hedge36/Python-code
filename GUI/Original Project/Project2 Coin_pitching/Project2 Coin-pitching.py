@@ -40,25 +40,29 @@ def test(content):
 
 def show():
     """显示计算结果"""
-    n = eval(entry.get())
-    ls = [0, 1]  # 正反面
-    for i in range(n):
-        a = random.choice(ls)
-        counts[a] = counts.get(a, 0)+1
-    outcome_win = tk.Toplevel(window)
-    outcome_win.title("投币结果")
-    center_x, center_y = int(screen_width/2-150), int(screen_height/2-100)
+    n = entry.get()
+    if n != '':
+        n = int(n)
+        ls = [0, 1]  # 正反面
+        for i in range(n):
+            a = random.choice(ls)
+            counts[a] = counts.get(a, 0)+1
+        outcome_win = tk.Toplevel(window)
+        outcome_win.title("投币结果")
+        center_x, center_y = int(screen_width/2-150), int(screen_height/2-100)
 
-    outcome_win.geometry("300x200+%d+%d" % (center_x, center_y))
-    tk.Label(outcome_win, text="%d次实验结果如下:" %
-             n).grid(row=0, padx=90, pady=15)
-    tk.Label(outcome_win, text="正面出现{}次,频率为{:.3f}".format(
-        counts[1], counts[1] / n)).grid(row=1, pady=5)
-    tk.Label(outcome_win, text="反面出现{}次,频率为{:.3f}".format(
-        counts[0], counts[0] / n)).grid(row=2, pady=5)
-    tk.Button(outcome_win, text="确认", width=9, command=outcome_win.destroy).grid(
-        row=3, pady=15)
-    counts.clear()
+        outcome_win.geometry("300x200+%d+%d" % (center_x, center_y))
+        tk.Label(outcome_win, text="%d次实验结果如下:" %
+                 n).grid(row=0, padx=90, pady=15)
+        tk.Label(outcome_win, text="正面出现{}次,频率为{:.3f}".format(
+            counts[1], counts[1] / n)).grid(row=1, pady=5)
+        tk.Label(outcome_win, text="反面出现{}次,频率为{:.3f}".format(
+            counts[0], counts[0] / n)).grid(row=2, pady=5)
+        tk.Button(outcome_win, text="确认", width=9, command=outcome_win.destroy).grid(
+            row=3, pady=15)
+        counts.clear()
+    else:
+        tkinter.messagebox.showwarning("Alert", "您还没有输入任何内容。")
 
 
 window = tk.Tk()
