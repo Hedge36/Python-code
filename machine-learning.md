@@ -1216,7 +1216,7 @@ $$
 
 #### 1.1 BP神经网络原理
 
-BP(Back Propagation)神经网络的学习过程由信号的正向传播与误差的反向传播两个过程组成。正向传播时，输入样本从输入层传入，经隐层逐层处理后，传向输出层。若输出层的实际输出与期望输出不符，则转向误差的反向传播阶段。误差的反向传播是将输出误差以某种形式通过隐层向输入层逐层反传，并将误差分摊给各层的所有单元，从而获得各层单元的误差信号，此误差信号即作为修正各单元权值的依据。BP网络由输入层﹑输出层和隐层组成， $N_1$ 为输入层，$N_m $ 为输出层，其余为隐层。BP 神经网络的结构如下：
+BP(Back Propagation)神经网络的学习过程由信号的正向传播与误差的反向传播两个过程组成。正向传播时，输入样本从输入层传入，经隐层逐层处理后，传向输出层。若输出层的实际输出与期望输出不符，则转向误差的反向传播阶段。误差的反向传播是将输出误差以某种形式通过隐层向输入层逐层反传，并将误差分摊给各层的所有单元，从而获得各层单元的误差信号，此误差信号即作为修正各单元权值的依据。BP网络由输入层﹑输出层和隐层组成， $N_1$ 为输入层，$N_m $ 为输出层，其余为隐层。BP 神经网络的结构如下：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/3928ae61d4d83668297c9299eec79900.png)
 这里介绍三层神经网络的推导（一个输入层、一个隐层和一个输出层)
@@ -1225,15 +1225,15 @@ BP 神经网络反向传播算法的神经元示意图图一：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/4d30427c37a479b51656c18ef9ccc4eb.png)
 
-上图描绘了神经元 $j$ 被它左边的一层神经元产生的一组函数信号所馈给。 m m m是作用于神经元 $j$ 的所有输入不包括偏置的个数。突触权值 $w_{j0}(n)$ 等于神经元 $j$ 的偏置 $b_j$ 。
+上图描绘了神经元 $j$ 被它左边的一层神经元产生的一组函数信号所馈给。 m m m是作用于神经元 $j$ 的所有输入不包括偏置的个数。突触权值 $w_{j0}(n)$ 等于神经元 $j$ 的偏置 $b_j$ 。
 
 1.前向传播过程推导
 
-图一中，在神经元 $j$ 的激活函数输入处产生的诱导局部域 $v_j(n)$ （即神经元 $j$ 的输入）是：
+图一中，在神经元 $j$ 的激活函数输入处产生的诱导局部域 $v_j(n)$ （即神经元 $j$ 的输入）是：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/06941b46096db9e7abcc640c85ab7fe7.png)
 
-$\phi_j$ 是激活函数，则出现在神经元 $j$ 输出处的函数信号（即神经元 $j$ 的输出） $ y_j(n) $ 是：
+$\phi_j$ 是激活函数，则出现在神经元 $j$ 输出处的函数信号（即神经元 $j$ 的输出） $ y_j(n) $ 是：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/c7619542a7cc512af811b8d5e15ca573.png)
 
@@ -1243,9 +1243,9 @@ $\phi_j$ 是激活函数，则出现在神经元 $j$ 输出处的函数信号（
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/00aa7497fa64f9bff7aaa02473097098.png)
 
-其中， $d_j(n)$是期望响应向量 $d(n)$ 的第 $j$ 个元素。
+其中， $d_j(n)$是期望响应向量 $d(n)$ 的第 $j$ 个元素。
 
-为了使函数连续可导，这里最小化均方根差，定义神经元 $j$ 的瞬时误差能量为：
+为了使函数连续可导，这里最小化均方根差，定义神经元 $j$ 的瞬时误差能量为：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/576c5598b8f9a9a74c9c952831c309aa.png)
 
@@ -1255,22 +1255,22 @@ $\phi_j$ 是激活函数，则出现在神经元 $j$ 输出处的函数信号（
 
 其中，集合C包括输出层的所有神经元。
 
-BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下降法对突触权值  $w_{ji}(n) $应用一个修正值 $∆w_{ji}(n)$ 它正比于偏导数 $δE(n)/\delta  w_{ji}(n)$ 。根据微分链式规则，把这个梯度表示为：
+BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下降法对突触权值  $w_{ji}(n) $应用一个修正值 $∆w_{ji}(n)$ 它正比于偏导数 $δE(n)/\delta  w_{ji}(n)$ 。根据微分链式规则，把这个梯度表示为：
 
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/20170411171824194)
 
-偏导数 $ δE(n)/\delta  w_{ji}(n)$ 代表一个敏感因子，决定突触权值 $w_{ji}$ 在权值空间的搜索方向。
+偏导数 $ δE(n)/\delta  w_{ji}(n)$ 代表一个敏感因子，决定突触权值 $w_{ji}$ 在权值空间的搜索方向。
 
-在式(2-5)两边对 $e_j(n)$ 取微分，得到：
+在式(2-5)两边对 $e_j(n)$ 取微分，得到：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/c795f1825f72c5ddc951d30a56ef651f.png)
 
-在式(2-3)两边对  $ y_j(n) $ 取微分，得到：
+在式(2-3)两边对  $ y_j(n) $ 取微分，得到：
 
-![这里写图片描述](/home/hedge/Typora/Temp-image/d5b321203e8081b720d5065a76cdc534.png)在式(2-2)两边对 $ v_j(n) $ 取微分，得到：
+![这里写图片描述](/home/hedge/Typora/Temp-image/d5b321203e8081b720d5065a76cdc534.png)在式(2-2)两边对 $ v_j(n) $ 取微分，得到：
 
-![这里写图片描述](/home/hedge/Typora/Temp-image/a976b96460b01591afb00320a7008cb7.png)最后在式(2-1)两边对  $ w_{ji}(n) $ 取微分，得到：
+![这里写图片描述](/home/hedge/Typora/Temp-image/a976b96460b01591afb00320a7008cb7.png)最后在式(2-1)两边对  $ w_{ji}(n) $ 取微分，得到：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/967e86fe7e1c5ffde1d36a85616e97f3.png)
 
@@ -1278,23 +1278,23 @@ BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下�
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/7c1bf20bd43dc615ebaae431b04b3984.png)
 
-应用于  $ w_{ji}(n) $ 的修正 $ ∆w_{ji}(n)  $ 定义为：
+应用于  $ w_{ji}(n) $ 的修正 $ ∆w_{ji}(n)  $ 定义为：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/559071cd87f3a2a09d7bf9400e85960d.png)
 
-其中，  $ \eta $ 是误差反向传播的学习率， 负号表示在权空间中梯度下降。
+其中，  $ \eta $ 是误差反向传播的学习率， 负号表示在权空间中梯度下降。
 
 将式(2-11)带入式(2-12)得：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/19f2f85f59843cab05c603f84a3e2e05.png)
 
-其中，  $ \delta_j(n)  $ 是根据delta法则定义的局部梯度：
+其中，  $ \delta_j(n)  $ 是根据delta法则定义的局部梯度：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/85713923bee5c3187f84c31a047071fa.png)
 
 局部梯度指明了突触权值所需要的变化。
 
-现在来考虑神经元 $j$ 所处的层。
+现在来考虑神经元 $j$ 所处的层。
 
 （1） 神经元 $j$ 是输出层节点
 当神经元 $j$ 位于输出层时，给它提供了一个期望响应。根据式(2-3)误差信号 $e_j(n)=d_j(n)-y_j(n)$确定，通过式(2-14)得到神经元 $j$ 的局部梯度  $ \delta_j(n)  $ 为：
@@ -1307,13 +1307,13 @@ BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下�
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/98d56741b221d8d4f38c713ff67dc6bd.png)
 
-来看图二：它表示输出层神经元 $ k  $ 连接到隐层神经元 $j$ 的信号流图。
+来看图二：它表示输出层神经元 $ k  $ 连接到隐层神经元 $j$ 的信号流图。
 
-![这里写图片描述](/home/hedge/Typora/Temp-image/3e20a3149eee0c7fe8094d15a04aacde.png)在这里下标 $j$ 表示隐层神经元，下标 $ k  $ 表示输出层神经元。
+![这里写图片描述](/home/hedge/Typora/Temp-image/3e20a3149eee0c7fe8094d15a04aacde.png)在这里下标 $j$ 表示隐层神经元，下标 $ k  $ 表示输出层神经元。
 
 图二中，网络的全部瞬时误差能量为：
 
-![这里写图片描述](/home/hedge/Typora/Temp-image/477134c2d95ca9139a52412940cc577c.png)在式(2-17)两边对函数信号  $y_j(n)$ 求偏导，得到：
+![这里写图片描述](/home/hedge/Typora/Temp-image/477134c2d95ca9139a52412940cc577c.png)在式(2-17)两边对函数信号  $y_j(n)$ 求偏导，得到：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/3f86a307c8bcaf8204447b4ac14a455d.png)在图二中：
 
@@ -1323,11 +1323,11 @@ BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下�
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/02c2f4f8f6200da993d83598c4746676.png)
 
-图二中，对于输出层神经元 $ k  $  ，其诱导局部域是：
+图二中，对于输出层神经元 $ k  $  ，其诱导局部域是：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/e178b4cb2e075f564ca386512f4d1abb.png)
 
-求式(2-21)对  $y_j(n)$ 的微分得到：
+求式(2-21)对  $y_j(n)$ 的微分得到：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/1396f68a57770b75eeb380e2c13c50a4.png)
 
@@ -1335,20 +1335,20 @@ BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下�
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/d656f257914f170403cb79b2ce1d9411.png)
 
-将式(2-23)带入式(2-16)得隐层神经元 $j$ 的局部梯度 $\delta_j(n) $ 为：
+将式(2-23)带入式(2-16)得隐层神经元 $j$ 的局部梯度 $\delta_j(n) $ 为：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/877cf2cb671d2e9958517c6706332421.png)
 
 **反向传播过程推导总结**
 
-因此，结合式(2-13)、(2-15)和(2-24)，由神经元 i i i连接到神经元 $j$ 的突触权值的修正值 $∆w_{ji}(n) $ ，按照delta法则定义如下：
+因此，结合式(2-13)、(2-15)和(2-24)，由神经元 i i i连接到神经元 $j$ 的突触权值的修正值 $∆w_{ji}(n) $ ，按照delta法则定义如下：
 
 ![这里写图片描述](/home/hedge/Typora/Temp-image/8e1e95dce677215281eb5bfe8f7ad2ed.png)
 
 其中：
 
-> + 神经元 $j$ 是输出层节点时，局部梯度 $\delta_j(n)$ 等于倒数 $ \phi_j'(v_j(n)) $ 和误差信号 $ e_j(n)=d_j(n)-y_j(n) $的乘积，见式(2-15);
-> + 神经元 $j$ 是隐层节点时，局部梯度 $\delta_j(n)$ 等于倒数 $ \phi_j'(v_j(n)) $ 和下一层（隐层或输出层）的 $ \delta_k $ 与权值加权和的乘积，见式(2-24)。
+> + 神经元 $j$ 是输出层节点时，局部梯度 $\delta_j(n)$ 等于倒数 $ \phi_j'(v_j(n)) $ 和误差信号 $ e_j(n)=d_j(n)-y_j(n) $的乘积，见式(2-15);
+> + 神经元 $j$ 是隐层节点时，局部梯度 $\delta_j(n)$ 等于倒数 $ \phi_j'(v_j(n)) $ 和下一层（隐层或输出层）的 $ \delta_k $ 与权值加权和的乘积，见式(2-24)。
 
 #### 1.2 标准BP神经网络设计原则
 
@@ -1358,7 +1358,7 @@ BP 算法通过反复修正权值使式(2-5)  $E_n$ 最小化，采用梯度下�
 
 ##### （2）学习率
 
-$ 0 <\eta <1 $
+$ 0 <\eta <1 $
 
 ##### （3）停止准则
 
@@ -1409,11 +1409,11 @@ $$
 
 一个既要加快学习速度又要保持稳定的方法是修改式(2-13)，增加动量项，表示为：
 $$
-∆w_{ji}(n) =  \alpha∆w_{ji}(n-1) + \eta\delta_j(n)y_i(n)
+∆w_{ji}(n) =  \alpha∆w_{ji}(n-1) + \eta\delta_j(n)y_i(n)
 $$
 这里  $\alpha$ 是动量常数，$0≤\alpha<1$。
 
-动量项$$ \alpha∆w_{ji}(n-1)$$反映了以前积累的调整经验，当误差梯度出现局部极小时，虽然 $∆w_{ji}(n)→0$，但$$ ∆w_{ji}(n-1) ≠0 $$，使其跳出局部极小区域，加快迭代收敛速度。
+动量项$$ \alpha∆w_{ji}(n-1)$$反映了以前积累的调整经验，当误差梯度出现局部极小时，虽然 $∆w_{ji}(n)→0$，但$$ ∆w_{ji}(n-1) ≠0 $$，使其跳出局部极小区域，加快迭代收敛速度。
 
 ##### （2）其他改进方法
 
@@ -1525,7 +1525,195 @@ $$
 
 这种做法是最精确的，它完全保留了所有信息，也未增加任何额外信息，如Google、百度的CTR预估模型，预处理时会把所有的变量都这么处理，达到几亿维。这样做的好处是湾站额各地保留了原始数据的全部信息而不用考虑缺失值。但但其缺点也很明显，即计算量大大提升，并且只有在样本量非常大的时候效果才好，否则会因为过于稀疏，效果很差。
 
-#### 4.3.5多重插补
+#### 4.3.5 多重插补
 
 多重插补(Multiple Imputation, MI)认为待插补的值是随机的，其值来自已观测到的值。具体实践中通常是估计出待插补的值，然后加上不同的噪声，形成多组可选插补值。根据某种选择依据，选择最合适的插补值。
+
+**Steps**
+
+> 1. 通过变量之间的关系对缺失数据进行预测，利用蒙特卡洛方法生成多个完整的数据集；
+> 2. 在每个完整的数据集上进行训练，得到训练后的模型及评价函数值；
+> 3. 对来自各个完整数据集的结果，根据评价函数值进行选择，选择评价函数值最大的模型，其对应的差值就是最终的插补值。
+
+#### 4.3.6 压缩感知及矩阵补全
+
+##### 一. 压缩感知
+
+Click [here](https://zhuanlan.zhihu.com/p/22445302) to study in detail.
+
+###### 1. **什么是压缩感知**
+
+> 压缩感知，常见的对应英文词汇包括compressed sensing，compressive sensing, compressive sampling等等，其实都是一个意思。在这里我们一律简称为**CS**。
+
+要理解CS，要从sensing和compressed两个词入手。
+
+（1）什么是感知（**sensing**）
+
+> Sensing描述的是，为了表达和恢复某一个信号或者对象，对其采取某种感知手段（这里的感知包括了对图像的imaging, 对连续信号的sampling,等等），从而得到这种感知模态下的measurement，以便之后的信号重建以及分析等应用，这样一个过程。
+
+我们拿图像重建举一个例子：
+
+如果我们要感知一个10x10像素的图像，最简单最直接的方式，就是直接在空间域里面感知，得到并储存图像的100个像素点,这样的话，你可以通过把这100个像素点排列为矩阵的方式，重建这副目标图像。这里获取这100个点的过程，就称之为sensing。
+
+（2）什么是压缩（**compressed**）
+
+> 在(1)的例子中，我们感知了一个10x10图像全部的100个像素点，我们一般称这种sensing叫做**全采样（full sampling）**，因为目标信号是一个100维的信号，而你也获得了对应的100维measurement，你可以很直接地完美恢复图像。这样的感知方式没有任何的压缩，i.e., **感知到的维度=信号本身的维度**。当然你也可以采集更高维度的measurement，我们称之为over-sampling / over-sensing， 但多余的采样并不会进一步提高你的图像恢复（信号已经达到完美恢复了）。
+
+在不借助信号先验的前提下，我们把需要的最少的感知样本维度（这里是100），记做是**critical sampling rate**。那么你也可以选择感知少于critical rate的measurement，比如你只采集98个点，这种情况我们称之为是**under-sampling**，这样就起到了对full sensing的压缩，也就是compressed了。
+
+（3）**CS要解决什么问题**
+
+> CS要解决的是，**如何在under-sampling的情况下，依然可以完美地恢复目标图像**。
+
+经典的信号处理体系是建立在经典的线性代数和统计的基础上的，那么处理这类under-sampling的重建问题，类似于你需要解100个未知数，却只有98个线性方程组。
+
+按照经典信号处理的理论，这类问题是存在无穷多解的（无法唯一确定地完美恢复目标图像）。我们把这类问题成为病态问题（**ill-posed problem**），而compressed sensing就是用来解决ill-posed的inverse problems（逆问题）。
+
+
+
+不同于咱们给的例子中，感知是直接幼稚地在空间域进行under-sampling，所谓**compressed sensing**，其实就是一种**更加smart的under-sampling的感知，并且在借助有效的信号先验的帮助下，追求达到对图像的完美重建**。
+
+但是为什么Compressed Sensing可以做到这一点呢？听上去很神奇，但这里主要的额外帮助来自于信号的先验。咱们还是用之前分析的恢复10x10图像的例子：
+
+在不借助信号先验的条件下，通过98个线性方程组，解100个未知数，理论上的解空间的自由度会有一个二维平面那么大，而这平面上的每个点都可以是我们恢复的图像，没有唯一解。但如果我们引入了一个**信号固有的先验**：比如真实的图像的解只能在某条线上。这就相当于我们在98个线性方程上，外加了一个linear **constraint**。由这个line和我们的解空间自由的平面的交点，就唯一确定了一个解：这个解既满足我们的98个线性方程组，又在我们的linear constraint上。这个例子其实就解了一个极其简化的compressed sensing问题。
+
+###### 2. **狭义 vs 广义**的Compressed Sensing
+
+我们经常讨论的compressed sensing (CS)，在方法层面上，有狭义和广义两种概念下的定义：
+
+（1）狭义的CS
+
+狭义的CS，是完全follow之前Tao他们在06-07提出的框架以及理论证明，只利用信号的稀疏性(sparsity），作为先验，帮助信号恢复。狭义的CS有比较完备的理论研究：比如如何设计Sensing的模态和方式，使得恢复信号质量最高(i.e., error最小）。
+
+在这套理论下，要求采样矩阵和稀疏字典的coherence尽量要小，从而在给定某个sampling rate和sparsity的条件下，达到最佳的图像恢复。因为先验是sparsity，随机的sampling matrix成为了一个不错的sensing系统选择。
+
+但值得提出的是，random sampling也见得是绝对意义上的最佳的sensing matrix。只不过用random sampling matrix，可以证明他和transform domain下的sparsity constraint，有比较小的coherence。在实际应用中，满足sparsity的信号，其实是在**a union of low-dimensional subspaces**里面的。在不确定non-zero的support的情况下，分析sensing matrix和general case下的sparsity constraint之间的coherence其实并不容易。所以用random sampling是个不错的选择。
+
+（2）广义的CS
+
+广义的CS，可以使用一切有效且可以利用的信号先验，帮助信号重建以及解决ill-posed inverse problems。实际上除了信号的可稀疏性以后，还有很多被证明有用的信号模型：包括low-rank model, statistical model, non-local mean，甚至包括深度先验(deep prior），都可以用来帮助图像重建。除了稀疏先验以外的先验，不一定有在CS框架下的理论和重建保证。
+
+在广义定义下，只要是通过signal prior建立regularizer，构造一个优化问题解决ill-posed problem，都可以算compressed sensing。包括最新的一些利用plug-and-play拿deep prior做图像重建的问题。
+
+随着CS应用的发展，i.e., 越来越多的论文灌水需要（大雾，划掉），越来越多的工作开始关注广义的CS，并且研究除了sparsity以外，不同prior之间对重建的增益。这样的框架，可以把当下最火的deep learning也包括在内。
+
+
+
+###### 3. 在图像处理的环境下，**哪些任务**是基于compressed sensing框架？
+
+Compressed sensing在图像处理和计算成像领域，有很多应用。包括但不限于：
+
+(1) **图像修复问题** - image super-resolution, interpolation, inpainting, etc. (Image Denoising不是CS问题）
+
+(2) **计算成像问题** - low-dose CT, undersampled MRI, etc.
+
+(3) **图像合成** - multi-channel measurement fusion, hyperspectral / multispectral fusion, etc. 
+
+第一项里面，inpainting应该是最好理解的：图像的一部分像素点缺失，恰好和我们在第一部分里面讨论的例子很像：在不借助外部先验的条件下，回复缺损的像素点，本身是病态问题。换句话说，你可以拿任何大小的像素点补全缺损的部分。但考虑到图像本身的性质和先验，就可以得到看起来最自然，也质量最高的inpainting结果。这个问题本质，其实就是在空间域里面的compressed sensing问题。
+
+第二项里面，医学成像是compressed sensing得到商业应用的一个很重要部分。比如前段时间西门子的，基于compressed sensing的一台MRI扫描仪就获得了美国FDA的许可，开始应用于临床。总体来说，医学成像对compressed sensing感兴趣，主要是（但不限于）为了解决 (1) 发射过大 和 (2) 扫描过慢 这两个问题。比如 CT 就是一种带放射性的成像方式，相比于扫一般物体，可以无节制地增大扫描精度，扫人体必须要对放射量（dose）有限制。但如果不使用compressed sensing的技术，得到的可能就是非常低质量或者有artifacts的图像。再比如 MRI ，他本身是一个没有放射性的成像方式，但最大的问题是，经典 MRI 扫描人体可能会非常慢，这会对病人造成不舒适。Compressed Sensing可以实现在降采样（更快）的前提下，依然保证成像的质量。
+
+第三项里面，可以认为多通道的采样，都是针对同一个目标的降采样。同样的，可以利用一个目标图像的固有属性，i.e., 信号先验，来帮助融合以及重建信号。相较于single channel的sensing问题，这类更加复杂的compressed sensing挑战，需要关注的不光是开发信号本身的先验，还有如何利用cross-channel correlation，使得不同的sensing matrix之间的关系得到最大化的利用。
+
+###### 4. **常见的误区**：
+
+ （1）Compressed Sensing这类型的概念，最早是Tao他们提出的。
+
+这个其实是不准确的：利用信号先验，包括sparsity等等，来解决病态逆问题，这类框架和概念其实早在80 / 90年代就已经被信号处理领域研究，只不过没有叫Compressed Sensing这个名字而已。但可惜的是之前的研究很多并没有提供配套理论以及分析采样和先验的数学关系。所以Tao他们搞的CS体系，真正的贡献以及突破，是提供了比较完备的理论支持和保证，从而真正说服大家，并且带动了高热度的科研投入。
+
+（2）Compressed Sensing只能用random sampling，并且**只能用sparsity prior**。
+
+在正文里面，我已经澄清了：
+
+   (i) random sampling在用sparsity prior的信号重建问题里，是个不错的sensing system，因为他和sparsity prior有较小的coherence。但并不是说random sampling就是绝对意义上的最佳选择。
+
+  (ii) 在广义的CS下，sparsity并不是唯一可用的signal prior。如果要回归到Tao他们的经典CS框架下，确实大量的理论证明，只讨论了sparsity作为prior的情况。但这并不能局限其他prior被应用到compressed sensing的应用中去。
+
+（3）Compressed Sensing已经**过时和完蛋**了。
+
+我记得前年的icassp，专门有一个panel discussion在讨论“Is compressed sensing dead?”
+
+我的看法是：狭义的compressed sensing似乎已经有了比较完备的理论体系，并且有足够多的实践了。但这并不证明这套compressed sensing的框架已经过时了。事实上，广义的compressed sensing正在被应用到各种有趣的实际问题中，而且如今机器学习的热潮，带动了利用数据驱动的方式主动学习信号先验的可能性。我的很多研究也在关注这一块儿，并且我认为，compressed sensing never dies, it just becomes more flexible。比如我博士期间的论文，主要就是关注blind compressed sensing，也就是认为signal prior不再是事先可知（blind），而是通过数据驱动的方式去获取。这样的先验可以对于你将要处理的数据最优化，从而达到更加好的信号重建。
+
+##### 二. 矩阵补全
+
+###### **1.简介**
+
+矩阵补全（matrix completion），顾名思义就是将一个含有缺失值的矩阵通过一定的方法将其恢复为一个完全的矩阵。目前该领域比较完全的理论是由Candes等人在2008年的论文《Exact Matrix Completion via Convex Optimization》，通过解一个凸优化问题实现将一个低秩矩阵恢复。
+
+为什么要求是低秩呢？我们知道矩阵的秩度量的是矩阵行列之间的相关性，如果矩阵各行或各列是线性无关的，那么其是一个满秩的矩阵，这里的低秩相对于矩阵的行数和列数而言的，如果矩阵的秩远小于此，则矩阵就是一个低秩的矩阵。可见，低秩矩阵其实包含有很多的冗余信息，在矩阵补全里面，为了借助已有的观测到的数据来恢复成完全的矩阵，我们需恰恰要这种冗余。
+
+目前矩阵补全主要被应用在图像恢复（SR）和推荐系统（协同过滤）两个方面。在推荐中的知名应用是Netflix的矩阵补全比赛，获奖的文章《The BellKor Solution to the Netflix Grand Prize》，这一篇文章用到了矩阵分解(Matrix Factorization)等多种算法的结合。（注意：矩阵分解（Matrix Factorization）是指用 A*B 来近似不完全的矩阵M，那么 A*B 的元素就可以用于估计M中对应空缺位置的元素值，而A*B可以看做是M的分解。显然，矩阵分解可以用于矩阵补全任务。）
+
+###### 2. 数学原理
+
+经过上面的简单描述，矩阵补全问题可以表述为：假如M是现有的数据集（大部分缺失），矩阵补全的目的就是找到一个和矩阵M观测到的部分差距尽量小并且秩（rank）最小的矩阵X。其数学形式如下： 
+
+
+$$
+\begin{align}
+& minimize \qquad &rank(\bold X)\\
+& subject \quad to \quad &X_{ij} = M_{jl}, (i,j)\in\Omega
+\end{align}
+$$
+但这是一个非凸的问题（NP-hard），所以Candes等人提出了用rank(X)的最优途径式nuclear norm形式来替代rank，形如：
+
+
+$$
+\begin{align}
+& minimize \qquad &\|X\|_*\\
+& subject \quad to \quad &X_{ij} = M_{jl}, (i,j)\in\Omega
+\end{align}
+$$
+其中，目标函数表示矩阵X的singular value之和：
+$$
+\|X\|_* = \sum_{k=1}^n \sigma_k(X)
+$$
+
+
+###### 3. 算法实现
+
+参考文献：《A singular value thresholding algorithm for matrix completion》，是Candes等人在2008年完成的论文。
+
+3.1 基本思路
+
+（1）当τ很大的时候，可以用下式来近似核范式（nuclear norm）： 
+$$
+\begin{align}
+& minimize \qquad & \tau\|X\|_* + \frac{1}{2}\|X\|^2_F  \\
+& subject \quad to \quad & P_\Omega(X)=P_\Omega(M)
+\end{align}
+$$
+（2）singular value shrinkage
+
+将一个秩为r的矩阵X进行奇异值分解（SVD）:
+$$
+X =U\sum V^*, \quad \sum = diag(\{\sigma_i\}_{1\leq i\leq r})
+$$
+对于每个T>=0，有软阈值操作(soft-thresholding operator)DT: 
+$$
+D_T(X):=UD_T(\sum)V^*, \quad D_T(\sum)=diag(\{\sigma_i - \tau)_+\})
+$$
+(其中 T>=0 ,这个软阈值操作仅仅应用于矩阵X的奇异值上，使它们趋于零,因此也将其称为singular value shrinkage operator)
+
+（3）据证明singular value shrinkage是nuclear norm的近似,则将上式变形为： 
+$$
+D_{\tau}(Y) = argmin \quad\frac{1}{2}\|X - Y \|^2_F + \tau\|X\|_*
+$$
+（4）运用拉格朗日乘子法得到迭代解： 
+$$
+\begin{cases} 
+X^k = \mathcal{D}_k(Y^{k-1}) \\
+Y^k = Y^{k-1} + \delta_k\mathcal{P}_\Omega(M - X^k)
+\end{cases} 
+$$
+
+
+
+
+后略
+
+
+
+
 
