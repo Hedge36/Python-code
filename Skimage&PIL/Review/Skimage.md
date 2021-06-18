@@ -1440,7 +1440,7 @@ plt.show()
 
 
 
-#### 5.2.8 median
+#### 5.2.8 median滤波
 
 中值滤波，一种平滑滤波，可以消除噪声。
 
@@ -3707,39 +3707,38 @@ skimage.util.random_noise(image, mode='gaussian', seed=None, clip=True,
 > > 's&p' 椒盐噪声，两种噪声同时出现，呈现出黑白杂点。
 > >
 > > 'speckle' 使用out = image + n *图像的乘法噪声，其中n是具有指定均值和方差的均匀噪声。
-> >
->
-> **seed** 
->
-> int 将在生成噪声之前设置随机种子，以进行有效的伪随机比较。
->
-> **clip**	
->
-> bool 若为True(default)则在加入'speckle', 'poisson', 或 'gaussian'这三种噪声后进行剪切以保证图像数据点都在[0,1]或[-1.1]之间。若为False，则数据可能超出这个范围。
->
-> **mean**
->
-> float 随机分布的均值，用于'gaussian'和'speckle'。 默认为0。 
->
-> **var**
->
-> float 随机分布的方差，（标准差^2）用于'gaussian'和'speckle'。 默认为0.01。 
->
-> **local_vars**
->
-> ndarray 图像每个像素点处的局部方差，正浮点数矩阵，和图像同型，用于'localvar'. 
->
-> **amount**
->
-> float 椒盐噪声像素点替换的比例，在[0,1]之间。用于'salt', 'pepper',和 'salt & pepper'. 默认 : 0.05 
->
-> **salt_vs_pepper** 
->
-> float 盐噪声和胡椒噪声的比例，在[0,1]之间。数字越大代表用1替换越多（more salt）. 默认 : 0.5 输出 
->
-> **out**
->
-> ndarray 输出为浮点图像数据，在[0,1]或[-1,1]之间。Skimage读取图像后格式为(height, width, channel)。注意RGB图像数据若为浮点数则范围为[0,1],若为整型则范围为[0,255]。
+> 
+>**seed** 
+> 
+>int 将在生成噪声之前设置随机种子，以进行有效的伪随机比较。
+> 
+>**clip**	
+> 
+>bool 若为True(default)则在加入'speckle', 'poisson', 或 'gaussian'这三种噪声后进行剪切以保证图像数据点都在[0,1]或[-1.1]之间。若为False，则数据可能超出这个范围。
+> 
+>**mean**
+> 
+>float 随机分布的均值，用于'gaussian'和'speckle'。 默认为0。 
+> 
+>**var**
+> 
+>float 随机分布的方差，（标准差^2）用于'gaussian'和'speckle'。 默认为0.01。 
+> 
+>**local_vars**
+> 
+>ndarray 图像每个像素点处的局部方差，正浮点数矩阵，和图像同型，用于'localvar'. 
+> 
+>**amount**
+> 
+>float 椒盐噪声像素点替换的比例，在[0,1]之间。用于'salt', 'pepper',和 'salt & pepper'. 默认 : 0.05 
+> 
+>**salt_vs_pepper** 
+> 
+>float 盐噪声和胡椒噪声的比例，在[0,1]之间。数字越大代表用1替换越多（more salt）. 默认 : 0.5 输出 
+> 
+>**out**
+> 
+>ndarray 输出为浮点图像数据，在[0,1]或[-1,1]之间。Skimage读取图像后格式为(height, width, channel)。注意RGB图像数据若为浮点数则范围为[0,1],若为整型则范围为[0,255]。
 
 
 

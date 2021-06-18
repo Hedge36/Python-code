@@ -441,7 +441,74 @@ array([ 0,  1,  2,  3,  4, 50, 60, 70, 80, 90])
 
 
 
+## Nan处理
 
+### 删除所有的缺失值（NaN）
+
+使用函数np.isnan（）来确定是否含有缺失值NaN，缺失值的位置的返回值为True。
+
+```python
+print(np.isnan(a))
+```
+
+通过使用取反运算符〜在此ndarray中将缺失值NaN的位置设置为False，可以删除缺失值（提取不缺失值的元素），但由于剩余元素的数量不同，因此可以删除原始数组ndarray的形状不会保留，而是被展平。
+
+```python
+print(~np.isnan(a))
+
+print(a[~np.isnan(a)])
+```
+
+
+
+### 删除包含缺失值（NaN）的行
+
+要删除包含缺失值NaN的行，可以使用any（）方法，如果NumPy数组行中有一个缺失值则整行返回True。
+如果参axis= 1，则确定每一行是否有缺失值。
+
+```python
+print(np.isnan(a).any(axis=1))
+```
+
+使用取反运算符〜将没有缺失值的行设置为True。
+
+```python
+print(~np.isnan(a).any(axis=1))
+```
+
+删除包含缺失值的行。
+
+```python
+print(a[~np.isnan(a).any(axis=1), :])
+
+print(a[~np.isnan(a).any(axis=1)])
+```
+
+
+
+### 删除包含缺失值（NaN）的列
+
+删除包含缺失值NaN的列时也是如此。 如果在any（）中参数axis= 0，则确定每一列是否至少有一个True。使用取反运算符〜将没有任何缺失值的列设置为True。
+
+```python
+print(~np.isnan(a).any(axis=0))
+```
+
+删除包含缺失值的列。
+
+```python
+print(a[:, ~np.isnan(a).any(axis=0)])
+```
+
+如果只想删除缺少值的列，请使用all（）而不是any（）。
+
+```python
+a = np.genfromtxt('data/src/sample_nan.csv', delimiter=',')
+a[2, 2] = np.nan
+print(a)
+print(a[:, ~np.isnan(a).any(axis=0)])
+print(a[:, ~np.isnan(a).all(axis=0)])
+```
 
 
 
@@ -1030,6 +1097,7 @@ DataFrame.rename(self, mapper=None, index=None, columns=None, axis=None,
 ### 4.1 更新
 
 reindex()：更新index或者columns。
+
 默认：更新index，返回一个新的DataFrame。
 
 ```python
@@ -1104,11 +1172,11 @@ e	3	4	5
 f	6	7	8
 g	9	10	11
 #获取第2行，第3列位置的数据
-df.iat[1, 2]
+df.iloc[1, 2]
 Out[205]: 5
 
 #获取f行，a列位置的数据
-df.at['f', 'a']
+df.loc['f', 'a']
 Out[206]: 6
 '''
 iat：依据行号定位
@@ -1240,6 +1308,78 @@ DataFrame.clip(lower=None, upper=None, axis=None, inplace=False, *args, **kwargs
 | **inplace** | 布尔值，默认为False是否对数据执行操作。版本0.21.0中的新功能。 |
 
 **返回值**：  Series或DataFrame与调用对象相同的类型，替换了剪辑边界之外的值
+
+## 10.数据处理
+
+### 1. 数据偏移
+
+#### pandas.DataFrame.shift
+
+`DataFrame.shift`(*periods=1*, *freq=None*, *axis=0*, *fill_value=<object object>*)
+
+> Shift index by desired number of periods with an optional time freq.When freq is not passed, shift the index without realigning the data. If freq is passed (in this case, the index must be date or datetime, or it will raise a NotImplementedError), the index will be increased using the periods and the freq. freq can be inferred when specified as “infer” as long as either freq or inferred_freq attribute is set in the index.
+
+#### Parameters
+
+> - **periods**	int
+>
+>   Number of periods to shift. Can be positive or negative.
+>
+> - **freq**     DateOffset, tseries.offsets, timedelta, or str, optional
+>
+>   Offset to use from the tseries module or time rule (e.g. ‘EOM’). If freq is specified then the index values are shifted but the data is not realigned. That is, use freq if you would like to extend the index when shifting and preserve the original data. If freq is specified as “infer” then it will be inferred from the freq or inferred_freq attributes of the index. If neither of those attributes exist, a ValueError is thrown.
+>
+> - **axis**    {0 or ‘index’, 1 or ‘columns’, None}, default None
+>
+>   Shift direction.
+>
+> - **fill_value**    object, optional
+>
+>   The scalar value to use for newly introduced missing values. the default depends on the dtype of self. For numeric data, `np.nan` is used. For datetime, timedelta, or period data, etc. `NaT` is used. For extension dtypes, `self.dtype.na_value` is used.*Changed in version 1.1.0.*
+
+#### Returns
+
+> - DataFrame
+>
+>   Copy of input object, shifted.
+
+## 2. 列变索引
+
+DataFrame.`set_index`(*keys*, *drop=True*, *append=False*, *inplace=False*, *verify_integrity=False*)
+
+> Set the DataFrame index using existing columns.Set the DataFrame index (row labels) using one or more existing columns or arrays (of the correct length). The index can replace the existing index or expand on it.
+
+### Parameters
+
+> **keys**	label or array-like or list of labels/arrays
+>
+> This parameter can be either a single column key, a single array of the same length as the calling DataFrame, or a list containing an arbitrary combination of column keys and arrays. Here, “array” encompasses [`Series`](https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series), [`Index`](https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index), `np.ndarray`, and instances of [`Iterator`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterator).
+>
+> **drop**	bool, default True
+>
+> Delete columns to be used as the new index.
+>
+> **append**	bool, default False
+>
+> Whether to append columns to existing index.
+>
+> **inplace	**bool, default False
+>
+> If True, modifies the DataFrame in place (do not create a new object).
+>
+> **verify_integrity**	bool, default False
+>
+> Check the new index for duplicates. Otherwise defer the check until necessary. Setting to False will improve the performance of this method.
+
+### Returns
+
+> DataFrame or NoneChanged row labels or None if `inplace=True`.
+
+
+
+
+
+---
 
 # Excel处理
 
