@@ -645,39 +645,39 @@ Lines have many attributes that you can set: linewidth, dash style, antialiased,
 
 Here are the available `Line2D` properties.
 
-| Property               | Value Type                                          |
-| ---------------------- | --------------------------------------------------- |
-| alpha                  | float                                               |
-| animated               | [True \| False]                                     |
-| antialiased or aa      | [True \| False]                                     |
-| clip_box               | a matplotlib.transform.Bbox instance                |
-| clip_on                | [True \| False]                                     |
-| clip_path              | a Path instance and a Transform instance, a Patch   |
-| color or c             | any matplotlib color                                |
-| contains               | the hit testing function                            |
-| dash_capstyle          | [`'butt'` |`'round'` |`'projecting'`]               |
-| dash_joinstyle         | [`'miter'` |`'round'` |`'bevel'`]                   |
-| dashes                 | sequence of on/off ink in points                    |
-| data                   | (np.array xdata, np.array ydata)                    |
-| figure                 | a matplotlib.figure.Figure instance                 |
-| label                  | any string                                          |
-| linestyle or ls        | [ `'-'` |`'--'` |`'-.'` |`':'` |`'steps'` \|...]    |
-| linewidth or lw        | float value in points                               |
-| marker                 | [ `'+'` |`','` |`'.'` |`'1'` |`'2'` |`'3'` |`'4'` ] |
-| markeredgecolor or mec | any matplotlib color                                |
-| markeredgewidth or mew | float value in points                               |
-| markerfacecolor or mfc | any matplotlib color                                |
-| markersize or ms       | float                                               |
-| markevery              | [ None \| integer \| (startind, stride) ]           |
-| picker                 | used in interactive line selection                  |
-| pickradius             | the line pick selection radius                      |
-| solid_capstyle         | [`'butt'` |`'round'` |`'projecting'`]               |
-| solid_joinstyle        | [`'miter'` |`'round'` |`'bevel'`]                   |
-| transform              | a matplotlib.transforms.Transform instance          |
-| visible                | [True \| False]                                     |
-| xdata                  | np.array                                            |
-| ydata                  | np.array                                            |
-| zorder                 | any number                                          |
+| Property               | Value Type                                        |
+| ---------------------- | ------------------------------------------------- | --------- | --------------- | ----- | ---------------- | ----- | ------- |
+| alpha                  | float                                             |
+| animated               | [True \| False]                                   |
+| antialiased or aa      | [True \| False]                                   |
+| clip_box               | a matplotlib.transform.Bbox instance              |
+| clip_on                | [True \| False]                                   |
+| clip_path              | a Path instance and a Transform instance, a Patch |
+| color or c             | any matplotlib color                              |
+| contains               | the hit testing function                          |
+| dash_capstyle          | [`'butt'`                                         | `'round'` | `'projecting'`] |
+| dash_joinstyle         | [`'miter'`                                        | `'round'` | `'bevel'`]      |
+| dashes                 | sequence of on/off ink in points                  |
+| data                   | (np.array xdata, np.array ydata)                  |
+| figure                 | a matplotlib.figure.Figure instance               |
+| label                  | any string                                        |
+| linestyle or ls        | [ `'-'`                                           | `'--'`    | `'-.'`          | `':'` | `'steps'` \|...] |
+| linewidth or lw        | float value in points                             |
+| marker                 | [ `'+'`                                           | `','`     | `'.'`           | `'1'` | `'2'`            | `'3'` | `'4'` ] |
+| markeredgecolor or mec | any matplotlib color                              |
+| markeredgewidth or mew | float value in points                             |
+| markerfacecolor or mfc | any matplotlib color                              |
+| markersize or ms       | float                                             |
+| markevery              | [ None \| integer \| (startind, stride) ]         |
+| picker                 | used in interactive line selection                |
+| pickradius             | the line pick selection radius                    |
+| solid_capstyle         | [`'butt'`                                         | `'round'` | `'projecting'`] |
+| solid_joinstyle        | [`'miter'`                                        | `'round'` | `'bevel'`]      |
+| transform              | a matplotlib.transforms.Transform instance        |
+| visible                | [True \| False]                                   |
+| xdata                  | np.array                                          |
+| ydata                  | np.array                                          |
+| zorder                 | any number                                        |
 
 > To get a list of settable line properties, call the `setp` function with a line or lines as argument.
 
@@ -713,7 +713,7 @@ plt.show()
 
 ![pyplot](E:/工具/Typora/Temp/sphx_glr_pyplot_007.png)
 
-The `figure` call here is optional because a figure will be created if none exists, just as an axes will be created (equivalent to an explicit `subplot()` call) if none exists. The `subplot` call specifies `numrows, numcols, plot_number` where `plot_number` ranges from 1 to `numrows*numcols`. ***The commas in the subplot call are optional if  `numrows*numcols<10`*.** So `subplot(211)` is identical to `subplot(2, 1, 1)`.
+The `figure` call here is optional because a figure will be created if none exists, just as an axes will be created (equivalent to an explicit `subplot()` call) if none exists. The `subplot` call specifies `numrows, numcols, plot_number` where `plot_number` ranges from 1 to `numrows*numcols`. ***The commas in the subplot call are optional if `numrows*numcols<10`\*.** So `subplot(211)` is identical to `subplot(2, 1, 1)`.
 
 You can create an arbitrary number of subplots and axes. If you want to place an axes manually, i.e., not on a rectangular grid, use `axes`, which allows you to specify the location as `axes(left, bottom, width, height])` where all values are in fractional (0 to 1) coordinates. See [Axes Demo for an example of placing axes manually and Basic Subplot Demo for an example with lots of subplots.
 
@@ -774,7 +774,6 @@ These properties are covered in more detail in Text properties and layout.
 ### Using mathematical expressions in text
 
 > matplotlib accepts LaTeX equation expressions in any text expression. For example to write the expression σi=15σi=15 in the title, you can write a TeX expression surrounded by dollar signs.
->
 
 ```
 plt.title(r'$\sigma_i=15$')
@@ -785,7 +784,6 @@ The `r` preceding the title string is important -- it signifies that the string 
 ### Annotating text
 
 > The uses of the basic `text` function above place text at an arbitrary position on the Axes. A common use for text is to annotate some feature of the plot, and the `annotate` method provides helper functionality to make annotations easy. In an annotation, there are two points to consider: the location being annotated represented by the argument `xy` and the location of the text `xytext`. Both of these arguments are `(x, y)` tuples.
->
 
 ```
 ax = plt.subplot()
@@ -868,6 +866,240 @@ plt.show()
 
 It is also possible to add your own scale, see Developer's guide for creating scales and transformations for details.
 
+# Chapter3 Sample
 
+## Sample plots in Matplotlib
 
-# Chapter3 
+> Here you'll find a host of example plots with the code that generated them.
+>
+> You can find the source code in UsageGuide/Demo3.ipnb.
+
+## Line Plot
+
+Here's how to create a line plot with text labels using `plot()`.
+
+[![../../_images/sphx_glr_simple_plot_0011.png](E:/工具/Typora/Temp/sphx_glr_simple_plot_0011.png)](https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html)
+
+Simple Plot
+
+## Multiple subplots in one figure
+
+Multiple axes (i.e. subplots) are created with the `subplot()` function:
+
+[![../../_images/sphx_glr_subplot_0011.png](E:/工具/Typora/Temp/sphx_glr_subplot_0011.png)](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subplot.html)
+
+Subplot
+
+## Images
+
+Matplotlib can display images (assuming equally spaced horizontal dimensions) using the `imshow()` function.
+
+[![../../_images/sphx_glr_image_demo_0031.png](E:/工具/Typora/Temp/sphx_glr_image_demo_0031.png)](https://matplotlib.org/stable/gallery/images_contours_and_fields/image_demo.html)
+
+Example of using `imshow()` to display a CT scan
+
+## Contouring and pseudocolor
+
+The `pcolormesh()` function can make a colored representation of a two-dimensional array, even if the horizontal dimensions are unevenly spaced. The `contour()` function is another way to represent the same data:
+
+[![../../_images/sphx_glr_pcolormesh_levels_0011.png](E:/工具/Typora/Temp/sphx_glr_pcolormesh_levels_0011.png)](https://matplotlib.org/stable/gallery/images_contours_and_fields/pcolormesh_levels.html)
+
+Example comparing `pcolormesh()` and `contour()` for plotting two-dimensional data
+
+## Histograms
+
+The `hist()` function automatically generates histograms and returns the bin counts or probabilities:
+
+[![../../_images/sphx_glr_histogram_features_0011.png](E:/工具/Typora/Temp/sphx_glr_histogram_features_0011.png)](https://matplotlib.org/stable/gallery/statistics/histogram_features.html)
+
+Histogram Features
+
+## Paths
+
+You can add arbitrary paths in Matplotlib using the `matplotlib.path` module:
+
+[![../../_images/sphx_glr_path_patch_0011.png](E:/工具/Typora/Temp/sphx_glr_path_patch_0011.png)](https://matplotlib.org/stable/gallery/shapes_and_collections/path_patch.html)
+
+Path Patch
+
+## Three-dimensional plotting
+
+The mplot3d toolkit (see Getting started and 3D plotting has support for simple 3D graphs including surface, wireframe, scatter, and bar charts.
+
+[![../../_images/sphx_glr_surface3d_0011.png](E:/工具/Typora/Temp/sphx_glr_surface3d_0011.png)](https://matplotlib.org/stable/gallery/mplot3d/surface3d.html)
+
+Surface3d
+
+Thanks to John Porter, Jonathon Taylor, Reinier Heeres, and Ben Root for the `mplot3d` toolkit. This toolkit is included with all standard Matplotlib installs.
+
+## Streamplot
+
+The `streamplot()` function plots the streamlines of a vector field. In addition to simply plotting the streamlines, it allows you to map the colors and/or line widths of streamlines to a separate parameter, such as the speed or local intensity of the vector field.
+
+[![../../_images/sphx_glr_plot_streamplot_0011.png](E:/工具/Typora/Temp/sphx_glr_plot_streamplot_0011.png)](https://matplotlib.org/stable/gallery/images_contours_and_fields/plot_streamplot.html)
+
+Streamplot with various plotting options.
+
+This feature complements the `quiver()` function for plotting vector fields. Thanks to Tom Flannaghan and Tony Yu for adding the streamplot function.
+
+## Ellipses
+
+In support of the Phoenix mission to Mars (which used Matplotlib to display ground tracking of spacecraft), Michael Droettboom built on work by Charlie Moad to provide an extremely accurate 8-spline approximation to elliptical arcs (see `Arc`, which are insensitive to zoom level.
+
+[![../../_images/sphx_glr_ellipse_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_ellipse_demo_0011.png)](https://matplotlib.org/stable/gallery/shapes_and_collections/ellipse_demo.html)
+
+Ellipse Demo
+
+## Bar charts
+
+Use the `bar()` function to make bar charts, which includes customizations such as error bars:
+
+[![../../_images/sphx_glr_barchart_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_barchart_demo_0011.png)](https://matplotlib.org/stable/gallery/statistics/barchart_demo.html)
+
+Barchart Demo
+
+You can also create stacked bars (bar_stacked.py, or horizontal bar charts (barh.py.
+
+## Pie charts
+
+The `pie()` function allows you to create pie charts. Optional features include auto-labeling the percentage of area, exploding one or more wedges from the center of the pie, and a shadow effect. Take a close look at the attached code, which generates this figure in just a few lines of code.
+
+[![../../_images/sphx_glr_pie_features_0011.png](E:/工具/Typora/Temp/sphx_glr_pie_features_0011.png)](https://matplotlib.org/stable/gallery/pie_and_polar_charts/pie_features.html)
+
+Pie Features
+
+## Tables
+
+The `table()` function adds a text table to an axes.
+
+[![../../_images/sphx_glr_table_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_table_demo_0011.png)](https://matplotlib.org/stable/gallery/misc/table_demo.html)
+
+Table Demo
+
+## Scatter plots
+
+The `scatter()` function makes a scatter plot with (optional) size and color arguments. This example plots changes in Google's stock price, with marker sizes reflecting the trading volume and colors varying with time. Here, the alpha attribute is used to make semitransparent circle markers.
+
+[![../../_images/sphx_glr_scatter_demo2_0011.png](E:/工具/Typora/Temp/sphx_glr_scatter_demo2_0011.png)](https://matplotlib.org/stable/gallery/lines_bars_and_markers/scatter_demo2.html)
+
+Scatter Demo2
+
+## GUI widgets
+
+Matplotlib has basic GUI widgets that are independent of the graphical user interface you are using, allowing you to write cross GUI figures and widgets. See `matplotlib.widgets` and the widget examples.
+
+[![../../_images/sphx_glr_slider_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_slider_demo_0011.png)](https://matplotlib.org/stable/gallery/widgets/slider_demo.html)
+
+Slider and radio-button GUI.
+
+## Filled curves
+
+The `fill()` function lets you plot filled curves and polygons:
+
+[![../../_images/sphx_glr_fill_0011.png](E:/工具/Typora/Temp/sphx_glr_fill_0011.png)](https://matplotlib.org/stable/gallery/lines_bars_and_markers/fill.html)
+
+Fill
+
+Thanks to Andrew Straw for adding this function.
+
+## Date handling
+
+You can plot timeseries data with major and minor ticks and custom tick formatters for both.
+
+[![../../_images/sphx_glr_date_0011.png](E:/工具/Typora/Temp/sphx_glr_date_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/date.html)
+
+Date
+
+See `matplotlib.ticker` and `matplotlib.dates` for details and usage.
+
+## Log plots
+
+The `semilogx()`, `semilogy()` and `loglog()` functions simplify the creation of logarithmic plots.
+
+[![../../_images/sphx_glr_log_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_log_demo_0011.png)](https://matplotlib.org/stable/gallery/scales/log_demo.html)
+
+Log Demo
+
+Thanks to Andrew Straw, Darren Dale and Gregory Lielens for contributions log-scaling infrastructure.
+
+## Polar plots
+
+The `polar()` function generates polar plots.
+
+[![../../_images/sphx_glr_polar_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_polar_demo_0011.png)](https://matplotlib.org/stable/gallery/pie_and_polar_charts/polar_demo.html)
+
+Polar Demo
+
+## Legends
+
+The `legend()` function automatically generates figure legends, with MATLAB-compatible legend-placement functions.
+
+[![../../_images/sphx_glr_legend_0011.png](E:/工具/Typora/Temp/sphx_glr_legend_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/legend.html)
+
+Legend
+
+Thanks to Charles Twardy for input on the legend function.
+
+## TeX-notation for text objects
+
+Below is a sampling of the many TeX expressions now supported by Matplotlib's internal mathtext engine. The mathtext module provides TeX style mathematical expressions using FreeType and the DejaVu, BaKoMa computer modern, or STIX fonts. See the `matplotlib.mathtext` module for additional details.
+
+[![../../_images/sphx_glr_mathtext_examples_0011.png](E:/工具/Typora/Temp/sphx_glr_mathtext_examples_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/mathtext_examples.html)
+
+Mathtext Examples
+
+Matplotlib's mathtext infrastructure is an independent implementation and does not require TeX or any external packages installed on your computer. See the tutorial at Writing mathematical expressions.
+
+## Native TeX rendering
+
+Although Matplotlib's internal math rendering engine is quite powerful, sometimes you need TeX. Matplotlib supports external TeX rendering of strings with the _usetex_ option.
+
+[![../../_images/sphx_glr_tex_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_tex_demo_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/tex_demo.html)
+
+Tex Demo
+
+## EEG GUI
+
+You can embed Matplotlib into Qt, GTK, Tk, or wxWidgets applications. Here is a screenshot of an EEG viewer called pbrain.
+
+![../../_images/eeg_small.png](E:/工具/Typora/Temp/eeg_small.png)
+
+The lower axes uses `specgram()` to plot the spectrogram of one of the EEG channels.
+
+For examples of how to embed Matplotlib in different toolkits, see:
+
+> - Embedding in GTK3
+> - Embedding in wx #2
+> - Matplotlib With Glade 3
+> - Embedding in Qt
+> - Embedding in Tk
+
+## XKCD-style sketch plots
+
+Just for fun, Matplotlib supports plotting in the style of xkcd.
+
+[![../../_images/sphx_glr_xkcd_0011.png](E:/工具/Typora/Temp/sphx_glr_xkcd_0011.png)](https://matplotlib.org/stable/gallery/showcase/xkcd.html)
+
+xkcd
+
+## Subplot example
+
+Many plot types can be combined in one figure to create powerful and flexible representations of data.
+
+![sample plots](E:/工具/Typora/Temp/sphx_glr_sample_plots_001.png)
+
+```
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(19680801)
+data = np.random.randn(2, 100)
+
+fig, axs = plt.subplots(2, 2, figsize=(5, 5))
+axs[0, 0].hist(data[0])
+axs[1, 0].scatter(data[0], data[1])
+axs[0, 1].plot(data[0], data[1])
+axs[1, 1].hist2d(data[0], data[1])
+
+plt.show()
+```

@@ -4,6 +4,36 @@
 
 start, end can be float.
 
+#### np.mgrid 
+
+*nd_grid* instance which returns a dense multi-dimensional “meshgrid”.
+
+An instance of `numpy.lib.index_tricks.nd_grid` which returns an dense (or fleshed out) mesh-grid when indexed, so that each returned argument has the same shape. The dimensions and number of the output arrays are equal to the number of indexing dimensions. If the step length is not a complex number, then the stop is not inclusive.
+
+However, if the step length is a **complex number** (e.g. 5j), then the integer part of its magnitude is interpreted as specifying the number of points to create between the start and stop values, where the stop value **is inclusive**.
+
+**Returns**
+
+> mesh-grid *ndarrays* all of the same dimensions
+
+**Examples**
+
+```python
+>>> np.mgrid[0:5,0:5]
+array([[[0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1],
+        [2, 2, 2, 2, 2],
+        [3, 3, 3, 3, 3],
+        [4, 4, 4, 4, 4]],
+       [[0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4],
+        [0, 1, 2, 3, 4]]])
+>>> np.mgrid[-1:1:5j]
+array([-1. , -0.5,  0. ,  0.5,  1. ])
+```
+
 ### ndarray.flat
 
 > A 1-D iterator over the array. 将数组转换为1-D的迭代器
