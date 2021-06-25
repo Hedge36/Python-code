@@ -333,7 +333,6 @@ class Application(Frame):
         self.startdraw(event)
         size = self.esize.get()
         if self.set_etype.get() == 'Rectangle':
-            print(size)
             self.drawbox.create_rectangle(event.x-size/2, event.y-size/2,
                                           event.x + size / 2, event.y + size / 2,
                                           fill=self.canvasbg, outline=self.canvasbg)
@@ -509,7 +508,6 @@ class Application(Frame):
         color = askcolor(color=self.drawcolor.get(),
                          title="选择画笔颜色")[1]
         if color != None:
-            print(color)
             self.oxflash.set(color)
             self.colorboard['fg'] = color
             self.colorboard['text'] = color

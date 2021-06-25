@@ -22,11 +22,11 @@
 
 > - Sklearn
 > - Moviepy
-> - SQL
+> - MySQL
 > - Nerual-network
 > - Opencv
 > - Pyqt5
-> - Pylet?
+> - Pylpyodbc
 
 ## About
 

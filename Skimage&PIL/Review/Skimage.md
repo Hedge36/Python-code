@@ -1,4 +1,4 @@
-# Skimage
+Skimage
 
 ##   All Before  
 
@@ -3008,7 +3008,7 @@ plt.show()
 
 ![img](https://upload-images.jianshu.io/upload_images/1496926-9784c27a13b21f94.png)
 
- 
+
 
 例2：
 
@@ -3944,8 +3944,6 @@ Out:
 ```PYTHON
 Text(0.5, 1.0, 'Sobel filter computed\n on (V)alue converted image (HSV)')
 ```
-
-![Copy to clipboard](https://scikit-image.org/docs/stable/_static/copy-button.svg)
 
 Notice that the result for the value-filtered image preserves the color of the original image, but channel filtered image combines in a more surprising way. In other common cases, smoothing for example, the channel filtered image will produce a better result than the value-filtered image.
 

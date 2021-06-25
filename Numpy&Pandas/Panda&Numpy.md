@@ -4,6 +4,12 @@
 
 start, end can be float.
 
+#### np.lispace
+
+#### np.argmax
+
+#### np.argmin
+
 #### np.mgrid 
 
 *nd_grid* instance which returns a dense multi-dimensional “meshgrid”.
