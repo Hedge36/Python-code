@@ -1,5 +1,4 @@
-/sklearn/*
+/sklearn/Review/*
 *.csv
 /MOOC/*
 Numpy&Pandas/Rubbish/1.csv
-Request/Rubbish/CET6/log.txt
