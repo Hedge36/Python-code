@@ -46,7 +46,9 @@
 
 ### 2.2 浮点型
 
-浮点数之间的运算存在不确定尾数，一般发生在10的-16次方左右，常见的有0.1+0.2==0.3000000004,
+**除法默认返回浮点数**
+
+浮点数之间的运算存在不确定尾数，一般发生在10的-16次方左右，常见的有0.1+0.2==0.3000000004;
 
 计算机中用的二进制并不完全等同十进制。
 
@@ -82,23 +84,25 @@
 
 ### 2.6 运算符计算优先顺序
 
-位运算和算术运算>>比较运算>>赋值运算>>逻辑运算
+> 指数运算>>算术运算>>位运算>>比较运算>>相等比较运算>>赋值运算>>恒等运算>>隶属运算>>逻辑运算
+>
 
->```python
->type(3.1//3)
->```
+其中圆括号拥有最高优先级，指数运算**从右至左**进行运算，同优先级内从左到右。
 
-<class 'float'>
+```python
+>>> 3 ** 4 ** 2
+43046721	# 3^16
+```
 
 注：数据计算过程中默认输出最宽范围的数据，其中整数<浮点数<复数。
 
 操作函数：
 
-> abs(x)         			   取x的绝对值;
+> abs(x)         			     取x的绝对值;
 >
 > divmod(x,y)       		 商余，输出元组类型（x//y,x%y);
 >
-> power(x,y[，z])     	 [,z]表示参数可省略，表示幂余;
+> power(x,y[，z])     	  [,z]表示参数可省略，表示幂余;
 >
 > max(x,y,..)       			取参数中的最大值;
 >
@@ -106,7 +110,7 @@
 >
 > int(x, base=10)     	  将x变成base进制整数并舍弃其小数部分;
 >
-> float(x)        			   将x变成浮点数，增加小数部分;
+> float(x)        			    将x变成浮点数，增加小数部分;
 >
 > complex(x)       		  将x变成复数，增加虚数部分;
 >
@@ -116,7 +120,7 @@
 
 ## 3. 字符串
 
-字符串的本质是字符序列，不同于列表，字符串**定义之后不能再对原字符串进行改变**。
+字符串的本质是字符序列，不同于列表，字符串**定义之后不能再对原字符串进行索引再赋值**。
 
 ### 3.1 字符串的创建
 
@@ -168,13 +172,13 @@
 >
 > str.swapcase()		产生新字符串并将所有大小写转换
 >
-> ==str.split(sep=)  	  **返回**一个列表，由str根据sep被分割的部分组成,如：'啊,哦,呃'.split(',')，输出['啊','哦','呃']；==
+> str.split(sep=)  	  **返回**一个**列表**，由str根据sep被分割的部分组成,如：'啊,哦,呃'.split(',')，输出['啊','哦','呃']；
 >
 > str.count(sub)  	  返回字符串sub在str中出现的次数；
 >
-> ==str.replace(old,new)==
+> str.replace(old,new)
 >
-> ​           	==**返回**字符串str的副本，副本中所有的old字符串被替换成new字符串；==
+> ​           	**返回**字符串str的副本，副本中所有的old字符串被替换成new字符串；
 >
 > str.center(width[,fillar])
 >
@@ -188,9 +192,9 @@
 >
 > ​           	字符串str根据宽度width向右对齐，fillchar填充字符可选且默认为空白；
 >
-> ==str.strip(chars)==
+> str.strip(chars)
 >
-> ​           	==**返回**一个从str中去掉在其左右两侧的char中列出的字符后的字符串；==
+> ​           	**返回**一个从str中去掉在其左右两侧的char中列出的字符后的字符串；
 >
 > str.Istrip(chars)
 >
@@ -200,15 +204,11 @@
 >
 > ​           	**返回**一个从str中去掉在其右侧的char中列出的字符的字符串；
 >
->  
+>  **str.join(iter)**
 >
-> ==**str.join(iter)**==
+> ​           	**在iter(字符串)变量除最后一个元素外每个元素后都加一个str,主要用于字符串的分隔等；**
 >
-> ​           	==**在iter(字符串)变量除最后一个元素外每个元素后都加一个str,主要用于字符串的分隔等；**==
->
-> ==str[m:n:k]				表示从m索引到n-1，以k为步长(亦即间距)(不输入默认为1)的字符串进行切片（输出为字符串，而非整数，浮点数）[::-1]:表示字符串倒过来切片得结果;==
->
-> 注意，不同于range(m,n),range(m,n)表示m为开头，n为结尾(不包括n)生成数字序列；
+> str[m:n:k]				表示从m索引到n-1，以k为步长(亦即间距)(不输入默认为1)的字符串进行切片（输出为字符串，而非整数，浮点数）[::-1]表示字符串倒过来切片得结果;
 >
 > str.startswith(s)   	判断字符串str是否以指定字符串s开头
 >
@@ -260,9 +260,9 @@
 
 ### 3.7 字符串驻留机制
 
-  仅保存一份相同且不可变字符串的方法，不同的值被存放在字符串驻留池中。
+仅保存一份相同且不可变字符串的方法，不同的值被存放在字符串驻留池中。
 
-  对于符合标识符规则的字符串(仅包括下划线，字母和数字)会启用字符串驻留机制。
+对于符合标识符规则的字符串(仅包括下划线，字母和数字)会启用字符串驻留机制。
 
  
 
@@ -282,21 +282,21 @@
 
 创建字典:
 
-> ==dict(zip(k,v)) 				k,v分别为键与值对应列表，并以其对应元素创建字典==
+> ==dict(zip(k,v)) 					   k,v分别为键与值对应列表，并以其对应元素创建字典==
 >
-> Fromkeys(list)			  将list中每个元素作为键，创建值为空(None)的字典
+> Fromkeys(list)			  	  将list中每个元素作为键，创建值为空(None)的字典
 
 ### 4.3 字典操作方法
 
 > d[k]									键k存在则返回相应值，不在则返回异常；
 >
-> d.get(k,\<default>)    	   键k存在则返回相应值，不在则返回\<defalut>；
+> d.get(k,\<default>)    	    键k存在则返回相应值，不在则返回\<defalut>；
 >
-> d.pop(k,\<default>)         键k存在则取出相应值，不在则返回\<defalut>；
+> d.pop(k,\<default>)           键k存在则取出相应值，不在则返回\<defalut>；
 >
-> d.popitem()       			  随机从字典d中取出一个键值对，并以元组形式返回被删除												键值对；
+> d.popitem()       			   随机从字典d中取出一个键值对，并以元组形式返回被删除												键值对；
 >
-> d.pop(a)       	 			  删除字典d中的键值对a，并返回被删除键对应的值；
+> d.pop(a)       	 			   删除字典d中的键值对a，并返回被删除键对应的值；
 >
 > d.clear()        					清除字典中的所有键值对；
 >
@@ -312,7 +312,7 @@
 
 ### 4.4 字典功能
 
-   d[key]=x        			  修改或者添加键值key对应值x;
+d[key]=x        			  	  修改或者添加键值key对应值x;
 
 ###    附:一键多值使用方法 
 
@@ -329,8 +329,6 @@ d['1'].append("a")
 key1 : {key2: vaule}
 ```
 
-
-
 ### 4.5 字典的特点
 
 字典十分占内存，但其键查询速度很快，典型的空间换时间，其次，不要在遍历字典的同时修改字典(原因较复杂，暂时不做解析)
@@ -339,13 +337,13 @@ key1 : {key2: vaule}
 
 ### 5.1 定义
 
-多个元素的无序组合，其底层是字典实现，所有元素都是字典的“键对象”，故不能重复，且python要求集合中的元素是不可变数据类型，如：整数，浮	点数，元组类型，不包括列表。(注意空集也是集合)
+> 多个元素的无序组合，其底层是字典实现，所有元素都是字典的“键对象”，故不能重复，且python要求集合中的元素是不可变数据类型，如：整数，浮	点数，元组类型，不包括列表。(注意空集也是集合)
 
 ### 5.2 表示
 
-集合用“{}”表示，元素用逗号分隔，用{}或者set()建立，如果建立空集合必须用set()
-
-且集合顺序是无序的，不一定是最初的定义的顺序。
+> 集合用“{}”表示，元素用逗号分隔，用{}或者set()建立，如果建立空集合必须用set()
+>
+> 且集合顺序是无序的，不一定是最初的定义的顺序。
 
 ### 5.3 集合操作方法
 
@@ -353,19 +351,19 @@ key1 : {key2: vaule}
 
 > set(ls)          	 使ls中的每一个字符单独拆分变成集合中的元素，且去掉重复元素；
 >
-> s.add(x)         	如果x不在集合S中，将s增加到x；
+> s.add(x)         	 如果x不在集合S中，将s增加到x；
 >
-> s.discard(x)        若x在集合s中，则移除s中的元素x，否则无效但不报错；
+> s.discard(x)         若x在集合s中，则移除s中的元素x，否则无效但不报错；
 >
 > s.remove(x)        移除s中的元素x，如果x不在，则会返回keyerror异常；
 >
-> s.clear()         	移除s中的所有元素；
+> s.clear()         	 移除s中的所有元素；
 >
 > s.pop()          	 随机返回s的一个元素，并且会更新s，若本身s为空，返回keyerror									异常；
 >
 > s.copy()        	 返回集合s的一个副本；
 >
-> len(s)          	  返回集合s的元素个数；
+> len(s)          	   返回集合s的元素个数；
 >
 > x in s          	  判断元素x是否在集合s中；
 >
@@ -387,7 +385,7 @@ key1 : {key2: vaule}
 
 ### 5.5 常见应用
 
-  去除列表中的重复数据：
+去除列表中的重复数据：
 
 ```python
 ls = [] ;s = set(ls);ls = list(s)
@@ -485,7 +483,7 @@ zip(list1,list2,...)将多个列表对应位置元素组合成元组并返回这
 
 列表类型是一种序列类型，但是可以随意修改，使用方括号[]或者list()创建，元素间用逗号分离，类型可不同，无长度限制，列表相互嵌套以表示多维列表，多维列表可多次索引。
 
-  操作函数：
+操作函数：
 
 > list(tuple)			   将元组转换为列表
 >
@@ -519,7 +517,7 @@ zip(list1,list2,...)将多个列表对应位置元素组合成元组并返回这
 >
 > s.replace(x,y)     				用y替换列表s中x元素
 
-  实例：
+实例：
 
 ```python
 b=[i for i in range(10) if i%2==0]
@@ -629,7 +627,7 @@ Prints the values to a stream, or to sys.stdout by default.
 >
 >    %i 		十进制整数
 >
->    %e 		指数 (基底写为e)
+>    %e 		指数 (基底写为e)·
 >
 >    %E 		指数 (基底写为E)
 >
@@ -772,7 +770,7 @@ print("\\033\[31m%s" % "输出红色字符")
 
    
 
-# 板块三 程序结构
+# 板块三 程序结构与异常处理
 
 ## 1. 基本原理
 
@@ -801,69 +799,63 @@ a==b但是a is not b(id不同)
 
 ## 3. 异常处理
 
-**try:**
+```python
+try:
 
-​     <语句一>
+	block to run
 
-**except** [<异常类型>] [as e]:（可使用多个except定向处理不同的异常类型）
+except [error_type] [as e]:（可使用多个except定向处理不同的异常类型）
 
-​     <语句二>
+ 	block to run if error
 
-保留字try表示运行语句一，若出现(指定类型异常)异常则运行语句二；
 
-[**else:**
+[else:
 
-​     <语句三>
+	block to run if without error
 
-   如果不发生异常，执行语句三；
+   如果不发生异常，执行语句三；]
 
-**finally：**
+[finally:
 
-​     <语句四>
+	block to run no matter if error occur]
+```
 
-   无论是否异常，都最后执行语句四，因而通常用来放置释放资源的代码。]
-
-Tip：一般情况下，不要将return语句放在try,except,else,finally块中，而是在板块的最后，否则会发生意想不到的错误。
+Tip：一般情况下，不要将return语句放在try, except, else, finally块中，而是在板块的最后，否则会发生意想不到的错误。
 
 ### 1.常见异常错误
 
-#### SyntaxError
+| Error type          | Error reason                               |
+| ------------------- | ------------------------------------------ |
+| AssertionError      | assert语句失败                             |
+| AttributeError      | 属性赋值或引用失败                         |
+| EOFError            | 用户输入文件到达末尾                       |
+| FloatingPointError  | 浮点计算错误                               |
+| GeneratorExit       | generator.close()方法被调用                |
+| ImportError         | 导入模块失败                               |
+| IndexError          | 索引超出序列的范围                         |
+| MemoryError         | 内存溢出                                   |
+| NotImplementedError | 尚未实现的方法                             |
+| OSError             | 操作系统产生的异常                         |
+| ReferenceError      | 试图访问一个已经被垃圾回收机制回收了的对象 |
+| RuntimeError        | 一般的运行时错误                           |
+| StopIteration       | 迭代器没有更多的值                         |
+| SyntaxError         | 语法错误                                   |
+| IndentationError    | 缩进错误                                   |
+| TabError            | Tab和空格混合使用                          |
+| TypeError           | 不同类型间的无效操作                       |
+| ValueError          | 传入无效的参数                             |
 
-语法错误
 
-#### NameError
-
-尝试访问一下未定义的变量
-
-#### ZeroDivisionError
-
-#### ValueError
-
-值错误
-
-#### TypeError
-
-类型错误
-
-#### AttributeError
-
-访问对象不存在的属性
-
-#### IndexError
-
-索引越界
-
-#### KeyError
-
-字典关键字不存在
 
 ### 2.with 上下文管理
 
 基本语法结构：
 
+```python
 with context_expr[as var]:
 
-​	语句块
+	block
+```
 
 with上下文管理可以自动管理资源，在with代码块执行完毕后自动还原进入该代码之前的现场或者上下文。无论何种原因跳出with块，无论是否有异常，总能保证资源正常释放，极大的简化了工作，在文本操作，网络同学向该年度场合非常常用。
 
@@ -878,49 +870,54 @@ traceback.print_exc([file=''])
 
 ### 4.自定义异常类
 
-可通过class定义一异常类，并通过raise 抛出异常。
+可通过class定义一异常类，并通过raise抛出异常。
 
 ## 4. 程序的循环结构
 
 ### 4.1 遍历循环
 
-   for <循环变量> in <可迭代对象>:
+基本语法：
 
-​     <循环体>                  
+```python
+for item in items:
 
-   遍历结构有：
+block              
+```
 
-   for i in range(m,n,k):     计数遍历循环
+遍历结构有：
 
-   for c in s:          	字符串s遍历循环(取出每一个字符串循环)
-
-   for item in ls:        列表ls遍历循环（ls=[]）
-
-   for line in file:        	遍历文件file的每一行，file为文件标识符
+> for i in range(m,n,k):     	计数遍历循环
+>
+> for c in s:          				 字符串s遍历循环(取出每一个字符串循环)
+>
+> for item in ls:       			  列表ls遍历循环（ls=[]）
+>
+> for line in file:        			遍历文件file的每一行，file为文件标识符
 
 特别地，字典的遍历：
 
-for i in d(d.keys()):				遍历字典d中的所有key
-
-for i in d.vaules():				遍历字典d中的所有value
-
-for i in d.items():				遍历字典d中的所有键值对
+> for i in d(d.keys()):				遍历字典d中的所有key
+>
+> for i in d.vaules():				 遍历字典d中的所有value
+>
+> for i in d.items():				   遍历字典d中的所有键值对
 
 可迭代对象包括：序列，字典，迭代器对象(range)，生成器对象。
 
 ### 4.2 无限循环
 
-   while <条件>:
+while <条件>:
 
-​     <语句块>
+​	<语句块>
 
-   反复执行语句块，直至条件不满足为止；(ctrl+c可以强制结束程序)
+反复执行语句块，直至条件不满足为止；(ctrl+c可以强制结束程序)
 
 ### 4.3 循环控制保留字
 
-   break           跳出并结束当前整个(最内层)循环，执行循环后的语句；
-
-   continue         	只结束当次循环，继续执行后续次数的循环
+> break           		跳出并结束当前整个(最内层)循环，执行循环后的语句；
+>
+> continue         	只结束当次循环，继续执行后续次数的循环
+>
 
 ### 4.4 循环的高级用法
 
@@ -930,18 +927,19 @@ for i in d.items():				遍历字典d中的所有键值对
 
 优化代码遵循下列三个原则：
 
-(1)尽量减少循环内部不必要的计算
-
-(2)嵌套循环中，尽量减少内部循环的计算，尽可能向外提
-
-(3)局部变量查询较快，尽量使用局部变量。
+> (1)尽量减少循环内部不必要的计算
+>
+> (2)嵌套循环中，尽量减少内部循环的计算，尽可能向外提
+>
+> (3)局部变量查询较快，尽量使用局部变量。
+>
 
 其他方法：
-	
 
-(1)连接多个字符串用join而不是+；
-
-(2)列表进行元素插入和删除时，尽量在列表尾部操作；
+> (1)连接多个字符串用join而不是+；
+>
+> (2)列表进行元素插入和删除时，尽量在列表尾部操作；
+>
 
 # 板块四 函数的定义及调用
 
@@ -1007,8 +1005,6 @@ def test(a, b)：
 test(1,2)
 ```
 
-
-
 #### 2.3.2 默认值参数
 
 我们可以为某些函数设置默认值，这样这些函数在传递时就是可选的，称为"默认值参数"，默认值参数必须放到位置参数后边。
@@ -1018,8 +1014,6 @@ def test(a, b, c = 10):
     d = a + b + c
 test(10, 20)
 ```
-
-
 
 #### 2.3.3. 命名参数
 
@@ -1031,23 +1025,19 @@ def test(a, b):
 test(b = 10, a = 10)
 ```
 
-
-
 ### 2.3.4 可变参数
 
 可变参数指"数量可变的参数"。包括两种情况：
 
-"`*params`”意为将多个参数收集到一个"元组"对象当中。
+`*params`意为将多个参数收集到一个"元组"对象当中。
 
-"`**params`"意为将多个参数收集到一个"字典"对象当中。
+`**params`意为将多个参数收集到一个"字典"对象当中。
 
 ```python
 def test(a, *b, **c):
     print(a, b, c)
 test(3, 2, 1, name = 'hedge', age = '19')
 ```
-
-
 
 ### 2.3.5 强制命名参数
 
@@ -1058,8 +1048,6 @@ def test(*a , b):
 	print(a, b)
 test(1, 2, 3, b = 3)
 ```
-
-
 
 
 
@@ -1112,8 +1100,6 @@ def test02():
 
 *Tip：变量名称不可与函数名相同，否则<u>**多次调用**</u>时会出现歧义报错。*
 
-
-
 ### 3.3 变量的删除
 
  使用del函数删除不再使用的变量，此时如果对象没有被引用，则会被垃圾回收器回收，清理内存空间。
@@ -1122,9 +1108,9 @@ def test02():
 
  python不支持常量，即没有语法规则限制改变一个常量的值，只能通过逻辑上不做修改。
 
- 
 
-## 附注： __xxx__ 函数
+
+## 附注： 私有属性函数
 
 ### 附注1 概况
 
@@ -1149,20 +1135,25 @@ __xxx 类中的私有变量名
 
  先来看下保留属性：
 
->>> Class1.__doc__ # 类型帮助信息 'Class1 Doc.' 
->>> Class1.__name__ # 类型名称 'Class1' 
->>> Class1.__module__ # 类型所在模块 '__main__' 
->>> Class1.__bases__ # 类型所继承的基类 (<type 'object'>,) 
->>> Class1.__dict__ # 类型字典，存储所有类型成员信息。 <dictproxy object at 0x00D3AD70> 
->>> Class1().__class__ # 类型 <class '__main__.Class1'> 
->>> Class1().__module__ # 实例类型所在模块 '__main__' 
->>> Class1().__dict__ # 对象字典，存储所有实例成员信息。 {'i': 1234}
+>Class1.\__doc__ # 类型帮助信息 'Class1 Doc.' 
+>
+>Class1.\__name__ # 类型名称 'Class1' 
+>
+>Class1.\_\_module\__ # 类型所在模块 '\__main__' 
+>
+>Class1.\__bases__ # 类型所继承的基类 (\<type 'object'>,) 
+>
+>Class1.\__dict__ # 类型字典，存储所有类型成员信息。\<dictproxy object at 0x00D3AD70> 
+>
+>Class1().\_\_class_\\_ # 类型 <class '\__main__.Class1'> 
+>
+>Class1().\_\_module__ # 实例类型所在模块 '\_\_main__' 
+>
+>Class1().\__dict__ # 对象字典，存储所有实例成员信息。 {'i': 1234}
 
 ### 附注3 保留方法:
 
 可以把保留方法分类：
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps1.jpg) 
 
 对 __init__() 方法的调用发生在实例被创建 之后 。如果要控制实际创建进程，请使用 [__new__() 方法](#esoterica)。
 
@@ -1172,9 +1163,7 @@ __xxx 类中的私有变量名
 
 由于 bytes 类型的引入而从 Python 3 开始出现。
 
-### 附注4 行为方式与迭代器类似的类
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps2.jpg) 
+### 附注4 行为方式与迭代器类似的类 
 
 无论何时创建迭代器都将调用 __iter__() 方法。这是用初始值对迭代器进行初始化的绝佳之处。
 
@@ -1184,9 +1173,7 @@ __reversed__() 方法并不常用。它以一个现有序列为参数，并将�
 
  
 
-### 附注5 计算属性
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps3.jpg) 
+### 附注5 计算属性 
 
 如果某个类定义了 __getattribute__() 方法，在 每次引用属性或方法名称时 Python 都调用它（特殊方法名称除外，因为那样将会导致讨厌的无限循环）。
 
@@ -1196,21 +1183,15 @@ __reversed__() 方法并不常用。它以一个现有序列为参数，并将�
 
 无论何时删除一个属性，都将调用 __delattr__() 方法。
 
-如果定义了 __getattr__() 或 __getattribute__() 方法， __dir__() 方法将非常有用。通常，调用 dir(x) 将只显示正常的属性和方法。如果__getattr()__方法动态处理color 属性， dir(x) 将不会将 color 列为可用属性。可通过覆盖 __dir__() 方法允许将 color 列为可用属性，对于想使用你的类但却不想深入其内部的人来说，该方法非常有益。
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps4.jpg) 
+如果定义了 __getattr__() 或 __getattribute__() 方法， __dir__() 方法将非常有用。通常，调用 dir(x) 将只显示正常的属性和方法。如果__getattr()__方法动态处理color 属性， dir(x) 将不会将 color 列为可用属性。可通过覆盖 __dir__() 方法允许将 color 列为可用属性，对于想使用你的类但却不想深入其内部的人来说，该方法非常有益。 
 
 ### 附注6 可比较的类
 
-我将此内容从前一节中拿出来使其单独成节，是因为“比较”操作并不局限于数字。许多数据类型都可以进行比较——字符串、列表，甚至字典。如果要创建自己的类，且对象之间的比较有意义，可以使用下面的特殊方法来实现比较。
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps5.jpg) 
+我将此内容从前一节中拿出来使其单独成节，是因为“比较”操作并不局限于数字。许多数据类型都可以进行比较——字符串、列表，甚至字典。如果要创建自己的类，且对象之间的比较有意义，可以使用下面的特殊方法来实现比较。 
 
 ### 附注7 可序列化的类
 
-Python 支持 [任意对象的序列化和反序列化](http://blog.163.com/jackylau_v/blog/serializing.html)。（多数 Python 参考资料称该过程为 “pickling” 和 “unpickling”）。该技术对与将状态保存为文件并在稍后恢复它非常有意义。所有的 [内置数据类型](http://blog.163.com/jackylau_v/blog/native-datatypes.html) 均已支持 pickling 。如果创建了自定义类，且希望它能够 pickle，阅读 [pickle 协议](http://docs.python.org/3.1/library/pickle.html) 了解下列特殊方法何时以及如何被调用
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps6.jpg) 
+Python 支持 [任意对象的序列化和反序列化](http://blog.163.com/jackylau_v/blog/serializing.html)。（多数 Python 参考资料称该过程为 “pickling” 和 “unpickling”）。该技术对与将状态保存为文件并在稍后恢复它非常有意义。所有的 [内置数据类型](http://blog.163.com/jackylau_v/blog/native-datatypes.html) 均已支持 pickling 。如果创建了自定义类，且希望它能够 pickle，阅读 [pickle 协议](http://docs.python.org/3.1/library/pickle.html) 了解下列特殊方法何时以及如何被调用 
 
 要重建序列化对象，Python 需要创建一个和被序列化的对象看起来一样的新对象，然后设置新对象的所有属性。__getnewargs__() 方法控制新对象的创建过程，而 __setstate__() 方法控制属性值的还原方式。
 
@@ -1218,9 +1199,7 @@ Python 支持 [任意对象的序列化和反序列化](http://blog.163.com/jack
 
 ### 附注8 可在 with 语块中使用的类
 
-with 语块定义了 [运行时刻上下文环境](#typecontextmanager)；在执行 with 语句时将“进入”该上下文环境，而执行该语块中的最后一条语句将“退出”该上下文环境。
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps7.jpg) 
+with 语块定义了 [运行时刻上下文环境](#typecontextmanager)；在执行 with 语句时将“进入”该上下文环境，而执行该语块中的最后一条语句将“退出”该上下文环境。 
 
 该文件对象同时定义了一个 __enter__() 和一个 __exit__() 方法。该 __enter__() 方法检查文件是否处于打开状态；如果没有， _checkClosed()方法引发一个例外。
 
@@ -1232,44 +1211,59 @@ __enter__() 方法将始终返回 self —— 这是 with 语块将用于调用�
 
 ### 附注9 真正神奇的东西
 
- 如果知道自己在干什么，你几乎可以完全控制类是如何比较的、属性如何定义，以及类的子类是何种类型。
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps8.jpg) 
+ 如果知道自己在干什么，你几乎可以完全控制类是如何比较的、属性如何定义，以及类的子类是何种类型。 
 
 python中以双下划线的是一些系统定义得名称，让python以更优雅得语法实行一些操作，本质上还是一些函数和变量，与其他函数和变量无二，比如:x.__add__(y) 等价于 x+y
 有一些很常见，有一些可能比较偏，在这里罗列一下，做个笔记，备忘。
 
-
 x.__contains__(y) 等价于 y in x, 在list,str, dict,set等容器中有这个函数
 __base__, __bases__, __mro__, 关于类继承和函数查找路径的。
+
 class.__subclasses__(), 返回子类列表
+
 x.__call__(...) == x(...)
+
 x.__cmp__(y) == cmp(x,y)
+
 x.__getattribute__('name') == x.name == getattr(x, 'name'),  比__getattr__更早调用
+
 x.__hash__() == hash(x)
+
 x.__sizeof__(), x在内存中的字节数, x为class得话， 就应该是x.__basicsize__
+
 x.__delattr__('name') == del x.name
-__dictoffset__ attribute tells you the offset to where you find the pointer to the __dict__ object in any instance object that has one. It is in bytes.
-__flags__, 返回一串数字，用来判断该类型能否被序列化（if it's a heap type), __flags__ & 512
+
+x.\__dictoffset__ attribute tells you the offset to where you find the pointer to the __dict__ object in any instance object that has one. It is in bytes.
+
+x.\__flags__, 返回一串数字，用来判断该类型能否被序列化（if it's a heap type), __flags__ & 512
+
 S.__format__, 有些类有用
+
 x.__getitem__(y) == x[y], 相应还有__setitem__, 某些不可修改类型如set，str没有__setitem__
+
 x.__getslice__(i, j) == x[i:j], 有个疑问，x='123456789', x[::2],是咋实现得
-__subclasscheck__(), check if a class is subclass
-__instancecheck__(), check if an object is an instance
-__itemsize__, These fields allow calculating the size in bytes of instances of the type. 0是可变长度， 非0则是固定长度
+
+x.\__subclasscheck__(), check if a class is subclass
+
+x.\__instancecheck__(), check if an object is an instance
+
+x.\__itemsize__, These fields allow calculating the size in bytes of instances of the type. 0是可变长度， 非0则是固定长度
+
 x.__mod__(y) == x%y, x.__rmod__(y) == y%x
+
 x.__module__ , x所属模块
+
 x.__mul__(y) == xy,  x.__rmul__(y) == yx
 
-__reduce__, __reduce_ex__ , for pickle
+x.\__reduce__, __reduce_ex__ , for pickle
 
-__slots__ 使用之后类变成静态一样，没有了__dict__, 实例也不可新添加属性
+x.\__slots__ 使用之后类变成静态一样，没有了__dict__, 实例也不可新添加属性
 
-__getattr__ 在一般的查找属性查找不到之后会调用此函数
+x.\__getattr__ 在一般的查找属性查找不到之后会调用此函数
 
-__setattr__ 取代一般的赋值操作，如果有此函数会调用此函数， 如想调用正常赋值途径用 object.__setattr__(self, name, value)
+x.\__setattr__ 取代一般的赋值操作，如果有此函数会调用此函数， 如想调用正常赋值途径用 object.__setattr__(self, name, value)
 
-__delattr__ 同__setattr__, 在del obj.name有意义时会调用
+x.\__delattr__ 同__setattr__, 在del obj.name有意义时会调用
 
  
 
@@ -1282,7 +1276,7 @@ __delattr__ 同__setattr__, 在del obj.name有意义时会调用
   比如：
 
 ```python
-f = [lambda x,y: x+y,lambda x,y: x*y]
+f = [lambda x,y: x+y, lambda x,y: x*y]
 print(f[1](1,2))
 ```
 
@@ -1304,8 +1298,6 @@ print(f[1](1,2))
 
 常见数学应用如：斐波那契数列，阶乘及汉诺塔
 
-
-
 ### 6.2 嵌套函数
 
 嵌套函数，在函数内部定义的函数，嵌套函数的定义及调用都只能在函数内部使用。常用于数据的封装(即数据隐藏，使得外部无法访问)，贯彻DRY(Don't repeat yourself)原则以及闭包。
@@ -1325,86 +1317,70 @@ def f1():
 
 本质上，所有文件都是二进制文件，但展示形式包括二进制文件及文本文件。
 
- 
-
 ## 2. 文件的打开与关闭
 
-文件需要从存储状态转变为占用状态才可唯一地排他地进行操作，其中常用函数有：
+### 2.1 概述
+
+文件需要从存储状态转变为占用状态才可唯一地排他地进行操作，其基本语法：
 
 文件句柄.<函数名>
 
-open(<文件名>,<打开模式>,encoding='UTF-8')
+```python
+open(filename, open_mode, encoding='UTF-8')
+```
 
 **注意：对于带有BOM的txt文本，解码方式应该选择UTF-8-sig**
 
-文件名表示：绝对路径(反斜杠换位斜杠/)
+文件名表示：
 
-​        相对路径（源文件同目录可省略，使用"."，单一目录无需"."）
+> 绝对路径(反斜杠换位斜杠/)
+>
+> 相对路径（源文件同目录可省略，使用"."，单一目录无需"."）
+>
 
 Tip：在powershell中带有空格的路径，路径需要用英文双引号括起来。
 
-打开模式：  
+### 2.2 打开模式  
 
-​		读写模式：
+读写模式：
 
-​        "r"只读模式，默认值，如果文件不存在，返回FileNoFoundError;
+> "r"，只读模式，默认值，如果文件不存在，返回FileNoFoundError;
+>
+> "w"，覆盖写模式，文件不存在则创建，存在则完全覆盖；
+>
+> "x"，创建写模式，文件不存在则创建，存在则返回FileExistsError(文本的创建另存为);
+>
+>  "a"，追加写模式，文件不存在则创建，存在则在文件最后追加内容；
+>
 
-​        "w"覆盖写模式，文件不存在则创建，存在则完全覆盖；
+展示模式：
 
-​        "x"创建写模式，文件不存在则创建，存在则返回FileExistsError(文本的创建另存为);
+> "b"，二进制文本类型；
+>
+> "t"，文本文件模式，默认值；
+>
+> "+"，与w/x/a同时使用，在原基础上增加读功能。
+>
 
-​        "a"追加写模式，文件不存在则创建，存在则在文件最后追加内容；
+close()   	关闭文件，且python关闭后自动关闭(最好自己打上，减少运行内存占用)
 
-​       文件类型：
+**Note：**
 
-​       "b"二进制文本类型；
+> 在windows平台下使用python内置函数 open() 时发现，当不传递encoding参数时，会自动采用gbk(cp936)编码打开文件，而当下**很大部分**文件的编码都是**UTF-8**，部分加密为**UTF-8-sig**（带有BOM加密文件）。
+>
+> 我们当然可以通过每次手动传参encoding='utf-8'，但是略显冗余，而且有很多外国的第三方包，里面调用的内置open()函数并没有提供接口让我们指定encoding，这就会导致这些包在windows平台上使用时，常会出现如 "UnicodeDecodeError:'gbk' codec can't decode byte 0x91 in position 209: illegal multibyte sequence" 的报错。
 
-​        "t"文本文件模式，默认值；
+遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符。遇到这种情况，open()函数还接收一个errors参数，表示如果遇到编码错误后如何处理。最简单的方式是直接忽略：
 
-​        "+"与w/x/a同时使用，在原基础上增加读功能。
+```python
+f = open('/Users/michael/gbk.txt', 'r', encoding='gbk', errors='ignore')
+```
 
-​	close()   	关闭文件，且python关闭后自动关闭(最好自己打上，减少运行内存占用)
-
-​	注：在windows平台下使用python内置函数 open() 时发现,当不传递encoding参数时，会自动采用gbk(cp936)编码打开文件，而当下**很大部分**文件的编码都是**UTF-8**，部分加密为**UTF-8-sig**（带有BOM加密文件）。
-
-​    我们当然可以通过每次手动传参encoding='utf-8'，但是略显冗余，而且有很多外国的第三方包，里面调用的内置open()函数并没有提供接口让我们指定encoding，这就会导致这些包在windows平台上使用时，常会出现如 "UnicodeDecodeError:'gbk' codec can't decode byte 0x91 in position 209: illegal multibyte sequence" 的报错。
-
-[python文件读写,以后就用with open语句](https://www.cnblogs.com/ymjyqsx/p/6554817.html)
+python文件读写,以后就用with open语句
 
 读写文件是最常见的IO操作。Python内置了读写文件的函数，用法和C是兼容的。
 
 读写文件前，我们先必须了解一下，在磁盘上读写文件的功能都是由操作系统提供的，现代操作系统不允许普通的程序直接操作磁盘，所以，读写文件就是请求操作系统打开一个文件对象（通常称为文件描述符），然后，通过操作系统提供的接口从这个文件对象中读取数据（读文件），或者把数据写入这个文件对象（写文件）。
-
-读文件
-
-要以读文件的模式打开一个文件对象，使用Python内置的open()函数，传入文件名和标示符：
-
-```python
-f = open('/Users/michael/test.txt', 'r')
-```
-
-标示符'r'表示读，这样，我们就成功地打开了一个文件。
-
-如果文件不存在，open()函数就会抛出一个IOError的错误，并且给出错误码和详细的信息告诉你文件不存在：
-
-```python
-f=open('/Users/michael/notfound.txt', 'r')
-```
-
-```python
-Traceback (most recent call last):
-
-File "<stdin>", line 1, in <module>
-
-FileNotFoundError: [Errno 2] No such file or directory: '/Users/michael/notfound.txt'
-```
-
-如果文件打开成功，接下来，调用read()方法可以一次读取文件的全部内容，Python把内容读到内存，用一个str对象表示：
-
-```python
-f.read()
-'Hello, world!'
-```
 
 最后一步是调用close()方法关闭文件。文件使用完毕后必须关闭，因为文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也是有限的：
 
@@ -1438,118 +1414,29 @@ with open('/path/to/file', 'r') as f:
 
 这和前面的try ... finally是一样的，但是代码更佳简洁，并且不必调用f.close()方法。
 
-调用read()会一次性读取文件的全部内容，如果文件有10G，内存就爆了，所以，要保险起见，可以反复调用read(size)方法，每次最多读取size个字节的内容。另外，调用readline()可以每次读取一行内容，调用readlines()一次读取所有内容并按行返回list。因此，要根据需要决定怎么调用。
-
-如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：
-
-```python
-for line in f.readlines():
-
-	print(line.strip()) # 把末尾的'\n'删掉
-```
-
-写文件
-
-写文件和读文件是一样的，唯一区别是调用open()函数时，传入标识符'w'或者'wb'表示写文本文件或写二进制文件：
-
-```python
-f = open('/Users/michael/test.txt', 'w')>>> f.write('Hello, world!')>>> f.close()
-```
-
-你可以反复调用write()来写入文件，但是务必要调用f.close()来关闭文件。当我们写文件时，操作系统往往不会立刻把数据写入磁盘，而是放到内存缓存起来，空闲的时候再慢慢写入。只有调用close()方法时，操作系统才保证把没有写入的数据全部写入磁盘。忘记调用close()的后果是数据可能只写了一部分到磁盘，剩下的丢失了。所以，还是用with语句来得保险：
-
-with open('/Users/michael/test.txt', 'w') as f:
-
-  f.write('Hello, world!')
-
-要写入特定编码的文本文件，请给open()函数传入encoding参数，将字符串自动转换成指定编码
-
-字符编码
-
-要读取非UTF-8编码的文本文件，需要给open()函数传入encoding参数，例如，读取GBK编码的文件：
-
-```python
-f = open('/Users/michael/gbk.txt', 'r', encoding='gbk')>>> f.read()'测试'
-```
-
-遇到有些编码不规范的文件，你可能会遇到UnicodeDecodeError，因为在文本文件中可能夹杂了一些非法编码的字符。遇到这种情况，open()函数还接收一个errors参数，表示如果遇到编码错误后如何处理。最简单的方式是直接忽略：
-
-```python
-f = open('/Users/michael/gbk.txt', 'r', encoding='gbk', errors='ignore')
-```
-
-二进制文件
-
-前面讲的默认都是读取文本文件，并且是UTF-8编码的文本文件。要读取二进制文件，比如图片、视频等等，用'rb'模式打开文件即可：
-
-```python
-f = open('/Users/michael/test.jpg', 'rb')>>> f.read()
-```
-
-b'xffxd8xffxe1x00x18Exifx00x00...' # 十六进制表示的字节
-
- 
-
- 
-
-总结：以后读写文件都使用with open语句，不要再像以前那样用f = open()这种语句了
-
- 
-
-　　　对于多个文件的读写，可以写成以下两种方式：
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps9.png) 
-
-with open('/home/xbwang/Desktop/output_measures.txt','r') as f:
-
-  with open('/home/xbwang/Desktop/output_measures2.txt','r') as f1:
-
-​    with open('/home/xbwang/Desktop/output_output_bk.txt','r') as f2:
-　　　　　　　........
-　　　　　　　........
-　　　　　　　........
-
-
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps11.png) 
-
-with open('/home/xbwang/Desktop/output_measures.txt','r') as f:
-
-........
-
-with open('/home/xbwang/Desktop/output_measures2.txt','r') as f1:
-
-........
-
-with open('/home/xbwang/Desktop/output_output_bk.txt','r') as f2:
-
-........
-
-![img](file:///C:UsersHedgeAppDataLocalTempksohtml22996wps12.png) 
-
- 
-
 ## 3. 文件内容的读取
 
 格式：<变量名称>.<函数名称>
 
-​	read([size])      读入全部内容，如果给出参数，则读入前size个字节；     
-
-​	readline([size])    读入一行内容，如果给出参数，则读入前size个字节；  
-
-​	readlines([hint])   	读入所有行内容，以每行为元素形成列表，如果给出参数，则
-
-​           	读入前hint行。
+> read([size])      		读入全部内容，如果给出参数，则读入前size个字节；     
+>
+> readline([size])    	读入一行内容，如果给出参数，则读入前size个字节；  
+>
+> readlines([hint])   	读入所有行内容，以每行为元素形成列表，如果给出参数，则
+>
+> ​           	读入前hint行。
+>
 
 ## 4. 全文本操作
 
-​	a.一次读入一次处理；
-
-​	b.分次读入一次处理，每次读取n行，读取完毕后关闭再次读取n行，节省内存。
-
-​	c.一次读入逐行处理；
-
-​	d.分行读入逐行处理；
+> a.一次读入一次处理；
+>
+> b.分次读入一次处理，每次读取n行，读取完毕后关闭再次读取n行，节省内存。
+>
+> c.一次读入逐行处理；
+>
+> d.分行读入逐行处理；
+>
 
  
 
@@ -1557,13 +1444,14 @@ with open('/home/xbwang/Desktop/output_output_bk.txt','r') as f2:
 
 ### 方法：
 
-write(s)       				向文件中写入一个字符串或者字节流；
+> write(s)       				向文件中写入一个字符串或者字节流；
+>
+> writelines(lines)   		将一个元素全为字符串的**列表**写入文件，不换行无空格无返回值；
+>
+> seek(offset)    		 	改变当前文件操作指针的位置，offset含义如下：
+>
 
-writelines(lines)   		将一个元素全为字符串的列表写入文件，不换行无空格无返回值；
-
-seek(offset)    		 	改变当前文件操作指针的位置，offset含义如下：
-
-​           						
+### **All**           						
 
 | 序号 | 方法                         | 描述                                                         |
 | :--- | :--------------------------- | ------------------------------------------------------------ |
@@ -1585,11 +1473,11 @@ seek(offset)    		 	改变当前文件操作指针的位置，offset含义如下
 
 字节计算：一个字母1个字节，一个汉字3个字节
 
-关于name__
+关于\_\_name__
 
-首先需要了解 __name__ 是属于 python 中的内置类属性，就是它会天生就存在于一个 python 程序中，代表对应程序名称。
+首先需要了解 \_\_name__ 是属于 python 中的内置类属性，就是它会天生就存在于一个 python 程序中，代表对应程序名称。
 
-比如所示的一段代码里面（这个脚本命名为 pcRequests.py），我只设了一个函数，但是并没有地方运行它，所以当 run 了这一段代码之后我们有会发现这个函数并没有被调用。但是当我们在运行这个代码时这个代码的 __name__ 的值为 __main__ （一段程序作为主线运行程序时其内置名称就是 __main__）。
+比如所示的一段代码里面（这个脚本命名为 pcRequests.py），我只设了一个函数，但是并没有地方运行它，所以当 run 了这一段代码之后我们有会发现这个函数并没有被调用。但是当我们在运行这个代码时这个代码的 \_\_name__ 的值为 \_\_main__ （一段程序作为主线运行程序时其内置名称就是 \_\_main__）。
 
 ```python
 import requestsclass requests(object):
@@ -1607,19 +1495,7 @@ def getHTMLText(url):
   print(__name__)
 ```
 
-结果：
-
-__main__Process finished with exit code 0
-
-当这个 pcRequests.py 作为模块被调用时，则它的 __name__ 就是它自己的名字：
-
-import pcRequestspcRequestsc=pcRequestsc.__name__
-
-结果：
-
-'pcRequests'
-
-看到这里应该能明白，自己的 __name__ 在自己用时就是 main，当自己作为模块被调用时就是自己的名字，就相当于：我管自己叫我自己，但是在朋友眼里我就是小仙女一样。
+看到这里应该能明白，自己的 \_\_name__ 在自己用时就是 \_\_main__，当自己作为模块被调用时就是自己的名字。
 
  
 
@@ -1653,9 +1529,7 @@ a.test()
 umc = __import__("usual math calculate")
 ```
 
-引用模块usual math calculate并命名为umc
-
-
+引用模块usual math calculate并命名为umc。
 
 ### 6.2 文本复制
 

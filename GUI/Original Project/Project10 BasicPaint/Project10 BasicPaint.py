@@ -331,16 +331,17 @@ class Application(Frame):
     def drawerasor(self, event):
         """通过绘制新的实心矩形覆盖原有图形，但这会存在一个问题，换背景颜色就全部显示出来了。"""
         self.startdraw(event)
-        size = self.esize.get()
-        if self.set_etype.get() == 'Rectangle':
-            self.drawbox.create_rectangle(event.x-size/2, event.y-size/2,
-                                          event.x + size / 2, event.y + size / 2,
-                                          fill=self.canvasbg, outline=self.canvasbg)
-        else:
-            self.drawbox.create_oval(event.x-size/2, event.y-size/2,
-                                     event.x + size / 2, event.y + size / 2,
-                                     fill=self.canvasbg, outline=self.canvasbg)
-        self.x, self.y = event.x, event.y
+        if self.esize.get() != "":
+            size = self.esize.get()
+            if self.set_etype.get() == 'Rectangle':
+                self.drawbox.create_rectangle(event.x-size/2, event.y-size/2,
+                                              event.x + size / 2, event.y + size / 2,
+                                              fill=self.canvasbg, outline=self.canvasbg)
+            else:
+                self.drawbox.create_oval(event.x-size/2, event.y-size/2,
+                                         event.x + size / 2, event.y + size / 2,
+                                         fill=self.canvasbg, outline=self.canvasbg)
+            self.x, self.y = event.x, event.y
 
     def drawoption(self, event):
         pass
@@ -390,6 +391,7 @@ class Application(Frame):
     def shortcut(self, event):
         """快捷键的绑定"""
         # 超级键绑定暂存问题！
+        # 快捷绘制的同时，绑定对应工具栏窗口
         print(event.keycode)
         if event.char == "l":
             """快速绘制直线"""
@@ -492,16 +494,16 @@ class Application(Frame):
 
     def esketchshow(self, *args):
         self.esketch.delete("all")
-        size = self.esize.get()
-        if self.set_etype.get() == 'Rectangle':
-            self.esketch.create_rectangle(50-size/2, 50-size/2,
-                                          50 + size / 2, 50 + size / 2,
-                                          fill='violet', outline='violet')
-        else:
-            self.esketch.create_oval(50-size/2, 50-size/2,
-                                     50 + size / 2, 50 + size / 2,
-                                     fill='violet', outline='violet')
-
+        if self.esize.get() != "":
+            size = self.esize.get()
+            if self.set_etype.get() == 'Rectangle':
+                self.esketch.create_rectangle(50-size/2, 50-size/2,
+                                              50 + size / 2, 50 + size / 2,
+                                              fill='violet', outline='violet')
+            else:
+                self.esketch.create_oval(50-size/2, 50-size/2,
+                                         50 + size / 2, 50 + size / 2,
+                                         fill='violet', outline='violet')
     # 设置区函数
 
     def setcolor(self):
