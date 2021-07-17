@@ -33,5 +33,5 @@ for i in range(a):
 
 ## 3. 数据处理
 
-涉及大量数据处理时，优先使用 `numpy` 库的 `ndarray` ，其次 `array` ，以加快运行速度。
+涉及大量数据处理时，优先使用 `numpy` 库的 `ndarray` ，其次`array`，以加快运行速度。
 

@@ -165,16 +165,10 @@
 
 用以生成项目文档的库。
 
-- Sphinx：Python 文档生成器。
-
-	官网
-
-	- awesome-sphinxdoc：[官网](https://github.com/yoloseem/awesome-sphinxdoc)
-
+- Sphinx：Python 文档生成器。[官网](https://zh-sphinx-doc.readthedocs.io/en/latest/contents.html)
+- awesome-sphinxdoc：[官网](https://github.com/yoloseem/awesome-sphinxdoc)
 - MkDocs：对 Markdown 友好的文档生成器。[官网](http://www.mkdocs.org/)
-
 - pdoc：一个可以替换Epydoc 的库，可以自动生成 Python 库的 API 文档。[官网](https://github.com/BurntSushi/pdoc)
-
 - Pycco：文学编程（literate-programming）风格的文档生成器。[官网](https://github.com/pycco-docs/pycco)
 
 ## 配置
@@ -383,36 +377,16 @@ Python实现的数据库。
 
 全栈 Web 框架。
 
-- Django
+- Django：Python 界最流行的 web 框架。[awesome-django](https://gitlab.com/rosarior/awesome-django)系列
 
-	：Python 界最流行的 web 框架。
+- Flask：一个Python 微型框架。[awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
 
-	官网
-
-	- [awesome-django](https://gitlab.com/rosarior/awesome-django)系列
-
-- Flask
-
-	：一个 Python 微型框架。
-
-	官网
-
-	- [awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
-
-- pyramid：一个小巧，快速，接地气的开源Python web 框架。
-
-	- [awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
-
+- pyramid：一个小巧，快速，接地气的开源Python web 框架。[awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
 - [Bottle](http://hao.jobbole.com/bottle/)：一个快速小巧，轻量级的 WSGI 微型 web 框架。[官网](http://bottlepy.org/docs/dev/index.html)
-
 - CherryPy：一个极简的 Python web 框架，服从 HTTP/1.1 协议且具有WSGI 线程池。[官网](http://www.cherrypy.org/)
-
 - TurboGears：一个可以扩展为全栈解决方案的微型框架。[官网](http://www.turbogears.org/)
-
 - [web.py](http://hao.jobbole.com/python-webpy/)：一个 Python 的 web 框架，既简单，又强大。[官网](http://webpy.org/)
-
 - web2py：一个全栈 web 框架和平台，专注于简单易用。[官网](http://www.web2py.com/)
-
 - [Tornado](http://hao.jobbole.com/tornado/)：一个web 框架和异步网络库。[官网](http://www.tornadoweb.org/en/latest/)
 
 ## 权限
@@ -457,9 +431,9 @@ Python实现的数据库。
 用来开发RESTful APIs的库
 
 - Django
-	- [django-rest-framework](http://hao.jobbole.com/django-rest-framework/)：一个强大灵活的工具，用来构建 web API。[官网](http://www.django-rest-framework.org/)
-	- django-tastypie：为Django 应用开发API。[官网](http://tastypieapi.org/)
-	- django-formapi：为 Django 的表单验证，创建 JSON APIs 。[官网](https://github.com/5monkeys/django-formapi)
+  - [django-rest-framework](http://hao.jobbole.com/django-rest-framework/)：一个强大灵活的工具，用来构建 web API。[官网](http://www.django-rest-framework.org/)
+  - django-tastypie：为Django 应用开发API。[官网](http://tastypieapi.org/)
+  - django-formapi：为 Django 的表单验证，创建 JSON APIs 。[官网](https://github.com/5monkeys/django-formapi)
 - Flask
 	- flask-api：为 flask 开发的，可浏览 Web APIs 。[官网](http://www.flaskapi.org/)
 	- flask-restful：为 flask 快速创建REST APIs 。[官网](http://flask-restful.readthedocs.org/en/latest/)
