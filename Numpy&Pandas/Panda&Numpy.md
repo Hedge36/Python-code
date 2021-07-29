@@ -1413,15 +1413,11 @@ DataFrame.`set_index`(*keys*, *drop=True*, *append=False*, *inplace=False*, *ver
 
 
 
-
-
 ---
 
 # Excel处理
 
 ## 1. 读取
-
-**现行新版pandas不支持“xlsx”格式的文件，如果您确实需要打开它，那么可以通过卸载新版更换版本低于1.2.0的pandas（内核为xlrd，因此xlrd同样无法打开该格式文件）或者通过openpyxl打开它。**
 
 **函数：**
 
@@ -1443,20 +1439,15 @@ usecols = None，squeeze = False,dtype = None, ...）
 > | sheet_name=1              | 第二张作为DataFrame                       |
 > | sheet_name=[0,1,'Sheet5'] | 第1页，第2页和第5页作为DataFrames的字典。 |
 >
->
 > `header`：指定作为列名的行，默认0，即取第一行的值为列名。数据为列名行以下的数据；若数据不含列名，则设定 header = None。
->
 >
 > `names`：默认为None，要使用的列名列表，如不包含标题行，应显示传递`header=None`。
 >
->
-> `index_col`：指定列为索引列，默认None列（0索引）用作DataFrame的行标签。
->
+> `index_col`：指定列为索引列，默认None列（0索引）用作DataFrame的行标签（若只使用列切片，则此处的列索引号为相对切片的索引号）。
 >
 > `usecols`：int或list，默认为None。
 >
 > - 如果为None则解析所有列
-> - 如果为int则表示要解析的最后一列
 > - 如果为int列表则表示要解析的列号列表
 > - 如果字符串则表示以逗号分隔的Excel列字母和列范围列表（例如“A：E”或“A，C，E：F”）。范围包括双方。
 >
