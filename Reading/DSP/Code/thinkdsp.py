@@ -5,6 +5,7 @@ Copyright 2013 Allen B. Downey
 License: MIT License (https://opensource.org/licenses/MIT)
 """
 
+from scipy.integrate import cumtrapz
 import copy
 import math
 
@@ -146,13 +147,13 @@ def read_wave_with_scipy(filename):
     return wave
 
 
-def play_wave(filename="sound.wav", player="aplay"):
+def play_wave(filename="sound.wav"):
     """Plays a wave file.
 
     filename: string
     player: string name of executable that plays wav files
     """
-    cmd = "%s %s" % (player, filename)
+    cmd = "D:\LenovoSoftstore\Install\kugouyinle\KuGou.exe %s" % filename
     popen = subprocess.Popen(cmd, shell=True)
     popen.communicate()
 
@@ -1502,7 +1503,6 @@ class TriangleSignal(Sinusoid):
         ys = normalize(unbias(ys), self.amp)
         return ys
 
-from scipy.integrate import cumtrapz
 
 class Chirp(Signal):
     """Represents a signal with variable frequency."""
@@ -1891,8 +1891,6 @@ def underride(d, **options):
         d.setdefault(key, val)
 
     return d
-
-
 
 
 def main():
