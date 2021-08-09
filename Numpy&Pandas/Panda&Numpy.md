@@ -841,8 +841,6 @@ age	 name 	call_name  score
 1	28		herz		herz			60
 2	35		sally		sally			90
 
-
-
 **3.合并后，删除重复的列**
 
 ```python
@@ -853,8 +851,6 @@ pd.merge(df1, df2, left_on='name', right_on='call_name').drop('name', axis=1)
 0 		25 		kate 			70
 1 		28 		herz 			60
 2 		35 		sally 			90
-
- 
 
 **4.参数how的使用**
 
@@ -922,8 +918,6 @@ pd.merge(df1, df3, on='name', how='right')
 
 - loc：通过标签选取数据，即通过index和columns的值进行选取。loc方法有两个参数，按顺序控制行列选取。
 - iloc：通过行号选取数据，即通过数据所在的自然行列数为选取数据。iloc方法也有两个参数，按顺序控制行列选取。
-
-
 
 #### 3.1.1 loc
 
@@ -1029,8 +1023,9 @@ df.drop([16, 17])
 
 **参数说明**
 
-by：列名，依旧该列进行排序
-ascending：确定排序方式，默认为True（降序）
+> by：列名，依旧该列进行排序
+>
+> ascending：确定排序方式，默认为True（降序）
 
 **实例**
 
@@ -1065,9 +1060,8 @@ print(dataFrame.sort_values(by='a_name',  ascending=False))
 > df.index() 
 >
 > df.columns()
-> 首先，举个例子，做一个DataFrame如下：
 
-
+首先，举个例子，做一个DataFrame如下：
 
 #### 修改
 
@@ -1088,11 +1082,9 @@ print(dataFrame.sort_values(by='a_name',  ascending=False))
 
 #### rename
 
-rename函数是专门为了修改DataFrame坐标轴标签函数。rename函数的优点：可以![\color{red}{选择性的修改}](https://math.jianshu.com/math?formula=%5Ccolor%7Bred%7D%7B%E9%80%89%E6%8B%A9%E6%80%A7%E7%9A%84%E4%BF%AE%E6%94%B9%7D)某行某列的标签。
+rename函数是专门为了修改DataFrame坐标轴标签函数。rename函数的优点：可以选择性修改某行某列的标签。
 
-![\color{red}{注}](https://math.jianshu.com/math?formula=%5Ccolor%7Bred%7D%7B%E6%B3%A8%7D)：函数/字典中的值必须是唯一的（1对1）。 未包含在字典/Series中的标签将保留原样。 列出的额外标签不会引发错误。
-
-
+注：函数/字典中的值必须是唯一的（1对1)。 未包含在字典/Series中的标签将保留原样。 列出的额外标签不会引发错误。
 
 ```python
 DataFrame.rename(self, mapper=None, index=None, columns=None, axis=None, 
@@ -1111,10 +1103,6 @@ DataFrame.rename(self, mapper=None, index=None, columns=None, axis=None,
 | inplace |     默认为False，不在原处修改数据，返回一个新的DataFrame     |
 |  level  | 默认为None，处理单个轴标签（有的数据会有2个或多个index或columns） |
 | errors  | 默认ignore，如果映射体里面包含DataFrame没有的轴标签，忽略不报错 |
-
-
-
-
 
 ## 4 索引
 
@@ -1170,6 +1158,7 @@ adult.set_index(['race', 'sex'],  drop=False)
 ### 4.3 重置
 
 reset_index()：将使用set_index()打造的层次化逆向操作。
+
 既是取消层次化索引，将索引变回列，并补上最常规的数字索引。
 
 ```python
@@ -1240,9 +1229,10 @@ df.sort_values(by="sales" ,  ascending=False)
 
 列举常用的参数用法：
 
-- by：函数的操作对象是DataFrame
-- axis：进行操作的列名，多个列名用列表表示
-- ascending：默认为升序True
+> - by：函数的操作对象是DataFrame
+> - axis：进行操作的列名，多个列名用列表表示
+> - ascending：默认为升序True
+>
 
 ```python
 df
@@ -1271,9 +1261,10 @@ df = df.sort_values(by=['col1'])
 
 ## 8. 处理缺损数据
 
-### 8.1 dropna()方法
+### 8.1 dropna
 
-该方法用于检查是否存在缺损数据，若存在则删除相关列与行。
+> 该方法用于检查是否存在缺损数据，若存在则删除相关列与行。
+
 **函数：**
 
 ```python
@@ -1288,7 +1279,9 @@ pd.dropna(axis=0,  how=‘any’,  thresh=None,  subset=None,  inplace=False)
 - `subset`：定义要在哪些列中查找缺失值。
 - `inplace`：默认值 False，是否直接在原DataFrame进行修改。
 
+### 8.2 isnan
 
+### 8.3 fillna
 
 ## 9. 其他用法
 
@@ -1375,11 +1368,9 @@ DataFrame.clip(lower=None, upper=None, axis=None, inplace=False, *args, **kwargs
 
 #### Returns
 
-> - DataFrame
->
->   Copy of input object, shifted.
+> **DataFrame**,	Copy of input object, shifted.
 
-## 2. 列变索引
+### 2. 列变索引
 
 DataFrame.`set_index`(*keys*, *drop=True*, *append=False*, *inplace=False*, *verify_integrity=False*)
 
@@ -1445,11 +1436,11 @@ usecols = None，squeeze = False,dtype = None, ...）
 >
 > `index_col`：指定列为索引列，默认None列（0索引）用作DataFrame的行标签（若只使用列切片，则此处的列索引号为相对切片的索引号）。
 >
-> `usecols`：int或list，默认为None。
+> `usecols`：int或list，默认为None，<u>cols顺序不影响结果</u>。
 >
 > - 如果为None则解析所有列
 > - 如果为int列表则表示要解析的列号列表
-> - 如果字符串则表示以逗号分隔的Excel列字母和列范围列表（例如“A：E”或“A，C，E：F”）。范围包括双方。
+> - 如果为字符串则表示以逗号分隔的Excel列字母和列范围列表（例如“A：E”或“A，C，E：F”），<u>包括两端那两列</u>。
 >
 > `squeeze`：boolean，默认为False,如果解析的数据只包含一列，则返回一个Series。
 >
