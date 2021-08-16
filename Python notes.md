@@ -1,13 +1,3 @@
-# **Python基础语法**
-
-# 目录
-
-
-
-[TOC]
-
- 
-
 # 板块一 数据类型及操作
 
 ## 1. 简述
@@ -32,7 +22,7 @@
 > **b.相关函数：**
 > 	
 >
-> power(x,y)，用于计算X的y次方
+> power(x,y)，用于计算X的y次方。
 > 	
 >**c.关于等于的判断符号：**
 > 
@@ -120,7 +110,7 @@
 >
 > divmod(x,y)       		 商余，输出元组类型（x//y,x%y);
 >
-> power(x,y[，z])     	  [,z]表示参数可省略，表示幂余;
+> power(x,y[，z])     	  x的y次幂，z为幂余;
 >
 > max(x,y,..)       			取参数中的最大值;
 >
@@ -367,15 +357,15 @@ print(f'{name} done in {time.time() - t0:.2f} s')
 >
 > d.clear()        					清除字典中的所有键值对；
 >
-> d.items()							以元组类型返回所有键值对；
+> **d.items()							以元组类型返回所有键值对；**
 >
-> d.keys()							 返回所有键组成的列表
+> **d.keys()							 返回所有键组成的列表**
 >
-> d.vaules()						  返回所有值组成的列表
+> **d.vaules()						  返回所有值组成的列表**
 >
 > len(d)								返回键值对数量
 >
-> d.update(c)					  将新字典c中所有键值对添加到旧字典d对象上，且有重复												自动覆盖
+> d.update(c)					  将新字典c中所有键值对添加到旧字典d对象上，且有重复自动覆盖
 
 ### 4.4 字典功能
 
@@ -570,25 +560,30 @@ zip(list1,list2,...)将多个列表对应位置元素组合成元组并返回这
 b=[i for i in range(10) if i%2==0]
 ```
 
-### **6.6 序列解包**
+### **6.6 序列类型的打包与解包**
 
-> 序列解包用于对多个变量同时赋值；
+> (自动)**打包**是将多个变量打包成一个序列类型输出，序列**解包**则是将一个解析序列元素用于对多个变量同时赋值。自动打包与自动解包结合起来就是**同时分配**技术，即显示地将一系列的值赋给一系列标识符。在进行同时分配式，都是先计算右侧表达式，在赋值给左边。
 >
-> a.用于列表,元组：
->
-> x, y, z = 1, 2, 3
->
-> [x, y, z] = [1, 2, 3]
->
-> b.用于字典时，则是默认对键进行操作赋值，如：
->
-> x, y = {1:a, 2:b}
->
-> x = 1, y = 2
->
-> 如需对键值对操作，则需要使用函数dict.items()
->
-> 如需对值操作，则需使用函数dict.values() 
+
+#### a. 用于列表,元组：
+
+```python
+x, y, z = 1, 2, 3
+
+[x, y, z] = [1, 2, 3]
+```
+
+#### b. 用于字典时，则是默认对键进行操作赋值，如：
+
+```python
+x, y = {1:a, 2:b}
+
+x = 1, y = 2
+```
+
+如需对键值对操作，则需要使用函数dict.items()
+
+如需对值操作，则需使用函数dict.values() 
 
 ### **6.7 使用zip()进行迭代**
 
@@ -598,9 +593,12 @@ zip()函数可对多个序列进行并行迭代，在最短序列”用完”时
 
 ```python
 names =['hedge', 'heaven', 'headdy']
+
 ages = [19, 23, 27, 31]
+
 for name, age in zip(names, ages):
-	print("{}:{}".format(name, age)) 
+
+  print("{}:{}".format(name, age)) 
 ```
 
 打印结果：	
@@ -615,8 +613,9 @@ heddy :27
 
 表示真假，仅包括True与False，其本质为1，0，甚至可以与数字相加，常作为判断返回值。
 
-> 注：0、空列表等空的容器或者None都可以采用bool（foo）语法创造一个布尔类型(False)。
->
+> 注：0、空列表等空的容器或者None，也可以采用bool（foo）语法创造一个布尔类型(False)。
+
+
 
 # 板块二 print输出格式化
 
@@ -630,16 +629,18 @@ Python两种输出值的方式: 表达式语句和 print() 函数。
 
 如果你希望将输出的值转成字符串，可以使用 repr() 或 str() 函数来实现。
 
-- **str()：** 函数返回一个用户易读的表达形式。
-
-- **repr()：** 产生一个解释器易读的表达形式。
-
-  Click  [here](https://www.runoob.com/python3/python3-inputoutput.html)  to learn more.
+> - **str()：** 函数返回一个用户易读的表达形式。
+>
+> - **repr()：** 产生一个解释器易读的表达形式。
+>
+>   Click  [here](https://www.runoob.com/python3/python3-inputoutput.html)  to learn more.
+>
 
 ## print
 
 ```python
 print(value, ..., sep=' ', end='\n', 
+      
       file=sys.stdout, flush=False)
 ```
 
@@ -656,8 +657,6 @@ Prints the values to a stream, or to sys.stdout by default.
 > flush: whether to forcibly flush the stream.
 
 除了槽填充格式化外，还有%格式化输出。
-
-
 
 ## %格式化输出
 
@@ -824,7 +823,11 @@ print("\\033\[31m%s" % "输出红色字符")
 
 ## 1. 基本原理
 
-根据判断条件结果而选择不同向前路径的运动方式。
+> 根据判断条件结果而选择不同向前路径的运动方式。
+
+Python支持条件表达式的语法，可以取代一个简单的控制结构。一般的语法表达式语法形式如下：
+
+> expr1 if condition else expr2
 
 ## 2. 基本条件组合
 
@@ -848,7 +851,7 @@ a=1000,b=1000
 
 a==b但是a is not b(id不同)
 
-但是对于整数[-5,256]，python控制台会进行缓存，此时a，b的地址是相同的，而对于[-5,ꝏ]在文件中打开都会进行缓存。此外，is 比 == 的运行效率要高。
+但是对于整数[-5,256]**（小整数池）**，python控制台会进行缓存，此时a，b的地址是相同的，而对于[-5,ꝏ]在文件中打开都会进行缓存。此外，is 比 == 的运行效率要高。
 
 **附：**
 
@@ -864,7 +867,6 @@ try:
 except [error_type] [as e]:（可使用多个except定向处理不同的异常类型）
 
  	block to run if error
-
 
 [else:
 
@@ -901,8 +903,6 @@ Tip：一般情况下，不要将return语句放在try, except, else, finally块
 | TabError            | Tab和空格混合使用                          |
 | TypeError           | 不同类型间的无效操作                       |
 | ValueError          | 传入无效的参数                             |
-
-
 
 ### 2.with 上下文管理
 
@@ -943,7 +943,7 @@ block
 
 遍历结构有：
 
-> for i in range(m,n,k):     	计数遍历循环
+> for i in range(m,n,k):     	计数遍历循环，k可以取负值
 >
 > for c in s:          				 字符串s遍历循环(取出每一个字符串循环)
 >
@@ -963,9 +963,10 @@ block
 
 ### 4.2 无限循环
 
-while <条件>:
-
-​	<语句块>
+> while <条件>:
+>
+> ​	<语句块>
+>
 
 反复执行语句块，直至条件不满足为止；(ctrl+c可以强制结束程序)
 
@@ -1002,17 +1003,18 @@ while <条件>:
 
 ## 1. 函数的结构
 
-def <函数名> (参数列表):	# 函数的标志
+> **def** tag (arguments : type):	# flag of fuction
+>
+> ​	*"""Annotion of Fuction, can inquire and print by `help`, according to PEP8"""*
+>
+> ​     Expressions
+>
+> ​     **return** values
+>
 
-​	*"""函数注释，可通过help()查询，不会打印"""*
+**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。参数类型包括两种，可有可无，可以通过**":"**对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用。
 
-​     <函数主体>
-
-​     return <返回值>
-
-**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。
-
-return可以返回需要的数据作为函数输出值，不设置返回值时默认返回None，当返回多个数值时，返回元组类型。
+return可以返回需要的数据作为函数输出值，不设置返回值时默认返回None，当返回多个数值时，将自动打包返回元组类型。
 
 
 
@@ -1033,21 +1035,15 @@ return可以返回需要的数据作为函数输出值，不设置返回值时�
 
 (copy模块需额外引入)
 
-浅拷贝copy():
-
-不拷贝子对象的内容，只拷贝对象的引用，即直接引用源对象的引用，对此引用改变时会改变源对象。
-
-深拷贝deepcopy():
-
-拷贝子对象的全部内容，包括子对象的引用，此时修改子对象不改变源对象。 
-
-**Tip:**
-
-> 参数的定义并传递：
+> **浅拷贝copy():**
 >
-> ```python
-> len(s:=str(2))
-> ```
+> > 不拷贝子对象的内容，只拷贝对象的引用，即直接引用源对象的引用，对此引用改变时会改变源对象。
+> >
+>
+> **深拷贝deepcopy():**
+>
+> > 拷贝子对象的全部内容，包括子对象的引用，此时修改子对象不改变源对象。 
+> >
 
 ### 2.3 参数类型
 
@@ -1165,8 +1161,6 @@ def test02():
 ### 3.4 常量
 
  python不支持常量，即没有语法规则限制改变一个常量的值，只能通过逻辑上不做修改。
-
-
 
 ## 附注： 私有属性函数
 
@@ -1323,8 +1317,6 @@ x.\__setattr__ 取代一般的赋值操作，如果有此函数会调用此函�
 
 x.\__delattr__ 同__setattr__, 在del obj.name有意义时会调用
 
- 
-
 ## 4.lambda函数
 
   lambda函数是一种匿名函数，没有名称，使用lambda保留字定义，只允许有一个表达式并且该表达式计算所得结果即为函数返回值。常用于定义**简单的能在一行内表示的**函数；
@@ -1340,13 +1332,9 @@ print(f[1](1,2))
 
 注：函数定义后需调用
 
- 
+## 5. 函数的查询
 
-## 5.函数的查询
-
-通过help(函数名),注意，不要加()，查询函数或者模块的批注。
-
-
+通过help(函数名)，注意，不要加()，查询函数或者模块的批注。
 
 ## 6. 常用函数应用
 
@@ -1678,8 +1666,6 @@ print(my)       # <__main__.MyClass object at 0x10b882290>
 print(my.name)  # Hello
 ```
 
- 
-
 ## 2. 实例对象
 
 通过object = 类名([参数…])构造实例对象，实例对象具有全部的类属性及实例属性，实例方法，且调用实例对象时，自动调用实例属性。
@@ -1692,23 +1678,18 @@ lisi = Women() # 将Women类实例化成对象
 print(lisi)  # <__main__.Women object at 0x000001B6873C8CC0>
 ```
 
- 
-
 ## 3. 属性和方法
 
-构造函数: __init__(self, 参数)方法:
+类可以通过`__init__(self, 参数)`来给初始化创建好的实例对象设置实例属性。
 
-​	初始化创建好的对象，给实例赋值
+类是实例的蓝图，每个实例通过属性（又称为域）来确定其状态信息。，且在Python中，不同于其他语言，Python没有方法的重载，即不能通过参数的不同辨别同名方法，后定义的方法和覆盖先定义的方法，只有最后一个方法有效，且不会报错。方法也是对象，在python中方法具有动态性，可以再定义及修改。
 
-实例属性从属于实例对象，相当于实例变量，实例方法从属于实例对象，相当于函数，且在Python中，不同于其他语言，Python没有方法的重载，即不能通过参数的不同辨别同名方法，后定义的方法和覆盖先定义的方法，只有最后一个方法有效，且不会报错。
+在类中调用实例属性及方法的语法如下：
 
-方法也是对象，在python中方法具有动态性，可以再定义及修改。
-
-在本类中调用实例属性及方法的语法如下：
-
-object.属性名
-
-object.方法名(实参列表)
+> object.attribute
+>
+> object.methods(params)
+>
 
 附：方法调用的本质
 
@@ -1717,8 +1698,6 @@ a = Person()
 
 a.study() = Person.study(a)
 ```
-
-
 
 ### 3.1 实例属性
 
@@ -1754,8 +1733,6 @@ print(People.name)    #错误
 print(People.age)     #错误
 ```
 
-
-
 ### 3.2 类属性
 
 A.当使用对象.属性名来改类里面的属性的时候，其实是在对象里面创建了一个同名的属性
@@ -1781,8 +1758,6 @@ print(p.__age)            #错误，不能在类外通过实例对象访问私�
 
 print(People.__age)        #错误，不能在类外通过类对象访问私有的类属性
 ```
-
-
 
 ### 附：实例属性与类属性的区别
 
@@ -1812,11 +1787,11 @@ del p.country    #删除实例属性
 print(p.country)
 ```
 
-- 如果需要在类外修改`类属性`，必须通过`类对象`去引用然后进行修改。如果通过实例对象去引用，会产生一个同名的`实例属性`，这种方式修改的是`实例属性`，不会影响到`类属性`，并且之后如果通过实例对象去引用该名称的属性，实例属性会强制屏蔽掉类属性，即引用的是`实例属性`，除非删除了该`实例属性`。
+如果需要在类外修改`类属性`，必须通过`类对象`去引用然后进行修改。如果通过实例对象去引用，会产生一个同名的`实例属性`，这种方式修改的是`实例属性`，不会影响到`类属性`，并且之后如果通过实例对象去引用该名称的属性，实例属性会强制屏蔽掉类属性，即引用的是`实例属性`，除非删除了该`实例属性`。
 
 ###  3.3 实例方法
 
-实例方法或者叫对象方法，指的是我们在类中定义的普通方法。
+实例方法或者叫对象方法，又称为成员函数，指的是我们在类中定义的普通方法。
 只有实例化对象之后才可以使用的方法，该方法的第一个形参接收的一定是对象本身。
 
 Python 的实例方法用得最多，也最常见。我们先来看 Python 的实例方法。
@@ -2070,13 +2045,9 @@ print(a)
 print(id(a))
 ```
 
- 
-
 ## 5. return 方法的返回值
 
-和函数一样，代码遇到return下面就不在执行，会将值返回给调用处
-
-没有return的方法打印调用处的值为None
+和函数一样，代码遇到return下面就不在执行，会将值返回给调用处。
 
 实例
 
@@ -2109,21 +2080,15 @@ print(d2Name)
 # 输出结果：None
 ```
 
- 
-
-
-
- 
-
 ## 6. 给对象和类绑定方法
 
-(1)给对象绑定方法
-
-from types import MethodType
+### (1)给对象绑定方法
 
 实例
 
 ```python
+from types import MethodType
+
 def func(self):
     
 	print('func')
@@ -2137,9 +2102,7 @@ a = A()
 a.func = MethodType(func,a)
 ```
 
- 
-
-(2) 给类绑定方法
+### (2) 给类绑定方法
 
 实例
 
@@ -2153,51 +2116,48 @@ A.func = func
 
 注意:
 
-1.构造方法第一个参数必须为self
+> 1.构造方法第一个参数必须为self
+>
+> 2.给对象绑定属性或者方法只有当前对象有给类绑定属性或者方法所有当前类的实例化的对象都会拥有。
 
-2.给对象绑定属性或者方法只有当前对象有给类绑定属性或者方法所有当前类的实例化的对象都会拥有
-
- 
-
-## 7. __slots__ 限制对象
+## 7. slots限制对象
 
 动态添加属性
 
-只能创建__slots__允许的属性 否则会报 AttributeError: ‘A’ object has no attribute ‘xxx’
+只能创建\__slots__允许的属性，否则会报 AttributeError: ‘A’ object has no attribute ‘xxx’
 
 实例:
 
 class A:
 
-  __slots__ = ('属性1'，'属性2'...)
+\__slots__ = ('属性1'，'属性2'...)
 
  
 
 ## 8. 私有属性和私有方法
 
-#### 8.1类的私有属性:
+### 8.1 类的私有属性:
 
-以'__'作为开头不能在类的外部进行使用和访问在类的里面使用self.__属性名
+> 以下划线开头的变量不能在类的外部进行直接使用和访问，单下划线表示变量是受保护的，而双下划线表示变量是私有的。
+>
 
-私有属性的访问
+#### 私有属性的访问
 
 在类的外部：*对象._类名__(前1个后2个，这也是私有属性的存储方式，可查询)*属性名查找
 
 在类的内部：方法里面的变量self.__属性名调用
 
-注意：在类的内部只要使用self.__属性名那么就会去找私有属性_类名___属性名
+注意：在类的内部只要使用self.\_\_属性名那么就会去找私有属性_类名___属性名
 
-#### 8.2类的私有方法
+### 8.2 类的私有方法
 
-以__作为开头，不能再类的外部进行使用和访问，在类的里面使用self.__方法名
+以\_\_作为开头，不能在类的外部进行使用和访问，在类的里面使用self.__方法名。在公有方法里面通过self去调用，方法本质上也是属性。
 
-在公有方法里面通过self去调用，方法本质上也是属性。
 
- 
 
 ## 9. 继承
 
-概念：面向对象编程带来最大的好处就代码的重用，实现代码重用的操作就是类的继承，被继承的类称之为父类或者基类，超类继承的类称之为子类。
+面向对象编程带来最大的好处就代码的重用，实现代码重用的操作就是类的继承，被继承的类称之为**父类或者基类**，超类继承的类称之为**子类**。
 
 所有的类都会继承一个超类object，即定义新类时()为空，默认继承object类。
 
@@ -2250,21 +2210,20 @@ b = B('张三',18,'男',60)# print(b.name)# print(b.__dict__)
 b.speak()
 ```
 
-
-
 注意：
 
-类的单一继承子类会继承父类的全部属性及方法，但是只能直接调用**私有以外**的属性和方法；
+> 类的单一继承子类会继承父类的全部属性及方法，但是只能直接调用**私有以外**的属性和方法；
+>
+> 如果在子类里存在和父类同名的属性或者方法叫做方法或属性的**重写**（也就是会覆盖掉）再次调用的时候调用的是子类的方法和属性；
+>
 
-如果在子类里存在和父类同名的属性或者方法叫做方法或属性的**重写**（也就是会覆盖掉）再次调用的时候调用的是子类的方法和属性；
+**在子类里调用父类的方法：**
 
-在子类里调用父类的方法：
-
-父类名.方法名(self[,参数…])，self代表当前类的实例化的对象；或者使用super()（获得父类的定义）.方法名
-
-super(当前类名,self).方法名（如果是单一继承super方法不建议加参数）
-
-super().方法名(建议)
+> 父类名.方法名(self[,参数…])，self代表当前类的实例化的对象；或者使用super()（获得父类的定义）.方法名
+>
+> super(当前类名,self).方法名（如果是单一继承super方法不建议加参数）
+>
+> **super().方法名(建议)**
 
 ### 9.2 多继承
 
@@ -2318,7 +2277,7 @@ class C(A,B):
 
 ## 附：类的组合使用
 
-### **1.组合的定义**
+### **1. 组合的定义**
 
 软件重用的重要方式除了继承之外还有另外一种方式，即：组合
 
@@ -2340,40 +2299,48 @@ class C(A,B):
 
 当类之间有显著不同，并且较小的类是较大的类所需要的组件时，用组合比较好。
 
-## 10. 运算重载符
+## 10. 运算重载
 
-### 10.1 构造函数与表达式： **init, sub**
+### 10.1 构造函数
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027101046372-173543059.png)
+类可以通过构造函数来实现实例化
+
+```python
+	class Number:
+    	# 构造函数
+    	def __init__(self, value):
+        	self.data = value
+          
+    a = Number(5)
+```
 
 ### 10.2 常见运算符重载方法
 
-| method                                         | overload           | call                                                         |
-| ---------------------------------------------- | ------------------ | ------------------------------------------------------------ |
-| __init__                                       | 构造函数           | 对象创建: X = Class(args)                                    |
-| __del__                                        | 析构函数           | X对象收回                                                    |
-| __add__                                        | 云算法+            | 如果没有_iadd_， X+Y， X+=Y                                  |
-| __or__                                         | 运算符\|           | 如果没有_ior_，X\|Y, X\|=Y                                   |
-| _repr__, __str__                               | 打印，转换         | print(X)，repr(X)，str(X)                                    |
-| __call__                                       | 函数调用           | X(*args, **kwargs)                                           |
-| __getattr__                                    | 点号运算           | X.undefined                                                  |
-| __setattr__                                    | 属性赋值语句       | X.any=value                                                  |
-| __delattr__                                    | 属性删除           | del X.any                                                    |
-| __getattribute__                               | 属性获取           | X.any                                                        |
-| __getitem__                                    | 索引运算           | X[key]，X[i:j]                                               |
-| __setitem__                                    | 索引赋值语句       | X[key]，X[i:j]=sequence                                      |
-| __delitem__                                    | 索引和分片删除     | del X[key]，del X[i:j]                                       |
-| __len__                                        | 长度               | len(X)，如果没有__bool__，真值测试                           |
-| __bool__                                       | 布尔测试           | bool(X)                                                      |
-| __lt__, __gt__, __le__, __ge__, __eq__, __ne__ | 特定的比较         | X<Y，X>Y，X<=Y，X>=Y， X==Y，X!=Y 注释：（lt: less than, gt: greater than,  le: less equal, ge: greater equal,  eq: equal, ne: not equal ） |
-| __radd__                                       | 右侧加法           | other+X                                                      |
-| __iadd__                                       | 实地（增强的）加法 | X+=Y(or else __add__)                                        |
-| __iter__, __next__                             | 迭代环境           | I=iter(X), next()                                            |
-| __contains__                                   | 成员关系测试       | item in X(任何可迭代)                                        |
-| __index__                                      | 整数值             | hex(X), bin(X), oct(X)                                       |
-| __enter__, __exit__                            | 环境管理器         | with obj as var:                                             |
-| __get__, __set__, __delete__                   | 描述符属性         | X.attr, X.attr=value, del X.attr                             |
-| __new__                                        | 创建               | 在__init__之前创建对象                                       |
+| method                                                       | overload           | call                                                         |
+| ------------------------------------------------------------ | ------------------ | ------------------------------------------------------------ |
+| \__del__                                                     | 析构函数           | X对象收回                                                    |
+| \__add__                                                     | 云算法+            | 如果没有_iadd_， X+Y， X+=Y                                  |
+| \__or__                                                      | 运算符\|           | 如果没有_ior_，X\|Y, X\|=Y                                   |
+| \_repr\_\_, \__str__                                         | 打印，转换         | print(X)，repr(X)，str(X)                                    |
+| \__call__                                                    | 函数调用           | X(*args, **kwargs)                                           |
+| \__getattr__                                                 | 点号运算           | X.undefined                                                  |
+| \__setattr__                                                 | 属性赋值语句       | X.any=value                                                  |
+| \__delattr__                                                 | 属性删除           | del X.any                                                    |
+| \__getattribute__                                            | 属性获取           | X.any                                                        |
+| \__getitem__                                                 | 索引运算           | X[key]，X[i:j]                                               |
+| \__setitem__                                                 | 索引赋值语句       | X[key]，X[i:j]=sequence                                      |
+| \__delitem__                                                 | 索引和分片删除     | del X[key]，del X[i:j]                                       |
+| \__len__                                                     | 长度               | len(X)，如果没有\__bool__，真值测试                          |
+| \__bool__                                                    | 布尔测试           | bool(X)                                                      |
+| \__lt\_\_, _\_gt\_\_, _\_le\_\_, \_\_ge\_\_, \_\_eq\_\_, \_\_ne__ | 特定的比较         | X<Y，X>Y，X<=Y，X>=Y， X==Y，X!=Y 注释：（lt: less than, gt: greater than,  le: less equal, ge: greater equal,  eq: equal, ne: not equal ） |
+| \__radd__                                                    | 右侧加法           | other+X                                                      |
+| \__iadd__                                                    | 实地（增强的）加法 | X+=Y(or else \__add__)                                       |
+| \_\_iter_\_, _\_next__                                       | 迭代环境           | I=iter(X), next()                                            |
+| _\_contains__                                                | 成员关系测试       | item in X(任何可迭代)                                        |
+| \__index__                                                   | 整数值             | hex(X), bin(X), oct(X)                                       |
+| \_\_enter_\_, _\_exit__                                      | 环境管理器         | with obj as var:                                             |
+| \_\_get\__, \__set\__, \_\_delete__                          | 描述符属性         | X.attr, X.attr=value, del X.attr                             |
+| _\_new__                                                     | 创建               | 在\__init__之前创建对象                                      |
 
 重新定义运算符可以自定义运算规则
 
@@ -2465,21 +2432,15 @@ __getattr__拦截属性.运算符
 
 #### 前言
 
-
-在《设计模式》一书中工厂模式提到了：
-
-> - 工厂方法模式（Factory Method）
-> - 抽象工厂模式 （Abstract Factory）
-
-
-但是在实际过程中还有一种工厂模式经常被使用，那就是 **简单工厂模式（Simple Factory）**。有一种常见的分类的方法：根据产品是由具体产品还是具体工厂可以分为 **工厂方法模式** 和 **简单工厂模式**；根据工厂的抽象程度可以分为 **工厂方法模式** 和 **抽象工厂模式**。接下来会通过例子对比简单工厂模式和工厂方法模式。
-
-
+>
+> 但是在实际过程中还有一种工厂模式经常被使用，那就是 **简单工厂模式（Simple Factory）**。有一种常见的分类的方法：根据产品是由具体产品还是具体工厂可以分为 **工厂方法模式** 和 **简单工厂模式**；根据工厂的抽象程度可以分为 **工厂方法模式** 和 **抽象工厂模式**。接下来会通过例子对比简单工厂模式和工厂方法模式。
+>
 
 #### 工厂意图
 
-
-定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。
+>
+> 定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。
+>
 
 #### 别名
 
@@ -2490,12 +2451,13 @@ __getattr__拦截属性.运算符
 
 #### 第一阶段
 
-小李开了一个代工厂，专门帮各大厂商生产手机，一开始只有小米找他生产小米手机(MiPhone)，后来质量过硬，声名远播，苹果公司也找上门了，准备让他生产苹果手机，生意来了，小李小手一挥，停工几个月，加了一个生产线专门生成苹果手机(Iphone)。于是乎，现在一个工厂有两个生产线。
+> 小李开了一个代工厂，专门帮各大厂商生产手机，一开始只有小米找他生产小米手机(MiPhone)，后来质量过硬，声名远播，苹果公司也找上门了，准备让他生产苹果手机，生意来了，小李小手一挥，停工几个月，加了一个生产线专门生成苹果手机(Iphone)。于是乎，现在一个工厂有两个生产线。
+>
 
 #### 第一阶段 UML 图
 
 让我们借助 UML 图直观了解一下工厂现在的样子。
-![img](https://cdn.nlark.com/yuque/__puml/83ce437ce8df7956994e7bb6a64f4a30.svg#lake_card_v2=eyJjb2RlIjoiQHN0YXJ0dW1sXG5jbGFzcyDlt6XljoIge1xuXHQr55Sf5Lqn5bCP57Gz5omL5py6KCk65omL5py6IC4uPiDlsI_nsbPmiYvmnLpcblx0K-eUn-S6p-iLueaenOaJi-acuigpOuaJi-acuiAuLj4g6Iu55p6c5omL5py6XG59XG5DbGllbnQgLS0g5bel5Y6CXG7miYvmnLogLS0gIENsaWVudFxu5bCP57Gz5omL5py6IC0tPiDmiYvmnLpcbuiLueaenOaJi-acuiAtLT4g5omL5py6XG5AZW5kdW1sIiwidHlwZSI6InB1bWwiLCJtYXJnaW4iOnRydWUsImlkIjoiWU9xUXYiLCJ1cmwiOiJodHRwczovL2Nkbi5ubGFyay5jb20veXVxdWUvX19wdW1sLzgzY2U0MzdjZThkZjc5NTY5OTRlN2JiNmE2NGY0YTMwLnN2ZyIsImNhcmQiOiJkaWFncmFtIn0=)
+<img src="https://cdn.nlark.com/yuque/__puml/83ce437ce8df7956994e7bb6a64f4a30.svg#lake_card_v2=eyJjb2RlIjoiQHN0YXJ0dW1sXG5jbGFzcyDlt6XljoIge1xuXHQr55Sf5Lqn5bCP57Gz5omL5py6KCk65omL5py6IC4uPiDlsI_nsbPmiYvmnLpcblx0K-eUn-S6p-iLueaenOaJi-acuigpOuaJi-acuiAuLj4g6Iu55p6c5omL5py6XG59XG5DbGllbnQgLS0g5bel5Y6CXG7miYvmnLogLS0gIENsaWVudFxu5bCP57Gz5omL5py6IC0tPiDmiYvmnLpcbuiLueaenOaJi-acuiAtLT4g5omL5py6XG5AZW5kdW1sIiwidHlwZSI6InB1bWwiLCJtYXJnaW4iOnRydWUsImlkIjoiWU9xUXYiLCJ1cmwiOiJodHRwczovL2Nkbi5ubGFyay5jb20veXVxdWUvX19wdW1sLzgzY2U0MzdjZThkZjc5NTY5OTRlN2JiNmE2NGY0YTMwLnN2ZyIsImNhcmQiOiJkaWFncmFtIn0=" alt="img" style="zoom:25%;" />
 
 #### 第一阶段代码
 
@@ -2797,8 +2759,6 @@ for i in range(10):
 
 **创建对象的时候加锁即可**
 
-
-
 ```python
 # encoding:utf-8
 __author__ = 'Fioman'
@@ -2879,7 +2839,11 @@ for i in range(10):
     t.start()
 ```
 
-# 板块七 其他
+# 板块七 数据结构与算法
+
+> **数据结构**是组织和访问数据的一种系统化方式，**算法**是在有限的时间内一步步执行某些任务的过程。为了分辨好的算法和数据结构，我们通过对其**运行时间**和**空间内存的占用**来分析。
+>
+> 运行时间更准的测度方法是算法所使用的CPU周期的数量，即使用相同的输入重复相同的算法可能没有保持一致性。通常我们任务运行时间依赖于输入的大小和结构，所以应在各种大小的不同测试输入上执行独立试验。
 
 ## 1. 推导式
 
@@ -2889,9 +2853,9 @@ for i in range(10):
 
 ### 1.2 列表推导式：
 
-通过列表生成列表对象，语法如下：
+通过列表生成列表对象，又称列表解析式，一般语法如下：
 
-[表达式 for item in 可迭代对象 ]
+> **[ expression for value in iterable if condition ]**
 
 ```python
 >>>[x for x in range(5) if x != 0 ]
@@ -2914,11 +2878,13 @@ char_	count = { c: (1, 2, 3).count(c) for c in (1, 2, 3)}
 
 通过集合生成集合对象，语法如下：
 
-{ 表达式 for item in 可迭代对象 }(可使用多个循环)
+> **{ expression for value in iterable if condition }**
 
 ### 1.5 生成器推导式(生成元组)：
 
 同列表：(表达式 for item in 可迭代对象)(可使用多个循环,括号此时**不可省略**)
+
+> **( expression for value in iterable if condition ) **
 
 **但是生成器推导式返回一个生成器，而不是一个数组。**
 
@@ -2929,11 +2895,13 @@ char_	count = { c: (1, 2, 3).count(c) for c in (1, 2, 3)}
 >>><generator object <genexpr> at 0x00000189566F2F90>
 ```
 
-### 附：生成器迭代器
+### 附：迭代器与生成器
 
-生成器对象generator object，一个生成器只能调用一次，调用完毕后即清除数据，但可多次访问
+迭代器是一个对象，通过一系列的值来管理迭代。一般情况下，同一个可迭代对象可以产生多个迭代器，同时每个迭代器维护自身进度的条件。迭代器不存储自己的元素副本，但它保存原始列表的当前索引，该索引指向下一个元素。**因此，如果原始列表的内容在迭代器构造后但在迭代完成前被修改，迭代器将抱告原始列表的更新内容。**
 
-遍历函数s(生成器).__next__()移动指标
+生成器对象generator object，一个生成器只能调用一次，调用完毕后即清除数据，但可多次访问，生成器是生成迭代器最方便的技术。生成器的技术有点像函数，但是不返回值。为了显示序列中的每一个值，要使用**yield**语句(函数内使用，生成并返回一个迭代器)。生成器不会立刻产生数据占用内存，称为懒惰计算方式，能够节省内存。
+
+iter(迭代器).\__next__()移动指标
 
 
 
@@ -2974,15 +2942,21 @@ Python是强类型语言，每个对象都有数据类型，只支持该类型�
 >
 > ⑷双下划线开头结尾往往有特殊的用法，尽量避免这种写法。
 
- 
+###  2.4 作用域与命名空间
+
+确定与标识符相关联的值的过程称为**名称解析**。每当标识符分配了一个值，这个定义都有特定的作用范围，称为**作用域**。最高级赋值通常是全局范围，对于在函数体内的赋值，其作用范围通常是函数内部局部范围。
+
+Python中的每一个定义域使用了抽象空间，称为**命名空间**。命名空间管理当前在给定作用域内定义的所有标识符。Python实现命名空间是用自己的字典将每个标识符字符串映射到其相关的值。Python还提供了几种方法来检查一个给定的命名空间。函数dir()报告给定命名空间中的标识符的名词，而函数var()返回完整的字典。
 
 ## 3. eval与exec函数
 
 ### eval函数
 
-功能：将字符串str当作有效的表达式来求值并**返回结果**
+将字符串str当作有效的表达式来求值并**返回结果**，一般语法表达式如下：
 
-语法：eval(source[,globals[,locals]]) -->value
+```python
+eval(source[,globals[,locals]]) -->value
+```
 
 参数：
 
@@ -2990,18 +2964,34 @@ Python是强类型语言，每个对象都有数据类型，只支持该类型�
 >
 > globals			可选，必选是dictionary
 >
-> locals			  可选，任意的映射对象
+> locals			   可选，任意的映射对象
 
 ```python
 dict = {a = 100, b = 10}
 eval("a+b",dict)
 ```
 
-### exec()函数
 
-仅执行语句，返回**None**
 
-注：关于exec函数的作用域：**主函数**
+### exec
+
+```python
+exec(object [,  globals [,  locals]])
+```
+
+这个函数支持动态执行 Python 代码。 *object* 必须是字符串或者代码对象。 如果是字符串，那么该字符串将被解析为一系列 Python 语句并执行（除非发生语法错误）。如果是代码对象，它将被直接执行。 在任何情况下，被执行的代码都应当是有效的文件输入（见参考手册中的“文件输入”一节）。 请注意即使在传递给 `exec()` 函数的代码的上下文中，`nonlocal`, `yield` 和 `return` 语句也不能在函数定义以外使用。 该函数的返回值是 `None`。
+
+无论哪种情况，如果省略了可选项，代码将在**当前作用域**内执行。 如果只提供了 *globals*，则它必须是一个字典（不能是字典的子类），该字典将同时被用于全局和局部变量。 如果同时提供了 *globals* 和 *locals*，它们会分别被用于全局和局部变量。 如果提供了 *locals*，则它可以是任何映射对象。 请记住在模块层级上，globals 和 locals 是同一个字典。 如果 exec 得到两个单独对象作为 *globals* 和 *locals*，则代码将如同嵌入类定义的情况一样执行。
+
+如果 *globals* 字典不包含 `__builtins__` 键值，则将为该键插入对内建 `builtins` 模块字典的引用。因此，在将执行的代码传递给`exec()` 之前，可以通过将自己的 `__builtins__` 字典插入到 *globals* 中来控制可以使用哪些内置代码。
+
+引发一个 审计事件 `exec` 附带参数 `code_object`。
+
+**注解**
+
+内置 `globals()` 和 `locals()` 函数各自返回当前的全局和本地字典，因此可以将它们传递给 `exec()` 的第二个和第三个实参。
+
+默认情况下，*locals* 的行为如下面 `locals()` 函数描述的一样：不要试图改变默认的 *locals* 字典。如果您想在 `exec()` 函数返回时知道代码对 *locals* 的变动，请明确地传递 *locals* 字典。
 
 ```python
 def name():
@@ -3012,7 +3002,7 @@ name()
 print(A1)  
 ```
 
-[OUTPUT]: NameError: name 'A1' is not defined
+[ OUTPUT]: NameError: name 'A1' is not defined
 
 ```python
 def name():
@@ -3023,7 +3013,7 @@ name()
 print(A1)  
 ```
 
-[OUTPUT]: 1
+[ OUTPUT ]: 1
 
 ```python
 record = [1, 2]
@@ -3032,7 +3022,7 @@ for i in range(2):
 print(A1) 
 ```
 
-[OUTPUT]:  1
+[ OUTPUT ]:  1
 
 ## 4. compile函数
 
@@ -3064,7 +3054,8 @@ compile(source, filename, mode[, flags[, dont_inherit]])
 
 以下展示了使用 compile 函数的实例：
 
-\>>>str = "for i in range(0,10): print(i)"  
+```python
+>>>str = "for i in range(0,10): print(i)"  
 
 c = compile(str,'','exec')   # 编译为字节代码对象  
 
@@ -3077,8 +3068,19 @@ str = "3 * 4 + 5"
 a = compile(str,'','eval') 
 
 eval(a) 17
+```
 
-#### python实现复制粘贴
+## assert
+
+assert声明函数，内置函数，对条件进行检查声明，若声明为True则无返回值，若声明为False，返回AssertionError，其一般语法表达式为：
+
+```python
+assert(expression, [arguments ])
+```
+
+> 注：该函数必须顶行单独使用
+
+## python实现复制粘贴
 
 \#pyperclip模块中的copy()/paste()可以向计算机的剪贴板发送文本，或从它接受文本。
 
@@ -3092,11 +3094,7 @@ pyperclip.copy('hello world')	# 把hello world 复制到计算机的剪切板
 print(pyperclip.paste())	# 把计算机剪切板的内容粘贴下来
 ```
 
-
-
 ## 5. map函数
-
-------
 
 ### 描述
 
@@ -3121,19 +3119,14 @@ map(function, iterable, ...)
 
 ## 6. 数据储存--pickle
 
-### 1. 概念
+### 1. Synposis
 
-pickle是python语言的**标准模块**，安装python后以包含pickle库，不需要再单独安装。
+> pickle模块用于实现序列化和反序列化，提供了一种简单的持久化功能，可以将对象以文件的形式加密存放在磁盘上。pickle是python语言的标准模块。
+>
+> pickle模块是以二进制的形式序列化后保存到文件中（保存文件的后缀为”.pkl”），不能直接打开进行预览。pickle模块的接口主要有两类，即序列化和反序列化。
+>
 
-pickle提供了一种简单的持久化功能，可以将对象以文件的形式存放在磁盘上。
-
-pickle模块用于实现序列化和反序列化。
-
-pickle模块是以二进制的形式序列化后保存到文件中（保存文件的后缀为”.pkl”），不能直接打开进行预览。
-
-pickle模块的接口主要有两类，即序列化和反序列化。
-
-### 2. 常用方法
+### 2. Method
 
 #### (1) pickle.load(file)
 
@@ -3142,6 +3135,14 @@ pickle模块的接口主要有两类，即序列化和反序列化。
 参数：	
 
 > file:文件名
+
+```python
+import pickle	
+
+with open("data.pickle", "wb") as f:
+  
+	pickle.load(f)
+```
 
 #### (2) pickle.dump(obj, file, [,protocol])
 
@@ -3157,7 +3158,13 @@ pickle模块的接口主要有两类，即序列化和反序列化。
 
 它们可以如下图这样使用：
 
-![img](https://img2018.cnblogs.com/blog/1378116/201904/1378116-20190411175657036-878722408.png)
+```python
+import pickle	
+
+with open("data.pickle", "wb") as f:
+  
+	pickle.dump(data, f, prorocol=pickle.HIGHEST_PROTOCOL)
+```
 
 #### (3) pickle.dumps(obj,[protocol])
 
@@ -3167,9 +3174,7 @@ pickle模块的接口主要有两类，即序列化和反序列化。
 
 作用：从str中读取序列化前的对象。
 
-### 3. 可以序列化和反序列化的数据
-
-![img](https://img2018.cnblogs.com/blog/1378116/201904/1378116-20190411175538121-1771757134.png)
+### 3. Data type supported to pickle![img](https://img2018.cnblogs.com/blog/1378116/201904/1378116-20190411175538121-1771757134.png)
 
 ## 7. enumerate
 
@@ -3200,18 +3205,195 @@ enumerate(sequence, [start=0])
 
 window系统默认解码方式为GBK，linux默认解码方式为UTF，python解释器默认解码方式为Unicode，文本文件打开默认解码方式为UTF-8。
 
+## 9. 赋值表达式
 
+海象运算符是在 PEP 572 被提出的，直到 3.8 版本合入发布。
 
-# 板块八 模块化编程
+它的英文原名叫 `Assignment Expressions`，翻译过来也就是 `赋值表达式`，不过现在大家更普遍地称之为海象运算符，其一般语法表达式如下。
 
-## 1. 编程流程
+```python
+identity : = value
+```
 
-> 1. 设计API与描述说明
-> 2. 代码实现
-> 3. 变量局部处理
-> 4. 函数封装
+结合函数等使用可以简化代码。
 
+## 算法运行时间分析
 
+函数增长率比较：大O、大Θ和大Ω说法
+
+常用来描述运行时间的七种函数如下，其增长速率依次增大。
+
+> 1. 常数函数 $ f(n) = c $​​ 
+> 2.  对数函数 $ f(n) = \log n $​ 
+> 3.  线性函数 $ f(n) = n $​​ 
+> 4.  $n\log n$函数  $ f(n) = n \log n $​​ 
+> 5.  二次函数$ f(n) = n^2 $​ 
+> 6. 三次函数及多项式 $ f(n) = n^3 $​ 
+> 7. 指数函数 $ f(n) = b^n $​ 
+
+**任何一个运行时间满足 $ O(n \log n)$​ 的算法（在计算机科学中，$\log$​​​指以2的底的对数）都是高效的。** 
+
+## 递归
+
+> 在计算机程序中，描述迭代的一种方法是使用循环，另一种方法则是递归。
+>
+> **递归是一种技术，这种技术通过一个函数在执行一次或者多次调用其本身，或者一种数据结构在其表示中依赖于相同类型的结构更小的实例。**在计算中，递归提供了用于执行迭代任务的优雅并且强大的替代方案。当函数的一次调用需要进行递归调用时，该调用就会被挂起，直至递归调用完成。
+>
+> 下面通过四个例子学习递归：阶乘函数、英式标尺、二分查找、文件递归。
+
+### 阶乘函数
+
+对于一个简单的递归函数，数学表示为 $ n !$ ，它被定义为1到n的乘积，更正式的定义为：
+$$
+n! = \begin{cases} 1, \qquad \qquad \qquad \qquad \qquad \quad n = 0  \\ 
+								n \times(n-1)\times\dots3\times2\times1 \quad n \geq 1\end{cases}
+$$
+递归的python实现：
+
+```python
+def factorial(n):
+  if n == 0:
+    return 1
+  else:
+    return n * factorial(n-1)
+```
+
+我们用递归追踪来说明一个递归函数的执行过程。在Python中，每一个函数被调用，都会创建一个被称为**活动记录**或**框架**的结构来存储信息，这个活动记录包含了一个用来存储函数调用的参数和局部变量的命名空间，以及关于在这个函数体中当前正在执行的命令的信息。
+
+### 英式标尺
+
+英式标尺是分形的一个简单示例，下面直接给出实现代码:
+
+```python
+def draw_line(tick_length, tick_label=''):
+  """Draw one line with given tick length (followed by optional label)."""
+  line = "-" * tick_length
+  if tick_label:
+    line += ''+tick_label
+  print(line)
+  
+def draw_interval(center_length):
+  """Draw tick interval based upon a center tick length."""
+  if center_length > 0:
+    draw_interval(center_length - 1)
+    draw_line(center_length)
+    draw_interval(center_length - 1)
+    
+def draw_ruler(num_inches, major_length):
+  """Draw English ruler with given number of inches, major tick length."""
+  draw_line(major+length, "0"):
+    for i in range(1, 1 + num.inches):
+      draw_interval(major_length - 1)
+      draw_line(major_length, str(i))
+```
+
+### 二分查找
+
+> 二分查找用于在一个含有n个元素的有序序列中有效地定位目标值。这是最重要的计算机算法之一，也是我们经常顺序存储数据的原因。
+
+当序列无序时，寻找一个目标值的标准方法是使用循环来检查每一个元素，直至找到目标值或者检查完数据集的每个元素，这种方法称为**顺序查找算法**。因为最坏的情况下每个元素都要检查，这个算法的时间复杂度是 $ O(n)$ （即线性的时间）。
+
+当**序列有序**并且可以通过索引访问时，有一个更加有效的算法。对于任意索引j，我们知道在索引0到j-1上存储的所有值都小于j，并且其后所有值都大于索引j上的值。在搜索目标值时，这使我们能快速定位到目标值。在查找时，如果不能排查一个元素与目标值相匹配，则称这个元素为候选项。该算法维持两个参数low和high，这样可使所有的候选条目的索引值都在这之间。首先，$low=0$​和$high=n-1$ 。我们可以比较目标值和中间值候选项，即索引项[mid]的数据。
+
+随后根据三种不同情况，对应执行直至求得结果或无解，这种算法被称为二分查找法，二分查找法的时间复杂度为$O(\log n)$​以下给出代码实现。
+
+```python
+def binary_search(data, target, low, high):
+    """Return True if target is found in indicate portion of a Python list.
+    
+    The search only considers the portion from data[low] to data [high] inclusive.
+    
+    """
+    if low > high:
+        return False
+    else:
+        mid = (low + high) // 2
+        if target == data[mid]:
+            return True
+        elif target < data[mid]:
+            # recur on the portion left of the middle
+            return binary_search(data, target, low, mid - 1 )
+        else:
+            # recur on the portion right of the middle
+            return binary_search(data, target, mid + 1, high)
+```
+
+### 文件递归
+
+现代操作系统用递归的方式来定义文件系统目录。下面是一个抱告文件系统磁盘使用情况的递归函数。
+
+```python
+import os 
+
+def disk_usage(path):
+    """Return the number of bytes used by a file/folder and any descendents."""
+    total = os.path.getsize(path)
+    if os.path.isdir(path):
+        for filename in  os.listdir(path):
+        childpath = os.path.join(path, filename)
+        total += disk_usage(childpath)
+
+    print("{:<7}".format(total), path)
+    return total
+```
+
+### 分析递归算法
+
+# 板块八 面向对象
+
+## 基础
+
+> 面向对象编程中的主体被称为对象。每个对象都是类的实例。类呈现给外部世界的是该类实例中个对象的一种简洁、一致的概括，没有太多不必要的细节，也没有提供访问类内部工作过程的接口。
+
+### 设计目标
+
+> 软件的实现应该达到健壮性、适应性和可重用性目标。
+
+**健壮性**是指应用程序中事先考虑到所有输入都会产生一个正确的输出，也可以说是没有明确定义的异常输出。
+
+**适用性**是指软件能随时间不断优化，以应对外部环境条件的变化。
+
+**可重用性**是指代码是可以重用的，尤其是指在不同的操作系统上的软件运行。
+
+### 设计原则
+
+> **模块化、抽象化、封装**
+
+在Python中，模块是一个源代码中定义的密切相关的函数和类的集合。
+
+抽象化是指从一个复杂的系统中提炼出最基本的部分。通常，描述系统的各个部分涉及给这些部分命名和解释它们的功能。将抽象模式应用于数据结构的设计便产生了抽象数据类型(Abstract Data Types, ADT)。ADT是数据结构的数学模型，它规定了数据存储的类型、支持的操作和操作参数的类型。Python采用一种抽象基类(Abstract Base Class, ABC)的机制支持抽象数据类型。
+
+封装指软件系统的不同组件不应显示其各自实现的内部细节。封装的主要优点之一就是它给程序员实现组件细节的自由，而不用关心其他程序员写的其他依赖于这些内部代码的程序。
+
+### 设计模式
+
+设计模式是一种可以应用于不同情况的解决方案提供了通用模板的模式。模式包括一个名称（标识）、一个语境（输入）、一个模板（环境）以及一个结果（输出）。接下来所涉及的设计模式分为解决**算法设计**和**软件工程**问题的模式，鉴于实际需求，此处着重介绍算法设计类。
+
+|          | 算法设计类                                                   | 软件工程类                                                   |
+| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 实例模式 | 递归<br />摊销<br />分治法<br />暴力算法<br />动态规划法<br />贪心法 | 迭代器<br />适配器<br />位置<br />合成<br />模板方法<br />定位器<br />工厂模式 |
+
+## 软件开发
+
+传统的软件开发包括三个阶段：**设计**、实现与测试和调试
+
+### 设计
+
+> 面向对象编程，设计也许是软件开发过程中最重要的阶段。在这一阶段，我们要决定程序的交互方式，存储的数据和功能。以下一些经验原则可以为设计类提供方便。
+
++ 责任：将工作分为不同的角色，用不同的类，通过不同的动作实现；
++ 独立：在尽可能独立的情况下规定每个人类的工作，细分各个类的责任，使得他们在各自的领域具有自主权。
++ 行为：仔细且精确地定义每个类的行为，这样与它交互的其他类可以更好地理解这公关由类执行的动作结果。
+
+**面向对象设计程序的关键在于定义类和f它们的实例变量和方法。**
+
+### 测试与调试
+
+> 测试时通过实验检验程序的正确性，调试时跟踪程序的执行并在其中发现错误的过程。在程序开发中，测试和调试通过是最耗时间的一项活动。
+
+详细的测试计划是编写程序最重要的部分。用所有可能的输入检验程序的正确性通常是不可能的，所以我们应该用有代表性的输入子集来运行程序。在特殊情况的输入下，程序往往会失败。需要仔细确认和测试这些情况。
+
+最简单的调试技术包括使用打印语句来跟踪程序执行过程中的变量的值，一种更好的办法是是调试器(debugger)运行程序。
 
 ## 2. 不同级导入
 

@@ -392,7 +392,6 @@ class Application(Frame):
         """快捷键的绑定"""
         # 超级键绑定暂存问题！
         # 快捷绘制的同时，绑定对应工具栏窗口
-        print(event.keycode)
         if event.char == "l":
             """快速绘制直线"""
             self.drawbox.bind("<B1-Motion>", self.drawline)
