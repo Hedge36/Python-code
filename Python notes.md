@@ -174,6 +174,10 @@
 >
 > str.swapcase()		产生新字符串并将所有大小写转换
 >
+> str.index(substr[, start])				如果找到字串str则返回最低索引，如果找不到则返回ValueError。
+>
+> str.partition(sep)	根据给定的sep，将字符串分为3个部分
+>
 > str.split(sep=)  	  **返回**一个**列表**，由str根据sep被分割的部分组成,如：'啊,哦,呃'.split(',')，输出['啊','哦','呃']；
 >
 > str.count(sub)  	  返回字符串sub在str中出现的次数；
@@ -206,7 +210,7 @@
 >
 > ​           	**返回**一个从str中去掉在其右侧的char中列出的字符的字符串；
 >
->  **str.join(iter)**
+> **str.join(iter)**
 >
 > ​           	**在iter(字符串)变量除最后一个元素外每个元素后都加一个str,主要用于字符串的分隔等；**
 >
