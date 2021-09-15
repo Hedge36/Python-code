@@ -73,12 +73,12 @@ a.flat[3]12345678910
 > Return a copy of the array collapsed into one dimension.
 > 将数组的**`副本`**转换为一个维度，并返回
 
-**可选参数，order：{‘C’,‘F’,‘A’,‘K’}**
+**可选参数，order：{'C’,'F’,'A’,'K’}**
 
-- ‘C’：C-style，行序优先
-- ‘F’：Fortran-style，列序优先
-- ‘A’：if a is Fortran contiguous in memory ,flatten in column_major order
-- ‘K’：按照元素在内存出现的顺序进行排序
+- 'C’：C-style，行序优先
+- 'F’：Fortran-style，列序优先
+- 'A’：if a is Fortran contiguous in memory ,flatten in column_major order
+- 'K’：按照元素在内存出现的顺序进行排序
   默认为’C’
 
 **举例如下:**
@@ -550,7 +550,7 @@ print(a[:, ~np.isnan(a).all(axis=0)])
 
 # Pandas
 
-##  简介
+##  Synopsis
 
 pandas是一个强大的分析结构化数据的工具集；它的使用基础是Numpy（提供高性能的矩阵运算）；用于数据挖掘和数据分析，同时也提供数据清洗功能。
 
@@ -606,21 +606,18 @@ Pandas中常见的数据结构有两种：
 - Fillna()填充缺失数据
 
 **数据过滤**
+
 Df[filter_condition]依据filter_condition(条件)对Df(数据)进行过滤。
 
 **绘图功能**
 
 ```
 Plot(kind, x, y, title, figsize)
-Kind(绘制什么形式的图), x（x轴内容）, y（y轴内容）, title（图标题）, figsize（图大小）
-12
 ```
 
 保存图片：`plt.savefig()`
 
-## 1 文件操作
-
-### IO操作
+## 1. IO
 
 | 格式类型  | 数据描述      | Reader         | Writer       |
 | --------- | ------------- | -------------- | ------------ |
@@ -728,9 +725,9 @@ dataFrame.to_csv("test.csv",  mode="a",  index=False, sep='|')
 123456789101112131415
 ```
 
-## 2 DataFrame
+## 2. DataFrame
 
-### 2.1 遍历
+### 2.1 iter
 
 遍历DataFrame数据。
 
@@ -741,7 +738,7 @@ for index,  row in df.iterrows():
 
 ### 2.2 concat
 
-> pd.concat(objs,  axis=0,  join =‘outer’,  join_axes=None,  ignore_index=False, keys=None,  levels=None,  names=None,  verify_integrity=False)
+> pd.concat(objs,  axis=0,  join ='outer’,  join_axes=None,  ignore_index=False, keys=None,  levels=None,  names=None,  verify_integrity=False)
 
 | 参数 | 可选项 | 参数说明|
 | :-----------: | :------------------------------------: | ------------- |
@@ -809,7 +806,7 @@ result = pd.concat([df1,  df4],  axis=1,  join_axes=[df1.index])
 |left_index |将左侧的行索引用作其连接键|
 |right_index |将右侧的行索引用作其连接键|
 |sort |根据连接键对合并后的数据进行排序，默认为True。有时在处理大数据集时，禁用该选项可获得更好的性能|
-|suffixes |字符串值元组，用于追加到重叠列名的末尾，默认为（‘\_x’, ‘_y’）.例如，左右两个DataFrame对象|
+|suffixes |字符串值元组，用于追加到重叠列名的末尾，默认为（'\_x’, '_y’）.例如，左右两个DataFrame对象|
 |copy |默认为False，可以在某些特殊情况下避免将数据复制到结果数据结构中。默认总是赋值。|
 |indicator |参数为'True'时，显示合并具体情况|
 
@@ -906,66 +903,44 @@ pd.merge(df1, df3, on='name', how='right')
 
 
 
-## 3 行列
+### 2.4 append
 
-### 3.1 查找
 
-查找DataFrame数据类型中的某一（多）行（列）
 
-这里记录两个可以实现该功能的函数：loc、iloc。
+## 3. Line and Row
 
-讲解如下：
+### 3.1 Index
 
-- loc：通过标签选取数据，即通过index和columns的值进行选取。loc方法有两个参数，按顺序控制行列选取。
-- iloc：通过行号选取数据，即通过数据所在的自然行列数为选取数据。iloc方法也有两个参数，按顺序控制行列选取。
+查找DataFrame数据类型中的某一（多）行或或列，这里记录两个可以实现该功能的函数：loc、iloc。获取dataframe的行列标题可以通过下面的命令实现：
+
+```python
+df.rows
+df.columns
+```
+
+
 
 #### 3.1.1 loc
 
-通过标签选取数据，即通过index和columns的值进行选取。loc方法有两个参数，按顺序控制行列选取。
+通过**label**选取数据，即通过**index**或**column**进行选取。loc方法有两个参数，按顺序控制行列选取，**当只输入一个参数时默认作为column**。
 
 ```python
 #1.定位单行
 df.loc['e']
-'''
-a    3
-b    4
-c    5
-Name: e,  dtype: int32
-===================================
-'''
+
 #2.定位单列
 df.loc[:, 'a']
-'''
-d    0
-e    3
-f    6
-g    9
-Name: a,  dtype: int32
-===================================
-'''
+
 #3.定位多行
 df.loc['e':]
-'''
-	a	b	c
-e	3	4	5
-f	6	7	8
-g	9	10	11
-===================================
-'''
+
 #4.定位多行多列
 df.loc['e':, ["a", "b"]]	# 访问不连续的多行或多列
-'''
-	a	b
-e	3	4
-f	6	7
-g	9	10
-===================================
-'''
 ```
 
 #### 3.1.2 iloc
 
-通过行号选取数据，即通过数据所在的自然行列数为选取数据。iloc方法也有两个参数，按顺序控制行列选取，**显示行列顺序与参数顺序有关**。
+通过**index_number**选取数据（只接受数字），即通过数据所在的自然行列数为选取数据。iloc方法也有两个参数，按顺序控制行列选取，**显示行列顺序与参数顺序有关**。
 
 ```python
 #1.定位单行
@@ -1005,17 +980,74 @@ f	7
 '''
 ```
 
+#### 3.1.3 Getitem
+
+> 通过中括号对列名直接索引，单括号索引返回结果为Series，双括号返回类型为二维列表。
+
+```python
+df[colsname]	# Series
+df[[colsname]]	# DataFrame
+```
 
 
-### 3.2 删除
 
-删除DataFrame中某一行
+
+
+### 3.2 Drop
+
+> **DataFrame.drop**(*labels=None*, *axis=0*, *index=None*, *columns=None*,*level=None*, *inplace=False*, *errors='raise'*)
+
+Drop specified labels from rows or columns.
+
+Remove rows or columns by specifying label names and corresponding axis, or by specifying directly index or column names. When using a multi-index, labels on different levels can be removed by specifying the level.
+
+Parameters
+
+- **labels**single label or list-like
+
+	Index or column labels to drop.
+
+- **axis**{0 or ‘index’, 1 or ‘columns’}, default 0
+
+	Whether to drop labels from the index (0 or ‘index’) or columns (1 or ‘columns’).
+
+- **index**single label or list-like
+
+	Alternative to specifying axis (`labels, axis=0` is equivalent to `index=labels`).
+
+- **columns**single label or list-like
+
+	Alternative to specifying axis (`labels, axis=1` is equivalent to `columns=labels`).
+
+- **level**int or level name, optional
+
+	For MultiIndex, level from which the labels will be removed.
+
+- **inplace**bool, default False
+
+	If False, return a copy. Otherwise, do operation inplace and return None.
+
+- **errors**{‘ignore’, ‘raise’}, default ‘raise’
+
+	If ‘ignore’, suppress error and only existing labels are dropped.
+
+Returns
+
+- DataFrame or None
+
+	DataFrame without the removed index or column labels or None if `inplace=True`.
+
+Raises
+
+- KeyError
+
+	If any of the labels is not found in the selected axis.
 
 ```python
 df.drop([16, 17])
 ```
 
-### 3.3 排序
+### 3.3 Rank
 
 **函数原型**
 
@@ -1027,102 +1059,17 @@ df.drop([16, 17])
 >
 > ascending：确定排序方式，默认为True（降序）
 
-**实例**
 
-```python
-#dataFrame:
-'''
-     a_name  b_name
-0      11       4
-1       2      52
-2       3       6
-'''
-print(dataFrame.sort_values(by='a_name',  ascending=True))
-'''
- 	a_name  b_name
-1       2      52
-2       3       6
-0      11       4
-'''
-print(dataFrame.sort_values(by='a_name',  ascending=False))
-'''
-  	 a_name  b_name
-0      11       4
-2       3       6
-1       2      52
-'''
-```
 
-### 3.4 行列名获取和更改
+## 4. Name
 
-#### 获取
+> 修改行或列的标题。
 
-> df.index() 
->
-> df.columns()
+### 4.1 Reindex
 
-首先，举个例子，做一个DataFrame如下：
+更新index或者columns，不更新原frame，返回一个新的DataFrame，如果需要在原frame上修改，令参数`inplace="True"`，基本语法如下：
 
-#### 修改
-
-```python
-  df.rename(index={ }, columns={ }, inplace=True)
-  data.rename(index={'A':'D', 'B':'E', 'C':'F'}, columns={'a':'d', 'b':'e', 'c':'f'},
-              inplace = True)
-  data
-```
-
-说明3点：
-
->     1. index和columns无关，可以分别指定，也就是说，可以只修改行索引，那么rename()中只写index
->
->     2. 索引可以任意挑选，如此处，index={'A':'D', 'C':'F'} 则只改A和C，columns同样
->
->     3. inplace=True, 在原dataframe上改动 
-
-#### rename
-
-rename函数是专门为了修改DataFrame坐标轴标签函数。rename函数的优点：可以选择性修改某行某列的标签。
-
-注：函数/字典中的值必须是唯一的（1对1)。 未包含在字典/Series中的标签将保留原样。 列出的额外标签不会引发错误。
-
-```python
-DataFrame.rename(self, mapper=None, index=None, columns=None, axis=None, 
-                 copy=True, inplace=False, level=None, errors='ignore')
-```
-
-参数介绍：
-
-|  参数   |                             含义                             |
-| :-----: | :----------------------------------------------------------: |
-| mapper  | 映射结构，修改columns或index要传入一个映射体，可以是字典、函数。修改列标签跟columns参数一起；修改行标签跟index参数一起。 |
-|  index  |        行标签参数，mapper, axis=0 等价于 index=mapper        |
-| columns |       列标签参数，mapper, axis=1 等价于 columns=mapper       |
-|  axis   |       轴标签格式，0代表index，1代表columns，默认index        |
-|  copy   |               默认为True，赋值轴标签后面的数据               |
-| inplace |     默认为False，不在原处修改数据，返回一个新的DataFrame     |
-|  level  | 默认为None，处理单个轴标签（有的数据会有2个或多个index或columns） |
-| errors  | 默认ignore，如果映射体里面包含DataFrame没有的轴标签，忽略不报错 |
-
-## 4 索引
-
-- reindex()
-  更新index或者columns，
-  默认：更新index，返回一个新的DataFrame
-- set_index()
-  将DataFrame中的列columns设置成索引index
-  打造层次化索引的方法
-- reset_index()
-  将使用set_index()打造的层次化逆向操作
-  既是取消层次化索引，将索引变回列，并补上最常规的数字索引
-
-详细讲解：
-
-### 4.1 更新
-
-reindex()：更新index或者columns。
-
-默认：更新index，返回一个新的DataFrame。
+> DataFrame.**reindex**(*labels=None*, *index=None*, *columns=None*, *axis=None*, *method=None*, *copy=True*, *level=None*, *fill_value=nan*, *limit=None*, *tolerance=None*)
 
 ```python
 # 返回一个新的DataFrame，更新index，原来的index会被替代消失
@@ -1140,10 +1087,66 @@ states = ["columns_a", "columns_b", "columns_c"]
 df2 = df1.reindex( columns=states )
 ```
 
-### 4.2 设置
 
-set_index()：将DataFrame中的列columns设置成索引index。
-打造层次化索引的方法。
+
+Conform Series/DataFrame to new index with optional filling logic.
+
+Places NA/NaN in locations having no value in the previous index. A new object is produced unless the new index is equivalent to the current one and `copy=False`.
+
+#### Parameters
+
+**keywords for axes**	array-like, optionalNew labels / index to conform to, should be specified using keywords. Preferably an Index object to avoid duplicating data.
+
+**method**	{None, 'backfill’/’bfill’, 'pad’/’ffill’, 'nearest’}Method to use for filling holes in reindexed DataFrame. Please note: this is only applicable to DataFrames/Series with a monotonically increasing/decreasing index.None (default): don’t fill gapspad / ffill: Propagate last valid observation forward to next valid.backfill / bfill: Use next valid observation to fill gap.nearest: Use nearest valid observations to fill gap.
+
+**copy**	bool, default TrueReturn a new object, even if the passed indexes are the same.
+
+**level**	int or nameBroadcast across a level, matching Index values on the passed MultiIndex level.
+
+**fill_value**	scalar, default np.NaNValue to use for missing values. Defaults to NaN, but can be any “compatible” value.
+
+**limit	**int, default NoneMaximum number of consecutive elements to forward or backward fill.
+
+**tolerance**	optionalMaximum distance between original and new labels for inexact matches. The values of the index at the matching locations most satisfy the equation `abs(index[indexer] - target) <= tolerance`.Tolerance may be a scalar value, which applies the same tolerance to all values, or list-like, which applies variable tolerance per element. List-like includes list, tuple, array, Series, and must be the same size as the index and its dtype must exactly match the index’s type.
+
+#### Returns
+
+Series/DataFrame with changed index.
+
+### 4.2 Rename
+
+> DataFrame.**rename**(*mapper=None*, *index=None*, *columns=None*, *axis=None*, *copy=True*, *inplace=False*, *level=None*, *errors='ignore'*)
+
+Alter axes labels.
+
+Function / dict values must be unique (1-to-1). Labels not contained in a dict / Series will be left as-is. Extra labels listed don’t throw an error.
+
+#### Parameters
+
+|  参数   |                             含义                             |
+| :-----: | :----------------------------------------------------------: |
+| mapper  | 映射结构，修改columns或index要传入一个映射体，可以是字典、函数。修改列标签跟columns参数一起；修改行标签跟index参数一起。 |
+|  index  |        行标签参数，mapper, axis=0 等价于 index=mapper        |
+| columns |       列标签参数，mapper, axis=1 等价于 columns=mapper       |
+|  axis   |       轴标签格式，0代表index，1代表columns，默认index        |
+|  copy   |               默认为True，赋值轴标签后面的数据               |
+| inplace |     默认为False，不在原处修改数据，返回一个新的DataFrame     |
+|  level  | 默认为None，处理单个轴标签（有的数据会有2个或多个index或columns） |
+| errors  | 默认ignore，如果映射体里面包含DataFrame没有的轴标签，忽略不报错 |
+
+#### Returns
+
+DataFrame or NoneDataFrame with the renamed axis labels or None if `inplace=True`.
+
+#### Raises
+
+KeyErrorIf any of the labels is not found in the selected axis and “errors=’raise’”.
+
+---
+
+### 4.3 Set_index
+
+将DataFrame中的列columns设置成索引index，打造层次化索引的方法。
 
 ```python
 # 将columns中的其中两列：race和sex的值设置索引，race为一级，sex为二级
@@ -1155,7 +1158,7 @@ adult.set_index(['race', 'sex'],  inplace = True)
 adult.set_index(['race', 'sex'],  drop=False) 
 ```
 
-### 4.3 重置
+### 4.3 Reset_index
 
 reset_index()：将使用set_index()打造的层次化逆向操作。
 
@@ -1225,7 +1228,7 @@ df.sort_values(by="sales" ,  ascending=False)
 
 函数原型：
 
-> DataFrame.sort_values(by,  axis=0,  ascending=True,  inplace=False,  kind=‘quicksort’,  na_position=‘last’)
+> DataFrame.sort_values(by,  axis=0,  ascending=True,  inplace=False,  kind='quicksort’,  na_position='last’)
 
 列举常用的参数用法：
 
@@ -1268,7 +1271,7 @@ df = df.sort_values(by=['col1'])
 **函数：**
 
 ```python
-pd.dropna(axis=0,  how=‘any’,  thresh=None,  subset=None,  inplace=False)
+pd.dropna(axis=0,  how='any’,  thresh=None,  subset=None,  inplace=False)
 ```
 
 **参数说明：**
@@ -1356,9 +1359,9 @@ DataFrame.clip(lower=None, upper=None, axis=None, inplace=False, *args, **kwargs
 >
 > - **freq**     DateOffset, tseries.offsets, timedelta, or str, optional
 >
->   Offset to use from the tseries module or time rule (e.g. ‘EOM’). If freq is specified then the index values are shifted but the data is not realigned. That is, use freq if you would like to extend the index when shifting and preserve the original data. If freq is specified as “infer” then it will be inferred from the freq or inferred_freq attributes of the index. If neither of those attributes exist, a ValueError is thrown.
+>   Offset to use from the tseries module or time rule (e.g. 'EOM’). If freq is specified then the index values are shifted but the data is not realigned. That is, use freq if you would like to extend the index when shifting and preserve the original data. If freq is specified as “infer” then it will be inferred from the freq or inferred_freq attributes of the index. If neither of those attributes exist, a ValueError is thrown.
 >
-> - **axis**    {0 or ‘index’, 1 or ‘columns’, None}, default None
+> - **axis**    {0 or 'index’, 1 or 'columns’, None}, default None
 >
 >   Shift direction.
 >
@@ -1451,7 +1454,7 @@ usecols = None，squeeze = False,dtype = None, ...）
 >
 > `skipfooter`：省略指定行数的数据，从尾部数的行开始。
 >
-> `dtype`:字典类型{'列名1':数据类型，‘列名’:数据类型}，设定指定列的数据类型。
+> `dtype`:字典类型{'列名1':数据类型，'列名’:数据类型}，设定指定列的数据类型。
 
 
 ```python
@@ -1574,3 +1577,10 @@ DataFrame.to_excel(writer, sheet_name='Sheet1', na_rep='', float_format=None,
    ```
 
    
+
+## 4. 其他库
+
+可用于处理Excel的库性能对比，此处推荐xlwings。
+
+![图片](E:/工具/Typora/Temp/640.webp)
+

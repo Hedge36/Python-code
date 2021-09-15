@@ -377,7 +377,6 @@ TestThread is alive  True
 import threading
 import time
 
-
 class TestThread(threading.Thread):
 
     def __init__(self,name=None):
@@ -391,8 +390,6 @@ class TestThread(threading.Thread):
 
 thread = TestThread(name='TestThread')
 thread.start()
-
-
 for i in range(5):
     print(threading.current_thread().name+' main ', i)
     print(thread.name+' is alive ', thread.isAlive())
@@ -514,8 +511,8 @@ deque(['d', 'b'])
 
 生产者模块儿负责产生数据，放入缓冲区，这些数据由另一个消费者模块儿来从缓冲区取出并进行消费者相应的处理。该模式的优点在于：
 
-- ***\*解耦\****：缓冲区的存在可以让生产者和消费者降低互相之间的依赖性，一个模块儿代码变化，不会直接影响另一个模块儿
-- ***\*并发\****：由于缓冲区，生产者和消费者不是直接调用，而是两个独立的并发主体，生产者产生数据之后把它放入缓冲区，就继续生产数据，不依赖消费者的处理速度
+- **解耦**：缓冲区的存在可以让生产者和消费者降低互相之间的依赖性，一个模块代码变化，不会直接影响另一个模块。
+- **并发**：由于缓冲区，生产者和消费者不是直接调用，而是两个独立的并发主体，生产者产生数据之后把它放入缓冲区，就继续生产数据，不依赖消费者的处理速度。
 
 ## 3、采用生产者消费者模式开发的Python多线程
 
@@ -527,10 +524,7 @@ Queue多线程代码示例如下：
 from Queue import Queue
 import time,threading
 
-
 q=Queue(maxsize=0)
-
-
 def product(name):
     count=1
     while True:

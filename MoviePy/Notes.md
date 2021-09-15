@@ -8,3 +8,19 @@
 
 
 
+
+
+## Application
+
+### 1. Concatenate
+
+```python
+from moviepy.editor import *
+import os
+
+L = [VideoFileClip(file) for file in os.listdir(".")]
+# Custom file rules 
+concat = concatenate_videoclips(L)
+concat.to_videofile("./concat.mp4", fps=24, remove_temp=False)
+```
+
