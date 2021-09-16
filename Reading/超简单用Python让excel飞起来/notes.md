@@ -47,127 +47,127 @@ excel已经成为必不可少的数据处理软件，几乎天天在用。python
 
 - 建立excel表连接
 
-```python3
+```python
 wb = xw.Book("e:\example.xlsx")
 ```
 
 - 实例化工作表对象
 
-```text
+```python
 sht = wb.sheets["sheet1"]
 ```
 
 - 返回工作表绝对路径
 
-```text
+```python
 wb.fullname
 ```
 
 - 返回工作簿的名字
 
-```text
+```python
 sht.name
 ```
 
 - 在单元格中写入数据
 
-```text
+```python
 sht.range('A1').value = "xlwings"
 ```
 
 - 读取单元格内容
 
-```text
+```python
 sht.range('A1').value
 ```
 
 - 清除单元格内容和格式
 
-```text
+```python
 sht.range('A1').clear()
 ```
 
 - 获取单元格的列标
 
-```text
+```python
 sht.range('A1').column
 ```
 
 - 获取单元格的行标
 
-```text
+```python
 sht.range('A1').row
 ```
 
 - 获取单元格的行高
 
-```text
+```python
 sht.range('A1').row_height
 ```
 
 - 获取单元格的列宽
 
-```text
+```python
 sht.range('A1').column_width
 ```
 
 - 列宽自适应
 
-```text
+```python
 sht.range('A1').columns.autofit()
 ```
 
 - 行高自适应
 
-```text
+```python
 sht.range('A1').rows.autofit()
 ```
 
 - 给单元格上背景色，传入RGB值
 
-```python3
+```python
 sht.range('A1').color = (34,139,34)
 ```
 
 - 获取单元格颜色，RGB值
 
-```python3
+```python
 sht.range('A1').color
 ```
 
 - 清除单元格颜色
 
-```text
+```python
 sht.range('A1').color = None
 ```
 
 - 输入公式，相应单元格会出现计算结果
 
-```python3
+```python
 sht.range('A1').formula='=SUM(B6:B7)'
 ```
 
 - 获取单元格公式
 
-```python3
+```python
 sht.range('A1').formula_array
 ```
 
 - 在单元格中写入批量数据，只需要指定其实单元格位置即可
 
-```python3
+```python
 sht.range('A2').value = [['Foo 1', 'Foo 2', 'Foo 3'], [10.0, 20.0, 30.0]]
 ```
 
 - 读取表中批量数据，使用expand()方法
 
-```python3
+```python
 sht.range('A2').expand().value
 ```
 
 - 其实你也可以不指定工作表的地址，直接与电脑里的活动表格进行交互
 
-```python3
+```python
 # 写入
 xw.Range("E1").value = "xlwings"# 读取
 xw.Range("E1").value
@@ -177,7 +177,7 @@ xw.Range("E1").value
 
 - 支持写入numpy array数据类型
 
-```python3
+```python
 import numpy as np
 np_data = np.array((1,2,3))
 sht.range('F1').value = np_data
@@ -185,7 +185,7 @@ sht.range('F1').value = np_data
 
 - 支持将pandas DataFrame数据类型写入excel
 
-```python3
+```python
 import pandas as pd
 df = pd.DataFrame([[1,2], [3,4]], columns=['a', 'b'])
 sht.range('A5').value = df
@@ -193,13 +193,13 @@ sht.range('A5').value = df
 
 - 将数据读取，输出类型为DataFrame
 
-```python3
+```python
 sht.range('A5').options(pd.DataFrame,expand='table').value
 ```
 
 - 将matplotlib图表写入到excel表格里
 
-```python3
+```python
 import matplotlib.pyplot as plt
 %matplotlib inline
 fig = plt.figure()
@@ -211,11 +211,11 @@ sht.pictures.add(fig, name='MyPlot', update=True)
 
 xlwings与VBA的配合非常完美，你可以在python中调用VBA，也可以在VBA中使用python编程，这些通过xlwings都可以巧妙实现。这里不对该内容做详细讲解，感兴趣的童鞋可以去xlwings官网学习。
 
-### 1. 创建带宏表格
+### 1. Python->Excel(VBA)
 
-在当前目录下创建一个带有宏的表格可以通过cmd命令来实现：
+在当前目录下创建一个带有宏的表格可以通过cmd命令来实现，**若不通过命令创建，则需在Excel文件中指定PYTHONPATH**（到对应文件夹），随后在UDF Modules中指定python文件。
 
-```
+```bash
 xlwings quickstart filename
 ```
 
@@ -244,13 +244,13 @@ if __name__ == "__main__":
     main()
 ```
 
+> **初始化设置完毕后，进入xlwings选项卡，单击Import Function，随后就可以用直接在单元格中使用Python定义的函数了。**
 
 
 
+### 2. VBA->Python
 
-
-
-
+在模块中导入模块，随后引用，不展开介绍。
 
 # 附：xlwings-API
 
@@ -263,7 +263,7 @@ if __name__ == "__main__":
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> import pandas as pd
 >>> import numpy as np
@@ -311,7 +311,7 @@ active
 
 应用程序对应于Excel实例。 可以像这样启动新的Excel实例：
 
-```
+```python
 >>> import xlwings as xw
 >>> app1 = xw.App()
 >>> app2 = xw.App()
@@ -319,7 +319,7 @@ active
 
 app对象是[`apps`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474)集合的成员：
 
-```
+```python
 >>> xw.apps
 Apps([<Excel App 1668>, <Excel App 1644>])
 >>> xw.apps[1668]  # get the available PIDs via xw.apps.keys()
@@ -341,37 +341,31 @@ Apps([<Excel App 1668>, <Excel App 1644>])
 
 0.9.0版中的新功能。
 
-```
-api
-```
+> api
 
 返回正在使用的引擎的本机对象（`pywin32`或`appscript` 对象）。
 
 0.9.0版中的新功能。
 
-```
-books
-```
+> books
 
 当前打开的所有Book对象的集合。
 
 0.9.0版中的新功能。
 
-`calculate`()
+> `calculate`()
 
 计算所有打开的工作簿。
 
 0.3.6版中的新功能。
 
-```
-calculation
-```
+> calculation
 
 返回或设置表示计算模式的计算值。 模式：`'manual'`, `'automatic'`, `'semiautomatic'`
 ('手动'，'自动'，'半自动')
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> wb.app.calculation = 'manual'
@@ -379,27 +373,24 @@ Examples
 
 0.9.0版中的新功能。
 
-```
-display_alerts
-```
+> display_alerts
 
 默认值为true。将此属性设置为false可在代码运行时抑制提示和警报消息；当消息需要响应时，Excel将选择默认响应。
 
 0.9.0版中的新功能。
 
-```
-hwnd
-```
+> hwnd
 
 返回Window句柄（仅限Windows）。
 
 New in version 0.9.0.
 
-`kill`()
+> `kill`()
+
 强制Excel应用程序通过终止其进程退出。
 New in version 0.9.0.
 
-`macro`(*name*)
+> `macro`(*name*)
 
 在Excel VBA中运行不属于特定工作簿但属于外接程序的子或函数。
 参数：name（带或不带模块名称的Sub或Function的名称，例如'Module1.MyMacro'或'MyMacro'） -
@@ -407,7 +398,7 @@ Examples
 
 This VBA function:
 
-```
+```VB
 Function MySum(x, y)
     MySum = x + y
 End Function
@@ -415,7 +406,7 @@ End Function
 
 可以像这样访问：
 
-```
+```python
 >>> import xlwings as xw
 >>> app = xw.App()
 >>> my_sum = app.macro('MySum')
@@ -427,50 +418,42 @@ End Function
 
 New in version 0.9.0.
 
-```
-pid
-```
+> pid
 
 返回应用程序的PID。
 New in version 0.9.0.
 
-`quit`()
+> `quit`()
 
 退出应用程序而不保存任何工作簿。
 
 New in version 0.3.3.
 
-`range`(*cell1*, *cell2=None*)
+> `range`(*cell1*, *cell2=None*)
 
 活动工作簿的活动工作表中的范围对象，请参见[`Range()`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.Range).
 
 New in version 0.9.0.
 
-```
-screen_updating
-```
+> screen_updating
 
 关闭屏幕更新以加快脚本速度。 您将无法看到脚本正在执行的操作，但它将运行得更快。 记住在脚本结束时将screen \ _updating属性设置回True。
 
 New in version 0.3.3.
 
-```
-selection
-```
+> selection
 
 将所选单元格作为Range返回。
 
 New in version 0.9.0.
 
-```
-version
-```
+> version
 
 返回Excel版本号对象。
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.App().version
 VersionNumber('15.24')
@@ -480,9 +463,7 @@ VersionNumber('15.24')
 
 Changed in version 0.9.0.
 
-```
-visible
-```
+> visible
 
 获取或设置Excel的可见性为“True”或“False”。
 
@@ -490,11 +471,11 @@ New in version 0.3.3.
 
 ### Books
 
-*class*`xlwings.main.``Books`(*impl*)
+> *class*`xlwings.main.``Books`(*impl*)
 
 所有`book`对象的集合：
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.books  # active app
 Books([<Book [Book1]>, <Book [Book2]>])
@@ -504,17 +485,15 @@ Books([<Book [Book1]>, <Book [Book2]>])
 
 New in version 0.9.0.
 
-```
-active
-```
+> active
 
 Returns the active Book.
 
-`add`()
+> `add`()
 
 创建一本新工作簿。 新工作簿成为活动工作簿，返回工作簿对象。
 
-`open`(*fullname*)
+> `open`(*fullname*)
 
 如果工作簿尚未打开则打开并返回。 如果它已经打开，它不会引发异常，只是返回工作簿对象。
 
@@ -522,11 +501,11 @@ Returns the active Book.
 
 ### Book
 
-*class*`xlwings.``Book`(*fullname=None*, *impl=None*)
+> *class*`xlwings.``Book`(*fullname=None*, *impl=None*)
 
 book对象是[`books`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474)集合的成员：
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.books[0]
 <Book [Book1]>
@@ -534,7 +513,7 @@ book对象是[`books`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474)集�
 
 提供：它在所有应用程序实例中查找该工作簿并返回错误，如果同一工作簿在多个实例中打开。 要连接到活动应用程序实例中的g，请使用“xw.books”并引用特定应用程序工作簿，使用：
 
-```
+```python
 >>> app = xw.App()  # 或类似现有应用程序的xw.apps[10559]，通过xw.apps.keys()获取PID
 >>> app.books['Book1']
 ```
@@ -558,36 +537,32 @@ book对象是[`books`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474)集�
 
 New in version 0.9.0.
 
-```
-app
-```
+> app
 
 返回表示工作簿创建者的app对象。
 
 New in version 0.9.0.
 
-*类方法*`caller`()
+> *类方法*`caller`()
 
 当通过`RunPython`从Excel调用Python函数时引用调用工作簿。 将它打包到从Excel调用的函数中，例如：
 为了能够从Python轻松调用此类代码进行调试，请使用
 
-`xw.Book.set_mock_caller()`.
+> `xw.Book.set_mock_caller()`.
 
 New in version 0.3.0.
 
-`close`()
+> `close`()
 
 关闭工作簿而不保存它。
 
 New in version 0.1.1.
 
-```
-fullname
-```
+> fullname
 
 以字符串形式返回对象的名称，包括其在磁盘上的路径。 只读字符串。
 
-`macro`(*name*)
+> `macro`(*name*)
 
 在Excel VBA中运行Sub或Function。
 
@@ -597,7 +572,7 @@ Examples
 
 This VBA function:
 
-```
+```VB
 Function MySum(x, y)
     MySum = x + y
 End Function
@@ -605,7 +580,7 @@ End Function
 
 可以像这样访问：
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.books.active
 >>> my_sum = wb.macro('MySum')
@@ -617,25 +592,21 @@ See also: [`App.macro()`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#x
 
 New in version 0.7.1.
 
-```
-name
-```
+> name
 
 以文本形式返回工作簿的名称。
 
-```
-names
-```
+> names
 
 返回一个名称集合，该集合表示指定工作簿中的所有名称（包括所有特定于工作表的名称）。
 
 Changed in version 0.9.0.
 
-*静态*`open_template`()
+> *静态*`open_template`()
 
 使用已包含的xlwings VBA模块创建新的Excel文件。 必须从交互式Python shell调用此方法：
 
-```
+```python
 >>> xw.Book.open_template()
 ```
 
@@ -643,7 +614,7 @@ See also: [Command Line Client](https://www.kancloud.cn/gnefnuy/xlwings-docs/com
 
 New in version 0.3.3.
 
-`save`(*path=None*)
+> `save`(*path=None*)
 
 保存工作簿。 如果提供了路径，则其工作方式类似于Excel中的另存为。 如果未指定路径，并且先前未保存文件，则使用当前文件名将其保存在当前工作目录中。 在没有提示的情况下覆盖现有文件。
 
@@ -651,7 +622,7 @@ New in version 0.3.3.
 
 Example
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> wb.save()
@@ -660,21 +631,19 @@ Example
 
 New in version 0.3.1.
 
-```
-selection
-```
+> selection
 
 将所选单元格作为Range返回。
 
 New in version 0.9.0.
 
-`set_mock_caller`()
+> `set_mock_caller`()
 
 设置Excel文件，用于在从Python调用代码时模拟`xw.Book.caller()`，而不是通过`RunPython`从Excel调用。
 
 Examples
 
-```
+```python
 # 此代码在Excel中通过RunPython和Python直接运行
 import os
 import xlwings as xw
@@ -690,9 +659,7 @@ if __name__ == '__main__':
 
 New in version 0.3.1.
 
-```
-sheets
-```
+> sheets
 
 返回表示工作簿中所有工作表的工作表集合。
 
@@ -700,11 +667,11 @@ New in version 0.9.0.
 
 ### Sheets
 
-*class*`xlwings.main.``Sheets`(*impl*)
+> *class*`xlwings.main.``Sheets`(*impl*)
 
 A collection of all `sheet` objects:
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.sheets  # active book
 Sheets([<Sheet [Book1]Sheet1>, <Sheet [Book1]Sheet2>])
@@ -714,13 +681,11 @@ Sheets([<Sheet [Book1]Sheet1>, <Sheet [Book1]Sheet2>])
 
 New in version 0.9.0.
 
-```
-active
-```
+> active
 
 Returns the active Sheet.
 
-`add`(*name=None*, *before=None*, *after=None*)
+> `add`(*name=None*, *before=None*, *after=None*)
 
 创建一个新的Sheet并使其成为活动工作表。
 
@@ -728,11 +693,11 @@ Returns the active Sheet.
 
 ### Sheet
 
-*class*`xlwings.``Sheet`(*sheet=None*, *impl=None*)
+> *class*`xlwings.``Sheet`(*sheet=None*, *impl=None*)
 
 A sheet object is a member of the [`sheets`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Sheets) collection:
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> wb.sheets[0]
@@ -745,19 +710,17 @@ A sheet object is a member of the [`sheets`](https://www.kancloud.cn/gnefnuy/xlw
 
 Changed in version 0.9.0.
 
-`activate`()
+> `activate`()
 
 Activates the Sheet and returns it.
 
-```
-api
-```
+> api
 
 Returns the native object (`pywin32` or `appscript` obj) of the engine being used.
 
 New in version 0.9.0.
 
-`autofit`(*axis=None*)
+> `autofit`(*axis=None*)
 
 在整个工作表上自动调整列，行或两者的宽度。
 
@@ -765,7 +728,7 @@ New in version 0.9.0.
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> wb.sheets['Sheet1'].autofit('c')
@@ -775,91 +738,73 @@ Examples
 
 New in version 0.2.3.
 
-```
-book
-```
+> book
 
 返回指定Sheet的Book。 只读。
 
-```
-cells
-```
+> cells
 
 返回一个Range对象，该对象表示Sheet上的所有单元格（而不仅仅是当前正在使用的单元格）。
 
 New in version 0.9.0.
 
-```
-charts
-```
+> charts
 
 See [`Charts`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Charts)
 
 New in version 0.9.0.
 
-`clear`()
+> `clear`()
 
 清除整个工作表的内容和格式。
 
-`clear_contents`()
+> `clear_contents`()
 
 清除整个工作表的内容但保留格式。
 
-`delete`()
+> `delete`()
 
 删除工作表。
 
-```
-index
-```
+> index
 
 返回工作表的索引（以1为基准，与Excel相同）。
 
-```
-name
-```
+> name
 
 获取或设置Sheet的名称。
 
-```
-names
-```
+> names
 
 返回表示所有工作表特定名称（使用“SheetName！”前缀定义的名称）的名称集合。
 
 New in version 0.9.0.
 
-```
-pictures
-```
+> pictures
 
 See [`Pictures`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Pictures)
 
 New in version 0.9.0.
 
-`range`(*cell1*, *cell2=None*)
+> `range`(*cell1*, *cell2=None*)
 
 从活动工作簿的活动工作表中返回Range对象，请参阅[`Range()`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.Range).
 
 New in version 0.9.0.
 
-`select`()
+> `select`()
 
 选择工作表。 选择仅适用于活动工作簿。
 
 New in version 0.9.0.
 
-```
-shapes
-```
+> shapes
 
 See [`Shapes`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Shapes)
 
 New in version 0.9.0.
 
-```
-used_range
-```
+> used_range
 
 工作表已使用的Range
 
@@ -869,7 +814,7 @@ New in version 0.13.0.
 
 ### Range
 
-*class*`xlwings.``Range`(*cell1=None*, *cell2=None*, ***可选*)
+> *class*`xlwings.``Range`(*cell1=None*, *cell2=None*, ***可选*)
 
 返回表示单元格或单元格范围的Range对象。
 
@@ -879,7 +824,7 @@ Examples
 
 活动工作表:
 
-```
+```python
 import xlwings as xw
 xw.Range('A1')
 xw.Range('A1:C3')
@@ -891,35 +836,31 @@ xw.Range(xw.Range('A1'), xw.Range('B2'))
 
 特定工作表:
 
-```
+```python
 xw.books['MyBook.xlsx'].sheets[0].range('A1')
 ```
 
-`add_hyperlink`(*address*, *text_to_display=None*, *screen_tip=None*)
+> `add_hyperlink`(*address*, *python_to_display=None*, *screen_tip=None*)
 
 添加指定范围的超链接（单个单元格）
 
-参数:address (str) – 超链接的地址；text_to_display (str, default None) – 要为超链接显示的文本. 默认为超链接地址；screen_tip (str, default None) – 鼠标指针暂停在超链接上时显示的屏幕提示. Default is set to ‘<address> - Click once to follow. Click and hold to select this cell.’
+参数:address (str) – 超链接的地址；python_to_display (str, default None) – 要为超链接显示的文本. 默认为超链接地址；screen_tip (str, default None) – 鼠标指针暂停在超链接上时显示的屏幕提示. Default is set to ‘<address> - Click once to follow. Click and hold to select this cell.’
 
 New in version 0.3.0.
 
-```
-address
-```
+> address
 
 Returns a string value that represents the range reference. Use `get_address()` to be able to provide paramaters.
 
 New in version 0.9.0.
 
-```
-api
-```
+> api
 
 Returns the native object (`pywin32` or `appscript` obj) of the engine being used.
 
 New in version 0.9.0.
 
-`autofit`()
+> `autofit`()
 
 Autofits the width and height of all cells in the range.
 
@@ -928,17 +869,15 @@ Autofits the width and height of all cells in the range.
 
 Changed in version 0.9.0.
 
-`clear`()
+> `clear`()
 
 Clears the content and the formatting of a Range.
 
-`clear_contents`()
+> `clear_contents`()
 
 Clears the content of a Range but leaves the formatting.
 
-```
-color
-```
+> color
 
 Gets and sets the background color of the specified Range.
 
@@ -948,7 +887,7 @@ Returns:RGBReturn type:tuple
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range('A1').color = (255,255,255)
@@ -961,9 +900,7 @@ True
 
 New in version 0.3.0.
 
-```
-column
-```
+> column
 
 Returns the number of the first column in the in the specified range. Read-only.
 
@@ -971,9 +908,7 @@ Returns:Return type:Integer
 
 New in version 0.3.5.
 
-```
-column_width
-```
+> column_width
 
 Gets or sets the width, in characters, of a Range. One unit of column width is equal to the width of one character in the Normal style. For proportional fonts, the width of the character 0 (zero) is used.
 
@@ -987,29 +922,23 @@ Returns:Return type:float
 
 New in version 0.4.0.
 
-```
-columns
-```
+> columns
 
 Returns a [`RangeColumns`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.RangeColumns) object that represents the columns in the specified range.
 
 New in version 0.9.0.
 
-```
-count
-```
+> count
 
 Returns the number of cells.
 
-```
-current_region
-```
+> current_region
 
 This property returns a Range object representing a range bounded by (but not including) any combination of blank rows and blank columns or the edges of the worksheet. It corresponds to `Ctrl-*` on Windows and `Shift-Ctrl-Space` on Mac.
 
 Returns:Return type:Range object
 
-`end`(*direction*)
+> `end`(*direction*)
 
 Returns a Range object that represents the cell at the end of the region that contains the source range. Equivalent to pressing Ctrl+Up, Ctrl+down, Ctrl+left, or Ctrl+right.
 
@@ -1017,7 +946,7 @@ Parameters:direction (One of 'up', 'down', 'right', 'left') –
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range('A1:B2').value = 1
@@ -1029,7 +958,7 @@ Examples
 
 New in version 0.9.0.
 
-`expand`(*mode='table'*)
+> `expand`(*mode='table'*)
 
 Expands the range according to the mode provided. Ignores empty top-left cells (unlike `Range.end()`).
 
@@ -1037,7 +966,7 @@ Parameters:mode (str, default 'table') – One of 'table' (=down and right), 'do
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range('A1').value = [[None, 1], [2, 3]]
@@ -1057,14 +986,15 @@ Gets or sets an array formula for the given Range.
 
 New in version 0.7.1.
 
-`get_address`(*row_absolute=True*, *column_absolute=True*, *include_sheetname=False*, *external=False*)
+> `get_address`(*row_absolute=True*, *column_absolute=True*, *include_sheetname=False*, *external=False*)
+
 Returns the address of the range in the specified format. `address` can be used instead if none of the defaults need to be changed.
 
 Parameters:row_absolute (bool, default True) – Set to True to return the row part of the reference as an absolute reference.column_absolute (bool, default True) – Set to True to return the column part of the reference as an absolute reference.include_sheetname (bool, default False) – Set to True to include the Sheet name in the address. Ignored if external=True.external (bool, default False) – Set to True to return an external reference with workbook and worksheet name.Returns:Return type:str
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range((1,1)).get_address()
@@ -1086,15 +1016,13 @@ Returns:Return type:float
 
 New in version 0.4.0.
 
-```
-hyperlink
-```
+> hyperlink
 
 Returns the hyperlink address of the specified Range (single Cell only)
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range('A1').value
@@ -1105,9 +1033,7 @@ Examples
 
 New in version 0.3.0.
 
-```
-last_cell
-```
+> last_cell
 
 Returns the bottom right cell of the specified range. Read-only.
 
@@ -1115,7 +1041,7 @@ Returns:Return type:Range
 
 Example
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> rng = xw.Range('A1:E4')
@@ -1125,9 +1051,7 @@ Example
 
 New in version 0.3.5.
 
-```
-left
-```
+> left
 
 Returns the distance, in points, from the left edge of column A to the left edge of the range. Read-only.
 
@@ -1135,23 +1059,19 @@ Returns:Return type:float
 
 New in version 0.6.0.
 
-```
-name
-```
+> name
 
 Sets or gets the name of a Range.
 
 New in version 0.4.0.
 
-```
-number_format
-```
+> number_format
 
 Gets and sets the number_format of a Range.
 
 Examples
 
-```
+```python
 >>> import xlwings as xw
 >>> wb = xw.Book()
 >>> xw.Range('A1').number_format
@@ -1163,7 +1083,7 @@ Examples
 
 New in version 0.2.3.
 
-`offset`(*row_offset=0*, *column_offset=0*)
+> `offset`(*row_offset=0*, *column_offset=0*)
 
 Returns a Range object that represents a Range that’s offset from the specified range.
 
@@ -1171,7 +1091,7 @@ Returns:Range objectReturn type:Range
 
 New in version 0.3.0.
 
-`options`(*convert=None*, ***options*)
+> `options`(*convert=None*, ***options*)
 
 Allows you to set a converter and their options. Converters define how Excel Ranges and their values are being converted both during reading and writing operations. If no explicit converter is specified, the base converter is being applied, see [Converters and Options](https://www.kancloud.cn/gnefnuy/xlwings-docs/converters.html#converters).
 
@@ -1179,22 +1099,19 @@ Parameters:convert (object, default None) – A converter, e.g. dict, np.array, 
 
 New in version 0.7.0.
 
-```
-raw_value
-```
+> raw_value
 
 Gets and sets the values directly as delivered from/accepted by the engine that is being used (`pywin32` or `appscript`) without going through any of xlwings’ data cleaning/converting. This can be helpful if speed is an issue but naturally will be engine specific, i.e. might remove the cross-platform compatibility.
 
-`resize`(*row_size=None*, *column_size=None*)
+> `resize`(*row_size=None*, *column_size=None*)
+
 Resizes the specified Range
 
 Parameters:row_size (int > 0) – The number of rows in the new range (if None, the number of rows in the range is unchanged).column_size (int > 0) – The number of columns in the new range (if None, the number of columns in the range is unchanged).Returns:Range objectReturn type:Range
 
 New in version 0.3.0.
 
-```
-row
-```
+> row
 
 Returns the number of the first row in the specified range. Read-only.
 
@@ -1213,9 +1130,7 @@ Returns:Return type:float
 
 New in version 0.4.0.
 
-```
-rows
-```
+> rows
 
 Returns a [`RangeRows`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.RangeRows) object that represents the rows in the specified range.
 
@@ -1227,33 +1142,25 @@ Selects the range. Select only works on the active book.
 
 New in version 0.9.0.
 
-```
-shape
-```
+> shape
 
 Tuple of Range dimensions.
 
 New in version 0.3.0.
 
-```
-sheet
-```
+> sheet
 
 Returns the Sheet object to which the Range belongs.
 
 New in version 0.9.0.
 
-```
-size
-```
+> size
 
 Number of elements in the Range.
 
 New in version 0.3.0.
 
-```
-top
-```
+> top
 
 Returns the distance, in points, from the top edge of row 1 to the top edge of the range. Read-only.
 
@@ -1261,17 +1168,13 @@ Returns:Return type:float
 
 New in version 0.6.0.
 
-```
-value
-```
+> value
 
 Gets and sets the values for the given Range.
 
 Returns:objectReturn type:returned object depends on the converter being used, see xlwings.Range.options()
 
-```
-width
-```
+> width
 
 Returns the width, in points, of a Range. Read-only.
 
@@ -1281,13 +1184,13 @@ New in version 0.4.0.
 
 ### RangeRows
 
-*class*`xlwings.``RangeRows`(*rng*)
+> *class*`xlwings.``RangeRows`(*rng*)
 
 Represents the rows of a range. Do not construct this class directly, use [`Range.rows`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.Range.rows) instead.
 
 Example
 
-```
+```python
 import xlwings as xw
 
 rng = xw.Range('A1:C4')
@@ -1315,13 +1218,13 @@ New in version 0.9.0.
 
 ### RangeColumns
 
-*class*`xlwings.``RangeColumns`(*rng*)
+> *class*`xlwings.``RangeColumns`(*rng*)
 
 Represents the columns of a range. Do not construct this class directly, use [`Range.columns`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.Range.columns) instead.
 
 Example
 
-```
+```python
 import xlwings as xw
 
 rng = xw.Range('A1:C4')
@@ -1341,9 +1244,7 @@ for c in rng.columns:
 
 Autofits the width of the columns.
 
-```
-count
-```
+> count
 
 Returns the number of columns.
 
@@ -1351,11 +1252,11 @@ New in version 0.9.0.
 
 ### Shapes
 
-*class*`xlwings.main.``Shapes`(*impl*)
+> *class*`xlwings.main.``Shapes`(*impl*)
 
 A collection of all `shape` objects on the specified sheet:
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.books['Book1'].sheets[0].shapes
 Shapes([<Shape 'Oval 1' in <Sheet [Book1]Sheet1>>, <Shape 'Rectangle 1' in <Sheet [Book1]Sheet1>>])
@@ -1363,25 +1264,21 @@ Shapes([<Shape 'Oval 1' in <Sheet [Book1]Sheet1>>, <Shape 'Rectangle 1' in <Shee
 
 New in version 0.9.0.
 
-```
-api
-```
+> api
 
 Returns the native object (`pywin32` or `appscript` obj) of the engine being used.
 
-```
-count
-```
+> count
 
 Returns the number of objects in the collection.
 
 ### Shape
 
-*class*`xlwings.``Shape`(**args*, ***options*)
+> *class*`xlwings.``Shape`(**args*, ***options*)
 
 The shape object is a member of the [`shapes`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Shapes) collection:
 
-```
+```python
 >>> import xlwings as xw
 >>> sht = xw.books['Book1'].sheets[0]
 >>> sht.shapes[0]  # or sht.shapes['ShapeName']
@@ -1390,69 +1287,55 @@ The shape object is a member of the [`shapes`](https://www.kancloud.cn/gnefnuy/x
 
 Changed in version 0.9.0.
 
-`activate`()
+> `activate`()
 
 Activates the shape.
 
 New in version 0.5.0.
 
-`delete`()
+> `delete`()
 
 Deletes the shape.
 
 New in version 0.5.0.
 
-```
-height
-```
+> height
 
 Returns or sets the number of points that represent the height of the shape.
 
 New in version 0.5.0.
 
-```
-left
-```
+> left
 
 Returns or sets the number of points that represent the horizontal position of the shape.
 
 New in version 0.5.0.
 
-```
-name
-```
+> name
 
 Returns or sets the name of the shape.
 
 New in version 0.5.0.
 
-```
-parent
-```
+> parent
 
 Returns the parent of the shape.
 
 New in version 0.9.0.
 
-```
-top
-```
+> top
 
 Returns or sets the number of points that represent the vertical position of the shape.
 
 New in version 0.5.0.
 
-```
-type
-```
+> type
 
 Returns the type of the shape.
 
 New in version 0.9.0.
 
-```
-width
-```
+> width
 
 Returns or sets the number of points that represent the width of the shape.
 
@@ -1464,7 +1347,7 @@ New in version 0.5.0.
 
 A collection of all `chart` objects on the specified sheet:
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.books['Book1'].sheets[0].charts
 Charts([<Chart 'Chart 1' in <Sheet [Book1]Sheet1>>, <Chart 'Chart 1' in <Sheet [Book1]Sheet1>>])
@@ -1506,7 +1389,7 @@ Returns the number of objects in the collection.
 
 The chart object is a member of the [`charts`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Charts) collection:
 
-```
+```python
 >>> import xlwings as xw
 >>> sht = xw.books['Book1'].sheets[0]
 >>> sht.charts[0]  # or sht.charts['ChartName']
@@ -1580,7 +1463,7 @@ Returns or sets the number of points that represent the width of the chart.
 
 A collection of all `picture` objects on the specified sheet:
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.books['Book1'].sheets[0].pictures
 Pictures([<Picture 'Picture 1' in <Sheet [Book1]Sheet1>>, <Picture 'Picture 2' in <Sheet [Book1]Sheet1>>])
@@ -1715,7 +1598,7 @@ New in version 0.5.0.
 
 A collection of all `name` objects in the workbook:
 
-```
+```python
 >>> import xlwings as xw
 >>> sht = xw.books['Book1'].sheets[0]
 >>> sht.names
@@ -1728,7 +1611,7 @@ New in version 0.9.0.
 
 Defines a new name for a range of cells.
 
-Parameters:name (str) – Specifies the text to use as the name. Names cannot include spaces and cannot be formatted as cell references.refers_to (str) – Describes what the name refers to, in English, using A1-style notation.Returns:Return type:Name
+Parameters:name (str) – Specifies the python to use as the name. Names cannot include spaces and cannot be formatted as cell references.refers_to (str) – Describes what the name refers to, in English, using A1-style notation.Returns:Return type:Name
 
 New in version 0.9.0.
 
@@ -1752,7 +1635,7 @@ Returns the number of objects in the collection.
 
 The name object is a member of the [`names`](https://www.kancloud.cn/gnefnuy/xlwings-docs/1127474#xlwings.main.Names) collection:
 
-```
+```python
 >>> import xlwings as xw
 >>> sht = xw.books['Book1'].sheets[0]
 >>> sht.names[0]  # or sht.names['MyName']
@@ -1835,7 +1718,7 @@ Apply converters and options to arguments, see also [`Range.options()`](https://
 
 Convert `x` into a 2-dimensional numpy array:
 
-```
+```python
 import xlwings as xw
 import numpy as np
 
@@ -1853,7 +1736,7 @@ Apply converters and options to return values, see also [`Range.options()`](http
 
 1. Suppress the index and header of a returned DataFrame:
 
-```
+```python
 import pandas as pd
 
 @xw.func
@@ -1868,7 +1751,7 @@ def get_dataframe(n, m):
 
 Unlike standard Excel arrays, dynamic arrays are being used from a single cell like a standard function and auto-expand depending on the dimensions of the returned array:
 
-```
+```python
 import xlwings as xw
 import numpy as np
 
@@ -1879,3 +1762,4 @@ def dynamic_array(n, m):
 ```
 
 New in version 0.10.0.
+
