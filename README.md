@@ -22,7 +22,6 @@
 
 > - Sklearn
 > - Moviepy
-> - MySQL
 > - Nerual-network
 > - Opencv
 > - Pyqt5
@@ -35,3 +34,4 @@
 > ​	Author: Hedge
 >
 > ​	Contact: Hedge36/Git 
+
