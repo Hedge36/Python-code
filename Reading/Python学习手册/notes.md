@@ -83,3 +83,11 @@
 #!/usr/bin/env python
 ```
 
+
+
+### 5. IDE
+
+关于IDE与IDLE就不再介绍。
+
+
+
