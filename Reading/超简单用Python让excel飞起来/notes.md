@@ -281,7 +281,7 @@ Examples
 
 所有`app`对象的集合：
 
-```
+```python
 >>> import xlwings as xw
 >>> xw.apps
 Apps([<Excel App 1668>, <Excel App 1644>])

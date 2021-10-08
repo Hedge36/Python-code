@@ -963,7 +963,7 @@ block
 
 ## 1. 函数的结构
 
-> **def** tag (arguments : type):	# flag of fuction
+> **def** tag (arguments : type) -> type hint:	# flag of fuction
 >
 > ​	*"""Annotion of Fuction, can inquire and print by `help`, according to PEP8"""*
 >
@@ -971,7 +971,7 @@ block
 >
 > ​     **return** values
 
-**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。参数类型包括两种，可有可无，可以通过**":"**对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用。
+**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。参数类型包括两种，可有可无，可以通过*":"type*对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用，*-> type hint*则表示为对输入输出的类型提示，作用同type，没有实际限制力。
 
 return可以返回需要的数据作为函数输出值，不设置返回值时默认返回None，当返回多个数值时，将自动打包返回元组类型。
 

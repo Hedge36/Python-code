@@ -619,21 +619,23 @@ Plot(kind, x, y, title, figsize)
 
 ## 1. IO
 
-| 格式类型  | 数据描述      | Reader         | Writer       |
-| --------- | ------------- | -------------- | ------------ |
-| text      | CSV           | read_ csv      | to_csv       |
-| text      | JSON          | read_json      | to_json      |
-| text      | HTML          | read_html      | to_html      |
-| text      | clipboard     | read_clipboard | to_clipboard |
-| binary    | Excel         | read_excel     | to_excel     |
-| binary    | HDF5          | read_hdf       | to_hdf       |
-| binary    | Feather       | read_feather   | to_feather   |
-| binary    | Msgpack       | read_msgpack   | to_msgpack   |
-| binary    | Stata         | read_stata     | to_stata     |
-| binary    | SAS           | read_sas       | \            |
-| binary    | Python Pickle | read_pickle    | to_pickle    |
-| SQL       | SQL           | read_sql       | to_sql       |
-| SQLGoogle | Big Query     | read_gbq       | to_gbq       |
+IO文本文件输入输出
+
+| 数据描述      | 格式类型  | Reader         | Writer       |
+| ------------- | --------- | -------------- | ------------ |
+| CSV           | text      | read_ csv      | to_csv       |
+| JSON          | text      | read_json      | to_json      |
+| HTML          | text      | read_html      | to_html      |
+| clipboard     | text      | read_clipboard | to_clipboard |
+| Excel         | binary    | read_excel     | to_excel     |
+| HDF5          | binary    | read_hdf       | to_hdf       |
+| Feather       | binary    | read_feather   | to_feather   |
+| Msgpack       | binary    | read_msgpack   | to_msgpack   |
+| Stata         | binary    | read_stata     | to_stata     |
+| SAS           | binary    | read_sas       | \            |
+| Python Pickle | binary    | read_pickle    | to_pickle    |
+| SQL           | SQL       | read_sql       | to_sql       |
+| Big Query     | SQLGoogle | read_gbq       | to_gbq       |
 
 
 
@@ -654,8 +656,6 @@ for column,  row in data.iterrows():
 ```
 
 ### 1.2 读取excel文件
-
-**现版本pandas(xlrd)不支持xlsx格式，仅支持xls，如需打开，需退版本，xlsx可使用openpyxl打开。**
 
 excel文件的读取都可以用以下函数来实现
 
@@ -704,26 +704,7 @@ data.head()
 - `na_values`：缺失值处理，`na_values= ["null"]`，用null字符替换缺失值。
 - `nrows`：定需要读取的行数：`nrows = 100`， 指定读取前100行数据。
 
-### 1.4 写CSV文件
 
-```python
-#任意的多组列表
-a = [1, 2, 3]
-b = [4, 5, 6]
-
-#字典中的key值即为csv中的列名
-data_dict = {'a_name':a, 'b_name':b}
-
-#设置DataFrame中列的排列顺序
-#如果无需重命名，columns这一参数可以省略
-dataFrame = pd.DataFrame(data_dict,  columns=['a_name',  'b_name'])
-
-#将DataFrame存储到csv文件中, index表示是否显示行名，default=True
-dataFrame.to_csv("test.csv",  index=False,  sep='|')
-#如果希望在不覆盖原文件内容的情况下将信息写入文件，可以加上mode="a"
-dataFrame.to_csv("test.csv",  mode="a",  index=False, sep='|')
-123456789101112131415
-```
 
 ## 2. DataFrame
 
@@ -905,7 +886,21 @@ pd.merge(df1, df3, on='name', how='right')
 
 ### 2.4 append
 
+### 2.5 query
 
+> query data according to demand.
+
+```python
+dataframe.query(condition)
+```
+
+### 2.6 filter
+
+> filter and show data you want.
+
+### 2.7 interpolate
+
+> get average by numbers before and behind.
 
 ## 3. Line and Row
 
@@ -989,9 +984,7 @@ df[colsname]	# Series
 df[[colsname]]	# DataFrame
 ```
 
-
-
-
+---
 
 ### 3.2 Drop
 
@@ -1168,7 +1161,7 @@ reset_index()：将使用set_index()打造的层次化逆向操作。
 df.reset_index()
 ```
 
-## 5 重复项
+## 5. Duplicate
 
 ### 5.1 查看是否存在重复项
 
@@ -1183,10 +1176,10 @@ a = df.duplicated()
 而 drop_duplicates方法，它用于返回一个移除了重复行的DataFrame
 
 ```python
-df = df.drop_duplicates()
+df = df.drop_duplicates(cols)
 ```
 
-## 6 元素
+## 6. Element
 
 ### 6.1 查找
 
@@ -1220,7 +1213,7 @@ at：依旧标签定位
 df['列名'][行序号（index）] = "新数据"
 ```
 
-## 7.排序
+## 7. Rank
 
 ```python
 df.sort_values(by="sales" ,  ascending=False)
@@ -1262,7 +1255,7 @@ df = df.sort_values(by=['col1'])
 '''
 ```
 
-## 8. 处理缺损数据
+## 8. Nan
 
 ### 8.1 dropna
 
@@ -1284,9 +1277,13 @@ pd.dropna(axis=0,  how='any’,  thresh=None,  subset=None,  inplace=False)
 
 ### 8.2 isnan
 
+check if nan exists.
+
 ### 8.3 fillna
 
-## 9. 其他用法
+fill nan with parameters.
+
+## 9. Else
 
 ### 9.1 连续时间序列
 
@@ -1341,7 +1338,7 @@ DataFrame.clip(lower=None, upper=None, axis=None, inplace=False, *args, **kwargs
 
 **返回值**：  Series或DataFrame与调用对象相同的类型，替换了剪辑边界之外的值
 
-## 10.数据处理
+## 10. Overall cases
 
 ### 1. 数据偏移
 
@@ -1373,13 +1370,15 @@ DataFrame.clip(lower=None, upper=None, axis=None, inplace=False, *args, **kwargs
 
 > **DataFrame**,	Copy of input object, shifted.
 
+---
+
 ### 2. 列变索引
 
 DataFrame.`set_index`(*keys*, *drop=True*, *append=False*, *inplace=False*, *verify_integrity=False*)
 
 > Set the DataFrame index using existing columns.Set the DataFrame index (row labels) using one or more existing columns or arrays (of the correct length). The index can replace the existing index or expand on it.
 
-### Parameters
+#### Parameters
 
 > **keys**	label or array-like or list of labels/arrays
 >
@@ -1401,9 +1400,17 @@ DataFrame.`set_index`(*keys*, *drop=True*, *append=False*, *inplace=False*, *ver
 >
 > Check the new index for duplicates. Otherwise defer the check until necessary. Setting to False will improve the performance of this method.
 
-### Returns
+#### Returns
 
 > DataFrame or NoneChanged row labels or None if `inplace=True`.
+
+### 3. 分组聚合
+
+```python
+df.groupby(cols).agg({col:function})	# agg used to refer aggregate function
+```
+
+
 
 
 
@@ -1583,4 +1590,37 @@ DataFrame.to_excel(writer, sheet_name='Sheet1', na_rep='', float_format=None,
 可用于处理Excel的库性能对比，此处推荐xlwings。
 
 ![图片](E:/工具/Typora/Temp/640.webp)
+
+
+
+# Else
+
+## 1. GUItools
+
+EDA是数据分析必须的过程，用来查看变量统计特征，可以此为基础尝试做特征工程。
+
+### 1.1 Pandas Profiling
+
+使用方法
+
+```python
+import pandas as pd
+import seaborn as sns
+mpg = sns.load_dataset('mpg')
+mpg.head()
+
+from pandas_profiling import ProfileReport
+profile = ProfileReport(mpg, title='MPG Pandas Profiling Report', explorative = True)
+```
+
+
+
+### 1.2 PandasGUI
+
+gui调用方法：
+
+```python
+from pandasgui import show
+gui = show(mpg)
+```
 

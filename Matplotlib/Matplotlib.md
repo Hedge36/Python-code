@@ -326,3 +326,17 @@ font.sans-serif     : Microsoft YaHei, DejaVu Sans, Bitstream Vera Sans, Compute
 ```
 
 重启程序或者使用jupyter时restart the kernel，再运行即可
+
+
+
+## Spine
+
+```python
+ax = plt.gca()
+ax.spine["bottom"].set_color
+ax.spine["bottom"].set_position
+ax.spine["bottom"].set_visiable
+```
+
+
+
