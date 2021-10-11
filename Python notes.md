@@ -971,7 +971,7 @@ block
 >
 > ​     **return** values
 
-**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。参数类型包括两种，可有可无，可以通过*":"type*对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用，*-> type hint*则表示为对输入输出的类型提示，作用同type，没有实际限制力。
+**函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。参数类型包括两种，可有可无，可以通过*":"type*对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用，*-> type hint*则表示为对输入输出的类型提示，*必须是准确的现存的数据类型*，作用同type，没有实际限制力。
 
 return可以返回需要的数据作为函数输出值，不设置返回值时默认返回None，当返回多个数值时，将自动打包返回元组类型。
 
@@ -1248,7 +1248,7 @@ x.\__setattr__ 取代一般的赋值操作，如果有此函数会调用此函�
 
 x.\__delattr__ 同__setattr__, 在del obj.name有意义时会调用
 
-## 4.lambda函数
+## 4. lambda函数
 
   lambda函数是一种匿名函数，没有名称，使用lambda保留字定义，只允许有一个表达式并且该表达式计算所得结果即为函数返回值。常用于定义**简单的能在一行内表示的**函数；
 
@@ -1264,7 +1264,9 @@ print(f[1](1,2))
 
 注：函数定义后需调用
 
-## 5. 嵌套函数
+
+
+## 5. 嵌套函数与组合函数
 
 嵌套函数，在函数内部定义的函数，嵌套函数的定义及调用都只能在函数内部使用。常用于数据的封装(即数据隐藏，使得外部无法访问)，贯彻DRY(Don't repeat yourself)原则以及闭包。
 
@@ -1275,7 +1277,194 @@ def f1():
 		print("byebye ,world")
 ```
 
-## 6. 常用内置函数
+> 组合函数与嵌套函数相似，但是区别在于嵌套的函数全局定义，这种情况下无法实现函数的封装，通过相互调用实现嵌套，实际应用比较广泛，同时较简单，不展开叙述。
+
+
+
+## 6. 函数装饰器
+
+### 概述
+
+> **装饰器**(Decorators)是 Python 的一个重要部分，其**本质是**，在函数调用的同时，动态地修改目标函数的功能的**函数**。他们有助于让我们的代码更简短，也更Pythonic（Python范儿），其基本语法如下:
+
+```python
+def func1():
+  block
+
+@func1
+def func2():
+  block
+```
+
+以下是其基本的使用场景：
+
+### 授权(Authorization)
+
+> 装饰器能有助于检查某个人是否被授权去使用一个web应用的端点(endpoint)。它们被大量使用于Flask和Django web框架中。
+>
+
+```python
+from functools import wraps  
+
+def requires_auth(f):    
+	@wraps(f)    
+	def decorated(*args, **kwargs):        
+    auth = request.authorization        
+    if not auth or not check_auth(auth.username, auth.password):            authenticate()        
+    return f(*args, **kwargs)    
+  return decorated
+```
+
+
+
+### 日志(Logging)
+
+> 日志是装饰器运用的另一个亮点。
+>
+
+```python
+from functools import wraps  
+
+def logit(func):    
+  @wraps(func)    
+  def with_logging(*args, **kwargs):        
+    print(func.__name__ + " was called")        
+    return func(*args, **kwargs)    
+  return with_logging  
+
+@logit 
+def addition_func(x):   
+  """Do some math."""   
+  return x + x   
+
+
+result = addition_func(4) 
+# Output: addition_func was called
+```
+
+------
+
+### 带参数的装饰器
+
+我们回到日志的例子，并创建一个包裹函数，能让我们指定一个用于输出的日志文件。
+
+```python
+from functools import wraps  
+
+def logit(logfile='out.log'):    
+  def logging_decorator(func):        
+    @wraps(func)        
+    def wrapped_function(*args, **kwargs):            
+      log_string = func.__name__ + " was called"            
+      print(log_string)            
+      # 打开logfile，并写入内容
+      with open(logfile, 'a') as opened_file:                
+        # 现在将日志打到指定的logfile                
+        opened_file.write(log_string + '\n')            
+      return func(*args, **kwargs)        
+    return wrapped_function    
+  return logging_decorator  
+
+@logit() 
+def myfunc1():    
+  pass  
+
+myfunc1() 
+# Output: myfunc1 was called 
+# 现在一个叫做 out.log 的文件出现了，里面的内容就是上面的字符串  
+
+@logit(logfile='func2.log') 
+def myfunc2():    
+  pass  
+
+myfunc2() 
+# Output: myfunc2 was called 
+# 现在一个叫做 func2.log 的文件出现了，里面的内容就是上面的字符串
+```
+
+
+
+------
+
+### 装饰器类
+
+现在我们有了能用于正式环境的logit装饰器，但当我们的应用的某些部分还比较脆弱时，异常也许是需要更紧急关注的事情。比方说有时你只想打日志到一个文件。而有时你想把引起你注意的问题发送到一个email，同时也保留日志，留个记录。这是一个使用继承的场景，但目前为止我们只看到过用来构建装饰器的函数。
+
+幸运的是，类也可以用来构建装饰器。那我们现在以一个类而不是一个函数的方式，来重新构建logit。
+
+```python
+from functools import wraps 
+
+class logit(object): 
+  def __init__(self, logfile='out.log'):        
+    self.logfile = logfile 
+  def __call__(self, func):        
+    @ wraps(func) 
+    def wrapped_function(*args, **kwargs):            
+      log_string = func.__name__ + " was called" 					
+      print(log_string)
+			# 打开logfile并写入
+      with open(self.logfile, 'a') as opened_file:
+      # 现在将日志打到指定的文件
+      	opened_file.write(log_string + '\n')
+       	# 现在，发送一个通知
+      	self.notify()
+        return func(*args, **kwargs)
+      return wrapped_function
+    
+    def notify(self):
+        # logit只打日志，不做别的
+        pass
+```
+
+这个实现有一个附加优势，在于比嵌套函数的方式更加整洁，而且包裹一个函数还是使用跟以前一样的语法：
+
+```python
+@logit()
+def myfunc1():
+    pass
+```
+
+现在，我们给 logit 创建子类，来添加 email 的功能(虽然 email 这个话题不会在这里展开)。
+
+```python
+class email_logit(logit):
+    '''
+    一个logit的实现版本，可以在函数调用时发送email给管理员
+    '''
+    def __init__(self, email='admin@myproject.com', *args, **kwargs):
+        self.email = email
+        super(email_logit, self).__init__(*args, **kwargs)
+
+		def notify(self):
+        # 发送一封email到self.email
+        # 这里就不做实现了
+        pass
+```
+
+
+
+## 7. 偏函数
+
+Python的`functools`模块提供了很多有用的功能，其中一个就是偏函数（Partial function）。要注意，这里的偏函数和数学意义上的偏函数不一样。
+
+在介绍函数参数的时候，我们讲到，**通过设定参数的默认值，可以降低函数调用的难度。**而偏函数也可以做到这一点，这里其实有点像函数重定义，具体用法见下：
+
+```python
+import functools
+func1 = functools.partial(func2, params=params)
+```
+
+当然，也可以通过以下方式实现：
+
+```python
+def func2(params=params):
+  func1(params=params)
+```
+
+
+
+## 8. 常用内置函数
 
 ### eval函数
 
@@ -1298,7 +1487,7 @@ dict = {a = 100, b = 10}
 eval("a+b",dict)
 ```
 
-
+---
 
 ### exec函数
 
@@ -1351,7 +1540,7 @@ print(A1)
 
 [ OUTPUT ]:  1
 
-
+---
 
 ### compile函数
 
@@ -1393,7 +1582,7 @@ a = compile(str,'','eval')
 eval(a) 17
 ```
 
-
+---
 
 ### assert函数
 
@@ -1405,7 +1594,7 @@ assert(expression, [arguments ])
 
 > 注：该函数必须顶行单独使用
 
-
+---
 
 ### map函数
 
@@ -1424,7 +1613,7 @@ map(function, iterable, ...)
 > - function -- 函数
 > - iterable -- 一个或多个序列
 
-
+---
 
 ### enumerate函数
 
@@ -3080,4 +3269,34 @@ identity : = value
 from ..name import func	# 从包的上上级导入
 from .name import func	# 从包的上级导入
 ```
+
+
+
+# 板块九 PythonShell
+
+## 基本Shell指令
+
+Run library module as a script in terminal via `-m`.
+
+### 1. webbrowser
+
+> Webbrowser is a standard module in python in fact, it provides a high-level interface to allow displaying web-based documents to users. The script **webbrowser** can be used as a command-line interface for the module. It accepts a URL as the argument.
+
+#### Usage
+
+> Open a web in default browser. You can also achieve via script through import method.
+
+```shell
+python -m webbrowser -t url
+```
+
+#### Params
+
+> + `-n` opens the URL in a new browser window, if possible; 
+>
+> + `-t` opens the URL in a new browser page (“tab”). The options are, naturally, mutually exclusive.
+
+#### Return
+
+> None.
 
