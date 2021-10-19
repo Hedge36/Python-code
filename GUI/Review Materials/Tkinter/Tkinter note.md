@@ -1575,15 +1575,11 @@ while True:
 Misc.after(timeinterval, func=None, *args)
 ```
 
-
-
 #### Description
 
 > Call function once after given time. (Call itself continuously)
 >
 > MS specifies the time in milliseconds. FUNC gives the function which shall be called. Additional parameters are given as parameters to the function call. Return identifier to cancel scheduling with after_cancel
-
-
 
 #### Params
 
@@ -1853,11 +1849,9 @@ root.mainloop()
 
 ### Description
 
-```
+```python
 from tkinter import filedialog
 ```
-
-
 
 ### Function
 
@@ -1888,18 +1882,16 @@ from tkinter import filedialog
 
 ### askopenfile
 
+#### Description
+
+> 提交一个对话框，向用户请求需要打开的文件对象，返回文件的绝对路径。
+
 #### Format
 
 ```python
 from tkinter import filedialog
 filedialog.askopenfile(mode="r", **options)
 ```
-
-
-
-#### Description
-
-
 
 #### Params
 
@@ -1922,8 +1914,6 @@ filedialog.askopenfile(mode="r", **options)
 | askfloat   | 输入并返回浮点数 |
 | askinteger | 输入并返回整数   |
 | askstring  | 输入并返回字符串 |
-
-
 
 ### Params
 

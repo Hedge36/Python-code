@@ -2,11 +2,11 @@
 
 ## Synopsis
 
-> Backup of local python files, including most of the libraries I have learnt. Here are python files including tutorials and projects, notes and documents of something else.
+> Backup of local python files and notes I take, including most of the libraries I have learnt. Here are python files including tutorials and projects, notes and documents of something else during my period learning python.
 
 ## Library Supported
 
-> - Multiprocess
+> - Multiprocess&Thread
 > - **Numpy**
 > - **Matplotlib**
 > - Pygame
@@ -16,7 +16,8 @@
 > - **Skimage**
 > - **PIL**
 > - Requests
-> - Threading
+
+Pytorch is coming.
 
 ## Library in Plan
 
@@ -25,13 +26,12 @@
 > - Nerual-network
 > - Opencv
 > - Pyqt5
-> - Pylpyodbc
 
-## About
+## About Author
 
-> ​	Copyrights: Hedge
+> @Copyrights: Hedge
 >
-> ​	Author: Hedge
+> @Author: Hedge
 >
-> ​	Contact: Hedge36/Git 
+> @Contact: Hedge36/Git 
 

@@ -12,7 +12,7 @@ Now, let's have a deeper look at the components of a Matplotlib figure.
 >
 > The easiest way to create a new figure is with pyplot:
 >
-> ```
+> ```python
 > fig = plt.figure()  # an empty figure with no Axes
 > fig, ax = plt.subplots()  # a figure with a single Axes
 > fig, axs = plt.subplots(2, 2)  # a figure with a 2x2 grid of Axes
@@ -42,14 +42,14 @@ All of plotting functions expect `numpy.array` or `numpy.ma.masked_array` as inp
 
 For example, to convert a `pandas.DataFrame`
 
-```
+```python
 a = pandas.DataFrame(np.random.rand(4, 5), columns = list('abcde'))
 a_asarray = a.values
 ```
 
 and to convert a `numpy.matrix`
 
-```
+```python
 b = np.matrix([[1, 2], [3, 4]])
 b_asarray = np.asarray(b)
 ```
@@ -65,7 +65,7 @@ As noted above, there are essentially **two ways** to use Matplotlib:
 
 So one can do (OO-style)
 
-```
+```python
 x = np.linspace(0, 2, 100)
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the figure.
@@ -83,13 +83,13 @@ ax.legend()  # Add a legend.
 
 Out:
 
-```
+```python
 <matplotlib.legend.Legend object at 0x7f1c6b1537f0>
 ```
 
 or (pyplot-style)
 
-```
+```python
 x = np.linspace(0, 2, 100)
 
 plt.plot(x, x, label='linear')  # Plot some data on the (implicit) axes.
@@ -105,7 +105,7 @@ plt.legend()
 
 Out:
 
-```
+```python
 <matplotlib.legend.Legend object at 0x7f1c6be86bb0>
 ```
 
@@ -117,17 +117,16 @@ Matplotlib's documentation and examples use both the OO and the pyplot approache
 >
 > In older examples, you may find examples that instead used the so-called `pylab` interface, via `from pylab import *`. This star-import imports everything both from pyplot and from `numpy`, so that one could do
 >
-> ```
+> ```python
 > x = linspace(0, 2, 100)
 > plot(x, x, label='linear')
-> ...
 > ```
 >
 > for an even more MATLAB-like style. This approach is strongly discouraged nowadays and deprecated. It is only mentioned here because you may still encounter it in the wild.
 
 Typically one finds oneself making the same plots over and over again, but with different data sets, which leads to needing to write specialized functions to do the plotting. The recommended function signature is something like:
 
-```
+```python
 def my_plotter(ax, data1, data2, param_dict):
     """
     A helper function to make a graph
@@ -157,7 +156,7 @@ def my_plotter(ax, data1, data2, param_dict):
 
 which you would then use as:
 
-```
+```python
 data1, data2, data3, data4 = np.random.randn(4, 100)
 fig, ax = plt.subplots(1, 1)
 my_plotter(ax, data1, data2, {'marker': 'x'})
@@ -167,13 +166,13 @@ my_plotter(ax, data1, data2, {'marker': 'x'})
 
 Out:
 
-```
+```python
 [<matplotlib.lines.Line2D object at 0x7f1c6c06dd30>]
 ```
 
 or if you wanted to have 2 sub-plots:
 
-```
+```python
 fig, (ax1, ax2) = plt.subplots(1, 2)
 my_plotter(ax1, data1, data2, {'marker': 'x'})
 my_plotter(ax2, data3, data4, {'marker': 'o'})
@@ -183,7 +182,7 @@ my_plotter(ax2, data3, data4, {'marker': 'o'})
 
 Out:
 
-```
+```python
 [<matplotlib.lines.Line2D object at 0x7f1c6c1ada00>]
 ```
 
@@ -245,7 +244,7 @@ Here is a detailed description of the configuration methods:
 
 3. If your script depends on a specific backend you can use the function `matplotlib.use()`:
 
-   ```
+   ```python
    import matplotlib
    matplotlib.use('qt5agg')
    ```
@@ -298,14 +297,14 @@ And here are the user interfaces and renderer combinations supported; these are 
 
 The Jupyter widget ecosystem is moving too fast to support directly in Matplotlib. To install ipympl
 
-```
+```shell
 pip install ipympl
 jupyter nbextension enable --py --sys-prefix ipympl
 ```
 
 or
 
-```
+```shell
 conda install ipympl -c conda-forge
 ```
 
@@ -339,7 +338,7 @@ Use of an interactive backend (see What is a backend?) permits--but does not by 
 
 From an ordinary python prompt, or after invoking ipython with no options, try this:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.ion()
 plt.plot([1.6, 2.7])
@@ -347,21 +346,21 @@ plt.plot([1.6, 2.7])
 
 This will pop up a plot window. Your terminal prompt will remain active, so that you can type additional commands such as:
 
-```
+```python
 plt.title("interactive test")
 plt.xlabel("index")
 ```
 
 On most interactive backends, the figure window will also be updated if you change it via the object-oriented interface. E.g. get a reference to the `Axes` instance, and call a method of that instance:
 
-```
+```python
 ax = plt.gca()
 ax.plot([3.1, 2.2])
 ```
 
 If you are using certain backends (like `macosx`), or an older version of Matplotlib, you may not see the new line added to the plot immediately. In this case, you need to explicitly call `draw()` in order to update the plot:
 
-```
+```python
 plt.draw()
 ```
 
@@ -369,7 +368,7 @@ plt.draw()
 
 Start a fresh session as in the previous example, but now turn interactive mode off:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.ioff()
 plt.plot([1.6, 2.7])
@@ -377,7 +376,7 @@ plt.plot([1.6, 2.7])
 
 Nothing happened--or at least nothing has shown up on the screen (unless you are using _macosx_ backend, which is anomalous). To make the plot appear, you need to do this:
 
-```
+```python
 plt.show()
 ```
 
@@ -389,7 +388,7 @@ In addition, non-interactive mode delays all drawing until `show()` is called; t
 
 Prior to version 1.0, `show()` generally could not be called more than once in a single script (although sometimes one could get away with it); for version 1.0.1 and above, this restriction is lifted, so one can write a script like this:
 
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -421,12 +420,11 @@ For plots that have line segments (e.g. typical line plots, outlines of polygons
 
 The following script will first display the data without any simplification, and then display the same data with simplification. Try interacting with both of them:
 
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
-# Setup, and create the data to plot
+# setup, and create the data to plot
 y = np.random.rand(100000)
 y[50000:] *= 2
 y[np.geomspace(10, 50000, 400).astype(int)] = -1
@@ -453,7 +451,7 @@ The simplification works by iteratively merging line segments into a single vect
 
 Markers can also be simplified, albeit less robustly than line segments. Marker simplification is only available to `Line2D` objects (through the `markevery` property). Wherever `Line2D` construction parameters are passed through, such as `matplotlib.pyplot.plot()` and `matplotlib.axes.Axes.plot()`, the `markevery` parameter can be used:
 
-```
+```python
 plt.plot(x, y, markevery=10)
 ```
 
@@ -465,7 +463,7 @@ If you are using the Agg backend (see What is a backend?), then you can make use
 
 The following script will first display the data without any chunk size restriction, and then display the same data with a chunk size of 10,000. The difference can best be seen when the figures are large, try maximizing the GUI and then interacting with them:
 
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -494,14 +492,14 @@ The default legend behavior for axes attempts to find the location that covers t
 
 The _fast_ style can be used to automatically set simplification and chunking parameters to reasonable settings to speed up plotting large amounts of data. It can be used simply by running:
 
-```
+```python
 import matplotlib.style as mplstyle
 mplstyle.use('fast')
 ```
 
 It is very lightweight, so it plays nicely with other styles, just make sure the fast style is applied last so that other styles do not overwrite the settings:
 
-```
+```python
 mplstyle.use(['dark_background', 'ggplot', 'fast'])
 ```
 
@@ -519,7 +517,7 @@ In `matplotlib.pyplot` various states are preserved across function calls, so th
 
 Generating visualizations with pyplot is very quick:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.plot([1, 2, 3, 4])
 plt.ylabel('some numbers')
@@ -532,7 +530,7 @@ You may be wondering why the x-axis ranges from 0-3 and the y-axis from 1-4. If 
 
 `plot` is a versatile function, and will take an arbitrary number of arguments. For example, to plot x versus y, you can write:
 
-```
+```python
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 ```
 
@@ -540,7 +538,7 @@ plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 
 Out:
 
-```
+```python
 [<matplotlib.lines.Line2D object at 0x7f1c6bee4940>]
 ```
 
@@ -548,7 +546,7 @@ Out:
 
 For every x, y pair of arguments, there is an optional third argument which is the format string that indicates the color and line type of the plot. The letters and symbols of the format string are from MATLAB, and you concatenate a color string with a line style string. The default format string is 'b-', which is a solid blue line. For example, to plot the above with red circles, you would issue
 
-```
+```python
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
 plt.axis([0, 6, 0, 20])
 plt.show()
@@ -560,7 +558,7 @@ See the `plot` documentation for a complete list of line styles and format strin
 
 If matplotlib were limited to working with lists, it would be fairly useless for numeric processing. Generally, you will use numpy arrays. In fact, all sequences are converted to numpy arrays internally. The example below illustrates plotting several lines with different format styles in one function call using arrays.
 
-```
+```python
 import numpy as np
 
 # evenly sampled time at 200ms intervals
@@ -579,7 +577,7 @@ There are some instances where you have data in a format that lets you access pa
 
 Matplotlib allows you provide such an object with the `data` keyword argument. If provided, then you may generate plots with the strings corresponding to these variables.
 
-```
+```python
 data = {'a': np.arange(50),
         'c': np.random.randint(0, 50, 50),
         'd': np.random.randn(50)}
@@ -598,7 +596,7 @@ plt.show()
 
 It is also possible to create a plot using categorical variables. Matplotlib allows you to pass categorical variables directly to many plotting functions. For example:
 
-```
+```python
 names = ['group_a', 'group_b', 'group_c']
 values = [1, 10, 100]
 
@@ -622,20 +620,20 @@ Lines have many attributes that you can set: linewidth, dash style, antialiased,
 
 - Use keyword args:
 
-  ```
+  ```python
   plt.plot(x, y, linewidth=2.0)
   ```
 
 - Use the setter methods of a `Line2D` instance. `plot` returns a list of `Line2D` objects; e.g., `line1, line2 = plot(x1, y1, x2, y2)`. In the code below we will suppose that we have only one line so that the list returned is of length 1. We use tuple unpacking with `line,` to get the first element of that list:
 
-  ```
+  ```python
   line, = plt.plot(x, y, '-')
   line.set_antialiased(False) # turn off antialiasing
   ```
 
 - Use `setp`. The example below uses a MATLAB-style function to set multiple properties on a list of lines. `setp` works transparently with a list of objects or a single object. You can either use python keyword arguments or MATLAB-style string/value pairs:
 
-  ```
+  ```python
   lines = plt.plot(x1, y1, x2, y2)
   # use keyword args
   plt.setp(lines, color='r', linewidth=2.0)
@@ -681,7 +679,7 @@ Here are the available `Line2D` properties.
 
 > To get a list of settable line properties, call the `setp` function with a line or lines as argument.
 
-```
+```python
 In [69]: lines = plt.plot([1, 2, 3])
 
 In [70]: plt.setp(lines)
@@ -695,7 +693,7 @@ In [70]: plt.setp(lines)
 
 MATLAB, and `pyplot`, have the concept of the current figure and the current axes. All plotting functions apply to the current axes. The function `gca` returns the current axes (a `matplotlib.axes.Axes` instance), and `gcf` returns the current figure (a `matplotlib.figure.Figure` instance). Normally, you don't have to worry about this, because it is all taken care of behind the scenes. Below is a script to create two subplots.
 
-```
+```python
 def f(t):
     return np.exp(-t) * np.cos(2*np.pi*t)
 
@@ -719,7 +717,7 @@ You can create an arbitrary number of subplots and axes. If you want to place an
 
 You can create multiple figures by using multiple `figure` calls with an increasing figure number. Of course, each figure can contain as many axes and subplots as your heart desires:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.figure(1)                # the first figure
 plt.subplot(211)             # the first subplot in the first figure
@@ -744,7 +742,7 @@ If you are making lots of figures, you need to be aware of one more thing: the m
 
 `text` can be used to add text in an arbitrary location, and `xlabel`, `ylabel` and `title` are used to add text in the indicated locations (see Text in Matplotlib Plots for a more detailed example)
 
-```
+```python
 mu, sigma = 100, 15
 x = mu + sigma * np.random.randn(10000)
 
@@ -765,7 +763,7 @@ plt.show()
 
 All of the `text` functions return a `matplotlib.text.Text` instance. Just as with lines above, you can customize the properties by passing keyword arguments into the text functions or using `setp`:
 
-```
+```python
 t = plt.xlabel('my data', fontsize=14, color='red')
 ```
 
@@ -775,7 +773,7 @@ These properties are covered in more detail in Text properties and layout.
 
 > matplotlib accepts LaTeX equation expressions in any text expression. For example to write the expression σi=15σi=15 in the title, you can write a TeX expression surrounded by dollar signs.
 
-```
+```python
 plt.title(r'$\sigma_i=15$')
 ```
 
@@ -785,7 +783,7 @@ The `r` preceding the title string is important -- it signifies that the string 
 
 > The uses of the basic `text` function above place text at an arbitrary position on the Axes. A common use for text is to annotate some feature of the plot, and the `annotate` method provides helper functionality to make annotations easy. In an annotation, there are two points to consider: the location being annotated represented by the argument `xy` and the location of the text `xytext`. Both of these arguments are `(x, y)` tuples.
 
-```
+```python
 ax = plt.subplot()
 
 t = np.arange(0.0, 5.0, 0.01)
@@ -808,13 +806,13 @@ In this basic example, both the `xy` (arrow tip) and `xytext` locations (text lo
 
 > `matplotlib.pyplot` supports not only linear axis scales, but also logarithmic and logit scales. This is commonly used if data spans many orders of magnitude. Changing the scale of an axis is easy:
 
-```
+```python
 plt.xscale('log')
 ```
 
 An example of four plots with the same data and different scales for the y axis is shown below.
 
-```
+```python
 # Fixing random state for reproducibility
 np.random.seed(19680801)
 
@@ -1052,9 +1050,7 @@ Matplotlib's mathtext infrastructure is an independent implementation and does n
 
 ## Native TeX rendering
 
-Although Matplotlib's internal math rendering engine is quite powerful, sometimes you need TeX. Matplotlib supports external TeX rendering of strings with the _usetex_ option.
-
-[![../../_images/sphx_glr_tex_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_tex_demo_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/tex_demo.html)
+Although Matplotlib's internal math rendering engine is quite powerful, sometimes you need TeX. Matplotlib supports external TeX rendering of strings with the _usetex_ option.[![../../_images/sphx_glr_tex_demo_0011.png](E:/工具/Typora/Temp/sphx_glr_tex_demo_0011.png)](https://matplotlib.org/stable/gallery/text_labels_and_annotations/tex_demo.html)
 
 Tex Demo
 
@@ -1076,19 +1072,15 @@ For examples of how to embed Matplotlib in different toolkits, see:
 
 ## XKCD-style sketch plots
 
-Just for fun, Matplotlib supports plotting in the style of xkcd.
+Just for fun, Matplotlib supports plotting in the style of xkcd.[![](E:/工具/Typora/Temp/sphx_glr_xkcd_0011.png)](https://matplotlib.org/stable/gallery/showcase/xkcd.html)
 
-[![../../_images/sphx_glr_xkcd_0011.png](E:/工具/Typora/Temp/sphx_glr_xkcd_0011.png)](https://matplotlib.org/stable/gallery/showcase/xkcd.html)
 
-xkcd
 
 ## Subplot example
 
-Many plot types can be combined in one figure to create powerful and flexible representations of data.
+Many plot types can be combined in one figure to create powerful and flexible representations of data.![sample plots](E:/工具/Typora/Temp/sphx_glr_sample_plots_001.png)
 
-![sample plots](E:/工具/Typora/Temp/sphx_glr_sample_plots_001.png)
-
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -1103,3 +1095,4 @@ axs[1, 1].hist2d(data[0], data[1])
 
 plt.show()
 ```
+
