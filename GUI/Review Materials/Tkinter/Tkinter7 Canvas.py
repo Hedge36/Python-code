@@ -4,6 +4,7 @@
 # @Author : Hedge
 # @File : Tkinter7 Canvas.py
 # @Software: PyCharm
+
 import tkinter as tk
 window = tk.Tk()
 window.title("my window")
