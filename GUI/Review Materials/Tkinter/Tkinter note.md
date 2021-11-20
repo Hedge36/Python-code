@@ -1,8 +1,8 @@
-GUI-tkinter/tcl
+# GUI-tkinter/tcl
 
 ## Before all
 
-> If you have any question, please seek the  [Docs](https://www.tcl.tk/doc/)  for answer. Learn more by refering to the  [tutorial](https://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html) .
+> If you have any question, please seek the [Docs](https://www.tcl.tk/doc/) for answer. Learn more by refering to the [tutorial](https://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html).
 >
 > Tip : There are somethings different with normal.
 >
@@ -178,7 +178,7 @@ root.update_idletasks()
 root.update() 
 ```
 
-
+---
 
 ### Layout
 
@@ -186,7 +186,7 @@ root.update()
 
 > 其实 grid 就是用表格的形式定位的。这里的参数 row 为行，colum 为列，padx 就是单元格左右间距，pady 就是单元格上下间距，ipadx是单元格内部元素与单元格的左右间距，ipady是单元格内部元素与单元格的上下间距，**column/rowspan表示跨列/行合并**，Stick表示Widget控件对齐方式，仅包括tk.N/S/W/E，表示上下左右对齐，可以同时指定多个，用"+"连接。
 >
-> 此外，可以通过父容器的row/columnconfigure(number, params)方法调控特定的行或列属性
+> 此外，可以通过父容器的row/columnconfigure(number, params)方法调控特定的行或列属性。
 
 **示例代码：**
 
@@ -196,8 +196,6 @@ for i in range(3):
     for j in range(3):
         tk.Label(window, text=1).grid(row=i, column=j, padx=10, pady=10, ipadx=10, ipady=10)
 ```
-
-
 
 #### 2. Pack
 
@@ -214,8 +212,6 @@ tk.Label(window, text='P', fg='red').pack(side='bottom') # 下
 tk.Label(window, text='P', fg='red').pack(side='left')   # 左
 tk.Label(window, text='P', fg='red').pack(side='right')  # 右
 ```
-
-
 
 #### 3. Place
 
@@ -413,7 +409,6 @@ text.search(key, start, end)
 
 > 使用search方法进行检索查找关键词，这个方法传回找到的字符的第一个位置索引。
 >
-> 
 
 #### Bookmark
 
@@ -457,7 +452,8 @@ text.search(key, start, end)
 
 ### 5. Listbox
 
-列表框是一个显示一系列选项的Widget控件，用户可以进行单项或多项的选择。
+> 列表框是一个显示一系列选项的Widget控件，用户可以进行单项或多项的选择。
+>
 
 | 参数             | 值                                 | 说明                   |
 | ---------------- | ---------------------------------- | ---------------------- |
@@ -694,11 +690,7 @@ create_image(x, y, options)
 
 无特殊参数
 
-#### 9.3 Method
-
-##### delete
-
-##### 基本动画
+#### 9.3 Cartoon
 
 ```python
 canvas.move(ID, xMove, yMove)
@@ -765,14 +757,12 @@ add_cascade()	# 添加子菜单
 add_command()	# 添加命令
 add_separator()	# 添加分隔符
 add_checkbutton()	# 添加复选框
-
-
 ```
 
-> **Post()** --> 右键菜单栏的制作
+> **右键菜单栏的制作**
 >
-> 1. Menu 类里面有一个 post 方法，它接收两个参数，即 x 和 y 坐标，它会在相应的位置弹出菜单；
-> 2. 利用 Menu 的 post 方法，还有 bind 方法；
+> 1. **Menu 类**里面有一个 post 方法，它接收两个参数，即 x 和 y 坐标，它会在相应的位置弹出菜单；
+> 2. 利用 Menu类对象 的 post 方法弹出弹窗，应用 bind 方法绑定右键；
 >
 > ```python
 > def showpopup(event):
@@ -894,7 +884,11 @@ Combobox(master, options)
 
 ### 2. ScrolledText
 
-> 
+> The `tkinter.scrolledtext` module provides a class of the same name which implements a basic text widget which has a vertical scroll bar configured to do the “right thing.” Using the `ScrolledText` class is a lot easier than setting up a text widget and scroll bar directly.
+>
+> The text widget and scrollbar are packed together in a `Frame`, and the methods of the `Grid` and `Pack` geometry managers are acquired from the `Frame` object. This allows the [`ScrolledText`](https://docs.python.org/3/library/tkinter.scrolledtext.html#tkinter.scrolledtext.ScrolledText) widget to be used directly to achieve most normal geometry management behavior.
+>
+> Its flag is just the same as Text, for which detailed is omitted.
 
 ### 3. Spinbox
 
@@ -966,12 +960,67 @@ tree.insert(id, index=tk.END, text=text, values=values)
 
 ### 6. Sizegrip
 
+> 该部件用来调整整个应用视窗的大小，通常位于右下角，为了能调整尺寸，可能会用到 columnconfigure () 及 rowconfigure () 方法，以及 grid () 方法中的 stiicky 参数.
+>
+> ```python
+> w = ttk.Sizegrip(parent, option=value, ...)
+> ```
+
+| 选项   | 说明                                                    |
+| ------ | ------------------------------------------------------- |
+| class_ | 部件分类名称，建立后不能改变                            |
+| style  | 生成部件的样式，能设置的只有选项 background, 为部件颜色 |
+
 
 
 ### 7. Notebook
 
-> Notebook 可以理解为选项卡，同样属于容器类组件，通过add方法向其添加组件，其基本属性与其他容器类保持一致。
+> Notebook 是一个Widget 容器控件，这个控件的特点就是有许多选项卡，当选择不同选项卡时可以看到不同的子控件内容，也可以当做子窗口内容，Notebook 是属于`tkinter.ttk`模块的控件。
 >
+> 构造方法如下：
+
+```python
+Notebook(master, options)
+```
+
+参数：
+
+> - 第一个参数：`parent/master`，表示这个选项卡将建立在哪一个窗口内
+> - 第二个参数：`options`，参数如下
+
+| 参数    | 含义                                                         |
+| :------ | :----------------------------------------------------------- |
+| height  | 如果设置数值则使用设置高度 默认是使用最大可能`高度`          |
+| padding | 设置Notebook外围的`额外空间`，可以设置4个数值代表left、top、tight、bottom四周的空间 |
+| width   | 如果设置数值则使用设置宽度 默认是使用最大可能`宽度`          |
+
+> 整个建立Notebook框架的步骤：
+>
+> > 1. 建立Notebook对象，假设对象名称是notebook
+> >
+> > 2. 使用notebook对象调用add()方法
+> >
+> > `add(子对象, text='xxx')`，其中xxx是要添加的选项卡名称，该代码可以将子对象插入notebook，同时产生’xxx’选项卡名称。
+>
+> 如果用正规语法表示`add()`方法，它的语法格式如下
+
+```python
+add(子对象, options)
+```
+
+options参数如下：
+
+| 参数      | 含义                                                         |
+| :-------- | :----------------------------------------------------------- |
+| compound  | 可以设置当选项卡内同时含图像和文字时，彼此之间的`位置关系`   |
+| image     | 选项卡以`图像`方式呈现                                       |
+| padding   | 设置Notebook和面板Pane的额外空间                             |
+| state     | 可能值是normal、disabled、hidden 如果是`disabled`表示无法被选取使用 如果是`hidden`表示被隐藏 |
+| sticky    | 指出子窗口面板的配置方式，`n/s/e/w`分别表示North、South、East、West |
+| text      | 选项卡中的`字符串内容`                                       |
+| underline | 指出第几个字母含`下划线` 从0开始计算的索引                   |
+
+
 
 ### 8. Progressbar
 
@@ -1158,7 +1207,28 @@ sep = Separator(master, orient, params)
 
 ### 10. Menubutton
 
+> A menubutton is the part of a drop-down menu that stays on the screen all the time. Every menubutton is associated with a Menu widget that can display the choices for that menubutton when the user clicks on it.
+>
+> Here is the simple syntax to create this widget.
 
+```
+w = Menubutton (master, option, ... )
+```
+
+#### Parameters
+
+> - **master** − This represents the parent window.
+> - **options** − Here is the list of most commonly used options for this widget. These options can be used as key-value pairs separated by commas.
+
+|      Option      | Description                                                  |
+| :--------------: | :----------------------------------------------------------- |
+| **activebackground** | The background color when the mouse is over the menubutton.  |
+| **activeforeground** | The foreground color when the mouse is over the menubutton. |
+|        **direction**         |Set direction=LEFT to display the menu to the left of the button; use direction=RIGHT to display the menu to the right of the button; or use direction='above' to place the menu above the button. |
+|        **disabledforeground**         | The foreground color shown on this menubutton when it is disabled. |
+|        **menu**       | To associate the menubutton with a set of choices, set this option to the Menu object containing those choices. That menu object must have been created by passing the associated menubutton to the constructor as its first argument. |
+|        **text**        |To display text on the menubutton, set this option to the string containing the desired text. Newlines ("\n") within the string will cause line breaks. |
+|        **textvariable**        | You can associate a control variable of class StringVar with this menubutton. Setting that control variable will change the displayed text. |
 
 ## 5. Something else
 

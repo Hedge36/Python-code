@@ -333,10 +333,12 @@ font.sans-serif     : Microsoft YaHei, DejaVu Sans, Bitstream Vera Sans, Compute
 
 ```python
 ax = plt.gca()
-ax.spine["bottom"].set_color
-ax.spine["bottom"].set_position
-ax.spine["bottom"].set_visiable
+ax.spine["top"].set_color
+ax.spine["bottom"].set_position((”data", 0))
+ax.spine["right"].set_visiable
 ```
 
 
+
+## matplotlib.style
 
