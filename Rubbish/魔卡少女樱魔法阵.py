@@ -1,5 +1,7 @@
 import turtle as t
-def tcyuan(x,y,r):
+
+
+def tcyuan(x, y, r):
     t.fillcolor("black")
     t.begin_fill()
     t.seth(0)
@@ -9,37 +11,43 @@ def tcyuan(x,y,r):
     t.pendown()
     t.circle(r)
     t.end_fill()
-def yuan(x,y,r):
+
+
+def yuan(x, y, r):
     t.seth(0)
-    y=y-r
+    y = y-r
     t.penup()
-    t.goto(x,y)
+    t.goto(x, y)
     t.pendown()
     t.circle(r)
-def yueliang():
-    R = 110 -1
 
-    r = R - 22 -1
+
+def yueliang():
+    R = 110 - 1
+
+    r = R - 22 - 1
 
     # 月亮填充
     t.penup()
-    t.goto(-350+2*R,0)
+    t.goto(-350+2*R, 0)
     t.seth(90)
     t.fillcolor("black")
     t.begin_fill()
-    t.circle(R,359)
+    t.circle(R, 359)
     t.left(90)
     t.fd(2)
     t.left(90)
-    t.circle(-r,359)
+    t.circle(-r, 359)
     t.left(90)
     t.fd(2)
     t.pendown()
     t.end_fill()
-    #轮廓
+    # 轮廓
     yuan(-350 + R, 0, R)
     yuan(-350 + 44 + r - 2, 0, r - 2)
-def zhixian(R,r,count,jiaodu):
+
+
+def zhixian(R, r, count, jiaodu):
     t.seth(90+jiaodu)
 #    t.goto(0, 0)
     for i in range(count):
@@ -49,29 +57,31 @@ def zhixian(R,r,count,jiaodu):
         t.pendown()
         t.fd(R-r)
         t.left(360/count)
-def zfx(R,r):
+
+
+def zfx(R, r):
     jiange = 10
 #    t.pensize(jiange)
     t.seth(90)
-    big = pow((R**2)*2,0.5)
+    big = pow((R**2)*2, 0.5)
     small = big-2*jiange
     for i in range(13):
-        #大线
+        # 大线
         t.penup()
-        t.goto(0,0)
+        t.goto(0, 0)
         t.fd(R)
         t.pendown()
         t.right(135)
         t.fd(big)
-        #小线
+        # 小线
         t.left(135)
         t.penup()
         t.goto(0, 0)
-        t.fd(pow((small**2)/2,0.5))
+        t.fd(pow((small**2)/2, 0.5))
         t.pendown()
         t.right(135)
         t.fd(small)
-        #粗线
+        # 粗线
         t.pensize(8)
         t.pencolor("black")
         t.left(135)
@@ -116,10 +126,12 @@ def zfx(R,r):
         t.pensize(2)
         t.pencolor("yellow")
         t.seth(90 + i * 30)
-def wjx(r,jiaodu):
+
+
+def wjx(r, jiaodu):
     t.fillcolor("black")
     t.penup()
-    t.goto(0,0)
+    t.goto(0, 0)
     t.seth(90+jiaodu)
     t.fd(r)
     t.pendown()
@@ -131,24 +143,26 @@ def wjx(r,jiaodu):
         t.left(72)
         t.forward(144)
     t.end_fill()
-    if jiaodu!=0:
+    if jiaodu != 0:
         t.seth(90 + jiaodu)
-        for i in range(1,6):
+        for i in range(1, 6):
             t.penup()
             t.goto(0, 0)
             t.left(72)
             t.pendown()
             t.fd(r)
+
+
 def xingzuo():
     r = 250
     t.penup()
-    t.goto(20,-35)
+    t.goto(20, -35)
     t.seth(-45)
     t.fd(r)
     t.pendown()
-    xz=['♒','♓','♈','♉','♌','♍','♎','♏']
+    xz = ['♒', '♓', '♈', '♉', '♌', '♍', '♎', '♏']
     for i in range(4):
-        t.write(xz[i],font=("", 20, ""))
+        t.write(xz[i], font=("", 20, ""))
         t.penup()
         t.right(90)
         t.circle(-300, 30)
@@ -158,13 +172,15 @@ def xingzuo():
     t.goto(-r/4+10, 5)
     t.seth(135)
     t.fd(r)
-    for i in range(4,8):
-        t.write(xz[i],font=("", 20, ""))
+    for i in range(4, 8):
+        t.write(xz[i], font=("", 20, ""))
         t.penup()
         t.right(90)
         t.circle(-300, 30)
         t.left(90)
         t.pendown()
+
+
 def dxnb(s):
     t.penup()
     t.fd(-19)
@@ -172,16 +188,18 @@ def dxnb(s):
     t.fd(2)
     t.pendown()
     t.write(s, font=["KaiTi", 30, "bold"])
+
+
 def taiyang():
 
-    def haicao(r,i):
+    def haicao(r, i):
         # 海藻
         t.fillcolor("black")
 
         t.penup()
-        if i==0:
+        if i == 0:
             t.goto(256, r)
-        elif i==1:
+        elif i == 1:
             t.goto(256-r, 0)
         else:
             t.goto(256, -r)
@@ -208,7 +226,6 @@ def taiyang():
         t.pendown()
         t.end_fill()
 
-
         t.seth(2 + i * 90)
         t.circle(r / 2, 105)
         t.left(10)
@@ -227,7 +244,6 @@ def taiyang():
         t.left(7)
         t.circle(r / 3, 85)
         t.end_fill()
-
 
         t.penup()
         if i == 0:
@@ -291,21 +307,22 @@ def taiyang():
         t.left(-7)
         t.circle(-(r / 3), 85)
         t.end_fill()
-    def xhaicao(r,i):
+
+    def xhaicao(r, i):
         t.penup()
         t.goto(256 + r, 0)
         t.seth(-90)
-        t.circle(-r,20)
+        t.circle(-r, 20)
         t.pendown()
         t.begin_fill()
         t.seth(30)
-        t.circle(-r/3,100)
-        t.circle(r/6,140)
-        t.circle(-r/11,100)
+        t.circle(-r/3, 100)
+        t.circle(r/6, 140)
+        t.circle(-r/11, 100)
         t.left(80)
-        t.circle(-r/2,-30)
-        t.circle(r/4,-140)
-        t.circle(-r/3,-60)
+        t.circle(-r/2, -30)
+        t.circle(r/4, -140)
+        t.circle(-r/3, -60)
         t.end_fill()
         t.penup()
         t.goto(256 + r, 0)
@@ -350,12 +367,12 @@ def taiyang():
     haicao(r, 0)
     haicao(r, 1)
     haicao(r, 2)
-    xhaicao(r,3)
+    xhaicao(r, 3)
 
-    #大三角形
+    # 大三角形
     t.fillcolor("black")
 
-    for i in range(1,4):
+    for i in range(1, 4):
         temp = 3
         t.penup()
         t.goto(256, 0)
@@ -364,18 +381,18 @@ def taiyang():
         t.begin_fill()
         t.right(22.5)
         t.fd(r)
-        if i==1:
-            t.goto(256,3*r-temp)
-            t.goto(256,0)
+        if i == 1:
+            t.goto(256, 3*r-temp)
+            t.goto(256, 0)
             t.seth(i*90+22.5)
             t.fd(r)
-            t.goto(256,3*r-temp)
-        elif i==2:
-            t.goto(256- 3 * r+temp,0)
+            t.goto(256, 3*r-temp)
+        elif i == 2:
+            t.goto(256 - 3 * r+temp, 0)
             t.goto(256, 0)
             t.seth(i * 90 + 22.5)
             t.fd(r)
-            t.goto(256-3 * r+temp,0)
+            t.goto(256-3 * r+temp, 0)
         else:
             t.goto(256, -3 * r+temp)
             t.goto(256, 0)
@@ -385,7 +402,7 @@ def taiyang():
         t.end_fill()
     # 小三角形
     x = pow(((2 * r) ** 2) / 2, 0.5)-8
-    for i in range(1,5):
+    for i in range(1, 5):
         t.penup()
         t.goto(256, 0)
         t.seth(i * 90)
@@ -393,19 +410,19 @@ def taiyang():
         t.begin_fill()
         t.right(22.5)
         t.fd(r)
-        if i==1:
-            t.goto(256+x,x)
-            t.goto(256,0)
+        if i == 1:
+            t.goto(256+x, x)
+            t.goto(256, 0)
             t.right(45)
             t.fd(r)
-            t.goto(256+x,x)
-        elif i==2:
+            t.goto(256+x, x)
+        elif i == 2:
             t.goto(256 - x, x)
             t.goto(256, 0)
             t.right(45)
             t.fd(r)
             t.goto(256 - x, x)
-        elif i==3:
+        elif i == 3:
             t.goto(256 - x, -x)
             t.goto(256, 0)
             t.right(45)
@@ -419,53 +436,53 @@ def taiyang():
             t.goto(256 + x, -x)
         t.end_fill()
 
-    #圆
+    # 圆
 #    t.begin_fill()
-    tcyuan(256,0,r)
-#初始化
-t.setup(1500,800,0,0)
+    tcyuan(256, 0, r)
+
+
+# 初始化
+t.setup(1500, 800, 0, 0)
 t.speed(0)
 t.bgcolor("black")
 t.pencolor("yellow")
 t.pensize(2)
-#最大的圆
-yuan(0,0,350)
-yuan(0,0,325)
-yuan(0,0,321)
-yuan(0,0,306)
-zhixian(321,306,72,0)
-#小圆
-yuan(0,0,204)
-yuan(0,0,200)
-yuan(0,0,186)
-zhixian(200,186,72,0)
-#正方形边框以及直线
-zhixian(290,213,12,0)
-zhixian(248,205,12,15)
-zfx(306,204)
-#里五角星
-wjx(200,36)
-#月亮
+# 最大的圆
+yuan(0, 0, 350)
+yuan(0, 0, 325)
+yuan(0, 0, 321)
+yuan(0, 0, 306)
+zhixian(321, 306, 72, 0)
+# 小圆
+yuan(0, 0, 204)
+yuan(0, 0, 200)
+yuan(0, 0, 186)
+zhixian(200, 186, 72, 0)
+# 正方形边框以及直线
+zhixian(290, 213, 12, 0)
+zhixian(248, 205, 12, 15)
+zfx(306, 204)
+# 里五角星
+wjx(200, 36)
+# 月亮
 yueliang()
-#太阳
+# 太阳
 taiyang()
-#最小圆
-tcyuan(0,328,22)
+# 最小圆
+tcyuan(0, 328, 22)
 dxnb("北")
-tcyuan(0,-328,22)
+tcyuan(0, -328, 22)
 dxnb("南")
-tcyuan(-328,0,22)
+tcyuan(-328, 0, 22)
 dxnb("西")
-tcyuan(328,0,22)
+tcyuan(328, 0, 22)
 dxnb("東")
 
-#外五角星
-wjx(200,0)
-#星座
+# 外五角星
+wjx(200, 0)
+# 星座
 xingzuo()
 t.penup()
-t.goto(-500,-500)
+t.goto(-500, -500)
 t.pendown()
 t.done()
-
-

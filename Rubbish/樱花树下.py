@@ -1,8 +1,10 @@
 import turtle as T
 import random
 import time
- 
+
 # 画樱花的躯干(60,t)
+
+
 def Tree(branch, t):
     time.sleep(0.0005)
     if branch > 3:
@@ -32,8 +34,10 @@ def Tree(branch, t):
         t.up()
         t.backward(branch)
         t.down()
- 
+
 # 掉落的花瓣
+
+
 def Petal(m, t):
     for i in range(m):
         a = 200 - 400 * random.random()
@@ -49,7 +53,8 @@ def Petal(m, t):
         t.backward(a)
         t.right(90)
         t.backward(b)
- 
+
+
 # 绘图区域
 t = T.Turtle()
 # 画布大小
@@ -62,7 +67,7 @@ t.up()
 t.backward(150)
 t.down()
 t.color('sienna')
- 
+
 # 画樱花的躯干
 Tree(60, t)
 # 掉落的花瓣

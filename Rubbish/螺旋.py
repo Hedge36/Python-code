@@ -1,9 +1,11 @@
 from turtle import *
+
 speed(0)
-bgcolor("white") 
+bgcolor("white")
 pencolor("MediumAquamarine")
 h = 10
-for j in range(360):   
+
+for j in range(360):
     for i in range(4):
         forward(h)
         right(90)
