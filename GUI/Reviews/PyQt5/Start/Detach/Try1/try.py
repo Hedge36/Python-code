@@ -1,6 +1,5 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from QtWidgets import QMainWindow
 
 
 class Window(QtWidgets.QMainWindow):
@@ -22,7 +21,7 @@ class Window(QtWidgets.QMainWindow):
         self.closebtn.setToolTip("轻击关闭窗口")    # 提示语
         self.pic = QtWidgets.QLabel()
         self.pic.setPixmap(QtGui.QPixmap("1.png"))
-        self.linklabel = QtWidgets.QLabel("<a href='#'>没用的，别点了</a>")
+        self.linklabel = QtWidgets.QLabel("<a href='#'>还没注册？点击退出吧～</a>")
         self.linklabel.setOpenExternalLinks(False)
         self.linklabel.setAlignment(QtCore.Qt.AlignRight)
         tip1 = QtWidgets.QLabel("姓名:")
@@ -33,19 +32,20 @@ class Window(QtWidgets.QMainWindow):
         self.ques2.setPlaceholderText("Rank")
         check1 = QtGui.QIntValidator(1, 999)
         self.ques2.setValidator(check1)
-        self.ques2.setMaxLength(3)
+        self.ques2.setMaxLength()
         self.query = QtWidgets.QPushButton("查询")
-        self.query.setMaximumWidth(200)
+        self.query.setMaximumWidth(250)
         self.query.clicked.connect(self.showinfo)
 
         # 布局设置区
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.closebtn)
         layout.addWidget(self.pic)
-        layout.addWidget(self.linklabel)
+        layout.addStretch(10)
         self.addxline(layout, tip1, self.ques1)
         self.addxline(layout, tip2, self.ques2)
         layout.addWidget(self.query, alignment=QtCore.Qt.AlignCenter)
+        layout.addWidget(self.linklabel)
 
         # 主窗口设置
         self.centerwidget = QtWidgets.QWidget()

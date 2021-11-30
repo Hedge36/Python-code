@@ -67,7 +67,7 @@ def equal():
         text_display.see("insert")
     except SyntaxError:
         text_delete_all()
-        change("Error!The input does not conform to the syntax specification!\n")
+        change("Error!The input does not confirm to the syntax specification!\n")
     except NameError:
         text_delete_all()
         change("Error!Any letter exists!\n")
@@ -89,7 +89,7 @@ def advance():
 
 def full():
     """完全模式"""
-    mode.set(1)
+    mode.set(2)
     tkm.showwarning("Alert", message="功能尚在开发中，敬请期待！")
 
 

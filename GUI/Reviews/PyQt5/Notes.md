@@ -55,6 +55,16 @@ if __name__ == '__main__':
 
 
 
+### 3. Method
+
+| 方法          | 说明         |
+| ------------- | ------------ |
+| SetObjectName | 设置对象名称 |
+|               |              |
+|               |              |
+
+
+
 ## 2. Sign and Slot
 
 > 信号与槽是Qt编程的基础，信号是指在特定情况下发射出去的一个通告（类似于tkinter中的事件，但信号比事件描述更准确，更接近于计算机视角），GUI程序设计的主要内容就是对界面上各组件发射的特定信号进行响应，而槽则是对信号响应的函数（即回调函数）。槽实际上是一个函数，它可以直接被调用，但与一般函数不同的是，槽函数可以与一个信号关联，当信号被发射时，槽函数即自动被执行，Qt的类中一般都有内置的槽函数，如 `close()`等。
@@ -1104,6 +1114,26 @@ JS调用PyQt5暂时省略。
 
 > 五种布局方式：绝对布局、水平布局、垂直布局、网格布局、表单布局，此外，还有嵌套布局用于设置更加复杂的界面。
 
+## 1. Absolute
+
+
+
+## 2. QHBoxLayout
+
+
+
+## 3. QVBoxLayout
+
+
+
+## 4.GridLayout
+
+
+
+## 5. FormLayout
+
+
+
 ## 6. QSplitter
 
 > QSplitter是一个特殊的布局管理器，它允许动态地拖动子控件之间的边界。
@@ -1185,3 +1215,347 @@ def on_sender_signal(self, params)
 ## 2. Mutilple Form
 
 > 多窗口信息交互，一般是子窗口发射自定义或内置信号至主窗口，主窗口获取信息。
+
+
+
+# 7. Graph and Animate
+
+## 1. Style
+
+> PyQt5的默认窗口样式是基于当前操作系统的原生窗口样式，在不同操作系统下显示的是不一样的，在常用的Linux及Mac系统中显示效果较理想，但在Windows中则不那么美观了，所以设计者需要根据自己的需求进行设计。
+
+### 1.1 Theme Style
+
+```python
+SetStyle(QStyle)	# 对单个控件设置主题风格
+QStyleFactory.keys()	# 获得当前平台支持的原有的Qstyle样式
+QApplication.setStyle(QStyleFactory.create("WindowsXP"))	
+# 全局设置
+```
+
+### 1.2 Form Style
+
+> PyQt5用setWindowFlags方法来设置窗口样式，包括以下几种基本样式：
+>
+> + Qt.Widget，默认窗口，有最大小化及关闭按钮；
+> + Qt.Window，普通窗口，有最大小化及关闭按钮；
+> + Qt.Dialog，对话框窗口，有问号和关闭窗口；
+> + Qt.Popup，弹出窗口，无边框；
+> + Qt.ToolTip，提示窗口，无任务栏；
+> + Qt.SplashScreen，闪屏，无边框无任务栏；
+> + Qt.SubWindow，子窗口，无按钮有标题；
+
+自定义顶层窗口外观标志：
+
+| 样式                         | 说明                             |
+| ---------------------------- | -------------------------------- |
+| MSWindowsFixedSizeDialogHint | 窗口无法调节大小                 |
+| FramelessWindowHint          | 窗口无边框                       |
+| CustomizeWindowHint          | 有边框无标题栏和按钮，不能移动   |
+| WindowTitleHint              | 添加标题栏和关闭按钮             |
+| WindowSystemMenuHint         | 添加系统目录和一个关闭按钮       |
+| WindowMaximizeButtonHint     | 激活最大化和关闭按钮，禁用最小化 |
+| WindowMinimizeButtonHint     | 激活最小化和关闭按钮，禁用最大化 |
+| WindowMinMaxButtonHint       | 激活最大最小化和关闭按钮         |
+| WindowCloseButtonHint        | 添加一个关闭按钮                 |
+| WindowContextHelpButtonHint  | 添加问号和关闭按钮               |
+| WindowStaysOnTopHint         | 窗口始终位于顶层                 |
+| WindowStaysOnBottomHint      | 窗口始终位于底层                 |
+
+### 1.3 绘图
+
+> 在PyQt5中图像类有四个，即为QPixmap, QImage, QPicture和QBitmap。
+>
+> + `QPixmap`，专门为绘图而设计，在绘制图片时需要使用QPixmap；
+> + `QImage`，提供了一个与硬件无关的图像表示函数，可以用于图片的**像素级访问**；
+> + `QPicture`，绘图设备类，继承自QPainter类。可以使用QPainter的begin方法**绘图**，并使用end方法结束绘图，使用save方法来保存图片。
+> + `QBitmap`，继承自QPainter，它提供了1bit深度的**二值图像**的类。QBitmap提供的单色图像，可以用来制作游标或者笔刷。
+
+其中。可以通过scaled方法调整图片大小。
+
+
+
+## 2. QSS
+
+> QSS是Qt的样式表，是用来自定义控件样式外观的一种机制。QSS大量参考了CSS的内容，但是功能少很多。其语法规则与css基本一致，遵循对象[属性]{样式}，id即objectname，不一样的是类选择器无需`.`，带有点的类选择器不包括其子类。
+>
+> QSS样式表的使用可以通过setStyleSheet方法来实现。
+
+### 2.1 加载QSS
+
+创建一个加载QSS样式表的公共类：
+
+```python
+class QSSLoader:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def read_qss_file(qss_file_name):
+        with open(qss_file_name, 'r',  encoding='UTF-8') as file:
+            return file.read()
+```
+
+在代码中加载qss样式表：
+
+```python
+app = QApplication(sys.argv)
+window = MainWindow()
+
+style_file = './style.qss'
+style_sheet = QSSLoader.read_qss_file(style_file)
+window.setStyleSheet(style_sheet)
+
+window.show()
+sys.exit(app.exec_())
+```
+
+### 2.2 QPalette
+
+```python
+palette = QPalette()
+palette.setColor(QPalette.Background, Qt.red)
+window.setPalette(palette)
+```
+
+### 2.3 QMovie
+
+```python
+movie = QMovie()
+label.setMovie(movie)	# 设置gif
+```
+
+### 2.4 Bg
+
+> 除了上述两种方式外，还有一种QPainter方法绘图，同时可以通过self.rect获取图像大小，及时进行重绘从而实现随窗口大小变化动态调整。
+
+
+
+## 3. Mask
+
+> Mask的作用是为调用它的控件增加一个遮罩，遮住所选区域以外的部分，是指看起来是透明的，你可以通过setMask方法来设置它，它包括一个参数QBitmap或者QRegion对象，此处调用QPixmap的mask'方法来获取自身的遮罩，是一个QBitmap对象。
+
+
+
+# 8. Extensions
+
+## 1. Pyinstaller
+
+
+
+## 2. SQL Sever
+
+> PyQt5 library contains **QtSql** module. It is an elaborate class system to communicate with many SQL based databases. Its **QSqlDatabase** provides access through a Connection object. Following is the list of currently available SQL drivers:
+
+| Driver Type |                     Description                      |
+| :---------: | :--------------------------------------------------: |
+|      **QDB2**      |                   IBM DB2                    |
+|      **QIBASE**      |          Borland InterBase Driver          |
+|      **QMYSQL**      |                MySQL Driver                |
+|      **QOCI**      |         Oracle Call Interface Driver         |
+|      **QODBC**      | ODBC Driver (includes Microsoft SQL Server) |
+|      **QPSQL**      |              PostgreSQL Driver              |
+|      **QSQLITE**      |         SQLite version 3 or above         |
+|      **QSQLITE2**      |             SQLite version 2             |
+
+对于SQL3：
+
+| Methods |                    Description                     |
+| :----: | :----------------------------------------------------------: |
+|   **setDatabaseName()**    | Sets the name of the database with which connection is sought |
+|   **setHostName()**    | Sets the name of the host on which the database is installed |
+|   **setUserName()**    |   Specifies the user name for connection    |
+|   **setPassword()**    | Sets the connection object’s password if any |
+|   **commit()**    | Commits the transactions and returns true if successful |
+|   **rollback()**    |      Rolls back the database transaction       |
+|   **close()**    |               Closes the connection               |
+
+**QSqlQuery** class has the functionality to execute and manipulate SQL commands. Both DDL and DML type of SQL queries can be executed. First step is to create SQlite database using the following statements −
+
+```python
+db = QSqlDatabase.addDatabase('QSQLITE')
+db.setDatabaseName('sportsdatabase.db')
+```
+
+Next, obtain Query object with **QSqlQuery()** method and call its most important method exec_(), which takes as an argument a string containing SQL statement to be executed.
+
+```python
+query = QtSql.QSqlQuery()
+query.exec_("create table sportsmen(id int primary key, " "firstname varchar(20), lastname varchar(20))")
+```
+
+The following script creates a SQLite database sports.db with a table of sportsperson populated with five records.
+
+```python
+import sys
+from PyQt5.QtSql import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+def createDB():
+   db = QSqlDatabase.addDatabase('QSQLITE')
+   db.setDatabaseName('sportsdatabase.db')
+
+   if not db.open():
+      msg = QMessageBox()
+      msg.setIcon(QMessageBox.Critical)
+      msg.setText("Error in Database Creation")
+      retval = msg.exec_()
+      return False
+   query = QSqlQuery()
+
+   query.exec_("create table sportsmen(
+      id int primary key, ""firstname varchar(20), lastname varchar(20))")
+
+   query.exec_("insert into sportsmen values(101, 'Roger', 'Federer')")
+   query.exec_("insert into sportsmen values(102, 'Christiano', 'Ronaldo')")
+   query.exec_("insert into sportsmen values(103, 'Ussain', 'Bolt')")
+   query.exec_("insert into sportsmen values(104, 'Sachin', 'Tendulkar')")
+   query.exec_("insert into sportsmen values(105, 'Saina', 'Nehwal')")
+   return True
+
+if __name__ == '__main__':
+   app = QApplication(sys.argv)
+   createDB()
+```
+
+To confirm that the SQLite database is created with above records added in sportsmen table in it, use a SQLite Gui utility called **SQLiteStudio**.
+
+![Database Handling](/home/hedge/Typora/Temp-image/database_handling.jpg)
+
+**QSqlTableModel** class in PyQt is a high-level interface that provides editable data model for reading and writing records in a single table. This model is used to populate a **QTableView** object. It presents to the user a scrollable and editable view that can be put on any top level window.
+
+A QSqlTableModel object is declared in the following manner −
+
+```python
+model = QtSql.QSqlTableModel()
+```
+
+Its editing strategy can be set to any of the following −
+
+| Edit Strategy                 | Description                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| QSqlTableModel.OnFieldChange  | All changes will be applied immediately                      |
+| QSqlTableModel.OnRowChange    | Changes will be applied when the user selects a different row |
+| QSqlTableModel.OnManualSubmit | All changes will be cached until either submitAll() or revertAll() is called |
+
+### Example
+
+In the following example, sportsperson table is used as a model and the strategy is set as −
+
+```python
+model.setTable('sportsmen') 
+model.setEditStrategy(QtSql.QSqlTableModel.OnFieldChange)
+   model.select()
+```
+
+QTableView class is part of Model/View framework in PyQt. The QTableView object is created as follows −
+
+```python
+view = QtGui.QTableView()
+view.setModel(model)
+view.setWindowTitle(title)
+return view
+```
+
+This QTableView object and two QPushButton widgets are added to the top level QDialog window. Clicked() signal of add button is connected to addrow() which performs insertRow() on the model table.
+
+```python
+button.clicked.connect(addrow)
+def addrow():
+   print model.rowCount()
+   ret = model.insertRows(model.rowCount(), 1)
+   print ret
+```
+
+The Slot associated with the delete button executes a lambda function that deletes a row, which is selected by the user.
+
+```python
+btn1.clicked.connect(lambda: model.removeRow(view1.currentIndex().row()))
+```
+
+The complete code is as follows −
+
+```python
+import sys
+from PyQt5.QtSql import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+def initializeModel(model):
+   model.setTable('sportsmen')
+   model.setEditStrategy(QSqlTableModel.OnFieldChange)
+   model.select()
+   model.setHeaderData(0, Qt.Horizontal, "ID")
+   model.setHeaderData(1, Qt.Horizontal, "First name")
+   model.setHeaderData(2, Qt.Horizontal, "Last name")
+
+def createView(title, model):
+   view = QTableView()
+   view.setModel(model)
+   view.setWindowTitle(title)
+   return view
+
+def addrow():
+   print (model.rowCount())
+   ret = model.insertRows(model.rowCount(), 1)
+   print (ret)
+
+def findrow(i):
+   delrow = i.row()
+
+if __name__ == '__main__':
+   app = QApplication(sys.argv)
+   db = QSqlDatabase.addDatabase('QSQLITE')
+   db.setDatabaseName('sportsdatabase.db')
+   model = QSqlTableModel()
+   delrow = -1
+   initializeModel(model)
+
+   view1 = createView("Table Model (View 1)", model)
+   view1.clicked.connect(findrow)
+
+   dlg = QDialog()
+   layout = QVBoxLayout()
+   layout.addWidget(view1)
+
+   button = QPushButton("Add a row")
+   button.clicked.connect(addrow)
+   layout.addWidget(button)
+
+   btn1 = QPushButton("del a row")
+   btn1.clicked.connect(lambda: model.removeRow(view1.currentIndex().row()))
+   layout.addWidget(btn1)
+
+   dlg.setLayout(layout)
+   dlg.setWindowTitle("Database Demo")
+   dlg.show()
+   sys.exit(app.exec_())
+```
+
+The above code produces the following output −
+
+![Database Handling Output](/home/hedge/Typora/Temp-image/database_handling_output.jpg)
+
+Try adding and deleting a few records and go back to SQLiteStudio to confirm the transactions.
+
+
+
+## 3. Pandas
+
+> ptpandas extensions support for pandas. Alert that It must install manually.
+
+
+
+## 4. Matplotlib
+
+
+
+
+
+## 5. PyQtGraph
+
+> 尽管PyQtGraph没有Matplotlib便捷，但是由于它是基于PyQt开发的，在性能上比后者有优势，该库需要单独安装。
+
