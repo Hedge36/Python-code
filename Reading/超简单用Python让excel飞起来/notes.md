@@ -1684,7 +1684,9 @@ New in version 0.9.0.
 
 ## UDF decorators
 
-`xlwings.``func`(*category="xlwings"*, *volatile=False*, *call_in_wizard=True*)
+> **VBA调用情况下，默认的工作路径为用户的文档路径**
+
+`xlwings.func`(*category="xlwings"*, *volatile=False*, *call_in_wizard=True*)
 
 Functions decorated with `xlwings.func` will be imported as `Function` to Excel when running “Import Python UDFs”.
 

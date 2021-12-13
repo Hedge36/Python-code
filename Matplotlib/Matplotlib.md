@@ -333,12 +333,21 @@ font.sans-serif     : Microsoft YaHei, DejaVu Sans, Bitstream Vera Sans, Compute
 
 ```python
 ax = plt.gca()
-ax.spine["top"].set_color
-ax.spine["bottom"].set_position((”data", 0))
-ax.spine["right"].set_visiable
+ax.spines["top"].set_color
+ax.spines["bottom"].set_position((”data", 0))
+ax.spines["right"].set_visiable
 ```
 
 
 
 ## matplotlib.style
+
+```python
+plt.style.available	# 查看全部可用的样式
+plt.style.library	# 查看当前样式属性	
+plt.style.use(style)# 使用样式
+
+mpl.rc_file_defaults()	# 还原样式至本次使用前
+mpl.rcdefaults()	# 还原样式至初始配置
+```
 
