@@ -13,6 +13,13 @@ class Window(QtWidgets.QMainWindow):
         self.status.showMessage("Welcome for your use!", 3000)
         # 第二个参数表示时间（毫秒），表示信息显示时长，默认为0,表示始终存在
         self.setWindowIcon(QtGui.QIcon('star.ico'))
+        self.setObjectName("Mainwindow")
+        self.setStyleSheet("#Mainwindow{border-image:url(./bg.jpg);}")
+
+    # def paintEvent(self, event):
+    #     painter = QtGui.QPainter(self)
+    #     pixmap = QtGui.QPixmap("./bg.jpg")
+    #     painter.drawPixmap(self.rect(), pixmap)
 
     def SetUI(self):
         # Widget控件区
@@ -32,9 +39,7 @@ class Window(QtWidgets.QMainWindow):
         self.ques2.setPlaceholderText("Rank")
         check1 = QtGui.QIntValidator(1, 999)
         self.ques2.setValidator(check1)
-        self.ques2.setMaxLength()
         self.query = QtWidgets.QPushButton("查询")
-        self.query.setMaximumWidth(250)
         self.query.clicked.connect(self.showinfo)
 
         # 布局设置区

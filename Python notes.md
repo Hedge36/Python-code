@@ -37,7 +37,6 @@
 **除法默认返回浮点数**
 
 > 浮点数之间的运算存在不确定尾数，一般发生在10的-16次方左右，常见的有0.1 + 0.2 == 0.3000000004；计算机中用的二进制并不完全等同十进制，通过 decimal 模块的 `Decimal` 方法，可以解决这个问题，如果想要表示分数，可以通过 fraction模块的 `Fraction` 方法。
->
 
 ### 2.3 科学计数法的使用
 
@@ -270,7 +269,6 @@
 > 仅保存一份相同且不可变字符串的方法，不同的值被存放在字符串驻留池中。
 >
 > 对于符合标识符规则的字符串(仅包括下划线，字母和数字)会启用字符串驻留机制。
->
 
 ### 3.8 字符串格式化
 
@@ -391,7 +389,6 @@ b.decode()
 ### 5.2 表示
 
 > 集合用“{}”表示，元素用逗号分隔，用{}或者set()建立，如果建立空集合必须用set()，且集合顺序是无序的，不一定是最初的定义的顺序。
->
 
 ### 5.3 集合类方法
 
@@ -590,7 +587,6 @@ for name, age in zip(names, ages):
 > heaven :23
 >
 > heddy :27
->
 
 ## 7. 布尔值
 
@@ -622,7 +618,6 @@ print(value, ..., sep=' ', end='\n',
 ```
 
 > Prints the values to a stream, or to sys.stdout by default.
->
 
 ### 2.2 Params
 
@@ -688,7 +683,6 @@ print(value, ..., sep=' ', end='\n',
 > 终端的字符颜色是用转义序列控制的，是文本模式下的系统显示功能，和具体的语言无关。
 >
 > 转义序列是以ESC开头,即用\\033来完成（ESC的ASCII码用十进制表示是27，用八进制表示就是033）。
->
 
 ### 2. 书写格式
 
@@ -733,7 +727,6 @@ print("\\033\[1;31;40m您输入的帐号或密码错误！")
 > 上方代码的输出格式为：字体高亮，红色前景，黄色背景      
 >
 > PS：前景色也就是字体的颜色
->
 
 
 上面两行代码的结果如下：
@@ -791,24 +784,16 @@ expr1 if condition else expr2
 
 ```python
 try:
-
 	block to try.
-
 except [error_type,...] [as e]:
-
  	block to run if error occurs.
-
 [else:
-
 	block to run if without error as an encourage]
-
 [finally:
-
 	block to run no matter whether error occurs]
 ```
 
 > Tip：一般情况下，不要将return语句放在try, except, else, finally块中，而是在板块的最后，否则会发生意想不到的错误。
->
 
 ### 1.常见异常错误
 
@@ -839,12 +824,10 @@ except [error_type,...] [as e]:
 
 ```python
 with context_expr[as var]:
-
 	block
 ```
 
 > with上下文管理可以自动管理资源，在with代码块执行完毕后自动还原进入该代码之前的环境或者上下文。无论因何种原因结束语句块，总能保证资源正常释放，极大的简化了工作，在文本操作，该操作非常常用。
->
 
 ### 3.traceback
 
@@ -856,12 +839,9 @@ import traceback
 traceback.print_exc([file=''])
 ```
 
-
-
 ### 4.自定义异常类
 
 > 可通过class定义一异常类（继承 `Exception`类），并通过raise抛出异常。
->
 
 
 
@@ -875,7 +855,6 @@ traceback.print_exc([file=''])
 
 ```python
 for item in items:
-
 	block              
 ```
 
@@ -901,12 +880,10 @@ for item in items:
 
 ```python
 while condition:
-
 	block
 ```
 
 > 当条件满足时，反复执行语句块，直至条件不满足为止。若要无限循环，只需将`condition`设置为`True`，常用于各种挂起线程，如应用界面。
->
 
 ### 4.3 循环控制保留字
 
@@ -942,11 +919,8 @@ while condition:
 
 ```python
 def tag (parameters : type) -> type hint:	
-    
 """Annotion of Fuction, can inquire and print by `help`, according to PEP8"""
-
      Expressions
-    
      return values
 ```
 
@@ -961,7 +935,6 @@ def tag (parameters : type) -> type hint:
 ## 2. 函数参数
 
 > 函数功能的实现往往需要用到参数，参数列表包括可变参数，可以没有参数(保留括号)，也可以是多个参数，参数个数也可固定。
->
 
 ### 2.1 参数形式
 
@@ -988,7 +961,6 @@ def tag (parameters : type) -> type hint:
 #### 2.3.1 位置参数
 
 > 函数调用时，实参默认按照**位置顺序**传递，需要个数与形参匹配，按照位置传递，称为位置参数。若不匹配则返回报错TypeError : missing arguments。
->
 
 形如：
 
@@ -1001,7 +973,6 @@ test(1,2)
 #### 2.3.2 默认值参数
 
 > 我们可以为某些函数设置默认值，这样这些函数在传递时就是可选的，称为"默认值参数"，**默认值参数必须放到位置参数后边**。
->
 
 ```python
 def test(a, b, c = 10):
@@ -1012,7 +983,6 @@ test(10, 20)
 #### 2.3.3. 命名参数
 
 > 我们也可以按照形参的名称传递参数，称为"命名参数"，也称"关键字参数"。
->
 
 ```python
 def test(a, b):
@@ -1037,7 +1007,6 @@ test(3, 2, 1, name = 'hedge', age = '19')
 ### 2.3.5 强制命名参数
 
 > 在可变参数后边的参数为"强制命名参数"，必须按照"命名参数"传递。
->
 
 ```python
 def test(*a , b):
@@ -1054,7 +1023,6 @@ test(1, 2, 3, b = 3)
 > 变量分为两类，**局部变量**和**全局变量**，局部变量为组合数据类型且未创建时，等同于全局变量，函数内部变量未经声明则为局部变量，若使用global声明则为全局变量；
 >
 > 全局变量降低了函数的通用性和可读性，应避免全局变量的使用。局部变量只作用在定义与结束之间的模块，调用比全局变量快*(提高效率应考虑将全局变量更换为局部变量)*，应优先考虑使用。如果局部变量与全局变量同名，则在函数内隐藏全局变量，只使用同名的局部变量。
->
 
 比如：
 
@@ -1080,7 +1048,6 @@ def test02():
 > 此外，调用函数locals()及globals()可以查看局部变量与全局变量。
 >
 > 值得注意的是，在嵌套函数中，用nonlocal宣称外层局部变量。
->
 
 ### 3.2 变量的赋值
 
@@ -1089,158 +1056,30 @@ def test02():
 #### 3.2.1 链式赋值：
 
 >  如：x=y=2
->
 
 #### 3.2.2 系列解包赋值：
 
  如：a,b,c=4,5,6相当于各自赋值，非元组类型
 
 >  可用于变量值的互换，如：a, b = b, a
->
 
 **Tip：变量名称不可与函数名相同，否则多次调用时会出现歧义报错。**
 
 ### 3.3 变量的删除
 
 >  使用del函数删除不再使用的变量，此时如果对象没有被引用，则会被垃圾回收器回收，清理内存空间。
->
 
 ### 3.4 常量
 
 >  python不支持常量，即没有语法规则限制改变一个常量的值，只能通过逻辑上不做修改。
->
 
-## 附注： 私有属性函数
 
-### 附注1 概况
-
-> 下划线对解释器有特殊的意义，而且是内建标识符所使用的符号，因此我们对于普通的变量，需要避免用下划线作为变量名的开始。一般来讲，变量名\_xx被看作是“私有的”，在模块或类外不可以使用。当变量是私有的时候，用_xxx 来表示变量是很好的习惯。
-
-**“单下划线” 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；**
-
-**“双下划线” 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。**
-
-### 附注2 保留属性：
-
-| Attributes | Description |
-|---|---|
-|Class.\__doc__ | 类型帮助信息  |
-|Class.\__name__ | 类型名称 |
-|Class.\_\_module\__ | 类型所在模块 '\__main__' |
-|Class.\__bases__ |类型所继承的基类 |
-|Class.\__dict__| 类型字典，存储所有类型成员信息 |
-|Class().\_\_class__| 类型 <class '\__main__.Class'> |
-|Class().\_\_module__ |实例类型所在模块 '\_\_main__'|
-|Class().\__dict__ |对象字典，存储所有实例成员信息|
-
-### 附注3 保留方法:
-
-可以把保留方法分类：
-
-对\__init\_\_() 方法的调用发生在实例被创建之后 。如果要控制实际创建进程，请使用 \_\_new__() 方法。
-
-按照约定， \_\_repr\_\_() 方法所返回的字符串为合法的 Python 表达式。
-
-在调用 print(x) 的同时也调用了 \_\_str__() 方法。
-
-### 附注4 行为方式与迭代器类似的类 
-
-无论何时创建迭代器都将调用 \_\_iter\_\_() 方法。这是用初始值对迭代器进行初始化的绝佳之处。无论何时从迭代器中获取下一个值都将调用 \__next__() 方法。\_\_reversed\_\_() 方法并不常用。它以一个现有序列为参数，并将该序列中所有元素从尾到头以逆序排列生成一个新的迭代器。
-
-### 附注5 计算属性 
-
-如果某个类定义了 __getattribute__() 方法，在 每次引用属性或方法名称时 Python 都调用它（特殊方法名称除外，因为那样将会导致讨厌的无限循环）。
-
-如果某个类定义了 __getattr__() 方法，Python 将只在正常的位置查询属性时才会调用它。如果实例 x 定义了属性color， x.color 将 不会 调用x.__getattr__('color')；而只会返回x.color 已定义好的值。
-
-无论何时给属性赋值，都会调用 __setattr__() 方法。
-
-无论何时删除一个属性，都将调用 __delattr__() 方法。
-
-如果定义了 __getattr__() 或 __getattribute__() 方法， __dir__() 方法将非常有用。通常，调用 dir(x) 将只显示正常的属性和方法。如果__getattr()__方法动态处理color 属性， dir(x) 将不会将 color 列为可用属性。可通过覆盖 __dir__() 方法允许将 color 列为可用属性，对于想使用你的类但却不想深入其内部的人来说，该方法非常有益。 
-
-### 附注6 可比较的类
-
-我将此内容从前一节中拿出来使其单独成节，是因为“比较”操作并不局限于数字。许多数据类型都可以进行比较——字符串、列表，甚至字典。如果要创建自己的类，且对象之间的比较有意义，可以使用下面的特殊方法来实现比较。 
-
-### 附注7 可序列化的类
-
-Python 支持 任意对象的序列化和反序列化。（多数 Python 参考资料称该过程为 “pickling” 和 “unpickling”）。该技术对与将状态保存为文件并在稍后恢复它非常有意义。所有的 内置数据类型 均已支持 pickling 。如果创建了自定义类，且希望它能够 pickle，阅读 pickle 协议 了解下列特殊方法何时以及如何被调用 
-
-要重建序列化对象，Python 需要创建一个和被序列化的对象看起来一样的新对象，然后设置新对象的所有属性。__getnewargs__() 方法控制新对象的创建过程，而 __setstate__() 方法控制属性值的还原方式。
-
-### 附注8 可在 with 语块中使用的类
-
-with 语块定义了 运行时刻上下文环境；在执行 with 语句时将“进入”该上下文环境，而执行该语块中的最后一条语句将“退出”该上下文环境。 
-
-该文件对象同时定义了一个 __enter__() 和一个 __exit__() 方法。该 __enter__() 方法检查文件是否处于打开状态；如果没有， _checkClosed()方法引发一个例外。
-
-__enter__() 方法将始终返回 self —— 这是 with 语块将用于调用属性和方法的对象
-
-在 with 语块结束后，文件对象将自动关闭。怎么做到的？在 __exit__() 方法中调用了 self.close() .
-
-### 附注9 真正神奇的东西
-
- 如果知道自己在干什么，你几乎可以完全控制类是如何比较的、属性如何定义，以及类的子类是何种类型。 
-
-python中以双下划线的是一些系统定义得名称，让python以更优雅得语法实行一些操作，本质上还是一些函数和变量，与其他函数和变量无二，比如:x.__add__(y) 等价于 x+y
-有一些很常见，有一些可能比较偏，在这里罗列一下，做个笔记，备忘。
-
-x.__contains__(y) 等价于 y in x, 在list,str, dict,set等容器中有这个函数
-__base__, __bases__, __mro__, 关于类继承和函数查找路径的。
-
-class.__subclasses__(), 返回子类列表
-
-x.__call__(...) == x(...)
-
-x.__cmp__(y) == cmp(x,y)
-
-x.__getattribute__('name') == x.name == getattr(x, 'name'),  比__getattr__更早调用
-
-x.__hash__() == hash(x)
-
-x.__sizeof__(), x在内存中的字节数, x为class得话， 就应该是x.__basicsize__
-
-x.__delattr__('name') == del x.name
-
-x.\__dictoffset__ attribute tells you the offset to where you find the pointer to the __dict__ object in any instance object that has one. It is in bytes.
-
-x.\__flags__, 返回一串数字，用来判断该类型能否被序列化（if it's a heap type), __flags__ & 512
-
-S.__format__, 有些类有用
-
-x.__getitem__(y) == x[y], 相应还有__setitem__, 某些不可修改类型如set，str没有__setitem__
-
-x.__getslice__(i, j) == x[i:j], 有个疑问，x='123456789', x[::2],是咋实现得
-
-x.\__subclasscheck__(), check if a class is subclass
-
-x.\__instancecheck__(), check if an object is an instance
-
-x.\__itemsize__, These fields allow calculating the size in bytes of instances of the type. 0是可变长度， 非0则是固定长度
-
-x.__mod__(y) == x%y, x.__rmod__(y) == y%x
-
-x.__module__ , x所属模块
-
-x.__mul__(y) == xy,  x.__rmul__(y) == yx
-
-x.\__reduce__, __reduce_ex__ , for pickle
-
-x.\__slots__ 使用之后类变成静态一样，没有了__dict__, 实例也不可新添加属性
-
-x.\__getattr__ 在一般的查找属性查找不到之后会调用此函数
-
-x.\__setattr__ 取代一般的赋值操作，如果有此函数会调用此函数， 如想调用正常赋值途径用 object.__setattr__(self, name, value)
-
-x.\__delattr__ 同__setattr__, 在del obj.name有意义时会调用
 
 ## 4. lambda函数
 
   lambda函数是一种匿名函数，没有名称，使用lambda保留字定义，只允许有一个表达式并且该表达式计算所得结果即为函数返回值。常用于定义**简单的能在一行内表示的**函数；
 
 >    lambda *Params* : *expression*
->
 
 比如：
 
@@ -1288,7 +1127,6 @@ def func2():
 ### 授权(Authorization)
 
 > 装饰器能有助于检查某个人是否被授权去使用一个web应用的端点(endpoint)。它们被大量使用于Flask和Django web框架中。
->
 
 ```python
 from functools import wraps  
@@ -1307,7 +1145,6 @@ def requires_auth(f):
 ### 日志(Logging)
 
 > 日志是装饰器运用的另一个亮点。
->
 
 ```python
 from functools import wraps  
@@ -1454,7 +1291,6 @@ def func2(params=params):
 ### eval函数
 
 > 将字符串str当作有效的表达式来**求值**并**返回结果**，与exec不同，它只能进行基本的求值操作，而不支持赋值等操作，同时，一般情况下，其作用域为全局作用域，如需指定，传入globals与locals参数，你可以通过python内置的locals方法来实现快速指定，其一般语法表达式如下：
->
 
 ```python
 eval(source[,globals[,locals]]) -->value
@@ -1591,7 +1427,6 @@ enumerate(sequence, [start=0])
 #### Return
 
 > 返回 `Enumerate-Object`。
->
 
 
 
@@ -1600,14 +1435,12 @@ enumerate(sequence, [start=0])
 ## 1. 文件类型
 
 > 本质上，所有文件都是二进制文件，但展示形式包括二进制文件及文本文件。
->
 
 ## 2. 文件的打开与关闭
 
 ### 2.1 概述
 
 > 文件需要从存储状态转变为占用状态才可唯一地排他地进行操作，其基本语法：
->
 
 ```python
 open(filename, open_mode, encoding='UTF-8')
@@ -1676,7 +1509,6 @@ with open('/path/to/file', 'r') as f:
 > readline([size])    	读入一行内容，如果给出参数，则读入前size个字节；  
 >
 > readlines([hint])   	读入所有行内容，以每行为元素形成列表，如果给出参数，则读入前hint行。
->
 
 ## 4. 全文本操作
 
@@ -1715,7 +1547,6 @@ with open('/path/to/file', 'r') as f:
 ### **附注：关于\_\_name__**
 
 > 首先需要了解 \_\_name__ 是属于 python内置类属性，在一个 python 程序中，代表对应程序名称。当一段程序作为主线运行程序时其内置名称就是 \_\_main__，使用if条件判断对该属性进行检查可以防止在被其他文件调用时语句块被调用。
->
 
 
 
@@ -1740,7 +1571,6 @@ import file
 ```
 
 > Tip:文件路径及名称中尽量不要出现空格，否则无法直接引用，确实需要的，可以通过以下方式引用：
->
 
 ```python
 symbol= __import__("filepath")
@@ -1749,7 +1579,6 @@ symbol= __import__("filepath")
 ### 6.2 文件复制
 
 > copyFile(source_path, target_path)
->
 
 ```python
 # copyfile .py
@@ -1771,17 +1600,15 @@ except:
 
 ## 1. 类的定义
 
-> 类也是一种对象，不同于数组列表等的是，类包含数据及方法(即函数)两种不同对象，类似于对象的*"模具"*，用于输出打印实例对象，即实例对象是通过类打印出来的对象。此外，结构包括：类属性，实例属性，实例方法(代码对象)，实例对象。
+> 类也是一种对象，不同于数组列表等的是，类包含数据及方法(即函数)两种不同对象，类似于对象的*"模具"*。此外，类的结构包括：类属性，实例属性，实例方法(代码对象)，实例对象。
 >
 > 对象命名通常首字母大写，多个单词采取驼峰原则。
->
 
 实例分析:
 
 ```python
 class Women:
 	sex = '女'
-	faceValue = "高"
 	height = "168"
 	weight = "85斤"
 	color = "yellow"		# 类属性
@@ -1790,12 +1617,6 @@ class Women:
 
 	def makeChild(self):
         print("可以生宝宝")		# 实例方法
-
-	def cookie(self):
-		print("做饭")
-
-	def memeda(self):
-        print("白天么么哒")
 ```
 
 #打印Women 类
@@ -1823,7 +1644,7 @@ print(my.name)  # Hello
 
 ## 2. 实例对象
 
-通过object = 类名([参数…])构造实例对象，实例对象具有全部的类属性及实例属性，实例方法，且调用实例对象时，自动调用实例属性。
+> 通过object = 类名([参数…])构造实例对象，实例对象具有全部的类属性及实例属性，实例方法，且调用实例对象时，自动调用实例属性。
 
 实例分析：
 
@@ -1837,7 +1658,7 @@ print(lisi)  # <__main__.Women object at 0x000001B6873C8CC0>
 
 类可以通过`__init__(self, 参数)`来给初始化创建好的实例对象设置实例属性。
 
-类是实例的蓝图，每个实例通过属性（又称为域）来确定其状态信息。，且在Python中，不同于其他语言，Python没有方法的重载，即不能通过参数的不同辨别同名方法，后定义的方法和覆盖先定义的方法，只有最后一个方法有效，且不会报错。方法也是对象，在python中方法具有动态性，可以再定义及修改。
+> 类是实例的蓝图，每个实例通过属性（又称为域）来确定其状态信息。，且在Python中，不同于其他语言，Python没有方法的重载，即不能通过参数的不同辨别同名方法，后定义的方法和覆盖先定义的方法，只有最后一个方法有效，且不会报错。方法也是对象，在python中方法具有动态性，可以再定义及修改。
 
 在类中调用实例属性及方法的语法如下：
 
@@ -1855,9 +1676,9 @@ a.study() = Person.study(a)
 
 ### 3.1 实例属性
 
-A.使用对象创建的属性称之为对象属性，只有当前对象里才存在，如果使用对象属性创建了一个和类里面同名的属性，那么调用的时候会优先查找对象里面的属性
-
-B.使用类里面的方法的参数self创建的属性也为对象属性
+> A.使用对象创建的属性称之为对象属性，只有当前对象里才存在，如果使用对象属性创建了一个和类里面同名的属性，那么调用的时候会优先查找对象里面的属性。
+>
+> B.使用类里面的方法的参数self创建的属性也为对象属性。
 
 ```python
 class People(object):
@@ -1869,20 +1690,17 @@ class People(object):
 p = People()
 p.age =12 #实例属性
 print(p.address) #正确
-print(p.name)    #正确
-print(p.age)     #正确
 print(People.address) #正确
 print(People.name)    #错误
-print(People.age)     #错误
 ```
 
 ### 3.2 类属性
 
-A.当使用对象.属性名来改类里面的属性的时候，其实是在对象里面创建了一个同名的属性
-
-B.当将对象里面同名的属性删除掉以后还是会调用类的属性
-
-C.不能再对象里删除类里面的属性，只有使用的权利使用类操作过的属性所有对象在调用类属性的时候都是修改后的属性创建对象属性的方法
+> A.当使用对象.属性名来改类里面的属性的时候，其实是在对象里面创建了一个同名的属性
+>
+> B.当将对象里面同名的属性删除掉以后还是会调用类的属性
+>
+> C.不能再对象里删除类里面的属性，只有使用的权利使用类操作过的属性所有对象在调用类属性的时候都是修改后的属性创建对象属性的方法
 
 ```python
 class People(object):
@@ -1894,19 +1712,15 @@ class People(object):
 p = People()
 
 print(p.name)           #正确
-
-print(People.name)      #正确
-
 print(p.__age)            #错误，不能在类外通过实例对象访问私有的类属性
-
 print(People.__age)        #错误，不能在类外通过类对象访问私有的类属性
 ```
 
 ### 附：实例属性与类属性的区别
 
-类属性就相当与全局变量，实例对象共有的属性，实例对象的属性为实例对象自己私有。
-
-类属性就是`类对象`（Tool）所拥有的属性，它被所有`类对象`的`实例对象(实例方法)`所共有，在内存中只存在一个副本，这个和C++中类的静态成员变量有点类似。对于公有的类属性，在类外可以通过`类对象`和`实例对象`访问。
+> 类属性就相当与全局变量，实例对象共有的属性，实例对象的属性为实例对象自己私有。
+>
+> 类属性就是`类对象`（Tool）所拥有的属性，它被所有`类对象`的`实例对象(实例方法)`所共有，在内存中只存在一个副本，这个和C++中类的静态成员变量有点类似。对于公有的类属性，在类外可以通过`类对象`和`实例对象`访问。
 
 ```python
 class People(object):
@@ -1923,8 +1737,6 @@ p.country = 'japan'
 
 print(p.country)      #实例属性会屏蔽掉同名的类属性
 
-print(People.country)
-
 del p.country    #删除实例属性
 
 print(p.country)
@@ -1934,10 +1746,10 @@ print(p.country)
 
 ###  3.3 实例方法
 
-实例方法或者叫对象方法，又称为成员函数，指的是我们在类中定义的普通方法。
-只有实例化对象之后才可以使用的方法，该方法的第一个形参接收的一定是对象本身。
-
-Python 的实例方法用得最多，也最常见。我们先来看 Python 的实例方法。
+> 实例方法或者叫对象方法，又称为成员函数，指的是我们在类中定义的普通方法。
+> 只有实例化对象之后才可以使用的方法，该方法的第一个形参接收的一定是对象本身。
+>
+> Python 的实例方法用得最多，也最常见。我们先来看 Python 的实例方法。
 
 ```python
 class Kls(object):
@@ -1967,7 +1779,7 @@ ik2.printd()
 
 #### 3.4.1 概述
 
-类方法用来操作类属性，可以通过装饰器@classmethod来定义，classmethod修饰符对应的函数不需要实例化，不需要 self 参数，但第一个参数需要是表示自身类的 cls 参数，可以来调用类的属性，类的方法，实例化对象等。
+> 类方法用来操作类属性，可以通过装饰器@classmethod来定义，classmethod修饰符对应的函数不需要实例化，不需要 self 参数，但第一个参数需要是表示自身类的 cls 参数，可以来调用类的属性，类的方法，实例化对象等。
 
 #### 3.4.2 定义方法
 
@@ -1978,35 +1790,26 @@ def 类方法(cls,[形参])：
 ​	函数体
 
 ```python
-class A(object):  
-    
+class A(object):    
 bar = 1    
-
 def func1(self):    
-    
     print ('foo')   
-    
-    @classmethod  
-    
+    @classmethod      
     def func2(cls):  
-        
         print ('func2')  
-        
         print (cls.bar) 
-        
         cls().func1()   # 调用 foo 方法 
-        
 A.func2()               # 不需要实例化
 ```
 
-注意：
+**注意：**
 
-1. @classmethod必须位于方法上面一行；
-
-2. 第一个cls必须有；cls指的是类对象本身(class缩写)；
-3. 无需给cls传参；
-4. 类方法中访问实例变量和实例方法会导致错误；
-5. 子类继承父类方法时，传入的cls是子类对象，而非父类对象。
+> 1. @classmethod必须位于方法上面一行；
+>
+> 2. 第一个cls必须有；cls指的是类对象本身(class缩写)；
+> 3. 无需给cls传参；
+> 4. 类方法中访问实例变量和实例方法会导致错误；
+> 5. 子类继承父类方法时，传入的cls是子类对象，而非父类对象。
 
 
 
@@ -2014,39 +1817,33 @@ A.func2()               # 不需要实例化
 
 #### 3.5.1 概述
 
-python允许定义与类对象无关的方法，称为“静态方法”，“静态方法”和在普通模块中的的函数没有区别，只不过“静态方法”放到了“类的名字空间里”，调用需要通过类调用。
+> python允许定义与类对象无关的方法，称为“静态方法”，“静态方法”和在普通模块中的的函数没有区别，只不过“静态方法”放到了“类的名字空间里”，调用需要通过类调用。
 
 #### 3.5.2 定义方法
 
 “静态方法”可以通过装饰器@staticmethod来定义，格式如下：
 
-@staticmethod
-
-def 静态方法名([参数])：
-
-​	函数体
+> @staticmethod
+>
+> def 静态方法名([参数])：
+>
+> ​	函数体
 
 注意：
 
-1. @staticmethod必须位于方法上面一行；
-2. 调用方法：“类名.静态方法名(参数列表)”
-3. 静态方法中访问实例变量和实例方法会导致错误；
+> 1. @staticmethod必须位于方法上面一行；
+> 2. 调用方法：“类名.静态方法名(参数列表)”
+> 3. 静态方法中访问实例变量和实例方法会导致错误；
 
 实例
 
 ```python
 class A:
-
 	@staticmethod
-
 	def demo():
-	
 		print('类来调用')
-
 a = A()
-
 a.demo()
-
 A.demo()
 ```
 
@@ -2066,12 +1863,7 @@ Python实现自动的垃圾回收，当对象没有被引用时(即引用次数�
 
 实例分析见下：
 
-在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：
-
-```python
-s = Student()
-s.score = 9999
-```
+在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改。
 
 上面的赋值显然不符合实际情况，为了限制score的范围，可以通过一个`set_score()`方法来设置成绩，再通过一个`get_score()`来获取成绩，这样，在`set_score()`方法里，就可以检查参数：
 
@@ -2090,17 +1882,6 @@ class Student(object):
 ```
 
 现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：
-
-```python
->>>s = Student()
->>>s.set_score(60)
->>>s.get_score()
-60
->>>s.set_score(9999)
-Traceback (most recent call last):
-
-ValueError: score must between 0 ~ 100!
-```
 
 但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。
 
@@ -2124,17 +1905,6 @@ class Student(object):
 ```
 
 `@property`的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上`@property`就可以了，此时，`@property`本身又创建了另一个装饰器`@score.setter`，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：
-
-```python
->>> s = Student()
->>> s.score = 60 # OK，实际转化为s.set_score(60)
->>> s.score # OK，实际转化为s.get_score()
-60
->>> s.score = 9999
-Traceback (most recent call last):
-
-ValueError: score must between 0 ~ 100! 
-```
 
 注意到这个神奇的`@property`，我们都在对实例操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。
 
@@ -2166,94 +1936,27 @@ class Student(object):
 
 self不是只能叫self别的也可以，但是规范来说都使用self，且调用实例方法时不能给self传参，self由解释器自动传参。
 
-实例：
 
-```python
-class A:
 
-	name = ''
-
-	def demo(self):
-
-		print(self) # 代表当前实例化类的对象
-
-		print(id(self))
-
-a = A()
-
-a.demo()
-
-print(a)
-
-print(id(a))
-```
-
-## 5. return 方法的返回值
-
-和函数一样，代码遇到return下面就不在执行，会将值返回给调用处。
-
-实例
-
-```python
-class Demo:
-
-	name = ''
-
-	def speak(self):
-
-		print("我是{}号楼".format(self.name))
-
-	def myRetuen(self):
-
-		return self.name
-
-		print(self.name) # 不在执行
-
-d2 = Demo()
-
-d2.name = 'd2'
-# 输出结果：给当前对象添加对象属性
-print(d2.name)	
-# 输出结果：'d2'
-print(d2.speak()) 
-# 输出结果：我是d2楼
-d2Name = d2.myRetuen()	
-
-print(d2Name) 
-# 输出结果：None
-```
-
-## 6. 给对象和类绑定方法
+## 5. 给对象和类绑定方法
 
 ### (1)给对象绑定方法
 
-实例
-
 ```python
 from types import MethodType
-
 def func(self):
-    
 	print('func')
-    
 from types import MethodType
-
 a = A()
-
 #a.func = MethodType(方法名,对象名)
-
 a.func = MethodType(func,a)
 ```
 
 ### (2) 给类绑定方法
 
-实例
-
 ```python
 def func(self):
-
 	print('func')#类名.属性名 = 函数名
-
 A.func = func
 ```
 
@@ -2263,7 +1966,7 @@ A.func = func
 >
 > 2.给对象绑定属性或者方法只有当前对象有给类绑定属性或者方法所有当前类的实例化的对象都会拥有。
 
-## 7. slots限制对象
+## 6. slots限制对象
 
 动态添加属性
 
@@ -2277,11 +1980,11 @@ class A:
 
  
 
-## 8. 私有属性和私有方法
+## 7. 私有属性和私有方法
 
-### 8.1 类的私有属性:
+### 7.1 类的私有属性:
 
-> 以下划线开头的变量不能在类的外部进行直接使用和访问，单下划线表示变量是受保护的，而双下划线表示变量是私有的。
+> 以下划线开头的变量不能在类的外部进行直接使用和访问，单下划线表示变量是受保护的，可在类及其子类中访问，而双下划线表示变量是私有的，只能在这个类中访问。
 
 #### 私有属性的访问
 
@@ -2291,19 +1994,19 @@ class A:
 
 注意：在类的内部只要使用self.\_\_属性名那么就会去找私有属性_类名___属性名
 
-### 8.2 类的私有方法
+### 7.2 类的私有方法
 
 以\_\_作为开头，不能在类的外部进行使用和访问，在类的里面使用self.__方法名。在公有方法里面通过self去调用，方法本质上也是属性。
 
 
 
-## 9. 继承
+## 8. 继承
 
 面向对象编程带来最大的好处就代码的重用，实现代码重用的操作就是类的继承，被继承的类称之为**父类或者基类**，超类继承的类称之为**子类**。
 
 所有的类都会继承一个超类object，即定义新类时()为空，默认继承object类。
 
-### 9.1 单一继承
+### 8.1 单一继承
 
 继承方法：
 
@@ -2328,27 +2031,17 @@ a.speak()
 
 ```python
 class B(A):
-
 	grade = ''
-
 	def __init__(self,name,age,sex,grade):
-
 		print('我是子类的__init__')
-
 		self.grade = grade
-	
-		A.__init__(self,name,age,sex)	#必须显式调用父类的初始化方法，不然解释器
-        
-        								#不会调用
-
+		A.__init__(self,name,age,sex)	
+        #必须显式调用父类的初始化方法，不然解释器不会调用
 	def speak(self):
-        
 		A.speak(self)
     
 print("我今年{} 我叫{} 我的成绩是{}".format(self.age,self.name,self.grade))
-
 b = B('张三',18,'男',60)# print(b.name)# print(b.__dict__)
-
 b.speak()
 ```
 
@@ -2366,53 +2059,38 @@ b.speak()
 >
 > **super().方法名(建议)**
 
-### 9.2 多继承
+### 8.2 多继承
 
-class类名(继承的父类1,继承的父类2[,父类3..]):
-
- pass
+> class类名(继承的父类1,继承的父类2[,父类3..])
 
 注意：
 
-*当类进行多继承的时候注意父类的顺序当父类存在**同名的属性或者方法**的时候会从继承时父类的顺序**从左->右**依次查找第一个出现的，同时，多继承会使得类的整体层次异常复杂，尽量避免使用。*
+> *当类进行多继承的时候注意父类的顺序当父类存在**同名的属性或者方法**的时候会从继承时父类的顺序**从左->右**依次查找第一个出现的，同时，多继承会使得类的整体层次异常复杂，尽量避免使用。*
 
 调用父类的方法
 
 ```python
 class A:
-
 	def speak(self):
-
 		print('我是A类的speak方法')
-
 	def a(self):
-
 		print('a')
 ```
 
 ```python
 class B:
-
 	def speak(self):
-
     	print('我是B类的speak方法')
-
     def b(self):
-
     	print('b')
 ```
 
 ```python
 class C(A,B):
-
 	def speak(self):
-	
 		super().speak() #还是从左往右找..
-
 	#super(C,self).speak()
-
 	# super(A,self).speak()
-
 	# super(B,self).speak()
 ```
 
@@ -2424,25 +2102,44 @@ class C(A,B):
 
 组合指的是，在一个类中以另外一个类的对象作为数据属性，称为类的组合。
 
-![img](https://upload-images.jianshu.io/upload_images/13717038-cfb5acf395bf97be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 2.组合的应用例子-圆环计算
+
+### 2. 圆环计算
 
 圆环是由两个圆组成的，圆环的面积是外面圆的面积减去内部圆的面积。圆环的周长是内部圆的周长加上外部圆的周长。
 
 这个时候，我们就首先实现一个圆形类，计算一个圆的周长和面积。然后在"环形类"中组合圆形的实例作为自己的属性来用。
 
-![img](https://upload-images.jianshu.io/upload_images/13717038-c585850a1f5c519f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```python
+from math import pi
 
-### 3.组合的应用例子-实例化组合调用
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+        
+    def area(self):
+        return pi * self.radius ** 2
+    
+   	def perimeter(self):
+        return 2 * pi * self.radius
+    
+class Ring:
+    def __init__(self, radius_out, radius_in)
+    	self.out_circle = Circle(radius_out)
+    	self.in_circle = Circle(radius_in)
+    
+    def area(self):
+        return self.out_circle.area() - self.in_circle.area()
+    
+    def perimeter(self):
+   		return self.out_circle.perimeter() + self.in_circle.perimeter()
+```
 
-用组合的方式建立了类与组合的类之间的关系，它是一种‘有’的关系,比如教授有生日，教授教python课程。
 
-当类之间有显著不同，并且较小的类是较大的类所需要的组件时，用组合比较好。
 
-## 10. 运算重载
+## 9. 运算重载
 
-### 10.1 构造函数
+### 9.1 构造函数
 
 类可以通过构造函数来实现实例化
 
@@ -2455,13 +2152,13 @@ class C(A,B):
     a = Number(5)
 ```
 
-### 10.2 常见运算符重载方法
+### 9.2 常见运算符重载方法
 
-| method                                                       | overload           | call                                                         |
+| method                                                       | name               | description                                                  |
 | ------------------------------------------------------------ | ------------------ | ------------------------------------------------------------ |
 | \__del__                                                     | 析构函数           | X对象收回                                                    |
-| \__add__                                                     | 云算法+            | 如果没有_iadd_， X+Y， X+=Y                                  |
-| \__or__                                                      | 运算符\|           | 如果没有_ior_，X\|Y, X\|=Y                                   |
+| \__add__                                                     | 加法               | 如果没有_iadd_， X+Y， X+=Y                                  |
+| \__or__                                                      | 运算符\|，或       | 如果没有_ior_，X\|Y, X\|=Y                                   |
 | \_repr\_\_, \__str__                                         | 打印，转换         | print(X)，repr(X)，str(X)                                    |
 | \__call__                                                    | 函数调用           | X(*args, **kwargs)                                           |
 | \__getattr__                                                 | 点号运算           | X.undefined                                                  |
@@ -2483,53 +2180,115 @@ class C(A,B):
 | \_\_get\__, \__set\__, \_\_delete__                          | 描述符属性         | X.attr, X.attr=value, del X.attr                             |
 | _\_new__                                                     | 创建               | 在\__init__之前创建对象                                      |
 
-重新定义运算符可以自定义运算规则
 
-### 10.3 索引和分片： __getitem__, __setitem__
 
-如果在类中定义的话，则对于实例的索引运算，会自动调用__getitem__。当实例X出现X[i]这样的索引运算时，Python会自动调用__getitem__方法
+### 9.3 索引和分片： __getitem__, __setitem__
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150259950-645044481.png)
+如果在类中定义索引方法，可实现对类对象的直接索引，索引时会自动调用__getitem__。因此，我们可通过在return返回值前增加代码语句拦截分片，同时通过定义该方法，可以实现迭代索引。
 
-### 10.4 拦截分片
+```python
+class Indexer(object):
+    def __init__(self, data):
+    	# self.data = list(range(4,10))
+        self.data = data
+        
+    def __getitem__(self, index):
+        print("get item", index)
+        return self.data[index]
+    
+X = Indexr()  
+for x in X:
+    print(x)
+```
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150305138-1676343554.png)
 
-### 10.5 索引迭代： __getitem__
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150309716-303335578.png)
-
-### 10.6 迭代器对象: __iter__, __next__
+### 9.4 迭代器对象: __iter__, __next__
 
 尽管上一节__getitem__是有效的，但它是迭代退而求其次的方法。Python所有的迭代环境会有优先尝试__iter__的方法，再尝试__getitem__。
 
 从技术角度上讲，迭代环境是通过iter去尝试寻找__iter__方法来实现，而这种方法返回一个迭代器对象。如果已经提供了，python会重复调用迭代器对象的next()方法，直到发生StopIteration异常。如果没有找到__iter__，python会使用__getitem__机制。
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150320529-1936668870.png)
+```python
+class MyIterator(object):
+    def __init__(self, wrapped):
+        self.wrapped = wrapped
+        self.offset = 0
+    def next(self):
+        if self.offset >= len(self.wrapped):
+            raise StopIteration("End")
+        item = self.wrapped[self.offset]
+        self.offset+=1
+        return item
+    
+class MyClass(object):
+    def __init__(self, data):
+        self.data = data
+    def __iter__(self):
+        return MyIterator(self.data)
+```
 
-### 10.7 __getattr__和__setattr__捕捉属性的的引用
 
-__getattr__拦截属性.运算符
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150324216-2106190284.png)
+### 9.5 __getattr__和__setattr__捕捉属性的的引用
 
-### 10.8 __repr__和__str__会返回字符串表达形式
+__getattr__拦截属性运算符`.`
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027150330169-840200039.png)
+```python
+class Empty(object):
+    def __getattr__(self, attrname):
+        if attrname == "age":
+            return 27
+       	else:
+            raise AttributeErro, attrname
+```
 
-### 10.9 __radd__处理右侧加法
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027154157982-441718945.png)
 
-### 10.10 __call__拦截调用
+### 9.6 __repr__和__str__会返回字符串表达形式
+
+该方法能够改变类对象的打印显示值
+
+```python
+class Number(object):
+    def __init__(self, data):
+        self.data = data
+    def __str__(self):
+        return "Hello world" 
+```
+
+
+
+### 9.7 __radd__处理右侧加法
+
+```python
+class Number(object):
+    def __init__(self, data):
+        self.data = data
+    def __radd__(self):
+        return Number(self.data+data) 
+```
+
+
+
+### 9.8 __call__拦截调用
 
 当实例调用时，使用__call__方法，该方法的功能类似于在类中重载 () 运算符，使得类实例对象可以像调用普通函数那样，以“对象名()”的形式使用。
 
-![img](https://images2015.cnblogs.com/blog/817474/201510/817474-20151027154159044-2002606217.png)
+```python
+class Prod(object):
+    def __init__(self, data):
+        self.data = data
+    def __call__(self, data):
+        return self.data * data
+    
+X = Prod(10)
+X(2)
+```
 
 
 
-## 11. 常用属性及方法说明
+## 10. 常用属性及方法说明
 
 > __doc__ 									类的说明
 >
@@ -2569,9 +2328,9 @@ __getattr__拦截属性.运算符
 
  
 
-## 12. 设计模式
+## 11. 设计模式
 
-### 12.1 工厂方法模式
+### 11.1 工厂方法模式
 
 #### 前言
 
@@ -2588,16 +2347,9 @@ __getattr__拦截属性.运算符
 
 虚构造器（Virtual Constructor）
 
-#### 案例
-
 #### 第一阶段
 
 > 小李开了一个代工厂，专门帮各大厂商生产手机，一开始只有小米找他生产小米手机(MiPhone)，后来质量过硬，声名远播，苹果公司也找上门了，准备让他生产苹果手机，生意来了，小李小手一挥，停工几个月，加了一个生产线专门生成苹果手机(Iphone)。于是乎，现在一个工厂有两个生产线。
-
-#### 第一阶段 UML 图
-
-让我们借助 UML 图直观了解一下工厂现在的样子。
-<img src="https://cdn.nlark.com/yuque/__puml/83ce437ce8df7956994e7bb6a64f4a30.svg#lake_card_v2=eyJjb2RlIjoiQHN0YXJ0dW1sXG5jbGFzcyDlt6XljoIge1xuXHQr55Sf5Lqn5bCP57Gz5omL5py6KCk65omL5py6IC4uPiDlsI_nsbPmiYvmnLpcblx0K-eUn-S6p-iLueaenOaJi-acuigpOuaJi-acuiAuLj4g6Iu55p6c5omL5py6XG59XG5DbGllbnQgLS0g5bel5Y6CXG7miYvmnLogLS0gIENsaWVudFxu5bCP57Gz5omL5py6IC0tPiDmiYvmnLpcbuiLueaenOaJi-acuiAtLT4g5omL5py6XG5AZW5kdW1sIiwidHlwZSI6InB1bWwiLCJtYXJnaW4iOnRydWUsImlkIjoiWU9xUXYiLCJ1cmwiOiJodHRwczovL2Nkbi5ubGFyay5jb20veXVxdWUvX19wdW1sLzgzY2U0MzdjZThkZjc5NTY5OTRlN2JiNmE2NGY0YTMwLnN2ZyIsImNhcmQiOiJkaWFncmFtIn0=" alt="img" style="zoom:25%;" />
 
 #### 第一阶段代码
 
@@ -2608,32 +2360,27 @@ Copyfrom abc import ABC, abstractmethod
 
 # 手机
 class Phone(ABC):
-    
     @abstractmethod
     def make(self):
         pass
 
 # 苹果手机
 class Apple(Phone):
-    
     def make(self):
         print("make apple")
 
 # 小米手机
 class XiaoMi(Phone):
-    
     def make(self):
         print("make xiaomi")
 
 
 class Factory:
-
     def product_phone(self, mobile_type):
         if mobile_type == 'apple':
             return Apple()
         else:
             return XiaoMi()
-
 
 if __name__ == '__main__':
     factory = Factory()
@@ -2661,39 +2408,33 @@ Copyfrom abc import ABC, abstractmethod
 
 # 抽象工厂
 class AbastractFactory(ABC):
-    
     @abstractmethod
     def product_phone(self):
         pass
 
 # 苹果工厂
 class AppleFactory(AbastractFactory):
-    
     def product_phone(self):
         return Apple().make()
 
 # 小米工厂
 class XiaomiFactory(AbastractFactory):
-    
     def product_phone(self):
         return XiaoMi().make()
 
 # 生产线
 class Phone(ABC):
-   	
     @abstractmethod
     def make(self):
         pass
 
 # 苹果生产线
 class Apple(Phone):
-    
     def make(self):
         print("make apple")
 
 # 小米生产线
 class XiaoMi(Phone):
-    
     def make(self):
         print("make xiaomi")
 
@@ -2718,28 +2459,29 @@ make apple
 
 #### 简单工厂模式优缺点
 
-- 优点：客户端与产品的创建分离，客户端不需要知道产品创建的逻辑，只需要消费该产品即可。
-- 缺点：工厂类集成了所有产品的创建逻辑，当工厂类出现问题，所有产品都会出现问题；还有当新增加产品都会修改工厂类，违背开闭原则
+> - 优点：客户端与产品的创建分离，客户端不需要知道产品创建的逻辑，只需要消费该产品即可。
+> - 缺点：工厂类集成了所有产品的创建逻辑，当工厂类出现问题，所有产品都会出现问题；还有当新增加产品都会修改工厂类，违背开闭原则。
+>
 
 #### 工厂方法模式优缺点
 
-- 优点：更符合开闭原则，增加一个产品类，则只需要实现其他具体的产品类和具体的工厂类即可；符合单一职责原则，每个工厂只负责生产对应的产品
-- 缺点：增加一个产品，就需要实现对应的具体工厂类和具体产品类；每个产品需要有对应的具体工厂和具体产品类
+> - 优点：更符合开闭原则，增加一个产品类，则只需要实现其他具体的产品类和具体的工厂类即可；符合单一职责原则，每个工厂只负责生产对应的产品；
+> - 缺点：增加一个产品，就需要实现对应的具体工厂类和具体产品类；每个产品需要有对应的具体工厂和具体产品类；
+>
 
-### 12.2 单例模式以及Python实现
+### 11.2 单例模式以及Python实现
 
-单例模式
+#### 单例模式
 
-单例模式就是确保一个类只有一个实例.当你希望整个系统中,某个类只有一个实例时,单例模式就派上了用场.
-比如,某个服务器的配置信息存在在一个文件中,客户端通过AppConfig类来读取配置文件的信息.如果程序的运行的过程中,很多地方都会用到配置文件信息,则就需要创建很多的AppConfig实例,这样就导致内存中有很多AppConfig对象的实例,造成资源的浪费.其实这个时候AppConfig我们希望它只有一份,就可以使用单例模式.
+> 单例模式就是确保一个类只有一个实例。当你希望整个系统中,某个类只有一个实例时，单例模式就派上了用场。
+> 比如，某个服务器的配置信息存在在一个文件中，客户端通过AppConfig类来读取配置文件的信息。如果程序的运行的过程中，很多地方都会用到配置文件信息，则就需要创建很多的AppConfig实例，这样就导致内存中有很多AppConfig对象的实例,造成资源的浪费。其实这个时候AppConfig我们希望它只有一份，就可以使用单例模式。
 
 实现单例模式的几种方法
 
 **1. 使用模块**
 其实,python的模块就是天然的单例模式,因为模块在第一次导入的时候,会生成.pyc文件,当第二次导入的时候,就会直接加载.pyc文件,而不是再次执行模块代码.如果我们把相关的函数和数据定义在一个模块中,就可以获得一个单例对象了.
 
-新建一个python模块叫singleton,然后常见以下python文件
-`mysingleton.py`
+新建一个python模块叫singleton
 
 ```python
 class Singleton(object):
@@ -2759,29 +2501,25 @@ from singleton.mysingleton import singleton
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 10:22'
 
 
 def singleton(cls):
     # 单下划线的作用是这个变量只能在当前模块里访问,仅仅是一种提示作用
     # 创建一个字典用来保存类的实例对象
     _instance = {}
-
+    
     def _singleton(*args, **kwargs):
         # 先判断这个类有没有对象
         if cls not in _instance:
             _instance[cls] = cls(*args, **kwargs)  # 创建一个对象,并保存到字典当中
         # 将实例对象返回
         return _instance[cls]
-
     return _singleton
 
 
 @singleton
 class A(object):
     a = 1
-
     def __init__(self, x=0):
         self.x = x
         print('这是A的类的初始化方法')
@@ -2797,8 +2535,6 @@ print(id(a1), id(a2))
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 11:06'
 
 
 class Singleton(object):
@@ -2826,8 +2562,6 @@ print(id(s1), id(s2), id(s3), id(s4))
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 11:26'
 import threading
 
 
@@ -2853,16 +2587,10 @@ for i in range(10):
     t.start()
 ```
 
-![img](https://upload-images.jianshu.io/upload_images/2905385-7df9a07c0ee3a15e.png?imageMogr2/auto-orient/strip|imageView2/2/w/730/format/webp)
-
-*执行结果好像也没有问题,那是因为执行的速度足够的快,如果在**init**()方法中有阻塞,就看到非常的明显.*
-
-
+执行结果好像也没有问题,那是因为执行的速度足够的快,如果在**init**()方法中有阻塞,就看到非常的明显.
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 11:26'
 import threading
 import time
 
@@ -2889,9 +2617,7 @@ for i in range(10):
     t.start()
 ```
 
-![img](https://upload-images.jianshu.io/upload_images/2905385-435f4dede67656d9.png?imageMogr2/auto-orient/strip|imageView2/2/w/689/format/webp)
-
-*可以看到是创建了10个不同的实例对象,这是什么原因呢.因为在一个对象创建的过程中,另外一个对象也创建了.当它判断的时候,会先去获取_instance属性,因为这个时候还没有,它就会调用**init**()方法.结果就是调用了10次,然后就创建了10个对象.*
+可以看到是创建了10个不同的实例对象,这是什么原因呢.因为在一个对象创建的过程中,另外一个对象也创建了.当它判断的时候,会先去获取_instance属性,因为这个时候还没有,它就会调用**init**()方法.结果就是调用了10次,然后就创建了10个对象.
 
 **如何解决呢?**
 `加锁:`
@@ -2901,9 +2627,6 @@ for i in range(10):
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 11:38'
-
 import time
 import threading
 
@@ -2944,8 +2667,6 @@ print(obj)
 
 ```python
 # encoding:utf-8
-__author__ = 'Fioman'
-__time__ = '2019/3/6 13:36'
 import threading
 
 
@@ -3009,7 +2730,6 @@ for i in range(10):
 ### 1.3 字典推导式：
 
 > 类似于字典推导式，字典推导式也可以增加if条件判断，多个for循环，语法格式如下：
->
 
 ```python
 {key_expression : value_expression for 表达式 in 可迭代对象}
@@ -3032,7 +2752,6 @@ char_count = {c: (1, 2, 3).count(c) for c in (1, 2, 3)}
 ### 1.5 生成器推导式(生成元组)：
 
 > 同列表：(表达式 for item in 可迭代对象)(可使用多个循环,括号此时**不可省略**)，**但生成器推导式返回一个生成器，而不是一个数组。**
->
 
 ```python
 ( expression for value in iterable if condition ) 
@@ -3070,7 +2789,6 @@ char_count = {c: (1, 2, 3).count(c) for c in (1, 2, 3)}
 > 标识通过地址引用了“对象”，容器本身并不存储任何数据，相应地，每一个元素都有一个64位（即8个字节）的存储地址（主存的存储位置则由计算机生成，往往不相关），当访问对应的元素时，实则访问该存储地址对应的值，这种情况下，访问任意一种元素所花费的时间及空间，都是一样的，这种存储结构称为引用结构。（直接存储元素本身的称为紧凑结构，往往效率更高，由array模块支持）
 >
 > 变量位于栈内存，对象(不变量)位于堆内存，赋值将变量绑定到对象，且为动态赋值。Python是动态类型语言，因此变量不需要显式声明类型。Python是强类型语言，每个对象都有数据类型，只支持该类型格式的操作。
->
 
 ### 2.3 标识符
 
@@ -3089,7 +2807,6 @@ char_count = {c: (1, 2, 3).count(c) for c in (1, 2, 3)}
 > 确定与标识符相关联的值的过程称为**名称解析**。每当标识符分配了一个值，这个定义都有特定的作用范围，称为**作用域**。最高级赋值通常是全局范围，对于在函数体内的赋值，其作用范围通常是函数内部局部范围。
 >
 > Python中的每一个定义域使用了抽象空间，称为**命名空间**。命名空间管理当前在给定作用域内定义的所有标识符。Python实现命名空间是用自己的字典将每个标识符字符串映射到其相关的值。Python还提供了几种方法来检查一个给定的命名空间。函数dir()报告给定命名空间中的标识符的名词，而函数var()返回完整的字典。
->
 
 
 
@@ -3151,7 +2868,14 @@ with open("data.pickle", "wb") as f:
 
 ### 3. Data type supported to pickle
 
-![img](https://img2018.cnblogs.com/blog/1378116/201904/1378116-20190411175538121-1771757134.png)
+> + None, True, False;
+> + integers, float, complex;
+> + strings, bytes, bytearrays;
+> + tuples, lists, sets and dictionaries(include pickable elements);
+> + functions define at top level of a module;
+> + built-in functions define at top level of a module;
+> + classes define at top level of a module;
+> + instances.
 
 
 
@@ -3160,7 +2884,6 @@ with open("data.pickle", "wb") as f:
 ![image-20210324165352696](C:\Users\Hedge\AppData\Roaming\Typora\typora-user-images\image-20210324165352696.png)
 
 > window系统默认解码方式为GBK，linux默认解码方式为UTF，python解释器默认解码方式为Unicode，文本文件打开默认解码方式为UTF-8。
->
 
 ## 5. 赋值表达式
 
@@ -3173,7 +2896,6 @@ with open("data.pickle", "wb") as f:
 > ```
 >
 > 结合函数等使用可以简化代码。
->
 
 
 
@@ -3192,7 +2914,6 @@ with open("data.pickle", "wb") as f:
 > + **适用性**是指软件能随时间不断优化，以应对外部环境条件的变化。
 >
 > + **可重用性**是指代码是可以重用的，尤其是指在不同的操作系统上的软件运行。
->
 
 ### 1.2 设计原则
 
@@ -3207,7 +2928,6 @@ with open("data.pickle", "wb") as f:
 ### 1.3 设计模式
 
 > 设计模式是一种可以应用于不同情况的解决方案提供了通用模板的模式。模式包括一个名称（标识）、一个语境（输入）、一个模板（环境）以及一个结果（输出）。接下来所涉及的设计模式分为解决**算法设计**和**软件工程**问题的模式，鉴于实际需求，此处着重介绍算法设计类。
->
 
 |          | 算法设计类                                                   | 软件工程类                                                   |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -3234,7 +2954,6 @@ with open("data.pickle", "wb") as f:
 > 详细的测试计划是编写程序最重要的部分。用所有可能的输入检验程序的正确性通常是不可能的，所以我们应该用有代表性的输入子集来运行程序。在特殊情况的输入下，程序往往会失败。需要仔细确认和测试这些情况。
 >
 > 最简单的调试技术包括使用打印语句来跟踪程序执行过程中的变量的值，一种更好的办法是是调试器(debugger)运行程序。
->
 
 
 
@@ -3252,7 +2971,6 @@ from .name import func	# 从包的上级导入
 ## 基本Shell指令
 
 > Run library module as a script in terminal via `-m`.
->
 
 ### 1. webbrowser
 
