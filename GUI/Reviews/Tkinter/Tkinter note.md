@@ -5,7 +5,6 @@
 > If you have any question, please seek the [Docs](https://www.tcl.tk/doc/) for answer. Learn more by refering to the [tutorial](https://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html).
 >
 > Tip : There are somethings different with normal.
->
 
 ## 1. Synopsis
 
@@ -80,7 +79,6 @@ background_label = tk.Label(window, image=background_image)
 > **And ld/thinkness is need when you refer to the highlightcolor and else.**
 >
 > Here is the common color of tkinter.
->
 
 <img src="E:/工具/Typora/Temp/SouthEast.png" alt="img"  />
 
@@ -292,7 +290,6 @@ win.mainloop()   # #窗口持久化
 #### 3.1 Synopsis
 
 > Entry是tkinter类中提供的的一个**单行文本输入域**，用来输入显示一行文本，收集键盘输入(类似 HTML 中的 text)，超过长度限制的内容会被自动隐藏。
->
 
 #### 3.2 Params
 
@@ -408,7 +405,6 @@ text.search(key, start, end)
 ```
 
 > 使用search方法进行检索查找关键词，这个方法传回找到的字符的第一个位置索引。
->
 
 #### Bookmark
 
@@ -453,7 +449,6 @@ text.search(key, start, end)
 ### 5. Listbox
 
 > 列表框是一个显示一系列选项的Widget控件，用户可以进行单项或多项的选择。
->
 
 | 参数             | 值                                 | 说明                   |
 | ---------------- | ---------------------------------- | ---------------------- |
@@ -558,14 +553,12 @@ Scale(master, params)
 #### 9.1 Synopsis　　
 
 > Canvas画布提供绘图功能(直线、椭圆、多边形、矩形) 可以包含图形或位图，用来绘制图表和图，创建图形编辑器，实现定制窗口部件。
->
 
 #### 9.2 Create
 
 ##### 1. Line
 
 > Items of type **line** appear on the display as one or more connected line segments or curves. Line items support coordinate indexing operations using the **dchars**, **index** and **insert** widget commands. Lines are created with widget commands of the following form:
->
 
 ```
 pathName create line x1 y1... xn yn ?option value ...?
@@ -573,7 +566,6 @@ pathName create line coordList ?option value ...?
 ```
 
 > The arguments *x1* through *yn* or *coordList* give the coordinates for a series of two or more points that describe a series of connected line segments. After the coordinates there may be any number of *option*-*value* pairs, each of which sets one of the configuration options for the item. These same *option*-*value* pairs may be used in **itemconfigure** widget commands to change the item's configuration. A line item is the current item whenever the mouse pointer is over any segment of the line, whether drawn or not and whether or not the line is smoothed.
->
 
 The following standard options are supported by lines:
 
@@ -616,7 +608,6 @@ The following extra options are supported for lines:
 ##### 2. oval
 
 > Items of type **oval** appear as circular or oval regions on the display. Each oval may have an outline, a fill, or both. Ovals are created with widget commands of the following form:
->
 
 ```
 pathName create oval x1 y1 x2 y2 ?option value ...?
@@ -624,7 +615,6 @@ pathName create oval coordList ?option value ...?
 ```
 
 > The arguments *x1*, *y1*, *x2*, and *y2* or *coordList* give the coordinates of two diagonally opposite corners of a rectangular region enclosing the oval. The oval will include the top and left edges of the rectangle not the lower or right edges. If the region is square then the resulting oval is circular; otherwise it is elongated in shape. After the coordinates there may be any number of *option*-*value* pairs, each of which sets one of the configuration options for the item. These same *option*-*value* pairs may be used in **itemconfigure** widget commands to change the item's configuration. An oval item becomes the current item when the mouse pointer is over any part that is painted or (when fully transparent) that would be painted if both the **-fill** and **-outline** options were non-empty.
->
 
 The following standard options are supported by ovals:
 
@@ -870,7 +860,6 @@ OptionMenu(master, options, *values)
 ## 4. Advanced Widget
 
 > Provided in module ttk in tkinter, before you use them, you need to import.
->
 
 ### 1. Combobox
 
@@ -880,7 +869,7 @@ OptionMenu(master, options, *values)
 Combobox(master, options)
 ```
 
-> 其中，用value表示其选项内容。其默认值设置可以通过current(index)方法实现。此外，当Combobox中的选项内容改变时，会产生虚拟的<ComboboxSelected>>事件，根据这个特性可绑定对应的回调函数。
+> 其中，用**values**指定其选项值。其默认值设置可以通过current(index)方法实现。此外，当Combobox中的选项内容改变时，会产生虚拟的<ComboboxSelected>>事件，根据这个特性可绑定对应的回调函数。
 
 ### 2. ScrolledText
 
@@ -1027,7 +1016,6 @@ options参数如下：
 #### 基本概念
 
 > Progressbar 可以解释为进度条，主要是当做一个工作进度的指针，在这个控件中会有一个指针，由此指针可以了解工作进度。
->
 
 ```python
 Progressbar(obj, options, ...)
@@ -1053,7 +1041,6 @@ Progressbar(obj, options, ...)
 > 2. **indeterminate**
 >
 > 	一个指针会在起点和终点间来回移动，通常当我们不知道工作所需时间时，可以使用此模式，主要目的是让用户知道程序仍然在继续工作。
->
 
 **Instance**
 
@@ -1237,7 +1224,6 @@ w = Menubutton (master, option, ... )
 #### Description
 
 > To transfer parameters to widget in tkinter, especially like Button. 
->
 
 #### Format
 
@@ -1246,7 +1232,6 @@ lambda params : expression
 ```
 
 > Return the outcome of expression.
->
 
 **For a simple example:**
 
@@ -1281,7 +1266,6 @@ window.bell(displayof=0)
 > 有些控件我们可以更改他们的内容，例如标签(Label)等，如果想要更改他们的内容，可以使用这些控件的参数，例如，textvariable、variable、onvalue等；
 >
 > 不过要将控件的参数以变量方式处理时，需要借助tkinter模块内的变量类别(Variable Classes)。这个类别有4个子类别，每一个类别其实就是一个数据类型的构造方法，我们可以通过这4个子类别的数据类型将他们与控件相关的参数结合。
->
 
 ### Type
 
@@ -1297,7 +1281,6 @@ x = BooleanVar()	# 布尔型变量，True是1，False是0
 #### set
 
 > use set() to set the value of var.
->
 
 ```python
 string.set(value)
@@ -1306,7 +1289,6 @@ string.set(value)
 #### get
 
 > use get() to get the value of var.
->
 
 ```python
 string.get()
@@ -1331,7 +1313,6 @@ Srting.trace(string, index, mode, *args)
 ##### mode : "w"
 
 > 我们可以利用变量设置追踪`Widget`控件("w"模式)，当其内容**发生改变**时，让程序自动执行函数，称为变动追踪。
->
 
 ```python
 string.trace("w", function)
@@ -1340,7 +1321,6 @@ string.trace("w", function)
 ##### mode : "r"
 
 > 我们也可以设计当控件内容**被读取**时，执行追踪并执行特定函数，称为读取追踪。
->
 
 ```python
 string.trace("r", function)
@@ -1373,7 +1353,6 @@ string.trace("r", function)
 > 1. **事件**（event）：是指点击、按键等操作，在tkinter中，event是一个类，当某个事件发生时，生成一个event对象，不同类型的事件生成具有不同属性的event对象。
 > 2. **事件处理**（event handler）：是指在捕获到事件后，程序自动执行的操作，是回调函数（recall function）。
 > 3. **事件绑定**（event binding）：是当一个事件发生时程序能够做出响应。tkinter提供三种绑定方式：实例绑定bind（将某个事件处理绑定到某个组件上）、类绑定bind_class（将某个事件处理绑定到某类组件上）、应用绑定bind_all（将某个事件处理绑定到所有组件上）。
->
 
 ### Event description
 
@@ -1384,7 +1363,6 @@ string.trace("r", function)
 > - modifier：事件修饰符。如：Alt、Shit组合键和Double事件。
 > - type：事件类型。如：按键（Key）、鼠标（Button/Motion/Enter/Leave/Relase）、Configure等。
 > - detail：事件细节。如：鼠标左键（1）、鼠标中键（2）、鼠标右键（3）。
->
 
 **注意大小写！！！**
 
@@ -1416,7 +1394,6 @@ string.trace("r", function)
 **（2）事件对象：**
 
 > 一个具体事件如<Button-1>是事件类（event class）的一个实例，事件类中设定了众多属性，其中部分属性是通用的，另一部分属性属于特定事件类型的，常用属性如下：
->
 
 | **属性** | **属性说明**                                                 | **适用事件类型**                 |
 | -------- | ------------------------------------------------------------ | -------------------------------- |
@@ -1556,12 +1533,10 @@ window.protocol(protocols, callback)
 #### 1. 说明
 
 > 由于tkinter一旦开始执行进入mainloop，就相当于进入一个界面死循环状态，出不来；如果想做定时刷新tkinter界面的控件数据，必须调用tkinter.TK()自带的after函数，这个函数可以设定定时执行某个任务的时间，使用别的python定时执行任务的模块是不行的。
->
 
 #### 2. 使用方式
 
 > 实现一个刷新数据函数调用tkinter.TK()自带的after函数，在调用mainloop函数之前，将这个刷新数据函数调用，则可以实现定时刷新数据功能，参考代码如下：
->
 
 ```python
 import tkinter as tk
