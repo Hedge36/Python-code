@@ -918,7 +918,7 @@ while condition:
 ## 1. Synopsis
 
 ```python
-def tag (parameters : type) -> type hint:	
+def tag(parameters: type) -> type_hint:	
 """Annotion of Fuction, can inquire and print by `help`, according to PEP8"""
      Expressions
      return values
@@ -926,7 +926,7 @@ def tag (parameters : type) -> type hint:
 
 > **函数**是就是将一个函数名变量(栈)绑定到一个函数**对象**(function)(形如字符串)，有特定的id，因而这个函数对象(堆)可以多次赋值到别的函数名变量中。
 >
-> 函数的参数类型包括两种，可有可无，可以通过*":"type*对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用，而*-> type hint*则表示为对输入输出的类型提示，*必须是准确的现存的数据类型*，作用同type，没有实际限制力。
+> 函数的参数类型包括两种，可有可无，可以通过*":"type*对参数类型进行说明(任意字符串)，但对参数无实际限制，函数外亦可使用，而*-> type hint*则表示为对输出的类型提示，*必须是准确的现存的数据类型*，作用同type，没有实际限制力。
 >
 > return可以返回需要的数据作为函数输出值，不设置返回值时默认返回None，当返回多个数值时，将自动打包返回元组类型。
 >
@@ -1958,7 +1958,7 @@ class A:
 
 ### 7.1 类的私有属性:
 
-> 以下划线开头的变量不能在类的外部进行直接使用和访问，单下划线表示变量是受保护的，可在类及其子类中访问，而双下划线表示变量是私有的，只能在这个类中访问。
+> 以下划线开头的变量都不能在类的外部进行直接使用和访问，单下划线表示变量是受保护的，可在该类及其子类中访问，而双下划线表示变量是私有的，只能在这个类中访问。
 
 #### 私有属性的访问
 
@@ -2965,4 +2965,18 @@ python -m webbrowser -t url
 #### Return
 
 > None.
+
+### 2. freeze
+
+> 利用终端生成一个python环境文件`requirements.txt`，该文件会包括当前python环境下所有的库，因此，常用于虚拟环境。
+
+```bash
+pip freeze > requirements.txt
+```
+
+> 生成环境文件后，其他用户可以通过下面的命令来加载获取库需求。
+
+```bash
+pip install -r requirements.txt
+```
 
