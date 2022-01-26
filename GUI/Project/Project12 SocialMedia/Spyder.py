@@ -7,8 +7,6 @@ import requests
 from lxml import etree
 import os
 
-# 第二次运行保存相同表名不能正确覆盖
-
 
 class BasicSpyder:
     """Spyder basic class."""
