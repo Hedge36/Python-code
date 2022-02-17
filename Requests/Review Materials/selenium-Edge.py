@@ -59,8 +59,4 @@ def download(word, page):
             f.write(response.content)
         print("Saved(%d/%d):" % (counter, size))
     print("All pictuers have been downloaded!")
-    browser.quit()
-
-
-if __name__ == "__main__":
-    download("插画", 3)
+    browser.q
