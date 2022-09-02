@@ -52,8 +52,7 @@
 
 ### 2.5 运算符
 
-> 运算符在不同的对象间具有不同的效果，这种特性称为**多态**，我们可以根据自身需要重载这些操作符，具体使用方法参见第六章类。
-
+> 运算符在不同的对象间具有不同的效果，这种特性称为**多态**，我们可以根据自身需要重这些操作符，具体使用方法参见第六章类。
 > | 比较运算符 | 说明                           |
 > | ---------- | ------------------------------ |
 > | <, >       | 大于或小于比较，返回布尔值     |
@@ -636,19 +635,19 @@ print(value, ..., sep=' ', end='\n',
 >
 > `%`格式化为python2沿用的格式化方法，其中格式符为真实值预留位置，并控制显示的格式。格式符可以包含有一个类型码，用以控制显示的类型，具体类型如下:
 >
-> > + **%s**		字符串 (采用str()的显示)
-> > + **%r**		字符串 (采用repr()的显示)
-> > + **%c** 		单个字符
-> > + **%b** 		二进制整数
-> > + **%d** 		十进制整数
-> > + **%i** 		十进制整数
-> > + **%e** 		指数 (基底写为e)·
-> > + **%E** 		指数 (基底写为E)
-> > + **%f** 		浮点数
-> > + **%F** 		浮点数，与上相同
-> > + **%g** 		指数(e)或浮点数 (根据显示长度)
-> > + **%G** 		指数(E)或浮点数 (根据显示长度)
-> > + **%%** 		字符"%"
+> | 格式符 | 含义                      |
+> | ------ | ------------------------- |
+> | %s     | 字符串 (采用str()的显示)  |
+> | %r     | 字符串 (采用repr()的显示) |
+> | %c     | 单个字符                  |
+> | %b     | 二进制整数                |
+> | %o     | 八进制整数                |
+> | %d(%i) | 十进制整数                |
+> | %x     | 十六进制整数              |
+> | %e(%E) | 指数显示                  |
+> | %f(%F) | 浮点显示                  |
+> | %g(%G) | 指数显示（自动位数）      |
+> | %%     | %符                       |
 
 可以用如下的方式，对格式进行进一步的控制：
 
@@ -2867,7 +2866,7 @@ with open("data.pickle", "wb") as f:
 > identity : = value
 > ```
 >
-> 结合函数等使用可以简化代码。
+> 注意，该表达式不能单独使用！必须结合函数等使用！
 
 
 
@@ -2953,7 +2952,8 @@ from .name import func	# 从包的上级导入
 > Open a web in default browser. You can also achieve via script through import method.
 
 ```shell
-python -m webbrowser -t url
+$ python -m webbrowser -t url
+$ python -m http.server	# Open a local server with docunment of current directory
 ```
 
 #### Params
@@ -2971,12 +2971,13 @@ python -m webbrowser -t url
 > 利用终端生成一个python环境文件`requirements.txt`，该文件会包括当前python环境下所有的库，因此，常用于虚拟环境。
 
 ```bash
-pip freeze > requirements.txt
+$ pip freeze > requirements.txt		# for version of pip less than 19.1
+$ pip list --format=freeze > requirements.txt		# for version of pip upper than 19.1
 ```
 
 > 生成环境文件后，其他用户可以通过下面的命令来加载获取库需求。
 
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 

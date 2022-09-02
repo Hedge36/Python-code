@@ -9,6 +9,7 @@
 > - Multiprocess&Thread
 > - **Numpy**
 > - **Matplotlib**
+> - **Plotly**
 > - Pygame
 > - **Tkinter**
 > - **Pandas**

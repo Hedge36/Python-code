@@ -1,0 +1,67 @@
+#! /home/hedge/anaconda3/bin/python
+# -*- coding:utf-8 -*-
+# Author: Hedge
+# Update
+# 1. Module help via command "--help" and introduction in file
+# 2. InputCheck
+# 3. Automatically detect the format of images
+# 4. There is not a good global interpreter or env of python as hashbang
+# 5. Support for wildcard
+
+from PIL import Image
+import os
+import sys
+
+
+def InputCheck(source, target, form):
+    """Check whether the foramt of input is correct.
+    source: the path of image file(s) to concat
+    target: the path of final file in PDF
+    form: the foramt of image, it should be one of [".jpg", ".png"]
+    """
+    error = 0
+    if error:
+        raise ValueError("Format of one of input doesn't match demand.")
+
+
+def Image2PDF(source, target: str, form: str):
+    """Concat multiple images into a PDF file.
+    Params:
+    source: Path string of dir or list of path string of image files.
+    target: Path string of PDF file(create automatically).
+    form: String of format of images.
+    """
+    InputCheck(source, target, form)
+    if isinstance(source, str):
+        imagefiles = [i for i in os.listdir(
+            source) if i.endswith(form)]  # More type?
+    else:
+        imagefiles = source
+    size = len(imagefiles)
+    pdfname = target.split("/")[-1]
+
+    if size == 0:
+        raise ValueError("No matching files detected!")
+    img_more = []
+    img1 = Image.open(imagefiles[0])
+    if size > 1:
+        for file in imagefiles[1:]:
+            img = Image.open(file)
+            if img.mode == "RGBA":
+                img = img.convert("RGB")
+            img_more.append(img)
+    img1.save(target, "PDF", resolution=100.0,
+            save_all=True, append_images=img_more)
+    print("%d个图片已保存为%s" % (size, pdfname))
+
+
+def main():
+    params = sys.argv
+    source = params[1:-2]
+    form = params[-2]       # What about multiple types concat?
+    target = params[-1]
+    Image2PDF(source, target, form)
+
+
+if __name__ == "__main__":
+    main()

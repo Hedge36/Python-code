@@ -15,7 +15,7 @@ def gettime():
     detailtime = pretime[3]
     week = pretime[0]   # 可以逐项具体打印的
     timeshow["text"] = pretime  # 动态修改标签
-    window.after(100, gettime)
+    window.after(1000, gettime)
 
 
 def read():
@@ -93,7 +93,7 @@ mode2.place(x=240, y=0)
 # 时间展示框
 timeshow = tk.Label(width=40, height=2, bg="yellow", font="楷体 14")
 timeshow.place(x=24, y=230)
-window.after(100, gettime)  # 实时显示时间
+window.after(1000, gettime)  # 实时显示时间
 
 # 写入展示框
 Detail = tk.LabelFrame(text="Detail", width=width,

@@ -52,7 +52,7 @@ class KuGou():
         # print(song_info)
         audio_name = re.findall('"audio_name":"(.*?)"', response)[0]
         # print(audio_name)
-        song_url = song_info.replace('\/', '/')
+        song_url = song_info.replace('\\/', '/')
         # print(song_url.replace('\/','/'))
         data = self.get_reponse(url=song_url).content
         with open('{}.mp3'.format(audio_name), 'wb') as f:
