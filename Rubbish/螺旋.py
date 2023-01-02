@@ -11,3 +11,5 @@ for j in range(360):
         right(90)
     right(3)
     h = h*1.01
+turtle.done()
+# 改成彩色，每次绘制改变画笔颜色
