@@ -1115,6 +1115,10 @@ Python 实现的算法和设计模式。
 - Codacy：自动化代码审查，更加快速的发布高质量代码。对于开源项目是免费的。[官网](https://www.codacy.com/)
 - QuantifiedCode：一个数据驱动、自动、持续的代码审查工具。[官网](https://www.quantifiedcode.com/)
 
+## 资源
+
+在这里可以找到新的 Python 库。
+
 ## 网站
 
 - [r/Python](https://www.reddit.com/r/python)
@@ -1133,7 +1137,7 @@ Python 实现的算法和设计模式。
 - [Pycoder's Weekly](http://pycoders.com/)
 - [Python Weekly](http://www.pythonweekly.com/)
 
-- https://twitter.com/PythonWeekly
+- https://twitter.com/PythonWeekly)
 
 ## 学习指南
 
