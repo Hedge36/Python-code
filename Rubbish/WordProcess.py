@@ -4,9 +4,7 @@ import os
 from tkinter import scrolledtext as st
 from tkinter import ttk
 """
-程序相关说明：
-英文复制暂不支持
-如何根据序号自动换行
+自动挂起暂时不可用
 """
 
 window = tk.Tk()
@@ -18,8 +16,8 @@ window.geometry("400x280")
 def run():
     """"""
     texts = text_display.get(0.1, "end")
-    final = texts.replace("\n", '').replace(" ", '').rstrip()
-    print(final)
+    final = texts.replace("\r", "").replace(
+        "\n", "").replace(" ", "").rstrip()
     pyperclip.copy(final)
     text_display.delete(0.1, tk.END)
 
@@ -38,12 +36,13 @@ def clear():
 def autopro():
     """"""
     # 如何实现自动挂起？
-    while modechose.get() == "Auto":
-        print("Test")
+    # while modechose.get() == "Auto":
+    #     print("Test")
     if text != pyperclip.paste():
         print("1")
-        text = pyperclip.paste()
-        final = text.replace("\n", '').replace(" ", '').rstrip()
+        texts = pyperclip.paste()
+        final = texts.replace("\r", "").replace(
+            "\n", "").replace(" ", "").rstrip()
         pyperclip.copy(final)
 
 
@@ -53,7 +52,8 @@ modechose = ttk.Combobox(values=["Manual", "Auto", ], width=8)
 modechose.current(0)
 modechose.place(x=300, y=10)
 description.place(x=25, y=10)
-description = tk.Label(text="pdf等汉字复制文本处理，自动去除空格换行，但划分不准，请自行\n调整。")
+description = tk.Label(text="用于pdf等汉字复制文本处理，自动去除空格换行，"
+                       "但划分不准，请自行调整，进一步功能，敬请期待。", wraplength=350)
 description.place(x=25, y=40)
 tip = tk.Label(text="将文本复制到下框中，点击复制即可自动复制到剪切板")
 tip.place(x=25, y=80)
@@ -73,9 +73,11 @@ window.mainloop()
 '''更新预告：
 1. 识别断行，自动分行
 2. 识别英文，理性去空格！Hard
+3. 上线文献模式，删改形如文献引用部分
+4. 自动模式上线后，下架手动模式
 
 计划：
 1. 通过正则匹配出所有的序号，在去掉‘\n’后的文本中再给它加上；
 2. 英文处理暂时没有思路;
-3. 升级为监听剪切板，后台全自动处理；
+3. 升级为监听剪切板，后台全自动处理；借助after函数
 '''
